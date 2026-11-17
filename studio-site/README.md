@@ -20,8 +20,8 @@ npm run preview   # serve dist/
 | --- | --- |
 | `src/data.js` | All copy in EN and EL: UI strings, studio details, projects |
 | `src/render.js` | HTML templates, shared by the build (pre-render) and the browser (language switch) |
-| `src/posters.js` | Generated SVG project posters (no image files needed) |
-| `src/motion.js` | Intro sequences, scroll "wind" on the wordmark, list rules, hover preview, page wipe |
+| `src/posters.js` | Black-and-white image stand-ins (generated SVG) and the `art()` helper that swaps in real photos |
+| `src/motion.js` | Intro sequences (red band, image reveal, wordmark), image parallax, work tiles rising, red page wipe |
 | `src/i18n.js` | Language toggle; remembers the choice; `?lang=el` also works |
 | `src/contact.js` | Contact form validation and sending |
 | `index.html` | Page shell; `scripts/gen-pages.mjs` copies it to `work/<slug>.html` per project |
@@ -31,8 +31,18 @@ Every page is pre-rendered to complete English HTML at build time. That covers S
 ## Adding a project
 
 Add an entry to `projects` in `src/data.js` with `en` and `el` copy and a `poster` spec
-(`waves`, `circle`, `grid`, `stripes`, `columns` or `arcs`, plus colours). Its case-study page is generated automatically.
-To use real photography instead of posters, swap the `poster(...)` calls in `src/render.js` for `<img>` tags with `width`, `height`, `loading="lazy"` and AVIF/WebP sources.
+(`waves`, `circle`, `grid`, `stripes`, `columns` or `arcs`). Its case-study page is generated automatically.
+
+## Photography
+
+The design is built around black-and-white photography crossed by solid red blocks.
+Until real photos are added, every image slot shows a generated black-and-white stand-in with print grain.
+
+1. Put photos in `public/images/` (any colour photo works: CSS renders it in black and white and adds the red block).
+2. Reference them in `src/data.js`:
+   - `studio.heroPhoto` for the hero (a portrait-format photo, roughly 4:5, works best) and `studio.studioPhoto` for the studio section.
+   - `photo: 'images/kyma.jpg'` on a project for every slot, or `photo: ['images/kyma-cover.jpg', 'images/kyma-2.jpg', 'images/kyma-3.jpg']` for the cover and the two detail images.
+3. Export at about 2000px on the long edge, as WebP or a quality-75 JPEG, so pages stay fast on phones.
 
 ## Contact form
 

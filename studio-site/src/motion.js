@@ -1,11 +1,9 @@
-// Motion system. One orchestrated intro per page, a scroll-velocity "wind" on the wordmark,
-// list rules that draw in, a cursor-following poster on fine pointers, and a wipe between pages.
+// Motion system. One orchestrated intro per page (red band sweeps in, image rises, wordmark sets),
+// gentle scroll parallax on images, work tiles that rise once, and a red wipe between pages.
 // Everything is transform/opacity based and fully skipped for prefers-reduced-motion.
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { projects } from './data.js';
-import { poster } from './posters.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,9 +39,8 @@ export function initMotion() {
   else if (document.querySelector('.case')) tl.add(caseIntro(), introAt);
   else endIntro();
 
-  initWind();
-  initRows();
-  initPreview();
+  initParallax();
+  initTiles();
   initPageTransitions();
 
   document.addEventListener('langchange', () => ScrollTrigger.refresh());
@@ -57,107 +54,58 @@ export function initMotion() {
 /* ---------- Intros ---------- */
 
 function homeIntro() {
-  const targets = ['.grid-lines span', '.wordmark .ch', '.hero-meta > *'];
+  const targets = ['.wordmark .ch', '.hero-band', '.hero-photo', '.hero-photo > *', '.hero-cta', '.hero-lead', '.hero-meta', '.hero-vertical', '.hero-since'];
   return gsap.timeline({
-    onComplete() { endIntro(); gsap.set(targets, { clearProps: 'transform,opacity,visibility' }); }
+    onComplete() { endIntro(); gsap.set(targets, { clearProps: 'transform,clipPath,opacity,visibility' }); }
   })
-    .fromTo('.grid-lines span', { scaleY: 0 }, { scaleY: 1, duration: 1.2, ease: 'expo.inOut', stagger: 0.035 })
-    .fromTo('.wordmark .ch', { yPercent: 105 }, { yPercent: 0, duration: 1.3, ease: 'expo.out', stagger: 0.065 }, 0.35)
-    .fromTo('.wordmark-word', { '--wght': 120 }, { '--wght': 500, duration: 1.9, ease: 'power3.out' }, 0.35)
-    .fromTo('.hero-meta > *', { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08 }, 1);
+    .fromTo('.hero-band', { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'expo.inOut' })
+    .fromTo('.hero-photo', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.15)
+    .fromTo('.hero-photo > *', { scale: 1.2 }, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0.15)
+    .fromTo('.wordmark .ch', { yPercent: 105 }, { yPercent: 0, duration: 1.2, ease: 'expo.out', stagger: 0.055 }, 0.45)
+    .fromTo('.hero-cta', { scale: 0 }, { scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 1.1)
+    .fromTo(['.hero-meta', '.hero-vertical', '.hero-lead', '.hero-since'], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, ease: 'power2.out', stagger: 0.07 }, 1);
 }
 
 function caseIntro() {
+  const targets = ['.case-title .line > span', '.case-poster', '.case-poster > :first-child', '.case-meta > div', '.case-red'];
   return gsap.timeline({
-    onComplete() {
-      endIntro();
-      gsap.set(['.case-title .line > span', '.case-poster', '.case-poster .poster', '.case-meta > div'], { clearProps: 'transform,clipPath,opacity,visibility' });
-    }
+    onComplete() { endIntro(); gsap.set(targets, { clearProps: 'transform,clipPath,opacity,visibility' }); }
   })
     .fromTo('.case-title .line > span', { yPercent: 105 }, { yPercent: 0, duration: 1.2, ease: 'expo.out' })
-    .fromTo('.case-meta > div', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, stagger: 0.06 }, 0.4)
-    .fromTo('.case-poster', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.2)
-    .fromTo('.case-poster .poster', { scale: 1.15 }, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0.2);
+    .fromTo('.case-red', { scaleY: 0 }, { scaleY: 1, duration: 1, ease: 'expo.inOut' }, 0.1)
+    .fromTo('.case-meta > div', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, stagger: 0.06 }, 0.3)
+    .fromTo('.case-poster', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.25)
+    .fromTo('.case-poster > :first-child', { scale: 1.15 }, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0.25);
 }
 
-/* ---------- Wordmark wind: shear follows scroll speed, then settles ---------- */
+/* ---------- Scroll: hero image drifts inside its frame; the band slides with it ---------- */
 
-function initWind() {
-  const wm = document.querySelector('.wordmark');
-  if (!wm) return;
-  const skew = gsap.quickTo(wm, 'skewX', { duration: 0.7, ease: 'power3.out' });
-  let settle;
-  ScrollTrigger.create({
-    trigger: '.hero', start: 'top top', end: 'bottom top',
-    onUpdate(self) {
-      skew(gsap.utils.clamp(-14, 14, self.getVelocity() / -220));
-      settle && settle.kill();
-      settle = gsap.delayedCall(0.12, () => skew(0));
-    }
-  });
-  gsap.to('.wordmark-mask', {
-    xPercent: -7, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+function initParallax() {
+  if (document.querySelector('.hero')) {
+    const st = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
+    gsap.to('.hero-photo', { yPercent: 12, ease: 'none', scrollTrigger: st });
+    gsap.to('.hero-band', { xPercent: 6, ease: 'none', scrollTrigger: { ...st } });
+  }
+  gsap.utils.toArray('.case-pair .photo > :first-child, .studio-photo > :first-child').forEach((el) => {
+    gsap.fromTo(el, { yPercent: -6, scale: 1.12 }, {
+      yPercent: 6, scale: 1.12, ease: 'none',
+      scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
+    });
   });
 }
 
-/* ---------- Work list rules draw in once ---------- */
+/* ---------- Work tiles rise once, like bars of a chart ---------- */
 
-function initRows() {
-  const rows = gsap.utils.toArray('.work-row');
-  if (!rows.length) return;
-  gsap.set(rows, { '--s': 0 });
-  ScrollTrigger.batch(rows, {
-    start: 'top 92%', once: true,
-    onEnter: (batch) => gsap.to(batch, { '--s': 1, duration: 1.1, ease: 'expo.inOut', stagger: 0.08 })
-  });
-}
-
-/* ---------- Poster follows the cursor over the work list ---------- */
-
-function initPreview() {
-  const list = document.querySelector('[data-render="worklist"]');
-  if (!list || !finePointer.matches) return;
-
-  const el = document.createElement('div');
-  el.className = 'preview';
-  el.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(el);
-  gsap.set(el, { xPercent: -50, yPercent: -50, scale: 0.8, autoAlpha: 0 });
-
-  const xTo = gsap.quickTo(el, 'x', { duration: 0.6, ease: 'power3' });
-  const yTo = gsap.quickTo(el, 'y', { duration: 0.6, ease: 'power3' });
-  const rTo = gsap.quickTo(el, 'rotation', { duration: 0.9, ease: 'power3' });
-  const cache = {};
-  let current = null;
-  let lastX = 0;
-  let settle;
-
-  const show = (slug) => {
-    if (slug === current) return;
-    current = slug;
-    const p = projects.find((x) => x.slug === slug);
-    el.innerHTML = cache[slug] || (cache[slug] = poster(p, { w: 400, h: 500 }));
-    gsap.fromTo(el.firstElementChild, { scale: 1.18 }, { scale: 1, duration: 0.7, ease: 'power3.out' });
-  };
-
-  list.addEventListener('pointerenter', (e) => {
-    gsap.set(el, { x: e.clientX, y: e.clientY });
-    lastX = e.clientX;
-    gsap.to(el, { autoAlpha: 1, scale: 1, duration: 0.45, ease: 'power3.out' });
-  });
-  list.addEventListener('pointermove', (e) => {
-    xTo(e.clientX); yTo(e.clientY);
-    rTo(gsap.utils.clamp(-7, 7, (e.clientX - lastX) * 0.35));
-    lastX = e.clientX;
-    settle && settle.kill();
-    settle = gsap.delayedCall(0.1, () => rTo(0));
-    const link = e.target.closest('[data-slug]');
-    if (link) show(link.dataset.slug);
-  });
-  list.addEventListener('pointerleave', () => {
-    current = null;
-    gsap.to(el, { autoAlpha: 0, scale: 0.8, duration: 0.3, ease: 'power2.in' });
+function initTiles() {
+  const tiles = gsap.utils.toArray('.tile-media');
+  if (!tiles.length) return;
+  gsap.set(tiles, { clipPath: 'inset(100% 0% 0% 0%)' });
+  ScrollTrigger.batch(tiles, {
+    start: 'top 90%', once: true,
+    onEnter: (batch) => gsap.to(batch, {
+      clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'expo.inOut', stagger: 0.08,
+      onComplete() { gsap.set(this.targets(), { clearProps: 'clipPath' }); }
+    })
   });
 }
 

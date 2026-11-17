@@ -6,11 +6,24 @@ export const studio = {
   email: 'hello@ostria.studio',
   phone: '+30 210 000 0000',
   instagram: 'https://instagram.com/',
-  linkedin: 'https://linkedin.com/'
+  linkedin: 'https://linkedin.com/',
+  // Optional photos, e.g. 'images/hero.jpg' in /public. Without them the generated stand-ins are used.
+  heroPhoto: null,     // hero (generated colonnade)
+  studioPhoto: null    // studio section (generated Cycladic steps)
 };
 
 export const strings = {
   en: {
+    'hero.vertical': 'Brand and digital design\nAthens, Greece',
+    'hero.cta': 'See selected work',
+    'hero.since': 'Since',
+    'hero.art': 'A sunlit Doric colonnade',
+    'work.intro': 'Recent projects for hotels, food producers, the public sector, transport, culture and retail.',
+    'approach.intro': 'Every project runs through the same four steps, whatever its size.',
+    'principles.title': 'What we hold to',
+    'principles.list': 'Clarity\nOrder\nCare',
+    'services.title': 'What we do',
+    'case.index': 'Project',
     'a11y.skip': 'Skip to content',
     'a11y.home': 'Ostria, home',
     'a11y.wordmark': 'Ostria, a design studio in Athens',
@@ -39,7 +52,7 @@ export const strings = {
     'studio.p1': 'We are eleven designers, developers and writers working from a former print shop in Kerameikos. Our name comes from the south wind that crosses the Aegean in spring: steady, warm, and hard to ignore.',
     'studio.p2': 'Every project starts with the same question: what does this need to say, and to whom? We answer it with systems of typography, grids, colour and motion that hold up on a shopfront, a phone screen and a ferry ticket alike.',
     'studio.clients': 'We have worked with hotel groups, municipalities, cultural institutions, food producers and start-ups across Greece, Cyprus and northern Europe.',
-    'approach.heading': 'How a project runs',
+    'approach.heading': 'How we work',
     'approach.1.title': 'Listen',
     'approach.1.text': 'Two weeks of interviews, audits and site visits before anything is drawn.',
     'approach.2.title': 'Define',
@@ -88,6 +101,16 @@ export const strings = {
   },
 
   el: {
+    'hero.vertical': 'Ταυτότητα και ψηφιακά\nΑθήνα, Ελλάδα',
+    'hero.cta': 'Δείτε επιλεγμένα έργα',
+    'hero.since': 'Από το',
+    'hero.art': 'Δωρική κιονοστοιχία στο φως του ήλιου',
+    'work.intro': 'Πρόσφατα έργα για ξενοδοχεία, παραγωγούς τροφίμων, τον δημόσιο τομέα, τις μεταφορές, τον πολιτισμό και το λιανεμπόριο.',
+    'approach.intro': 'Κάθε έργο, όποιο κι αν είναι το μέγεθός του, περνά από τα ίδια τέσσερα βήματα.',
+    'principles.title': 'Οι αρχές μας',
+    'principles.list': 'Σαφήνεια\nΤάξη\nΦροντίδα',
+    'services.title': 'Τι κάνουμε',
+    'case.index': 'Έργο',
     'a11y.skip': 'Μετάβαση στο περιεχόμενο',
     'a11y.home': 'Ostria, αρχική',
     'a11y.wordmark': 'Ostria, στούντιο σχεδιασμού στην Αθήνα',
@@ -116,7 +139,7 @@ export const strings = {
     'studio.p1': 'Είμαστε έντεκα σχεδιαστές, προγραμματιστές και κειμενογράφοι και δουλεύουμε σε ένα παλιό τυπογραφείο στον Κεραμεικό. Το όνομά μας το πήραμε από τον νοτιά που διασχίζει το Αιγαίο την άνοιξη: σταθερός, ζεστός και αδύνατον να τον αγνοήσεις.',
     'studio.p2': 'Κάθε έργο ξεκινά με την ίδια ερώτηση: τι πρέπει να πει και σε ποιον; Απαντάμε με συστήματα τυπογραφίας, καννάβου, χρώματος και κίνησης που λειτουργούν το ίδιο καλά σε μια βιτρίνα, σε μια οθόνη κινητού και σε ένα εισιτήριο πλοίου.',
     'studio.clients': 'Έχουμε συνεργαστεί με ξενοδοχειακούς ομίλους, δήμους, πολιτιστικούς φορείς, παραγωγούς τροφίμων και νεοφυείς επιχειρήσεις στην Ελλάδα, την Κύπρο και τη βόρεια Ευρώπη.',
-    'approach.heading': 'Πώς εξελίσσεται ένα έργο',
+    'approach.heading': 'Πώς δουλεύουμε',
     'approach.1.title': 'Ακούμε',
     'approach.1.text': 'Δύο εβδομάδες συνεντεύξεων, αξιολογήσεων και επισκέψεων πριν σχεδιαστεί οτιδήποτε.',
     'approach.2.title': 'Ορίζουμε',
@@ -165,8 +188,10 @@ export const strings = {
   }
 };
 
-// Project posters are generated SVG compositions (see posters.js), so the site ships no image files.
-// Replace `poster` with real photography later by adding an `images` array and updating render.js.
+// Each project shows a generated black-and-white stand-in (see posters.js) until you add real photography:
+//   photo: 'images/kyma-1.jpg'                          one photo for every slot, or
+//   photo: ['images/kyma-1.jpg', 'images/kyma-2.jpg', 'images/kyma-3.jpg']   cover, then the two detail images.
+// Put the files in /public/images. Any colour photo works: CSS renders it in black and white.
 export const projects = [
   {
     slug: 'kyma-hotels',

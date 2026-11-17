@@ -1,7 +1,7 @@
 // Shared HTML rendering. Runs at build time (Vite plugin) to pre-render English pages,
 // and in the browser to re-render when the language changes. No DOM access here.
 import { strings, projects, studio } from './data.js';
-import { poster } from './posters.js';
+import { art } from './posters.js';
 
 export const LANGS = ['en', 'el'];
 
@@ -14,7 +14,17 @@ export const str = (key, lang = 'en') => strings[lang][key] ?? strings.en[key] ?
 const tx = (key, lang, tag = 'span', attrs = '') =>
   `<${tag} data-i18n="${key}"${attrs ? ' ' + attrs : ''}>${esc(str(key, lang))}</${tag}>`;
 
+/** Display heading set in lowercase with the red full stop of the wordmark */
+const title = (key, lang, tag, attrs = '') =>
+  `<${tag} class="display"${attrs ? ' ' + attrs : ''}><span data-i18n="${key}">${esc(str(key, lang))}</span><span class="stop" aria-hidden="true">.</span></${tag}>`;
+
+const ARROW = '<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+const ARROW_DOWN = '<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v15m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+
 export const findProject = (slug) => projects.find((p) => p.slug === slug);
+const pad = (n) => String(n).padStart(2, '0');
+const heroArt = { slug: 'hero', poster: { type: 'colonnade' }, photo: studio.heroPhoto };
+const studioArt = { slug: 'studio', poster: { type: 'steps' }, photo: studio.studioPhoto };
 
 /* ---------- Chrome ---------- */
 
@@ -23,7 +33,7 @@ export function renderHeader(root = '', lang = 'en') {
 <a class="skip" href="#main" data-i18n="a11y.skip">${esc(str('a11y.skip', lang))}</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="${root}index.html" data-i18n-aria-label="a11y.home" aria-label="${esc(str('a11y.home', lang))}">Ostria</a>
+    <a class="brand" href="${root}index.html" data-i18n-aria-label="a11y.home" aria-label="${esc(str('a11y.home', lang))}">ostria<span class="stop">.</span></a>
     <nav class="nav" data-i18n-aria-label="nav.label" aria-label="${esc(str('nav.label', lang))}">
       <a href="${root}index.html#work">${tx('nav.work', lang)}</a>
       <a href="${root}index.html#studio">${tx('nav.studio', lang)}</a>
@@ -40,19 +50,19 @@ export function renderHeader(root = '', lang = 'en') {
 export function renderFooter(root = '', lang = 'en') {
   return `
 <footer class="site-footer">
-  <div class="container grid">
-    <a class="footer-mark" href="${root}index.html" data-i18n-aria-label="a11y.home" aria-label="${esc(str('a11y.home', lang))}">Ostria</a>
-    <p class="footer-address" data-i18n="footer.address">${esc(str('footer.address', lang))}</p>
-    <p class="footer-contact">
+  <div class="container footer-grid">
+    <a class="footer-mark" href="${root}index.html" data-i18n-aria-label="a11y.home" aria-label="${esc(str('a11y.home', lang))}">ostria<span class="stop">.</span></a>
+    <p class="footer-col" data-i18n="footer.address">${esc(str('footer.address', lang))}</p>
+    <p class="footer-col">
       <a href="mailto:${studio.email}">${studio.email}</a><br>
       <a href="tel:${studio.phone.replace(/\s/g, '')}">${studio.phone}</a>
     </p>
-    <p class="footer-social">
+    <p class="footer-col">
       <a href="${studio.instagram}" rel="noopener">Instagram</a><br>
       <a href="${studio.linkedin}" rel="noopener">LinkedIn</a>
     </p>
     <p class="footer-rights">${tx('footer.rights', lang)}</p>
-    <a class="footer-top" href="#top" data-i18n="footer.top">${esc(str('footer.top', lang))}</a>
+    <a class="footer-top square" href="#top" data-i18n-aria-label="footer.top" aria-label="${esc(str('footer.top', lang))}">${ARROW_DOWN}</a>
   </div>
 </footer>
 <div class="wipe" aria-hidden="true"></div>`;
@@ -61,34 +71,32 @@ export function renderFooter(root = '', lang = 'en') {
 /* ---------- Home ---------- */
 
 export function renderWorkList(lang = 'en', root = '') {
-  const rows = projects
+  const tiles = projects
     .map((p) => {
       const c = p[lang];
       return `
-    <li class="work-row">
-      <a class="work-link" href="${root}work/${p.slug}.html" data-slug="${p.slug}">
-        <span class="work-thumb">${poster(p, { w: 160, h: 200 })}</span>
-        <span class="work-client">${esc(p.client)}</span>
-        <span class="work-services">${esc(c.services)}</span>
-        <span class="work-sector">${esc(c.sector)}</span>
-        <span class="work-year">${p.year}</span>
+    <li class="tile">
+      <a class="tile-link" href="${root}work/${p.slug}.html" data-slug="${p.slug}">
+        <span class="tile-media photo">${art(p, { w: 640, h: 800, label: `${p.client}: ${c.title}`, root })}<span class="red-block" aria-hidden="true"></span></span>
+        <span class="tile-client">${esc(p.client)}</span>
+        <span class="tile-services">${esc(c.services)}</span>
+        <span class="tile-year">${p.year}</span>
       </a>
     </li>`;
     })
     .join('');
-  return `<ul class="work-list" role="list">${rows}</ul>`;
+  return `<ul class="tiles" role="list">${tiles}</ul>`;
 }
 
 export function renderHome(lang = 'en') {
-  const grid = Array.from({ length: 12 }, () => '<span></span>').join('');
   const steps = [1, 2, 3, 4]
     .map(
       (n) => `
-        <li class="step">
-          <span class="step-n" aria-hidden="true">${n}</span>
-          ${tx(`approach.${n}.title`, lang, 'h4', 'class="step-title"')}
-          ${tx(`approach.${n}.text`, lang, 'p', 'class="step-text"')}
-        </li>`
+      <li class="step">
+        <span class="step-n" aria-hidden="true">${pad(n)}</span>
+        ${tx(`approach.${n}.title`, lang, 'h3', 'class="step-title"')}
+        ${tx(`approach.${n}.text`, lang, 'p', 'class="step-text"')}
+      </li>`
     )
     .join('');
   const budgets = [0, 1, 2, 3, 4]
@@ -96,51 +104,71 @@ export function renderHome(lang = 'en') {
     .join('');
 
   return `
-<section class="hero" aria-labelledby="wordmark">
-  <div class="grid-lines container" aria-hidden="true"><div class="grid">${grid}</div></div>
-  <div class="container hero-inner">
-    <h1 class="wordmark" id="wordmark" data-i18n-aria-label="a11y.wordmark" aria-label="${esc(str('a11y.wordmark', lang))}">
-      <span class="wordmark-mask" aria-hidden="true"><span class="wordmark-word">${'Ostria'.split('').map((ch) => `<span class="ch">${ch}</span>`).join('')}</span></span>
-    </h1>
-    <div class="grid hero-meta">
-      ${tx('hero.lead', lang, 'p', 'class="hero-lead"')}
-      ${tx('hero.services', lang, 'p', 'class="hero-services"')}
-      ${tx('hero.place', lang, 'p', 'class="hero-place"')}
-    </div>
+<section class="hero container" aria-labelledby="wordmark">
+  <h1 class="wordmark" id="wordmark" data-i18n-aria-label="a11y.wordmark" aria-label="${esc(str('a11y.wordmark', lang))}">
+    <span class="wordmark-mask" aria-hidden="true">${'ostria'.split('').map((ch) => `<span class="ch">${ch}</span>`).join('')}<span class="ch stop">.</span></span>
+  </h1>
+  ${tx('hero.lead', lang, 'p', 'class="hero-lead"')}
+  <p class="hero-since" aria-hidden="true">2014</p>
+  ${tx('hero.services', lang, 'p', 'class="hero-meta hero-meta-a"')}
+  ${tx('hero.place', lang, 'p', 'class="hero-meta hero-meta-b"')}
+  ${tx('hero.vertical', lang, 'p', 'class="hero-vertical"')}
+  <div class="hero-media">
+    <div class="hero-photo photo">${art(heroArt, { w: 1200, h: 1500, label: str('hero.art', lang), eager: true })}</div>
+    <div class="hero-band" aria-hidden="true"></div>
+    <a class="hero-cta square" href="#work" data-i18n-aria-label="hero.cta" aria-label="${esc(str('hero.cta', lang))}">${ARROW}</a>
   </div>
 </section>
 
 <section class="section work" id="work" aria-labelledby="work-heading">
   <div class="container">
-    <div class="grid section-head">
-      ${tx('work.heading', lang, 'h2', 'class="section-title" id="work-heading"')}
-    </div>
-    <div class="work-cols" aria-hidden="true">
-      ${tx('work.client', lang)}${tx('work.services', lang)}${tx('work.sector', lang)}${tx('work.year', lang)}
+    <div class="section-head">
+      <p class="section-intro"><span class="dot" aria-hidden="true"></span>${tx('work.intro', lang)}</p>
+      ${title('work.heading', lang, 'h2', 'id="work-heading"')}
     </div>
     <div data-render="worklist">${renderWorkList(lang)}</div>
   </div>
 </section>
 
+<section class="section approach" aria-labelledby="approach-heading">
+  <div class="container">
+    <div class="section-head">
+      <p class="section-intro"><span class="dot" aria-hidden="true"></span>${tx('approach.intro', lang)}</p>
+      ${title('approach.heading', lang, 'h2', 'id="approach-heading"')}
+    </div>
+    <ol class="steps" role="list">${steps}</ol>
+  </div>
+</section>
+
 <section class="section studio" id="studio" aria-labelledby="studio-heading">
-  <div class="container grid">
-    ${tx('studio.heading', lang, 'h2', 'class="section-title" id="studio-heading"')}
+  <div class="container studio-grid">
+    ${title('studio.heading', lang, 'h2', 'id="studio-heading"')}
+    <div class="studio-red">
+      ${tx('principles.title', lang, 'p', 'class="studio-red-title"')}
+      ${tx('principles.list', lang, 'p', 'class="studio-red-list"')}
+    </div>
+    <div class="studio-services">
+      ${tx('services.title', lang, 'p', 'class="red-label"')}
+      ${tx('hero.services', lang, 'p', 'class="studio-services-list"')}
+    </div>
+    <div class="studio-media">
+      <span class="studio-circle" aria-hidden="true"></span>
+      <div class="studio-photo photo">${art(studioArt, { w: 1000, h: 800 })}</div>
+    </div>
     <div class="studio-copy">
       ${tx('studio.p1', lang, 'p', 'class="studio-big"')}
       ${tx('studio.p2', lang, 'p')}
       ${tx('studio.clients', lang, 'p')}
     </div>
-  </div>
-  <div class="container grid approach">
-    ${tx('approach.heading', lang, 'h3', 'class="approach-title"')}
-    <ol class="steps" role="list">${steps}</ol>
+    <span class="plus" aria-hidden="true"></span>
+    <span class="dots" aria-hidden="true"></span>
   </div>
 </section>
 
 <section class="section contact" id="contact" aria-labelledby="contact-heading">
-  <div class="container grid">
+  <div class="container contact-grid">
     <div class="contact-intro">
-      ${tx('contact.heading', lang, 'h2', 'class="contact-title" id="contact-heading"')}
+      ${title('contact.heading', lang, 'h2', 'id="contact-heading"')}
       ${tx('contact.lead', lang, 'p', 'class="contact-lead"')}
       <p class="contact-direct">${tx('contact.or', lang)}<br><a class="contact-email" href="mailto:${studio.email}">${studio.email}</a></p>
     </div>
@@ -171,7 +199,7 @@ export function renderHome(lang = 'en') {
       </div>
       <div class="hp" aria-hidden="true"><label for="f-gotcha">Leave empty</label><input id="f-gotcha" name="_gotcha" tabindex="-1" autocomplete="off"></div>
       <div class="form-foot field-wide">
-        <button class="button" type="submit"><span data-i18n="form.submit">${esc(str('form.submit', lang))}</span></button>
+        <button class="button" type="submit"><span data-i18n="form.submit">${esc(str('form.submit', lang))}</span><span class="button-arrow">${ARROW}</span></button>
         <p class="form-status" role="status" aria-live="polite" data-form-status></p>
       </div>
     </form>
@@ -189,49 +217,49 @@ export function renderProject(slug, lang = 'en', root = '../') {
   const L = (k) => esc(str(k, lang));
 
   const block = (key, text) => `
-  <section class="case-block container grid">
+  <section class="case-block container">
     <h2 class="case-label">${L(key)}</h2>
     <p class="case-text">${esc(text)}</p>
   </section>`;
 
   return `
 <article class="case" data-project="${p.slug}">
-  <header class="case-head container grid">
+  <header class="case-head container">
     <a class="case-back" href="${root}index.html#work">${L('case.all')}</a>
-    <p class="case-client">${esc(p.client)}</p>
-    <h1 class="case-title"><span class="line"><span>${esc(c.title)}</span></span></h1>
     <dl class="case-meta">
       <div><dt>${L('case.client')}</dt><dd>${esc(p.client)}</dd></div>
       <div><dt>${L('case.services')}</dt><dd>${esc(c.services)}</dd></div>
       <div><dt>${L('case.sector')}</dt><dd>${esc(c.sector)}</dd></div>
       <div><dt>${L('case.year')}</dt><dd>${p.year}</dd></div>
     </dl>
+    <p class="case-index"><span class="visually-hidden">${L('case.index')} </span>${pad(i + 1)}</p>
+    <h1 class="case-title"><span class="line"><span>${esc(c.title)}</span></span></h1>
+    <div class="case-red">
+      <ul class="case-facts" role="list">${c.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+    </div>
   </header>
 
-  <figure class="case-poster container">${poster(p, { w: 1600, h: 900, label: `${p.client}: ${c.title}` })}</figure>
+  <figure class="case-hero container">
+    <div class="case-poster photo">${art(p, { w: 1600, h: 1000, label: `${p.client}: ${c.title}`, root, eager: true })}<span class="red-block" aria-hidden="true"></span></div>
+    <span class="plus" aria-hidden="true"></span>
+    <span class="dots" aria-hidden="true"></span>
+  </figure>
 
   ${block('case.brief', c.brief)}
 
   <div class="case-pair container">
-    <figure>${poster(p, { w: 800, h: 1000, variant: 1 })}</figure>
-    <figure>${poster(p, { w: 800, h: 1000, variant: 2 })}</figure>
+    <figure class="photo">${art(p, { w: 800, h: 1000, variant: 1, root })}</figure>
+    <figure class="photo">${art(p, { w: 800, h: 1000, variant: 2, root })}</figure>
   </div>
 
   ${block('case.work', c.work)}
-
-  <section class="case-block container grid">
-    <h2 class="case-label">${L('case.result')}</h2>
-    <div class="case-text">
-      <p>${esc(c.result)}</p>
-      <ul class="case-facts" role="list">${c.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
-    </div>
-  </section>
+  ${block('case.result', c.result)}
 
   <nav class="case-next container" aria-label="${L('case.next')}">
     <a href="${root}work/${next.slug}.html" class="case-next-link">
       <span class="case-next-label">${L('case.next')}</span>
-      <span class="case-next-client">${esc(next.client)}</span>
-      <span class="case-next-thumb">${poster(next, { w: 400, h: 500 })}</span>
+      <span class="case-next-client">${esc(next.client)}<span class="stop" aria-hidden="true">.</span></span>
+      <span class="case-next-thumb photo">${art(next, { w: 400, h: 500, root })}<span class="red-block" aria-hidden="true"></span></span>
     </a>
   </nav>
 </article>`;

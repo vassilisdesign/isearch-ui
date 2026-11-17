@@ -1,4 +1,5 @@
-// Generates Swiss-style SVG posters for each project from a small spec.
+// Generates image stand-ins: Swiss-style SVG compositions, rendered in black and white (mono)
+// so they take the same red-block treatment as real photography. Real photos replace them via `photo` in data.js.
 // Deterministic (seeded by slug + variant) so build output and browser output match.
 
 function seeded(str) {
@@ -19,6 +20,50 @@ function seeded(str) {
 const r1 = (n) => Math.round(n * 10) / 10;
 
 const compositions = {
+  // Whitewashed Cycladic steps in hard sun: the studio stand-in.
+  steps({ w, h, id }) {
+    const n = 7;
+    const sw = w / (n + 1.5);
+    const sh = h / (n + 3);
+    let out = `<rect width="${w}" height="${h}" fill="url(#${id}-stone)"/>`;
+    for (let i = 0; i < n; i++) {
+      const x = i * sw;
+      const y = h - (i + 1) * sh;
+      out += `<rect x="${r1(x)}" y="${r1(y)}" width="${r1(w - x)}" height="${r1(sh)}" fill="url(#${id}-riser)"/>`;
+      out += `<rect x="${r1(x)}" y="${r1(y)}" width="${r1(w - x)}" height="${r1(sh * 0.22)}" fill="#f4f4f1"/>`;
+    }
+    out += `<polygon points="${r1(w * 0.55)},0 ${w},0 ${w},${r1(h * 0.62)}" fill="#000" opacity="0.32"/>`;
+    return out;
+  },
+
+  // Sunlit Doric colonnade: the hero stand-in.
+  colonnade({ w, h, rand, variant, id }) {
+    const n = 5 + variant;
+    const top = h * 0.2;
+    const base = h * 0.82;
+    const span = (w * 1.12) / n;
+    const cw = span * 0.58;
+    const off = -w * 0.06 + rand() * span * 0.25;
+    let out = `<rect x="0" y="${r1(top)}" width="${w}" height="${r1(base - top)}" fill="url(#${id}-in)"/>`;
+    for (let i = 0; i < n; i++) {
+      const x = off + i * span;
+      out += `<rect x="${r1(x)}" y="${r1(top)}" width="${r1(cw)}" height="${r1(base - top)}" fill="url(#${id}-col)"/>`;
+      for (let f = 1; f < 9; f++) {
+        const fx = x + (cw / 9) * f;
+        out += `<line x1="${r1(fx)}" y1="${r1(top)}" x2="${r1(fx)}" y2="${r1(base)}" stroke="#000" stroke-opacity="${(0.05 + f * 0.012).toFixed(3)}" stroke-width="${r1(cw / 70)}"/>`;
+      }
+      out += `<rect x="${r1(x - cw * 0.1)}" y="${r1(top - h * 0.03)}" width="${r1(cw * 1.2)}" height="${r1(h * 0.04)}" fill="url(#${id}-col)"/>`;
+    }
+    out += `<rect x="0" y="${r1(top - h * 0.17)}" width="${w}" height="${r1(h * 0.14)}" fill="url(#${id}-stone)"/>`;
+    out += `<rect x="0" y="${r1(top - h * 0.03)}" width="${w}" height="${r1(h * 0.012)}" fill="#1a1a1a" opacity="0.55"/>`;
+    for (let s = 0; s < 3; s++) {
+      const y = base + s * h * 0.06;
+      out += `<rect x="0" y="${r1(y)}" width="${w}" height="${r1(h * 0.02)}" fill="#efefec"/>`;
+      out += `<rect x="0" y="${r1(y + h * 0.02)}" width="${w}" height="${r1(h * 0.04)}" fill="url(#${id}-riser)"/>`;
+    }
+    return out;
+  },
+
   waves({ w, h, fg, rand, variant }) {
     const rows = 9 + variant * 2;
     const amp = h / rows / 2.4;
@@ -110,13 +155,41 @@ const compositions = {
  * @param {object} opts     { w, h, variant, label }
  * @returns {string} inline SVG markup
  */
-export function poster(project, { w = 400, h = 500, variant = 0, label = '' } = {}) {
+export function poster(project, { w = 400, h = 500, variant = 0, label = '', mono = true } = {}) {
   const spec = project.poster;
+  const id = `a${project.slug.replace(/[^a-z0-9]/gi, '')}${variant}${w}`;
   const rand = seeded(`${project.slug}:${variant}`);
   const draw = compositions[spec.type] || compositions.circle;
-  const body = draw({ w, h, fg: spec.fg, accent: spec.accent || spec.fg, rand, variant });
+  const fg = mono ? '#161616' : spec.fg;
+  const accent = mono ? '#77776f' : spec.accent || spec.fg;
+  const body = draw({ w, h, fg, accent, rand, variant, id });
   const a11y = label
     ? `role="img" aria-label="${label.replace(/"/g, '&quot;')}"`
     : 'aria-hidden="true" focusable="false"';
-  return `<svg class="poster" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" ${a11y}><rect width="${w}" height="${h}" fill="${spec.bg}"/>${body}</svg>`;
+  const defs = mono
+    ? `<defs>
+<linearGradient id="${id}-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ecece9"/><stop offset="1" stop-color="#b4b4ae"/></linearGradient>
+<linearGradient id="${id}-col" x1="0" x2="1"><stop offset="0" stop-color="#f6f6f3"/><stop offset=".35" stop-color="#dcdcd7"/><stop offset=".75" stop-color="#8d8d87"/><stop offset="1" stop-color="#4b4b47"/></linearGradient>
+<linearGradient id="${id}-in" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0c0c"/><stop offset="1" stop-color="#3a3a37"/></linearGradient>
+<linearGradient id="${id}-stone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2e2de"/><stop offset="1" stop-color="#a9a9a3"/></linearGradient>
+<linearGradient id="${id}-riser" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b7b75"/><stop offset="1" stop-color="#3d3d3a"/></linearGradient>
+<radialGradient id="${id}-v" cx=".45" cy=".4" r=".8"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></radialGradient>
+</defs>`
+    : '';
+  const bg = mono ? `url(#${id}-bg)` : spec.bg;
+  const vignette = mono ? `<rect width="${w}" height="${h}" fill="url(#${id}-v)"/>` : '';
+  return `<svg class="poster" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" ${a11y}>${defs}<rect width="${w}" height="${h}" fill="${bg}"/>${body}${vignette}</svg>`;
+}
+
+/**
+ * A project image: the real photo when `project.photo` is set, otherwise the generated stand-in.
+ * Photos are shown in black and white by CSS, so any colour photo works.
+ */
+export function art(project, { w = 400, h = 500, variant = 0, label = '', root = '', eager = false } = {}) {
+  const ph = project.photo && (Array.isArray(project.photo) ? project.photo[variant] || project.photo[0] : project.photo);
+  if (ph) {
+    const src = typeof ph === 'string' ? ph : ph.src;
+    return `<img class="photo-img" src="${root}${src}" alt="${(label || '').replace(/"/g, '&quot;')}" width="${w}" height="${h}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+  }
+  return poster(project, { w, h, variant, label });
 }
