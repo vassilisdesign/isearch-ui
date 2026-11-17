@@ -81,6 +81,21 @@ EL = {
     'Wordmark, first line': 'Λογότυπο, πρώτη γραμμή',
     'Wordmark, second line': 'Λογότυπο, δεύτερη γραμμή',
     'No Works yet. Add them under Works → Add Work.': 'Δεν υπάρχουν ακόμη έργα. Προσθέστε τα από Έργα → Προσθήκη έργου.',
+    'Legal details': 'Νομικά στοιχεία',
+    'Legal name (person or company)': 'Επωνυμία (φυσικό πρόσωπο ή εταιρεία)',
+    'Person responsible for content': 'Υπεύθυνος περιεχομένου',
+    'Street address': 'Διεύθυνση',
+    'Postcode': 'Ταχυδρομικός κώδικας',
+    'City': 'Πόλη',
+    'VAT number (ΑΦΜ)': 'ΑΦΜ',
+    'Tax office (ΔΟΥ)': 'ΔΟΥ',
+    'GEMI number (ΓΕΜΗ), or "Not registered"': 'Αριθμός ΓΕΜΗ, ή «Δεν απαιτείται»',
+    'Courts of (city)': 'Αρμόδια δικαστήρια (πόλη)',
+    'Hosting provider (name, country)': 'Πάροχος φιλοξενίας (όνομα, χώρα)',
+    'Email provider': 'Πάροχος email',
+    'Accountant or accounting software (optional)': 'Λογιστής ή λογισμικό (προαιρετικό)',
+    'Server log retention (days)': 'Διατήρηση αρχείων καταγραφής (ημέρες)',
+    'Works archive': 'Αρχείο έργων',
 }
 # 'Work' means "Work" (menu, plural sense) on the front end and "Work" (one item) in the admin:
 # the front-end menu label wins, since visitors see it.

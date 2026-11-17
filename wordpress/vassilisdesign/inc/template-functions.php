@@ -131,6 +131,58 @@ function vd_works_grid( $args = array() ) {
 	return '<ul class="vd-tiles" role="list">' . implode( '', array_map( 'vd_work_tile', $posts ) ) . '</ul>';
 }
 
+/**
+ * Works archive: title, Sector filter and tiles from the current archive query.
+ * Outside a Works archive (for example in the Elementor editor) it shows the latest Works.
+ */
+function vd_works_archive() {
+	global $wp_query;
+	$is_archive = is_post_type_archive( 'works' ) || is_tax( 'work_sector' );
+	$query      = $is_archive ? $wp_query : new WP_Query(
+		array(
+			'post_type'      => 'works',
+			'post_status'    => 'publish',
+			'posts_per_page' => 24,
+			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
+		)
+	);
+	$title      = is_tax( 'work_sector' ) ? single_term_title( '', false ) : __( 'Works', 'vassilisdesign' );
+	$terms      = get_terms( array( 'taxonomy' => 'work_sector', 'hide_empty' => true ) );
+	ob_start();
+	?>
+	<div class="vd-wrap vd-archive-head">
+		<?php echo vd_display_title( $title, 'h1' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php if ( $terms && ! is_wp_error( $terms ) ) : ?>
+			<nav class="vd-filter" aria-label="<?php esc_attr_e( 'Sectors', 'vassilisdesign' ); ?>">
+				<a href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>"<?php echo is_post_type_archive( 'works' ) ? ' aria-current="page"' : ''; ?>><?php esc_html_e( 'All', 'vassilisdesign' ); ?></a>
+				<?php foreach ( $terms as $term ) : ?>
+					<a href="<?php echo esc_url( get_term_link( $term ) ); ?>"<?php echo is_tax( 'work_sector', $term->term_id ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $term->name ); ?></a>
+				<?php endforeach; ?>
+			</nav>
+		<?php endif; ?>
+	</div>
+	<div class="vd-wrap vd-archive-body">
+		<?php if ( $query->have_posts() ) : ?>
+			<ul class="vd-tiles" role="list">
+				<?php
+				foreach ( $query->posts as $work ) {
+					echo vd_work_tile( $work ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				}
+				?>
+			</ul>
+			<?php
+			if ( $is_archive ) {
+				the_posts_pagination( array( 'mid_size' => 1 ) );
+			}
+			?>
+		<?php else : ?>
+			<p class="vd-empty"><?php esc_html_e( 'No Works yet.', 'vassilisdesign' ); ?></p>
+		<?php endif; ?>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+
 function vd_scope_items( $post_id ) {
 	return array_filter( array_map( 'trim', explode( "\n", (string) get_post_meta( $post_id, 'vd_scope', true ) ) ) );
 }

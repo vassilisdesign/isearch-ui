@@ -61,6 +61,22 @@ function vd_render_setup_page() {
 		</table>
 		<p class="description" style="max-width:760px"><?php esc_html_e( 'No add-on packs are needed (Essential Addons, Premium Addons, UAE, Unlimited Elements, Sticky Header Effects): the theme widgets and Elementor Pro cover everything, and each add-on would add CSS and JavaScript to every page.', 'vassilisdesign' ); ?></p>
 
+		<h2><?php esc_html_e( 'Legal pages', 'vassilisdesign' ); ?></h2>
+		<?php $vd_missing = vd_legal_missing(); ?>
+		<?php if ( $vd_missing ) : ?>
+			<p style="max-width:760px">
+				<?php esc_html_e( 'These details are still missing. Fill them in under Appearance → Customize → Legal details and click Publish: the pages complete themselves.', 'vassilisdesign' ); ?>
+				<a class="button" href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=vd_legal' ) ); ?>"><?php esc_html_e( 'Open Legal details', 'vassilisdesign' ); ?></a>
+			</p>
+			<ul style="list-style:disc;padding-left:1.5em;max-width:760px">
+				<?php foreach ( $vd_missing as $vd_title => $vd_tokens ) : ?>
+					<li><strong><?php echo esc_html( $vd_title ); ?>:</strong> <?php echo esc_html( implode( ', ', $vd_tokens ) ); ?></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php else : ?>
+			<p><span style="color:#008a20">&#10003;</span> <?php esc_html_e( 'All legal details are filled in.', 'vassilisdesign' ); ?></p>
+		<?php endif; ?>
+
 		<h2><?php esc_html_e( 'What the setup does', 'vassilisdesign' ); ?></h2>
 		<ol style="max-width:760px">
 			<li><?php esc_html_e( 'Applies Elementor performance settings: no Google Fonts, no default colours or fonts, external CSS files, leaner markup, CSS loaded per page, SVG icons, lightbox off, Works editable with Elementor.', 'vassilisdesign' ); ?></li>
@@ -68,6 +84,8 @@ function vd_render_setup_page() {
 			<li><?php esc_html_e( 'Creates the Privacy Policy, Terms of Use and Legal Notice pages (English) and sets the WordPress privacy page. The Cookie Policy is created by the Complianz wizard.', 'vassilisdesign' ); ?></li>
 			<li><?php esc_html_e( 'Creates the Home page from the Elementor template and sets it as the front page.', 'vassilisdesign' ); ?></li>
 			<li><?php esc_html_e( 'Creates the header and footer menus.', 'vassilisdesign' ); ?></li>
+			<li><?php esc_html_e( 'With Elementor Pro: creates the "Single Work" and "Works archive" Theme Builder templates, shown on Works only.', 'vassilisdesign' ); ?></li>
+			<li><?php esc_html_e( 'Fills the legal pages with your Legal details.', 'vassilisdesign' ); ?></li>
 		</ol>
 		<p><?php esc_html_e( 'Existing pages, menus and terms with the same names are left untouched.', 'vassilisdesign' ); ?></p>
 
@@ -240,10 +258,127 @@ function vd_run_setup() {
 	}
 	set_theme_mod( 'nav_menu_locations', $locations );
 
+	// 6. Elementor Pro Theme Builder templates for Works (editable in Templates → Theme Builder).
+	if ( defined( 'ELEMENTOR_PRO_VERSION' ) ) {
+		foreach ( vd_create_theme_builder_templates() as $line ) {
+			$log[] = $line;
+		}
+	}
+
+	// 7. Legal details from Appearance → Customize → Legal details.
+	$filled = vd_fill_legal_pages();
+	if ( $filled ) {
+		/* translators: %s: list of page titles */
+		$log[] = sprintf( __( 'Legal details filled in on: %s', 'vassilisdesign' ), implode( ', ', $filled ) );
+	}
+
 	update_option( 'permalink_structure', get_option( 'permalink_structure' ) ? get_option( 'permalink_structure' ) : '/%postname%/' );
 	flush_rewrite_rules();
 	$log[] = __( 'Permalinks refreshed.', 'vassilisdesign' );
 
+	return $log;
+}
+
+/**
+ * Creates the "Single Work" and "Works archive" Theme Builder templates (Elementor Pro), built from
+ * the theme widgets and shown only for Works. Existing ones (created earlier by this setup) are kept.
+ */
+function vd_create_theme_builder_templates() {
+	$log       = array();
+	$templates = array(
+		'single-post' => array(
+			'title'      => 'Single Work',
+			'location'   => 'single',
+			'widgets'    => array( 'vd-work-header', 'vd-work-intro', 'vd-work-gallery', 'vd-next-work' ),
+			'conditions' => array( 'include/singular/works' ),
+		),
+		'archive'     => array(
+			'title'      => 'Works archive',
+			'location'   => 'archive',
+			'widgets'    => array( 'vd-works-archive' ),
+			'conditions' => array( 'include/archive/works_archive', 'include/archive/work_sector' ),
+		),
+	);
+	$cache = (array) get_option( 'elementor_pro_theme_builder_conditions', array() );
+
+	foreach ( $templates as $type => $t ) {
+		$existing = get_posts(
+			array(
+				'post_type'   => 'elementor_library',
+				'post_status' => 'any',
+				'meta_key'    => '_vd_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'meta_value'  => $type, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'fields'      => 'ids',
+			)
+		);
+		if ( $existing ) {
+			continue;
+		}
+		$elements = array();
+		foreach ( $t['widgets'] as $i => $widget ) {
+			$elements[] = array(
+				'id'         => substr( md5( $type . $widget ), 0, 7 ),
+				'elType'     => 'widget',
+				'widgetType' => $widget,
+				'settings'   => new stdClass(),
+				'elements'   => array(),
+			);
+		}
+		$data = array(
+			array(
+				'id'       => substr( md5( $type . 'container' ), 0, 7 ),
+				'elType'   => 'container',
+				'settings' => array(
+					'content_width'  => 'full',
+					'flex_direction' => 'column',
+					'css_classes'    => 'vd-bare',
+					'_title'         => $t['title'],
+				),
+				'elements' => $elements,
+				'isInner'  => false,
+			),
+		);
+		$id = wp_insert_post(
+			array(
+				'post_type'   => 'elementor_library',
+				'post_status' => 'publish',
+				'post_title'  => $t['title'],
+			)
+		);
+		if ( ! $id || is_wp_error( $id ) ) {
+			continue;
+		}
+		update_post_meta( $id, '_elementor_edit_mode', 'builder' );
+		update_post_meta( $id, '_elementor_template_type', $type );
+		update_post_meta( $id, '_elementor_data', wp_slash( wp_json_encode( $data ) ) );
+		update_post_meta( $id, '_elementor_version', defined( 'ELEMENTOR_VERSION' ) ? ELEMENTOR_VERSION : '' );
+		update_post_meta( $id, '_elementor_conditions', $t['conditions'] );
+		update_post_meta( $id, '_vd_template', $type );
+		wp_set_object_terms( $id, $type, 'elementor_library_type' );
+		$cache[ $t['location'] ][ $id ] = $t['conditions'];
+		/* translators: %s: template name */
+		$log[] = sprintf( __( 'Theme Builder template created: %s (shown on Works only).', 'vassilisdesign' ), $t['title'] );
+	}
+
+	if ( $log ) {
+		// Let Elementor Pro rebuild its conditions cache; fall back to writing it directly.
+		$regenerated = false;
+		try {
+			if ( class_exists( '\ElementorPro\Modules\ThemeBuilder\Module' ) ) {
+				$manager = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager();
+				if ( method_exists( $manager, 'get_cache' ) && method_exists( $manager->get_cache(), 'regenerate' ) ) {
+					$manager->get_cache()->regenerate();
+					$regenerated = true;
+				}
+			}
+		} catch ( \Throwable $e ) {
+			$regenerated = false;
+		}
+		if ( ! $regenerated ) {
+			update_option( 'elementor_pro_theme_builder_conditions', $cache );
+		}
+		$log[] = __( 'Check Templates → Theme Builder: "Single Work" and "Works archive" should show the condition "Works". If not, open each one and set Display Conditions → Include → Works.', 'vassilisdesign' );
+	}
 	return $log;
 }
 

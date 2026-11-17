@@ -176,6 +176,10 @@ body {
 /* Pages without a hero start below the header */
 .vd-main, body:not(.home) .site-main { padding-top: calc(var(--vd-header-h) + clamp(24px, 4vw, 56px)); }
 .elementor-page .site-main { padding-top: 0; }
+/* Elementor Pro Theme Builder templates for Works start below the header too */
+.elementor-location-single .vd-case-head, [data-elementor-type="single-post"] .vd-case-head,
+.elementor-location-archive .vd-archive-head, [data-elementor-type="archive"] .vd-archive-head { padding-top: calc(var(--vd-header-h) + clamp(24px, 4vw, 56px)); }
+.elementor-location-archive .vd-archive-body, [data-elementor-type="archive"] .vd-archive-body { padding-bottom: var(--vd-section); }
 
 /* ==========================================================================
    Hero

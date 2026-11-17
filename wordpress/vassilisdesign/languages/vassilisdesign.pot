@@ -6,22 +6,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: vassilisdesign\n"
 
-#: archive-works.php:13 inc/widgets/widgets.php:185 inc/works.php:61
-msgid "Works"
-msgstr ""
-
-#: archive-works.php:20 inc/works.php:34 inc/works.php:39
-msgid "Sectors"
-msgstr ""
-
-#: archive-works.php:21
-msgid "All"
-msgstr ""
-
-#: archive-works.php:40
-msgid "No Works yet."
-msgstr ""
-
 #: inc/admin-setup.php:17 inc/admin-setup.php:17 inc/admin-setup.php:41
 msgid "VASSILISDESIGN setup"
 msgstr ""
@@ -51,75 +35,111 @@ msgid "No add-on packs are needed (Essential Addons, Premium Addons, UAE, Unlimi
 msgstr ""
 
 #: inc/admin-setup.php:64
-msgid "What the setup does"
-msgstr ""
-
-#: inc/admin-setup.php:66
-msgid "Applies Elementor performance settings: no Google Fonts, no default colours or fonts, external CSS files, leaner markup, CSS loaded per page, SVG icons, lightbox off, Works editable with Elementor."
-msgstr ""
-
-#: inc/admin-setup.php:67
-msgid "Creates the four Sectors for Works."
+msgid "Legal pages"
 msgstr ""
 
 #: inc/admin-setup.php:68
-msgid "Creates the Privacy Policy, Terms of Use and Legal Notice pages (English) and sets the WordPress privacy page. The Cookie Policy is created by the Complianz wizard."
+msgid "These details are still missing. Fill them in under Appearance → Customize → Legal details and click Publish: the pages complete themselves."
 msgstr ""
 
 #: inc/admin-setup.php:69
-msgid "Creates the Home page from the Elementor template and sets it as the front page."
-msgstr ""
-
-#: inc/admin-setup.php:70
-msgid "Creates the header and footer menus."
-msgstr ""
-
-#: inc/admin-setup.php:72
-msgid "Existing pages, menus and terms with the same names are left untouched."
+msgid "Open Legal details"
 msgstr ""
 
 #: inc/admin-setup.php:77
-msgid "Run setup"
+msgid "All legal details are filled in."
+msgstr ""
+
+#: inc/admin-setup.php:80
+msgid "What the setup does"
+msgstr ""
+
+#: inc/admin-setup.php:82
+msgid "Applies Elementor performance settings: no Google Fonts, no default colours or fonts, external CSS files, leaner markup, CSS loaded per page, SVG icons, lightbox off, Works editable with Elementor."
+msgstr ""
+
+#: inc/admin-setup.php:83
+msgid "Creates the four Sectors for Works."
+msgstr ""
+
+#: inc/admin-setup.php:84
+msgid "Creates the Privacy Policy, Terms of Use and Legal Notice pages (English) and sets the WordPress privacy page. The Cookie Policy is created by the Complianz wizard."
+msgstr ""
+
+#: inc/admin-setup.php:85
+msgid "Creates the Home page from the Elementor template and sets it as the front page."
+msgstr ""
+
+#: inc/admin-setup.php:86
+msgid "Creates the header and footer menus."
 msgstr ""
 
 #: inc/admin-setup.php:87
-msgid "You are not allowed to do this."
+msgid "With Elementor Pro: creates the \"Single Work\" and \"Works archive\" Theme Builder templates, shown on Works only."
 msgstr ""
 
-#: inc/admin-setup.php:103
-msgid "Elementor performance settings applied."
+#: inc/admin-setup.php:88
+msgid "Fills the legal pages with your Legal details."
+msgstr ""
+
+#: inc/admin-setup.php:90
+msgid "Existing pages, menus and terms with the same names are left untouched."
+msgstr ""
+
+#: inc/admin-setup.php:95
+msgid "Run setup"
 msgstr ""
 
 #: inc/admin-setup.php:105
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: inc/admin-setup.php:121
+msgid "Elementor performance settings applied."
+msgstr ""
+
+#: inc/admin-setup.php:123
 msgid "Elementor is not active: settings skipped."
 msgstr ""
 
-#: inc/admin-setup.php:113
+#: inc/admin-setup.php:131
 msgid "Sector created: %s"
 msgstr ""
 
-#: inc/admin-setup.php:138
+#: inc/admin-setup.php:156
 msgid "WordPress sample privacy page replaced with the Privacy Policy and published."
 msgstr ""
 
-#: inc/admin-setup.php:155
+#: inc/admin-setup.php:173
 msgid "Page created: %s"
 msgstr ""
 
-#: inc/admin-setup.php:187
+#: inc/admin-setup.php:205
 msgid "Home page created from the Elementor template and set as the front page. Add the hero image, logos and studio image in Elementor."
 msgstr ""
 
-#: inc/admin-setup.php:216
+#: inc/admin-setup.php:234
 msgid "Header menu created."
 msgstr ""
 
-#: inc/admin-setup.php:238
+#: inc/admin-setup.php:256
 msgid "Footer legal menu created. After the Complianz wizard, add its Cookie Policy page to this menu."
 msgstr ""
 
-#: inc/admin-setup.php:245
+#: inc/admin-setup.php:272
+msgid "Legal details filled in on: %s"
+msgstr ""
+
+#: inc/admin-setup.php:277
 msgid "Permalinks refreshed."
+msgstr ""
+
+#: inc/admin-setup.php:360
+msgid "Theme Builder template created: %s (shown on Works only)."
+msgstr ""
+
+#: inc/admin-setup.php:380
+msgid "Check Templates → Theme Builder: \"Single Work\" and \"Works archive\" should show the condition \"Works\". If not, open each one and set Display Conditions → Include → Works."
 msgstr ""
 
 #: inc/customizer.php:16
@@ -166,6 +186,66 @@ msgstr ""
 msgid "Footer text"
 msgstr ""
 
+#: inc/legal.php:18
+msgid "Legal name (person or company)"
+msgstr ""
+
+#: inc/legal.php:19
+msgid "Person responsible for content"
+msgstr ""
+
+#: inc/legal.php:20
+msgid "Street address"
+msgstr ""
+
+#: inc/legal.php:21
+msgid "Postcode"
+msgstr ""
+
+#: inc/legal.php:22
+msgid "City"
+msgstr ""
+
+#: inc/legal.php:23
+msgid "VAT number (ΑΦΜ)"
+msgstr ""
+
+#: inc/legal.php:24
+msgid "Tax office (ΔΟΥ)"
+msgstr ""
+
+#: inc/legal.php:25
+msgid "GEMI number (ΓΕΜΗ), or \"Not registered\""
+msgstr ""
+
+#: inc/legal.php:26
+msgid "Courts of (city)"
+msgstr ""
+
+#: inc/legal.php:27
+msgid "Hosting provider (name, country)"
+msgstr ""
+
+#: inc/legal.php:28
+msgid "Email provider"
+msgstr ""
+
+#: inc/legal.php:29
+msgid "Accountant or accounting software (optional)"
+msgstr ""
+
+#: inc/legal.php:30
+msgid "Server log retention (days)"
+msgstr ""
+
+#: inc/legal.php:45
+msgid "Legal details"
+msgstr ""
+
+#: inc/legal.php:46
+msgid "Used to complete the Privacy Policy, Terms of Use and Legal Notice (English and Greek). Saving fills in every placeholder that is still on those pages."
+msgstr ""
+
 #: inc/setup.php:26
 msgid "Header menu"
 msgstr ""
@@ -178,255 +258,283 @@ msgstr ""
 msgid "No Works yet. Add them under Works → Add Work."
 msgstr ""
 
-#: inc/template-functions.php:146 inc/widgets/widgets.php:194 inc/widgets/widgets.php:348
+#: inc/template-functions.php:149 inc/widgets/widgets.php:186 inc/works.php:61
+msgid "Works"
+msgstr ""
+
+#: inc/template-functions.php:156 inc/works.php:34 inc/works.php:39
+msgid "Sectors"
+msgstr ""
+
+#: inc/template-functions.php:157
+msgid "All"
+msgstr ""
+
+#: inc/template-functions.php:179
+msgid "No Works yet."
+msgstr ""
+
+#: inc/template-functions.php:198 inc/widgets/widgets.php:195 inc/widgets/widgets.php:349
 msgid "Sector"
 msgstr ""
 
-#: inc/template-functions.php:147 inc/works.php:18 inc/works.php:157
+#: inc/template-functions.php:199 inc/works.php:18 inc/works.php:157
 msgid "Services"
 msgstr ""
 
-#: inc/template-functions.php:148 inc/works.php:17 inc/works.php:153
+#: inc/template-functions.php:200 inc/works.php:17 inc/works.php:153
 msgid "Location"
 msgstr ""
 
-#: inc/template-functions.php:154
+#: inc/template-functions.php:206
 msgid "All work"
 msgstr ""
 
-#: inc/template-functions.php:162
+#: inc/template-functions.php:214
 msgid "Project"
 msgstr ""
 
-#: inc/template-functions.php:167 inc/works.php:161
+#: inc/template-functions.php:219 inc/works.php:161
 msgid "Scope"
 msgstr ""
 
-#: inc/template-functions.php:199
+#: inc/template-functions.php:251
 msgid "About the project"
 msgstr ""
 
-#: inc/template-functions.php:244 inc/template-functions.php:246
+#: inc/template-functions.php:296 inc/template-functions.php:298
 msgid "Next project"
 msgstr ""
 
-#: inc/widgets/widgets.php:67
+#: inc/widgets/widgets.php:68
 msgid "VD Hero"
 msgstr ""
 
-#: inc/widgets/widgets.php:70
+#: inc/widgets/widgets.php:71
 msgid "Hero"
 msgstr ""
 
-#: inc/widgets/widgets.php:71
+#: inc/widgets/widgets.php:72
 msgid "Wordmark line 1"
 msgstr ""
 
-#: inc/widgets/widgets.php:72
+#: inc/widgets/widgets.php:73
 msgid "Wordmark line 2"
 msgstr ""
 
-#: inc/widgets/widgets.php:73
+#: inc/widgets/widgets.php:74
 msgid "Accessible name"
 msgstr ""
 
-#: inc/widgets/widgets.php:74
+#: inc/widgets/widgets.php:75
 msgid "Positioning"
 msgstr ""
 
-#: inc/widgets/widgets.php:75
+#: inc/widgets/widgets.php:76
 msgid "Column 1"
 msgstr ""
 
-#: inc/widgets/widgets.php:76
+#: inc/widgets/widgets.php:77
 msgid "Column 2"
 msgstr ""
 
-#: inc/widgets/widgets.php:77
+#: inc/widgets/widgets.php:78
 msgid "Vertical text"
 msgstr ""
 
-#: inc/widgets/widgets.php:78
+#: inc/widgets/widgets.php:79
 msgid "Rotated corner text"
 msgstr ""
 
-#: inc/widgets/widgets.php:79 inc/widgets/widgets.php:307
+#: inc/widgets/widgets.php:80 inc/widgets/widgets.php:308
 msgid "Image"
 msgstr ""
 
-#: inc/widgets/widgets.php:80
+#: inc/widgets/widgets.php:81
 msgid "Image description"
 msgstr ""
 
-#: inc/widgets/widgets.php:84
+#: inc/widgets/widgets.php:85
 msgid "Image display"
 msgstr ""
 
-#: inc/widgets/widgets.php:88
+#: inc/widgets/widgets.php:89
 msgid "Packshot on white: fit"
 msgstr ""
 
-#: inc/widgets/widgets.php:89
+#: inc/widgets/widgets.php:90
 msgid "Photo: fill"
 msgstr ""
 
-#: inc/widgets/widgets.php:93
+#: inc/widgets/widgets.php:94
 msgid "Arrow button link"
 msgstr ""
 
-#: inc/widgets/widgets.php:94
+#: inc/widgets/widgets.php:95
 msgid "Arrow button label"
 msgstr ""
 
-#: inc/widgets/widgets.php:144
+#: inc/widgets/widgets.php:145
 msgid "VD Section heading"
 msgstr ""
 
-#: inc/widgets/widgets.php:147
+#: inc/widgets/widgets.php:148
 msgid "Heading"
 msgstr ""
 
-#: inc/widgets/widgets.php:148
+#: inc/widgets/widgets.php:149
 msgid "Intro (left)"
 msgstr ""
 
-#: inc/widgets/widgets.php:149
+#: inc/widgets/widgets.php:150
 msgid "Title (right, shown lowercase with a red full stop)"
 msgstr ""
 
-#: inc/widgets/widgets.php:153
+#: inc/widgets/widgets.php:154
 msgid "Heading level"
 msgstr ""
 
-#: inc/widgets/widgets.php:179
+#: inc/widgets/widgets.php:180
 msgid "VD Works grid"
 msgstr ""
 
-#: inc/widgets/widgets.php:186
+#: inc/widgets/widgets.php:187
 msgid "Number of Works"
 msgstr ""
 
-#: inc/widgets/widgets.php:187
+#: inc/widgets/widgets.php:188
 msgid "All sectors"
 msgstr ""
 
-#: inc/widgets/widgets.php:195
+#: inc/widgets/widgets.php:196
 msgid "\"All work\" link text (empty to hide)"
 msgstr ""
 
-#: inc/widgets/widgets.php:200
+#: inc/widgets/widgets.php:201
 msgid "Order Works with the \"Order\" field on each Work (lowest first)."
 msgstr ""
 
-#: inc/widgets/widgets.php:223
+#: inc/widgets/widgets.php:224
 msgid "VD Logo wall"
 msgstr ""
 
-#: inc/widgets/widgets.php:226
+#: inc/widgets/widgets.php:227
 msgid "Logos"
 msgstr ""
 
-#: inc/widgets/widgets.php:227
+#: inc/widgets/widgets.php:228
 msgid "Logos (on white, any size)"
 msgstr ""
 
-#: inc/widgets/widgets.php:254
+#: inc/widgets/widgets.php:255
 msgid "VD Numbered list"
 msgstr ""
 
-#: inc/widgets/widgets.php:257 inc/widgets/widgets.php:264
+#: inc/widgets/widgets.php:258 inc/widgets/widgets.php:265
 msgid "Items"
 msgstr ""
 
-#: inc/widgets/widgets.php:259 inc/widgets/widgets.php:302 inc/widgets/widgets.php:391
+#: inc/widgets/widgets.php:260 inc/widgets/widgets.php:303 inc/widgets/widgets.php:392
 msgid "Title"
 msgstr ""
 
-#: inc/widgets/widgets.php:260 inc/widgets/widgets.php:392
+#: inc/widgets/widgets.php:261 inc/widgets/widgets.php:393
 msgid "Text"
 msgstr ""
 
-#: inc/widgets/widgets.php:298
+#: inc/widgets/widgets.php:299
 msgid "VD Studio"
 msgstr ""
 
-#: inc/widgets/widgets.php:301 template-parts/header.php:38
+#: inc/widgets/widgets.php:302 template-parts/header.php:38
 msgid "Studio"
 msgstr ""
 
-#: inc/widgets/widgets.php:303
+#: inc/widgets/widgets.php:304
 msgid "Red box label"
 msgstr ""
 
-#: inc/widgets/widgets.php:304
+#: inc/widgets/widgets.php:305
 msgid "Red box list (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:305
+#: inc/widgets/widgets.php:306
 msgid "Side label"
 msgstr ""
 
-#: inc/widgets/widgets.php:306
+#: inc/widgets/widgets.php:307
 msgid "Side list (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:308
+#: inc/widgets/widgets.php:309
 msgid "Text (first paragraph is shown large)"
 msgstr ""
 
-#: inc/widgets/widgets.php:343
+#: inc/widgets/widgets.php:344
 msgid "VD Client index"
 msgstr ""
 
-#: inc/widgets/widgets.php:346
+#: inc/widgets/widgets.php:347
 msgid "Clients"
 msgstr ""
 
-#: inc/widgets/widgets.php:349
+#: inc/widgets/widgets.php:350
 msgid "Clients (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:353
+#: inc/widgets/widgets.php:354
 msgid "Groups"
 msgstr ""
 
-#: inc/widgets/widgets.php:387
+#: inc/widgets/widgets.php:388
 msgid "VD Contact intro"
 msgstr ""
 
-#: inc/widgets/widgets.php:390 template-parts/header.php:40
+#: inc/widgets/widgets.php:391 template-parts/header.php:40
 msgid "Contact"
 msgstr ""
 
-#: inc/widgets/widgets.php:393
+#: inc/widgets/widgets.php:394
 msgid "Line above the contact details"
 msgstr ""
 
-#: inc/widgets/widgets.php:398
+#: inc/widgets/widgets.php:399
 msgid "Email and phone come from Appearance → Customize → Studio details."
 msgstr ""
 
-#: inc/widgets/widgets.php:422 inc/works.php:62 template-parts/header.php:36
+#: inc/widgets/widgets.php:423 inc/works.php:62 template-parts/header.php:36
 msgid "Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:427
+#: inc/widgets/widgets.php:428
 msgid "Shows the current Work. Use inside a Theme Builder \"Single\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:448
+#: inc/widgets/widgets.php:449
 msgid "VD Work header"
 msgstr ""
 
-#: inc/widgets/widgets.php:463
+#: inc/widgets/widgets.php:464
 msgid "VD Work cover and summary"
 msgstr ""
 
-#: inc/widgets/widgets.php:478
+#: inc/widgets/widgets.php:479
 msgid "VD Work gallery"
 msgstr ""
 
-#: inc/widgets/widgets.php:493
+#: inc/widgets/widgets.php:494
+msgid "VD Works archive"
+msgstr ""
+
+#: inc/widgets/widgets.php:500
+msgid "Works archive"
+msgstr ""
+
+#: inc/widgets/widgets.php:505
+msgid "Title, Sector filter and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
+msgstr ""
+
+#: inc/widgets/widgets.php:520
 msgid "VD Next Work"
 msgstr ""
 

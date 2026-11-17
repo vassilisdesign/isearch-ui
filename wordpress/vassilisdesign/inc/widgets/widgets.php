@@ -26,6 +26,7 @@ function vd_widget_classes() {
 		'VD_Widget_Work_Intro',
 		'VD_Widget_Work_Gallery',
 		'VD_Widget_Next_Work',
+		'VD_Widget_Works_Archive',
 	);
 }
 
@@ -482,6 +483,32 @@ class VD_Widget_Work_Gallery extends VD_Work_Widget {
 		if ( $w ) {
 			echo vd_work_gallery( $w ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
+	}
+}
+
+class VD_Widget_Works_Archive extends VD_Widget {
+	public function get_name() {
+		return 'vd-works-archive';
+	}
+	public function get_title() {
+		return __( 'VD Works archive', 'vassilisdesign' );
+	}
+	protected function is_dynamic_content(): bool {
+		return true;
+	}
+	protected function register_controls() {
+		$this->start( __( 'Works archive', 'vassilisdesign' ) );
+		$this->add_control(
+			'note',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw'  => esc_html__( 'Title, Sector filter and all Works of the current archive. Use inside a Theme Builder "Archive" template for Works.', 'vassilisdesign' ),
+			)
+		);
+		$this->end_controls_section();
+	}
+	protected function render() {
+		echo vd_works_archive(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 
