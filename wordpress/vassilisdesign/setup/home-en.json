@@ -1,0 +1,391 @@
+{
+ "title": "VASSILISDESIGN Home",
+ "type": "page",
+ "version": "0.4",
+ "page_settings": {
+  "template": "elementor_header_footer"
+ },
+ "content": [
+  {
+   "id": "41493f5",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-bare",
+    "_title": "Hero"
+   },
+   "elements": [
+    {
+     "id": "fa147dc",
+     "elType": "widget",
+     "widgetType": "vd-hero",
+     "settings": {
+      "line1": "VASSILIS",
+      "line2": "DESIGN",
+      "label": "VASSILISDESIGN, independent design studio",
+      "lead": "Independent design studio.\nDistinctive identities.\nMeaningful design.",
+      "meta_a": "Brand identity\nPackaging and labels\nEditorial and print\nWeb design\nDigital communication",
+      "meta_b": "Based in Greece\nClients in Greece, the US and the UK",
+      "vertical": "Independent design studio\nGreece and the United States",
+      "corner": "GR / US",
+      "image": {
+       "id": "",
+       "url": ""
+      },
+      "image_alt": "Wine labels designed by VASSILISDESIGN",
+      "fit": "contain",
+      "cta": "#work",
+      "cta_label": "See selected work"
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "46c3b7a",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Selected work",
+    "_element_id": "work"
+   },
+   "elements": [
+    {
+     "id": "51f2cb7",
+     "elType": "widget",
+     "widgetType": "vd-section-head",
+     "settings": {
+      "intro": "Identities, packaging, labels and websites for wineries, hotels, restaurants, food producers and professional firms.",
+      "title": "Selected work",
+      "tag": "h2"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "129289d",
+     "elType": "widget",
+     "widgetType": "vd-works-grid",
+     "settings": {
+      "count": 8,
+      "sector": "",
+      "all_link": "All work"
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "e85501a",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Identities"
+   },
+   "elements": [
+    {
+     "id": "aa502e5",
+     "elType": "widget",
+     "widgetType": "vd-section-head",
+     "settings": {
+      "intro": "Logos and identity systems built on typography and proportion.",
+      "title": "Identities",
+      "tag": "h2"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "37f88a2",
+     "elType": "widget",
+     "widgetType": "vd-logo-wall",
+     "settings": {
+      "logos": []
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "6828da9",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Services"
+   },
+   "elements": [
+    {
+     "id": "0a5984f",
+     "elType": "widget",
+     "widgetType": "vd-section-head",
+     "settings": {
+      "intro": "We take a brand from its first mark to its complete physical and digital presence.",
+      "title": "Identity to every touchpoint",
+      "tag": "h2"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "d1eea39",
+     "elType": "widget",
+     "widgetType": "vd-numbered-list",
+     "settings": {
+      "items": [
+       {
+        "title": "Brand identity",
+        "text": "Logos and complete visual identity systems that stay recognisable wherever they appear.",
+        "_id": "22f1944"
+       },
+       {
+        "title": "Packaging and labels",
+        "text": "Labels and packaging for wine, food, beverages and consumer products, prepared for print down to colour separation.",
+        "_id": "4650363"
+       },
+       {
+        "title": "Editorial and print",
+        "text": "Corporate publications, brochures, catalogues and advertising, designed with the press in mind.",
+        "_id": "bf0e331"
+       },
+       {
+        "title": "Web design",
+        "text": "Websites designed and built in-house, from WordPress development to hosting.",
+        "_id": "b18f2cf"
+       },
+       {
+        "title": "Digital communication",
+        "text": "Social media creative and campaigns that carry the identity into everyday communication.",
+        "_id": "65100fd"
+       }
+      ]
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "9aa219a",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Studio",
+    "_element_id": "studio"
+   },
+   "elements": [
+    {
+     "id": "99c5b33",
+     "elType": "widget",
+     "widgetType": "vd-studio",
+     "settings": {
+      "title": "Studio",
+      "red_title": "What we hold to",
+      "red_list": "Typography first\nDetail and proportion\nBuilt for production\nDesign and technology",
+      "side_title": "Industries",
+      "side_list": "Wine\nHospitality and tourism\nFood and beverage\nProfessional services",
+      "text": "<p>VASSILISDESIGN is an independent design studio in Greece, working with clients in Greece, the United States and the UK.</p><p>We let typography and composition carry the message, and we adapt the approach to each brand, product and audience instead of repeating one style.</p><p>Hands-on experience in print, packaging production and colour separation, together with in-house web development, means every idea is designed to be made.</p>",
+      "image": {
+       "id": "",
+       "url": ""
+      }
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "24a5b56",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Clients"
+   },
+   "elements": [
+    {
+     "id": "e995464",
+     "elType": "widget",
+     "widgetType": "vd-section-head",
+     "settings": {
+      "intro": "A selection of the businesses we have worked with.",
+      "title": "Clients",
+      "tag": "h2"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "fc7c794",
+     "elType": "widget",
+     "widgetType": "vd-client-index",
+     "settings": {
+      "groups": [
+       {
+        "title": "Wine and packaging",
+        "names": "Cava Oinos\nPorto Carras\nDougos Winery\nLantides Winery\nWine Art Estate\nPOTEUS\nKanthia\nKourtis Winery\nOlympus Wines\nTaste Greek Wines",
+        "_id": "174cc69"
+       },
+       {
+        "title": "Hospitality and tourism",
+        "names": "Three Peaks Elevated Stay\nSimosMare\nOlympos Beach\nHotel Atlas\nMediterranean Hotels\nPieria Hotels Association\nOpen Ways",
+        "_id": "fe13092"
+       },
+       {
+        "title": "Restaurants and food",
+        "names": "Ammos Estiatorio, New York\nBurger Lab\nFamily Food\nFelea Goods",
+        "_id": "8e99678"
+       },
+       {
+        "title": "Corporate and professional services",
+        "names": "FBFK Law\nArtis Capital\nArtis Trade House\nWCWCA\nSokrates Furniture\nQueens PMU\nCBD Extraction\nMercedes Driving School",
+        "_id": "776ebb9"
+       }
+      ]
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "9a84f2d",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section vd-section-end vd-contact",
+    "_title": "Contact",
+    "_element_id": "contact"
+   },
+   "elements": [
+    {
+     "id": "72dbe54",
+     "elType": "widget",
+     "widgetType": "vd-contact-intro",
+     "settings": {
+      "title": "Start a project",
+      "lead": "Tell us about your brand, product or website. We reply to every enquiry.",
+      "direct": "Or write to us directly"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "de11845",
+     "elType": "widget",
+     "widgetType": "form",
+     "settings": {
+      "form_name": "Contact",
+      "form_fields": [
+       {
+        "custom_id": "name",
+        "field_type": "text",
+        "field_label": "Name",
+        "required": "true",
+        "width": "50",
+        "autocomplete": "name",
+        "_id": "33307b9"
+       },
+       {
+        "custom_id": "email",
+        "field_type": "email",
+        "field_label": "Email",
+        "required": "true",
+        "width": "50",
+        "_id": "c42f741"
+       },
+       {
+        "custom_id": "company",
+        "field_type": "text",
+        "field_label": "Company (optional)",
+        "width": "50",
+        "_id": "1b48430"
+       },
+       {
+        "custom_id": "budget",
+        "field_type": "select",
+        "field_label": "Budget",
+        "field_options": "Not sure yet\nUnder €5,000\n€5,000–15,000\n€15,000–30,000\nOver €30,000",
+        "width": "50",
+        "_id": "bf765bb"
+       },
+       {
+        "custom_id": "message",
+        "field_type": "textarea",
+        "field_label": "About the project",
+        "placeholder": "What you need, roughly when, and anything we should see first.",
+        "required": "true",
+        "rows": 5,
+        "width": "100",
+        "_id": "94f3d8a"
+       },
+       {
+        "custom_id": "consent",
+        "field_type": "acceptance",
+        "field_label": "",
+        "acceptance_text": "I agree that VASSILISDESIGN uses these details to reply to my enquiry, as described in the <a href=\"{{privacy_url}}\">Privacy Policy</a>.",
+        "required": "true",
+        "width": "100",
+        "_id": "bfda23e"
+       },
+       {
+        "custom_id": "website",
+        "field_type": "honeypot",
+        "field_label": "",
+        "width": "100",
+        "_id": "c4f6de7"
+       }
+      ],
+      "show_labels": "yes",
+      "mark_required": "",
+      "button_text": "Send message",
+      "button_width": "",
+      "submit_actions": [
+       "email"
+      ],
+      "email_to": "{{email}}",
+      "email_subject": "New enquiry from the website",
+      "email_content": "[all-fields]",
+      "email_from_name": "VASSILISDESIGN",
+      "email_reply_to": "[field id=\"email\"]",
+      "email_content_type": "plain",
+      "form_metadata": [
+       "date",
+       "time",
+       "page_url"
+      ],
+      "custom_messages": "yes",
+      "success_message": "Message sent. We will be in touch soon.",
+      "error_message": "The message did not send. Please try again, or email us directly.",
+      "required_field_message": "This field is required.",
+      "invalid_message": "Please check this field.",
+      "_css_classes": "vd-form"
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  }
+ ]
+}

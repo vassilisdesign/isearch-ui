@@ -1,0 +1,2 @@
+# The repository root ignores dist/ (old app build output); keep the theme zip.
+!dist/

@@ -1,0 +1,591 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: VASSILISDESIGN 1.0.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: vassilisdesign\n"
+
+#: archive-works.php:13 inc/widgets/widgets.php:185 inc/works.php:61
+msgid "Works"
+msgstr ""
+
+#: archive-works.php:20 inc/works.php:34 inc/works.php:39
+msgid "Sectors"
+msgstr ""
+
+#: archive-works.php:21
+msgid "All"
+msgstr ""
+
+#: archive-works.php:40
+msgid "No Works yet."
+msgstr ""
+
+#: inc/admin-setup.php:17 inc/admin-setup.php:17 inc/admin-setup.php:41
+msgid "VASSILISDESIGN setup"
+msgstr ""
+
+#: inc/admin-setup.php:44
+msgid "Setup finished."
+msgstr ""
+
+#: inc/admin-setup.php:51
+msgid "Plugins"
+msgstr ""
+
+#: inc/admin-setup.php:57
+msgid "Active"
+msgstr ""
+
+#: inc/admin-setup.php:57
+msgid "Install and activate"
+msgstr ""
+
+#: inc/admin-setup.php:57
+msgid "Not installed (optional)"
+msgstr ""
+
+#: inc/admin-setup.php:62
+msgid "No add-on packs are needed (Essential Addons, Premium Addons, UAE, Unlimited Elements, Sticky Header Effects): the theme widgets and Elementor Pro cover everything, and each add-on would add CSS and JavaScript to every page."
+msgstr ""
+
+#: inc/admin-setup.php:64
+msgid "What the setup does"
+msgstr ""
+
+#: inc/admin-setup.php:66
+msgid "Applies Elementor performance settings: no Google Fonts, no default colours or fonts, external CSS files, leaner markup, CSS loaded per page, SVG icons, lightbox off, Works editable with Elementor."
+msgstr ""
+
+#: inc/admin-setup.php:67
+msgid "Creates the four Sectors for Works."
+msgstr ""
+
+#: inc/admin-setup.php:68
+msgid "Creates the Privacy Policy, Terms of Use and Legal Notice pages (English) and sets the WordPress privacy page. The Cookie Policy is created by the Complianz wizard."
+msgstr ""
+
+#: inc/admin-setup.php:69
+msgid "Creates the Home page from the Elementor template and sets it as the front page."
+msgstr ""
+
+#: inc/admin-setup.php:70
+msgid "Creates the header and footer menus."
+msgstr ""
+
+#: inc/admin-setup.php:72
+msgid "Existing pages, menus and terms with the same names are left untouched."
+msgstr ""
+
+#: inc/admin-setup.php:77
+msgid "Run setup"
+msgstr ""
+
+#: inc/admin-setup.php:87
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: inc/admin-setup.php:103
+msgid "Elementor performance settings applied."
+msgstr ""
+
+#: inc/admin-setup.php:105
+msgid "Elementor is not active: settings skipped."
+msgstr ""
+
+#: inc/admin-setup.php:113
+msgid "Sector created: %s"
+msgstr ""
+
+#: inc/admin-setup.php:138
+msgid "WordPress sample privacy page replaced with the Privacy Policy and published."
+msgstr ""
+
+#: inc/admin-setup.php:155
+msgid "Page created: %s"
+msgstr ""
+
+#: inc/admin-setup.php:187
+msgid "Home page created from the Elementor template and set as the front page. Add the hero image, logos and studio image in Elementor."
+msgstr ""
+
+#: inc/admin-setup.php:216
+msgid "Header menu created."
+msgstr ""
+
+#: inc/admin-setup.php:238
+msgid "Footer legal menu created. After the Complianz wizard, add its Cookie Policy page to this menu."
+msgstr ""
+
+#: inc/admin-setup.php:245
+msgid "Permalinks refreshed."
+msgstr ""
+
+#: inc/customizer.php:16
+msgid "Viber and WhatsApp available"
+msgstr ""
+
+#: inc/customizer.php:18
+msgid "Greece"
+msgstr ""
+
+#: inc/customizer.php:19
+msgid "Independent design studio\nGreece"
+msgstr ""
+
+#: inc/customizer.php:36
+msgid "Studio details"
+msgstr ""
+
+#: inc/customizer.php:41
+msgid "Wordmark, first line"
+msgstr ""
+
+#: inc/customizer.php:42
+msgid "Wordmark, second line"
+msgstr ""
+
+#: inc/customizer.php:43
+msgid "Email"
+msgstr ""
+
+#: inc/customizer.php:44
+msgid "Phone"
+msgstr ""
+
+#: inc/customizer.php:45
+msgid "Messaging note"
+msgstr ""
+
+#: inc/customizer.php:46
+msgid "Clock label"
+msgstr ""
+
+#: inc/customizer.php:47
+msgid "Footer text"
+msgstr ""
+
+#: inc/setup.php:26
+msgid "Header menu"
+msgstr ""
+
+#: inc/setup.php:27
+msgid "Footer legal menu"
+msgstr ""
+
+#: inc/template-functions.php:128
+msgid "No Works yet. Add them under Works → Add Work."
+msgstr ""
+
+#: inc/template-functions.php:146 inc/widgets/widgets.php:194 inc/widgets/widgets.php:348
+msgid "Sector"
+msgstr ""
+
+#: inc/template-functions.php:147 inc/works.php:18 inc/works.php:157
+msgid "Services"
+msgstr ""
+
+#: inc/template-functions.php:148 inc/works.php:17 inc/works.php:153
+msgid "Location"
+msgstr ""
+
+#: inc/template-functions.php:154
+msgid "All work"
+msgstr ""
+
+#: inc/template-functions.php:162
+msgid "Project"
+msgstr ""
+
+#: inc/template-functions.php:167 inc/works.php:161
+msgid "Scope"
+msgstr ""
+
+#: inc/template-functions.php:199
+msgid "About the project"
+msgstr ""
+
+#: inc/template-functions.php:244 inc/template-functions.php:246
+msgid "Next project"
+msgstr ""
+
+#: inc/widgets/widgets.php:67
+msgid "VD Hero"
+msgstr ""
+
+#: inc/widgets/widgets.php:70
+msgid "Hero"
+msgstr ""
+
+#: inc/widgets/widgets.php:71
+msgid "Wordmark line 1"
+msgstr ""
+
+#: inc/widgets/widgets.php:72
+msgid "Wordmark line 2"
+msgstr ""
+
+#: inc/widgets/widgets.php:73
+msgid "Accessible name"
+msgstr ""
+
+#: inc/widgets/widgets.php:74
+msgid "Positioning"
+msgstr ""
+
+#: inc/widgets/widgets.php:75
+msgid "Column 1"
+msgstr ""
+
+#: inc/widgets/widgets.php:76
+msgid "Column 2"
+msgstr ""
+
+#: inc/widgets/widgets.php:77
+msgid "Vertical text"
+msgstr ""
+
+#: inc/widgets/widgets.php:78
+msgid "Rotated corner text"
+msgstr ""
+
+#: inc/widgets/widgets.php:79 inc/widgets/widgets.php:307
+msgid "Image"
+msgstr ""
+
+#: inc/widgets/widgets.php:80
+msgid "Image description"
+msgstr ""
+
+#: inc/widgets/widgets.php:84
+msgid "Image display"
+msgstr ""
+
+#: inc/widgets/widgets.php:88
+msgid "Packshot on white: fit"
+msgstr ""
+
+#: inc/widgets/widgets.php:89
+msgid "Photo: fill"
+msgstr ""
+
+#: inc/widgets/widgets.php:93
+msgid "Arrow button link"
+msgstr ""
+
+#: inc/widgets/widgets.php:94
+msgid "Arrow button label"
+msgstr ""
+
+#: inc/widgets/widgets.php:144
+msgid "VD Section heading"
+msgstr ""
+
+#: inc/widgets/widgets.php:147
+msgid "Heading"
+msgstr ""
+
+#: inc/widgets/widgets.php:148
+msgid "Intro (left)"
+msgstr ""
+
+#: inc/widgets/widgets.php:149
+msgid "Title (right, shown lowercase with a red full stop)"
+msgstr ""
+
+#: inc/widgets/widgets.php:153
+msgid "Heading level"
+msgstr ""
+
+#: inc/widgets/widgets.php:179
+msgid "VD Works grid"
+msgstr ""
+
+#: inc/widgets/widgets.php:186
+msgid "Number of Works"
+msgstr ""
+
+#: inc/widgets/widgets.php:187
+msgid "All sectors"
+msgstr ""
+
+#: inc/widgets/widgets.php:195
+msgid "\"All work\" link text (empty to hide)"
+msgstr ""
+
+#: inc/widgets/widgets.php:200
+msgid "Order Works with the \"Order\" field on each Work (lowest first)."
+msgstr ""
+
+#: inc/widgets/widgets.php:223
+msgid "VD Logo wall"
+msgstr ""
+
+#: inc/widgets/widgets.php:226
+msgid "Logos"
+msgstr ""
+
+#: inc/widgets/widgets.php:227
+msgid "Logos (on white, any size)"
+msgstr ""
+
+#: inc/widgets/widgets.php:254
+msgid "VD Numbered list"
+msgstr ""
+
+#: inc/widgets/widgets.php:257 inc/widgets/widgets.php:264
+msgid "Items"
+msgstr ""
+
+#: inc/widgets/widgets.php:259 inc/widgets/widgets.php:302 inc/widgets/widgets.php:391
+msgid "Title"
+msgstr ""
+
+#: inc/widgets/widgets.php:260 inc/widgets/widgets.php:392
+msgid "Text"
+msgstr ""
+
+#: inc/widgets/widgets.php:298
+msgid "VD Studio"
+msgstr ""
+
+#: inc/widgets/widgets.php:301 template-parts/header.php:38
+msgid "Studio"
+msgstr ""
+
+#: inc/widgets/widgets.php:303
+msgid "Red box label"
+msgstr ""
+
+#: inc/widgets/widgets.php:304
+msgid "Red box list (one per line)"
+msgstr ""
+
+#: inc/widgets/widgets.php:305
+msgid "Side label"
+msgstr ""
+
+#: inc/widgets/widgets.php:306
+msgid "Side list (one per line)"
+msgstr ""
+
+#: inc/widgets/widgets.php:308
+msgid "Text (first paragraph is shown large)"
+msgstr ""
+
+#: inc/widgets/widgets.php:343
+msgid "VD Client index"
+msgstr ""
+
+#: inc/widgets/widgets.php:346
+msgid "Clients"
+msgstr ""
+
+#: inc/widgets/widgets.php:349
+msgid "Clients (one per line)"
+msgstr ""
+
+#: inc/widgets/widgets.php:353
+msgid "Groups"
+msgstr ""
+
+#: inc/widgets/widgets.php:387
+msgid "VD Contact intro"
+msgstr ""
+
+#: inc/widgets/widgets.php:390 template-parts/header.php:40
+msgid "Contact"
+msgstr ""
+
+#: inc/widgets/widgets.php:393
+msgid "Line above the contact details"
+msgstr ""
+
+#: inc/widgets/widgets.php:398
+msgid "Email and phone come from Appearance → Customize → Studio details."
+msgstr ""
+
+#: inc/widgets/widgets.php:422 inc/works.php:62 template-parts/header.php:36
+msgid "Work"
+msgstr ""
+
+#: inc/widgets/widgets.php:427
+msgid "Shows the current Work. Use inside a Theme Builder \"Single\" template for Works."
+msgstr ""
+
+#: inc/widgets/widgets.php:448
+msgid "VD Work header"
+msgstr ""
+
+#: inc/widgets/widgets.php:463
+msgid "VD Work cover and summary"
+msgstr ""
+
+#: inc/widgets/widgets.php:478
+msgid "VD Work gallery"
+msgstr ""
+
+#: inc/widgets/widgets.php:493
+msgid "VD Next Work"
+msgstr ""
+
+#: inc/works.php:19
+msgid "Scope (one item per line)"
+msgstr ""
+
+#: inc/works.php:20 inc/works.php:177
+msgid "Gallery"
+msgstr ""
+
+#: inc/works.php:21 inc/works.php:168
+msgid "Cover display"
+msgstr ""
+
+#: inc/works.php:36
+msgid "Add new Sector"
+msgstr ""
+
+#: inc/works.php:37
+msgid "Edit Sector"
+msgstr ""
+
+#: inc/works.php:38
+msgid "All Sectors"
+msgstr ""
+
+#: inc/works.php:64
+msgid "Add Work"
+msgstr ""
+
+#: inc/works.php:65
+msgid "Add new Work"
+msgstr ""
+
+#: inc/works.php:66
+msgid "Edit Work"
+msgstr ""
+
+#: inc/works.php:67
+msgid "New Work"
+msgstr ""
+
+#: inc/works.php:68
+msgid "View Work"
+msgstr ""
+
+#: inc/works.php:69
+msgid "View Works"
+msgstr ""
+
+#: inc/works.php:70
+msgid "Search Works"
+msgstr ""
+
+#: inc/works.php:71
+msgid "No Works found."
+msgstr ""
+
+#: inc/works.php:72
+msgid "No Works found in Trash."
+msgstr ""
+
+#: inc/works.php:73
+msgid "All Works"
+msgstr ""
+
+#: inc/works.php:74
+msgid "Cover image"
+msgstr ""
+
+#: inc/works.php:75
+msgid "Set cover image"
+msgstr ""
+
+#: inc/works.php:76
+msgid "Remove cover image"
+msgstr ""
+
+#: inc/works.php:77
+msgid "Use as cover image"
+msgstr ""
+
+#: inc/works.php:78
+msgid "Work published."
+msgstr ""
+
+#: inc/works.php:79
+msgid "Work updated."
+msgstr ""
+
+#: inc/works.php:138
+msgid "Work details"
+msgstr ""
+
+#: inc/works.php:150
+msgid "Title = client or project name. Excerpt = the short summary shown on the Work page. Cover image = the tile on the homepage."
+msgstr ""
+
+#: inc/works.php:154
+msgid "Thessaloniki, Greece"
+msgstr ""
+
+#: inc/works.php:158
+msgid "Identity, packaging, website"
+msgstr ""
+
+#: inc/works.php:164
+msgid "One item per line. Shown in the red box on the Work page."
+msgstr ""
+
+#: inc/works.php:171
+msgid "Photo or screenshot: fill the frame"
+msgstr ""
+
+#: inc/works.php:172
+msgid "Packshot or logo on white: fit inside the frame"
+msgstr ""
+
+#: inc/works.php:188
+msgid "Choose images"
+msgstr ""
+
+#: inc/works.php:189
+msgid "Remove all"
+msgstr ""
+
+#: inc/works.php:191
+msgid "Images shown on the Work page, in this order. Drag to reorder inside the media window. Packshots on white blend into the page automatically."
+msgstr ""
+
+#: inc/works.php:230
+msgid "Work gallery"
+msgstr ""
+
+#: inc/works.php:231
+msgid "Use these images"
+msgstr ""
+
+#: inc/works.php:242
+msgid "Cover"
+msgstr ""
+
+#: template-parts/footer.php:17
+msgid "Legal"
+msgstr ""
+
+#: template-parts/footer.php:37
+msgid "Cookie settings"
+msgstr ""
+
+#: template-parts/footer.php:41
+msgid "Back to top"
+msgstr ""
+
+#: template-parts/header.php:13
+msgid "Skip to content"
+msgstr ""
+
+#: template-parts/header.php:19
+msgid "Main"
+msgstr ""

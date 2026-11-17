@@ -1,0 +1,16 @@
+/*
+Theme Name:   VASSILISDESIGN
+Theme URI:    https://vassilisdesign.gr
+Description:  Child theme of Hello Elementor for VASSILISDESIGN. Adds the Works post type, the studio design system, lightweight Elementor widgets and performance defaults.
+Author:       VASSILISDESIGN
+Author URI:   https://vassilisdesign.gr
+Template:     hello-elementor
+Version:      1.0.0
+Requires at least: 6.5
+Requires PHP: 7.4
+License:      GNU General Public License v3 or later
+License URI:  https://www.gnu.org/licenses/gpl-3.0.html
+Text Domain:  vassilisdesign
+*/
+
+/* Styles live in assets/css/vd.css (enqueued by inc/assets.php). */

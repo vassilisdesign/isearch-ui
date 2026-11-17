@@ -1,0 +1,391 @@
+{
+ "title": "VASSILISDESIGN Αρχική",
+ "type": "page",
+ "version": "0.4",
+ "page_settings": {
+  "template": "elementor_header_footer"
+ },
+ "content": [
+  {
+   "id": "6689fd8",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-bare",
+    "_title": "Hero"
+   },
+   "elements": [
+    {
+     "id": "f6e8b72",
+     "elType": "widget",
+     "widgetType": "vd-hero",
+     "settings": {
+      "line1": "VASSILIS",
+      "line2": "DESIGN",
+      "label": "VASSILISDESIGN, ανεξάρτητο στούντιο σχεδιασμού",
+      "lead": "Ανεξάρτητο στούντιο σχεδιασμού.\nΞεχωριστές ταυτότητες.\nΣχεδιασμός με νόημα.",
+      "meta_a": "Εταιρική ταυτότητα\nΣυσκευασία και ετικέτες\nΈντυπα και εκδόσεις\nΣχεδιασμός ιστοσελίδων\nΨηφιακή επικοινωνία",
+      "meta_b": "Με έδρα την Ελλάδα\nΠελάτες σε Ελλάδα, ΗΠΑ και Ηνωμένο Βασίλειο",
+      "vertical": "Ανεξάρτητο στούντιο σχεδιασμού\nΕλλάδα και Ηνωμένες Πολιτείες",
+      "corner": "GR / US",
+      "image": {
+       "id": "",
+       "url": ""
+      },
+      "image_alt": "Ετικέτες κρασιού από το VASSILISDESIGN",
+      "fit": "contain",
+      "cta": "#work",
+      "cta_label": "Δείτε επιλεγμένα έργα"
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "91b2088",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Selected work",
+    "_element_id": "work"
+   },
+   "elements": [
+    {
+     "id": "4f6d0d5",
+     "elType": "widget",
+     "widgetType": "vd-section-head",
+     "settings": {
+      "intro": "Ταυτότητες, συσκευασίες, ετικέτες και ιστοσελίδες για οινοποιεία, ξενοδοχεία, εστιατόρια, παραγωγούς τροφίμων και επαγγελματίες.",
+      "title": "Επιλεγμένα έργα",
+      "tag": "h2"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "03ca8ad",
+     "elType": "widget",
+     "widgetType": "vd-works-grid",
+     "settings": {
+      "count": 8,
+      "sector": "",
+      "all_link": "Όλα τα έργα"
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "b485f5c",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Identities"
+   },
+   "elements": [
+    {
+     "id": "75dfdca",
+     "elType": "widget",
+     "widgetType": "vd-section-head",
+     "settings": {
+      "intro": "Λογότυπα και συστήματα ταυτότητας, χτισμένα πάνω στην τυπογραφία και τις αναλογίες.",
+      "title": "Ταυτότητες",
+      "tag": "h2"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "07a03a6",
+     "elType": "widget",
+     "widgetType": "vd-logo-wall",
+     "settings": {
+      "logos": []
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "3cd3a8c",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Services"
+   },
+   "elements": [
+    {
+     "id": "f863951",
+     "elType": "widget",
+     "widgetType": "vd-section-head",
+     "settings": {
+      "intro": "Συνοδεύουμε ένα brand από το πρώτο του σήμα μέχρι την πλήρη φυσική και ψηφιακή του παρουσία.",
+      "title": "Από την ταυτότητα παντού",
+      "tag": "h2"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "10a2434",
+     "elType": "widget",
+     "widgetType": "vd-numbered-list",
+     "settings": {
+      "items": [
+       {
+        "title": "Εταιρική ταυτότητα",
+        "text": "Λογότυπα και ολοκληρωμένα συστήματα οπτικής ταυτότητας που αναγνωρίζονται όπου κι αν εμφανίζονται.",
+        "_id": "a396fec"
+       },
+       {
+        "title": "Συσκευασία και ετικέτες",
+        "text": "Ετικέτες και συσκευασίες για κρασί, τρόφιμα, ποτά και καταναλωτικά προϊόντα, έτοιμες για εκτύπωση μέχρι τον διαχωρισμό χρωμάτων.",
+        "_id": "05cdaf4"
+       },
+       {
+        "title": "Έντυπα και εκδόσεις",
+        "text": "Εταιρικές εκδόσεις, μπροσούρες, κατάλογοι και διαφημίσεις, σχεδιασμένα με γνώση της εκτύπωσης.",
+        "_id": "e4952ee"
+       },
+       {
+        "title": "Σχεδιασμός ιστοσελίδων",
+        "text": "Ιστοσελίδες που σχεδιάζουμε και υλοποιούμε εμείς, από την ανάπτυξη σε WordPress μέχρι τη φιλοξενία.",
+        "_id": "c452cc2"
+       },
+       {
+        "title": "Ψηφιακή επικοινωνία",
+        "text": "Δημιουργικό για social media και καμπάνιες που μεταφέρουν την ταυτότητα στην καθημερινή επικοινωνία.",
+        "_id": "3ec9620"
+       }
+      ]
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "23dff71",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Studio",
+    "_element_id": "studio"
+   },
+   "elements": [
+    {
+     "id": "a436dcb",
+     "elType": "widget",
+     "widgetType": "vd-studio",
+     "settings": {
+      "title": "Στούντιο",
+      "red_title": "Οι αρχές μας",
+      "red_list": "Πρώτα η τυπογραφία\nΛεπτομέρεια και αναλογίες\nΈτοιμο για παραγωγή\nΣχεδιασμός και τεχνολογία",
+      "side_title": "Κλάδοι",
+      "side_list": "Κρασί\nΦιλοξενία και τουρισμός\nΤρόφιμα και ποτά\nΕπαγγελματικές υπηρεσίες",
+      "text": "<p>Το VASSILISDESIGN είναι ανεξάρτητο στούντιο σχεδιασμού στην Ελλάδα, με πελάτες σε Ελλάδα, Ηνωμένες Πολιτείες και Ηνωμένο Βασίλειο.</p><p>Αφήνουμε την τυπογραφία και τη σύνθεση να μεταφέρουν το μήνυμα, και προσαρμόζουμε την προσέγγιση σε κάθε brand, προϊόν και κοινό αντί να επαναλαμβάνουμε ένα ύφος.</p><p>Η εμπειρία στην εκτύπωση, την παραγωγή συσκευασιών και τον διαχωρισμό χρωμάτων, μαζί με την ανάπτυξη ιστοσελίδων στο στούντιο, σημαίνει ότι κάθε ιδέα σχεδιάζεται για να υλοποιηθεί.</p>",
+      "image": {
+       "id": "",
+       "url": ""
+      }
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "2c70633",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section",
+    "_title": "Clients"
+   },
+   "elements": [
+    {
+     "id": "6b40a32",
+     "elType": "widget",
+     "widgetType": "vd-section-head",
+     "settings": {
+      "intro": "Μια επιλογή από τις επιχειρήσεις με τις οποίες έχουμε συνεργαστεί.",
+      "title": "Πελάτες",
+      "tag": "h2"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "05ac3df",
+     "elType": "widget",
+     "widgetType": "vd-client-index",
+     "settings": {
+      "groups": [
+       {
+        "title": "Κρασί και συσκευασία",
+        "names": "Cava Oinos\nPorto Carras\nDougos Winery\nLantides Winery\nWine Art Estate\nPOTEUS\nKanthia\nKourtis Winery\nOlympus Wines\nTaste Greek Wines",
+        "_id": "c3ce6f4"
+       },
+       {
+        "title": "Φιλοξενία και τουρισμός",
+        "names": "Three Peaks Elevated Stay\nSimosMare\nOlympos Beach\nHotel Atlas\nMediterranean Hotels\nPieria Hotels Association\nOpen Ways",
+        "_id": "2ac877c"
+       },
+       {
+        "title": "Εστίαση και τρόφιμα",
+        "names": "Ammos Estiatorio, New York\nBurger Lab\nFamily Food\nFelea Goods",
+        "_id": "dcf4888"
+       },
+       {
+        "title": "Εταιρικές και επαγγελματικές υπηρεσίες",
+        "names": "FBFK Law\nArtis Capital\nArtis Trade House\nWCWCA\nSokrates Furniture\nQueens PMU\nCBD Extraction\nMercedes Driving School",
+        "_id": "d3d2e67"
+       }
+      ]
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "0a62fd4",
+   "elType": "container",
+   "settings": {
+    "content_width": "full",
+    "flex_direction": "column",
+    "css_classes": "vd-section vd-section-end vd-contact",
+    "_title": "Contact",
+    "_element_id": "contact"
+   },
+   "elements": [
+    {
+     "id": "75eb0f3",
+     "elType": "widget",
+     "widgetType": "vd-contact-intro",
+     "settings": {
+      "title": "Ξεκινήστε ένα έργο",
+      "lead": "Πείτε μας για το brand, το προϊόν ή την ιστοσελίδα σας. Απαντάμε σε κάθε μήνυμα.",
+      "direct": "Ή γράψτε μας απευθείας"
+     },
+     "elements": [],
+     "isInner": false
+    },
+    {
+     "id": "01ec503",
+     "elType": "widget",
+     "widgetType": "form",
+     "settings": {
+      "form_name": "Contact",
+      "form_fields": [
+       {
+        "custom_id": "name",
+        "field_type": "text",
+        "field_label": "Όνομα",
+        "required": "true",
+        "width": "50",
+        "autocomplete": "name",
+        "_id": "81a9dd1"
+       },
+       {
+        "custom_id": "email",
+        "field_type": "email",
+        "field_label": "Email",
+        "required": "true",
+        "width": "50",
+        "_id": "8c7364f"
+       },
+       {
+        "custom_id": "company",
+        "field_type": "text",
+        "field_label": "Εταιρεία (προαιρετικό)",
+        "width": "50",
+        "_id": "d1137a7"
+       },
+       {
+        "custom_id": "budget",
+        "field_type": "select",
+        "field_label": "Προϋπολογισμός",
+        "field_options": "Δεν έχει οριστεί ακόμη\nΈως 5.000 €\n5.000–15.000 €\n15.000–30.000 €\nΠάνω από 30.000 €",
+        "width": "50",
+        "_id": "4b4387b"
+       },
+       {
+        "custom_id": "message",
+        "field_type": "textarea",
+        "field_label": "Για το έργο",
+        "placeholder": "Τι χρειάζεστε, περίπου πότε, και ό,τι πρέπει να δούμε πρώτα.",
+        "required": "true",
+        "rows": 5,
+        "width": "100",
+        "_id": "85c2f8b"
+       },
+       {
+        "custom_id": "consent",
+        "field_type": "acceptance",
+        "field_label": "",
+        "acceptance_text": "Συμφωνώ να χρησιμοποιηθούν τα στοιχεία μου από το VASSILISDESIGN για την απάντηση στο αίτημά μου, όπως περιγράφεται στην <a href=\"{{privacy_url}}\">Πολιτική Απορρήτου</a>.",
+        "required": "true",
+        "width": "100",
+        "_id": "3d63fae"
+       },
+       {
+        "custom_id": "website",
+        "field_type": "honeypot",
+        "field_label": "",
+        "width": "100",
+        "_id": "979b25e"
+       }
+      ],
+      "show_labels": "yes",
+      "mark_required": "",
+      "button_text": "Αποστολή μηνύματος",
+      "button_width": "",
+      "submit_actions": [
+       "email"
+      ],
+      "email_to": "{{email}}",
+      "email_subject": "Νέο μήνυμα από την ιστοσελίδα",
+      "email_content": "[all-fields]",
+      "email_from_name": "VASSILISDESIGN",
+      "email_reply_to": "[field id=\"email\"]",
+      "email_content_type": "plain",
+      "form_metadata": [
+       "date",
+       "time",
+       "page_url"
+      ],
+      "custom_messages": "yes",
+      "success_message": "Το μήνυμα στάλθηκε. Θα επικοινωνήσουμε σύντομα μαζί σας.",
+      "error_message": "Το μήνυμα δεν στάλθηκε. Δοκιμάστε ξανά ή γράψτε μας απευθείας.",
+      "required_field_message": "Το πεδίο είναι υποχρεωτικό.",
+      "invalid_message": "Ελέγξτε αυτό το πεδίο.",
+      "_css_classes": "vd-form"
+     },
+     "elements": [],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  }
+ ]
+}
