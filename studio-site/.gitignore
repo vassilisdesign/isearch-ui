@@ -3,3 +3,6 @@ dist
 work
 .env
 .env.local
+
+# The repo root ignores public/ (old app build output); this site keeps its images there.
+!public/
