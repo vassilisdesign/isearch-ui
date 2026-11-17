@@ -13,7 +13,7 @@ const workPages = existsSync(workDir)
 // Pre-renders every page in English so content, SEO and no-JS visitors get complete HTML.
 function prerender() {
   return {
-    name: 'ostria-prerender',
+    name: 'site-prerender',
     transformIndexHtml: {
       order: 'pre',
       handler(html) {

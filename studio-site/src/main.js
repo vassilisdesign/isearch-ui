@@ -6,7 +6,7 @@ import { initClock } from './clock.js';
 import { initContact } from './contact.js';
 import { initMotion } from './motion.js';
 
-window.__ostria = true; // tells the inline failsafe that scripts are running
+window.__vd = true; // tells the inline failsafe that scripts are running
 
 initI18n();
 initClock();

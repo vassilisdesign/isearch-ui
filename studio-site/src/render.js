@@ -1,7 +1,6 @@
 // Shared HTML rendering. Runs at build time (Vite plugin) to pre-render English pages,
 // and in the browser to re-render when the language changes. No DOM access here.
-import { strings, projects, studio } from './data.js';
-import { art } from './posters.js';
+import { strings, projects, studio, identities, clients } from './data.js';
 
 export const LANGS = ['en', 'el'];
 
@@ -22,9 +21,15 @@ const ARROW = '<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" focusab
 const ARROW_DOWN = '<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v15m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
 
 export const findProject = (slug) => projects.find((p) => p.slug === slug);
+export const clientName = (p, lang = 'en') => (typeof p.client === 'string' ? p.client : p.client[lang]);
 const pad = (n) => String(n).padStart(2, '0');
-const heroArt = { slug: 'hero', poster: { type: 'colonnade' }, photo: studio.heroPhoto };
-const studioArt = { slug: 'studio', poster: { type: 'steps' }, photo: studio.studioPhoto };
+const chars = (word) => word.split('').map((ch) => `<span class="ch">${ch}</span>`).join('');
+
+/** <img> for a portfolio image. Decorative when alt is empty. */
+function photo(im, { alt = '', root = '', eager = false } = {}) {
+  return `<img class="photo-img" src="${root}${im.src}" alt="${esc(alt)}" width="${im.w}" height="${im.h}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+}
+const fitClass = (im) => (im.fit === 'contain' ? ' fit-contain' : '');
 
 /* ---------- Chrome ---------- */
 
@@ -33,7 +38,7 @@ export function renderHeader(root = '', lang = 'en') {
 <a class="skip" href="#main" data-i18n="a11y.skip">${esc(str('a11y.skip', lang))}</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="${root}index.html" data-i18n-aria-label="a11y.home" aria-label="${esc(str('a11y.home', lang))}">ostria<span class="stop">.</span></a>
+    <a class="brand" href="${root}index.html" data-i18n-aria-label="a11y.home" aria-label="${esc(str('a11y.home', lang))}">VASSILIS<span class="brand-break"></span>DESIGN<span class="stop">.</span></a>
     <nav class="nav" data-i18n-aria-label="nav.label" aria-label="${esc(str('nav.label', lang))}">
       <a href="${root}index.html#work">${tx('nav.work', lang)}</a>
       <a href="${root}index.html#studio">${tx('nav.studio', lang)}</a>
@@ -51,15 +56,12 @@ export function renderFooter(root = '', lang = 'en') {
   return `
 <footer class="site-footer">
   <div class="container footer-grid">
-    <a class="footer-mark" href="${root}index.html" data-i18n-aria-label="a11y.home" aria-label="${esc(str('a11y.home', lang))}">ostria<span class="stop">.</span></a>
-    <p class="footer-col" data-i18n="footer.address">${esc(str('footer.address', lang))}</p>
+    <a class="footer-mark" href="${root}index.html" data-i18n-aria-label="a11y.home" aria-label="${esc(str('a11y.home', lang))}">VASSILIS<br>DESIGN<span class="stop">.</span></a>
+    <p class="footer-col" data-i18n="footer.base">${esc(str('footer.base', lang))}</p>
     <p class="footer-col">
       <a href="mailto:${studio.email}">${studio.email}</a><br>
-      <a href="tel:${studio.phone.replace(/\s/g, '')}">${studio.phone}</a>
-    </p>
-    <p class="footer-col">
-      <a href="${studio.instagram}" rel="noopener">Instagram</a><br>
-      <a href="${studio.linkedin}" rel="noopener">LinkedIn</a>
+      <a href="tel:${studio.phone.replace(/\s/g, '')}">${studio.phone}</a><br>
+      ${tx('contact.messaging', lang)}
     </p>
     <p class="footer-rights">${tx('footer.rights', lang)}</p>
     <a class="footer-top square" href="#top" data-i18n-aria-label="footer.top" aria-label="${esc(str('footer.top', lang))}">${ARROW_DOWN}</a>
@@ -77,10 +79,10 @@ export function renderWorkList(lang = 'en', root = '') {
       return `
     <li class="tile">
       <a class="tile-link" href="${root}work/${p.slug}.html" data-slug="${p.slug}">
-        <span class="tile-media photo">${art(p, { w: 640, h: 800, label: `${p.client}: ${c.title}`, root })}<span class="red-block" aria-hidden="true"></span></span>
-        <span class="tile-client">${esc(p.client)}</span>
+        <span class="tile-media photo${fitClass(p.cover)}">${photo(p.cover, { root })}<span class="red-block" aria-hidden="true"></span></span>
+        <span class="tile-client">${esc(clientName(p, lang))}</span>
         <span class="tile-services">${esc(c.services)}</span>
-        <span class="tile-year">${p.year}</span>
+        <span class="tile-location">${esc(c.location)}</span>
       </a>
     </li>`;
     })
@@ -88,33 +90,52 @@ export function renderWorkList(lang = 'en', root = '') {
   return `<ul class="tiles" role="list">${tiles}</ul>`;
 }
 
+function renderIdentities(root = '') {
+  return identities
+    .map((l) => `<li class="logo-cell"><span class="logo-frame">${photo(l, { alt: l.name, root })}</span></li>`)
+    .join('');
+}
+
+function renderClients(lang = 'en') {
+  return Object.entries(clients)
+    .map(
+      ([key, names]) => `
+      <div class="client-group">
+        ${tx(`sector.${key}`, lang, 'h3', 'class="client-sector"')}
+        <ul class="client-list" role="list">${names.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>
+      </div>`
+    )
+    .join('');
+}
+
 export function renderHome(lang = 'en') {
-  const steps = [1, 2, 3, 4]
+  const services = [1, 2, 3, 4, 5]
     .map(
       (n) => `
       <li class="step">
         <span class="step-n" aria-hidden="true">${pad(n)}</span>
-        ${tx(`approach.${n}.title`, lang, 'h3', 'class="step-title"')}
-        ${tx(`approach.${n}.text`, lang, 'p', 'class="step-text"')}
+        ${tx(`service.${n}.title`, lang, 'h3', 'class="step-title"')}
+        ${tx(`service.${n}.text`, lang, 'p', 'class="step-text"')}
       </li>`
     )
     .join('');
   const budgets = [0, 1, 2, 3, 4]
     .map((n) => `<option value="${esc(str(`form.budget.${n}`, 'en'))}" data-i18n="form.budget.${n}">${esc(str(`form.budget.${n}`, lang))}</option>`)
     .join('');
+  const studioImage = { src: 'images/family-mix.webp', w: 1185, h: 1194, fit: 'contain' };
 
   return `
 <section class="hero container" aria-labelledby="wordmark">
   <h1 class="wordmark" id="wordmark" data-i18n-aria-label="a11y.wordmark" aria-label="${esc(str('a11y.wordmark', lang))}">
-    <span class="wordmark-mask" aria-hidden="true">${'ostria'.split('').map((ch) => `<span class="ch">${ch}</span>`).join('')}<span class="ch stop">.</span></span>
+    <span class="wordmark-mask" aria-hidden="true"><span class="wm-line">${chars('VASSILIS')}</span><span class="wm-line">${chars('DESIGN')}<span class="ch stop">.</span></span></span>
   </h1>
   ${tx('hero.lead', lang, 'p', 'class="hero-lead"')}
-  <p class="hero-since" aria-hidden="true">2014</p>
+  <p class="hero-since" aria-hidden="true">GR / US</p>
   ${tx('hero.services', lang, 'p', 'class="hero-meta hero-meta-a"')}
   ${tx('hero.place', lang, 'p', 'class="hero-meta hero-meta-b"')}
   ${tx('hero.vertical', lang, 'p', 'class="hero-vertical"')}
   <div class="hero-media">
-    <div class="hero-photo photo">${art(heroArt, { w: 1200, h: 1500, label: str('hero.art', lang), eager: true })}</div>
+    <div class="hero-photo photo fit-contain">${photo(studio.heroPhoto, { alt: str('hero.art', lang), eager: true })}</div>
     <div class="hero-band" aria-hidden="true"></div>
     <a class="hero-cta square" href="#work" data-i18n-aria-label="hero.cta" aria-label="${esc(str('hero.cta', lang))}">${ARROW}</a>
   </div>
@@ -130,13 +151,23 @@ export function renderHome(lang = 'en') {
   </div>
 </section>
 
-<section class="section approach" aria-labelledby="approach-heading">
+<section class="section identities" aria-labelledby="ids-heading">
   <div class="container">
     <div class="section-head">
-      <p class="section-intro"><span class="dot" aria-hidden="true"></span>${tx('approach.intro', lang)}</p>
-      ${title('approach.heading', lang, 'h2', 'id="approach-heading"')}
+      <p class="section-intro"><span class="dot" aria-hidden="true"></span>${tx('ids.intro', lang)}</p>
+      ${title('ids.heading', lang, 'h2', 'id="ids-heading"')}
     </div>
-    <ol class="steps" role="list">${steps}</ol>
+    <ul class="logos" role="list">${renderIdentities()}</ul>
+  </div>
+</section>
+
+<section class="section approach" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-head">
+      <p class="section-intro"><span class="dot" aria-hidden="true"></span>${tx('services.intro', lang)}</p>
+      ${title('services.heading', lang, 'h2', 'id="services-heading"')}
+    </div>
+    <ol class="steps" role="list">${services}</ol>
   </div>
 </section>
 
@@ -148,20 +179,30 @@ export function renderHome(lang = 'en') {
       ${tx('principles.list', lang, 'p', 'class="studio-red-list"')}
     </div>
     <div class="studio-services">
-      ${tx('services.title', lang, 'p', 'class="red-label"')}
-      ${tx('hero.services', lang, 'p', 'class="studio-services-list"')}
+      ${tx('industries.title', lang, 'p', 'class="red-label"')}
+      ${tx('industries.list', lang, 'p', 'class="studio-services-list"')}
     </div>
     <div class="studio-media">
       <span class="studio-circle" aria-hidden="true"></span>
-      <div class="studio-photo photo">${art(studioArt, { w: 1000, h: 800 })}</div>
+      <div class="studio-photo photo fit-contain">${photo(studioImage)}</div>
     </div>
     <div class="studio-copy">
       ${tx('studio.p1', lang, 'p', 'class="studio-big"')}
       ${tx('studio.p2', lang, 'p')}
-      ${tx('studio.clients', lang, 'p')}
+      ${tx('studio.p3', lang, 'p')}
     </div>
     <span class="plus" aria-hidden="true"></span>
     <span class="dots" aria-hidden="true"></span>
+  </div>
+</section>
+
+<section class="section clients" aria-labelledby="clients-heading">
+  <div class="container">
+    <div class="section-head">
+      <p class="section-intro"><span class="dot" aria-hidden="true"></span>${tx('clients.intro', lang)}</p>
+      ${title('clients.heading', lang, 'h2', 'id="clients-heading"')}
+    </div>
+    <div class="client-groups">${renderClients(lang)}</div>
   </div>
 </section>
 
@@ -170,7 +211,11 @@ export function renderHome(lang = 'en') {
     <div class="contact-intro">
       ${title('contact.heading', lang, 'h2', 'id="contact-heading"')}
       ${tx('contact.lead', lang, 'p', 'class="contact-lead"')}
-      <p class="contact-direct">${tx('contact.or', lang)}<br><a class="contact-email" href="mailto:${studio.email}">${studio.email}</a></p>
+      <p class="contact-direct">${tx('contact.or', lang)}<br>
+        <a class="contact-email" href="mailto:${studio.email}">${studio.email}</a><br>
+        <a class="contact-phone" href="tel:${studio.phone.replace(/\s/g, '')}">${studio.phone}</a><br>
+        ${tx('contact.messaging', lang)}
+      </p>
     </div>
     <form class="form" data-contact novalidate>
       <div class="field">
@@ -212,54 +257,51 @@ export function renderHome(lang = 'en') {
 export function renderProject(slug, lang = 'en', root = '../') {
   const p = findProject(slug);
   const c = p[lang];
+  const name = clientName(p, lang);
   const i = projects.indexOf(p);
   const next = projects[(i + 1) % projects.length];
   const L = (k) => esc(str(k, lang));
+  const [lead, ...rest] = p.images;
 
-  const block = (key, text) => `
-  <section class="case-block container">
-    <h2 class="case-label">${L(key)}</h2>
-    <p class="case-text">${esc(text)}</p>
-  </section>`;
+  const gallery = rest
+    .map((im) => `<figure class="gallery-item photo is-color${fitClass(im)}${im.h > im.w * 1.6 ? ' is-tall' : ''}" style="aspect-ratio: ${im.fit === 'contain' ? '1 / 1' : `${im.w} / ${im.h}`}">${photo(im, { alt: name, root })}</figure>`)
+    .join('');
 
   return `
 <article class="case" data-project="${p.slug}">
   <header class="case-head container">
     <a class="case-back" href="${root}index.html#work">${L('case.all')}</a>
     <dl class="case-meta">
-      <div><dt>${L('case.client')}</dt><dd>${esc(p.client)}</dd></div>
+      <div><dt>${L('case.sector')}</dt><dd>${L(`sector.${p.sector}`)}</dd></div>
       <div><dt>${L('case.services')}</dt><dd>${esc(c.services)}</dd></div>
-      <div><dt>${L('case.sector')}</dt><dd>${esc(c.sector)}</dd></div>
-      <div><dt>${L('case.year')}</dt><dd>${p.year}</dd></div>
+      <div><dt>${L('case.location')}</dt><dd>${esc(c.location)}</dd></div>
     </dl>
     <p class="case-index"><span class="visually-hidden">${L('case.index')} </span>${pad(i + 1)}</p>
-    <h1 class="case-title"><span class="line"><span>${esc(c.title)}</span></span></h1>
+    <h1 class="case-title"><span class="line"><span>${esc(name)}<span class="stop" aria-hidden="true">.</span></span></span></h1>
     <div class="case-red">
-      <ul class="case-facts" role="list">${c.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+      <p class="case-red-title">${L('case.scope')}</p>
+      <ul class="case-facts" role="list">${c.scope.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
     </div>
   </header>
 
   <figure class="case-hero container">
-    <div class="case-poster photo">${art(p, { w: 1600, h: 1000, label: `${p.client}: ${c.title}`, root, eager: true })}<span class="red-block" aria-hidden="true"></span></div>
+    <div class="case-poster photo is-color${fitClass(lead)}" style="aspect-ratio: ${lead.fit === 'contain' ? '16 / 10' : `${lead.w} / ${lead.h}`}">${photo(lead, { alt: name, root, eager: true })}</div>
     <span class="plus" aria-hidden="true"></span>
     <span class="dots" aria-hidden="true"></span>
   </figure>
 
-  ${block('case.brief', c.brief)}
+  <section class="case-block container">
+    <h2 class="case-label">${L('case.about')}</h2>
+    <p class="case-text">${esc(c.summary)}</p>
+  </section>
 
-  <div class="case-pair container">
-    <figure class="photo">${art(p, { w: 800, h: 1000, variant: 1, root })}</figure>
-    <figure class="photo">${art(p, { w: 800, h: 1000, variant: 2, root })}</figure>
-  </div>
-
-  ${block('case.work', c.work)}
-  ${block('case.result', c.result)}
+  ${gallery ? `<div class="gallery container">${gallery}</div>` : ''}
 
   <nav class="case-next container" aria-label="${L('case.next')}">
     <a href="${root}work/${next.slug}.html" class="case-next-link">
       <span class="case-next-label">${L('case.next')}</span>
-      <span class="case-next-client">${esc(next.client)}<span class="stop" aria-hidden="true">.</span></span>
-      <span class="case-next-thumb photo">${art(next, { w: 400, h: 500, root })}<span class="red-block" aria-hidden="true"></span></span>
+      <span class="case-next-client">${esc(clientName(next, lang))}<span class="stop" aria-hidden="true">.</span></span>
+      <span class="case-next-thumb photo${fitClass(next.cover)}">${photo(next.cover, { root })}<span class="red-block" aria-hidden="true"></span></span>
     </a>
   </nav>
 </article>`;
@@ -268,10 +310,10 @@ export function renderProject(slug, lang = 'en', root = '../') {
 export function pageTitle(slug, lang = 'en') {
   if (!slug) return str('meta.title', lang);
   const p = findProject(slug);
-  return `${p.client}: ${p[lang].title} — Ostria`;
+  return `${clientName(p, lang)} — VASSILISDESIGN`;
 }
 
 export function pageDescription(slug, lang = 'en') {
   if (!slug) return str('meta.description', lang);
-  return findProject(slug)[lang].brief;
+  return findProject(slug)[lang].summary;
 }

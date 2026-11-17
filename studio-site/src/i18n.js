@@ -2,7 +2,7 @@
 import { strings } from './data.js';
 import { renderWorkList, renderProject, pageTitle, pageDescription, LANGS } from './render.js';
 
-const KEY = 'ostria-lang';
+const KEY = 'vd-lang';
 
 export function initialLang() {
   const param = new URLSearchParams(location.search).get('lang');

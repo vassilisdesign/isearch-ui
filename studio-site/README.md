@@ -1,9 +1,10 @@
-# Ostria: studio website
+# VASSILISDESIGN: studio website
 
-A bilingual (English / Greek) website for a brand and digital design studio in Athens.
+A bilingual (English / Greek) website for VASSILISDESIGN, an independent design studio in Greece.
 It's built with Vite, vanilla JS, GSAP and Lenis, and the build outputs plain static files.
 
-"Ostria" and all copy, clients and figures are **placeholders**. Every piece of text is in `src/data.js`.
+Clients, services, contact details and portfolio images come from vassilisdesign.gr and the studio brief.
+The project summaries in `src/data.js` are short factual drafts: review and expand them before launch.
 
 ## Run
 
@@ -18,31 +19,36 @@ npm run preview   # serve dist/
 
 | File | What it does |
 | --- | --- |
-| `src/data.js` | All copy in EN and EL: UI strings, studio details, projects |
+| `src/data.js` | All copy in EN and EL, studio details, featured projects, the logo wall and the client index |
 | `src/render.js` | HTML templates, shared by the build (pre-render) and the browser (language switch) |
-| `src/posters.js` | Black-and-white image stand-ins (generated SVG) and the `art()` helper that swaps in real photos |
 | `src/motion.js` | Intro sequences (red band, image reveal, wordmark), image parallax, work tiles rising, red page wipe |
 | `src/i18n.js` | Language toggle; remembers the choice; `?lang=el` also works |
 | `src/contact.js` | Contact form validation and sending |
+| `public/images/` | Portfolio images (WebP) |
 | `index.html` | Page shell; `scripts/gen-pages.mjs` copies it to `work/<slug>.html` per project |
 
 Every page is pre-rendered to complete English HTML at build time. That covers SEO, link previews and no-JS visitors. Greek is applied in place when chosen.
 
-## Adding a project
+## Homepage order
 
-Add an entry to `projects` in `src/data.js` with `en` and `el` copy and a `poster` spec
-(`waves`, `circle`, `grid`, `stripes`, `columns` or `arcs`). Its case-study page is generated automatically.
+Projects come first: hero, selected work, identities (logo wall), services, studio, clients, contact.
 
-## Photography
+## Adding or editing a project
 
-The design is built around black-and-white photography crossed by solid red blocks.
-Until real photos are added, every image slot shows a generated black-and-white stand-in with print grain.
+Add an entry to `projects` in `src/data.js`: `slug`, `client`, `sector` (`wine`, `hosp`, `food` or `corp`), a `cover` image, the `images` for its page, and `en` / `el` copy (`location`, `services`, `summary`, `scope`). Its case-study page is generated automatically.
 
-1. Put photos in `public/images/` (any colour photo works: CSS renders it in black and white and adds the red block).
-2. Reference them in `src/data.js`:
-   - `studio.heroPhoto` for the hero (a portrait-format photo, roughly 4:5, works best) and `studio.studioPhoto` for the studio section.
-   - `photo: 'images/kyma.jpg'` on a project for every slot, or `photo: ['images/kyma-cover.jpg', 'images/kyma-2.jpg', 'images/kyma-3.jpg']` for the cover and the two detail images.
-3. Export at about 2000px on the long edge, as WebP or a quality-75 JPEG, so pages stay fast on phones.
+Images use `img('name', width, height, fit)`:
+- `fit: 'contain'` for packshots and logos on a white background. They blend into the page colour.
+- `fit: 'cover'` (the default) for screenshots and photography.
+
+On the homepage, images appear in black and white with the red block on hover. Case-study pages show them in full colour.
+
+## Images
+
+1. Export at about 1600–2000px on the long edge, as WebP (quality 75–80).
+2. Put them in `public/images/` and reference them in `src/data.js`.
+
+The current website screenshots are only 800px wide. Replacing them with larger exports will make the case-study pages sharper.
 
 ## Contact form
 
@@ -60,8 +66,8 @@ Without an ID, the form still works: it opens the visitor's email app with the m
 
 ## Motion and performance
 
-- One orchestrated intro per page. Afterwards motion only responds to the visitor: scroll speed shears the wordmark, hovering shows a poster, and clicking a link wipes to the next page.
+- One orchestrated intro per page. Afterwards motion is gentle: images drift slightly on scroll, work tiles rise once, red blocks answer hover, and a red wipe plays between pages.
 - Animation uses transforms, opacity and clip-path only. Smooth scrolling (Lenis) runs for mouse and trackpad users only; touch devices keep native scrolling.
 - `prefers-reduced-motion` turns off every animation and the page transitions.
 - Content is never left hidden. Pre-paint state is set by a tiny inline script with a 4-second failsafe, and visitors without JavaScript get the full page.
-- About 65 KB of gzipped JS. The font is the variable Commissioner, self-hosted and split by script, so only the Latin or Greek subset a page uses is downloaded.
+- About 65 KB of gzipped JS and 1.4 MB of images in total, lazy-loaded below the fold. The font is the variable Commissioner, self-hosted and split by script.

@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const html = document.documentElement;
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-const WIPE_KEY = 'ostria-wipe';
+const WIPE_KEY = 'vd-wipe';
 let lenis = null;
 
 const clearWipeFlag = () => { try { sessionStorage.removeItem(WIPE_KEY); } catch (e) { /* blocked */ } };
