@@ -187,6 +187,7 @@ body {
 .vd-hero {
   display: grid; grid-template-columns: repeat(var(--vd-cols), minmax(0, 1fr)); column-gap: var(--vd-gap); row-gap: 20px;
   padding-top: calc(var(--vd-header-h) + 28px);
+  overflow-x: clip; /* the red band drifts right on scroll; keep it inside the page */
 }
 .vd-wordmark {
   grid-column: 1 / -1; order: 1; font-size: clamp(3rem, 21.5vw, 10rem); font-weight: 800; line-height: 0.86; letter-spacing: -0.045em;
@@ -271,6 +272,37 @@ body {
   .vd-tile:nth-child(4n + 4) .vd-tile-media { aspect-ratio: 4 / 5.7; }
 }
 .vd-all-link { margin-top: clamp(32px, 4vw, 56px); }
+
+/* Uniform grid (VD Works grid, "Staggered heights" off): N per row on desktop, 3 on tablet, 2 on phones */
+.vd-tiles.vd-tiles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--vd-grid-gap, 0px); align-items: start; }
+.vd-tiles-grid .vd-tile .vd-tile-media { aspect-ratio: 4 / 5; }
+@media (min-width: 720px) { .vd-tiles.vd-tiles-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .vd-tiles.vd-tiles-grid { grid-template-columns: repeat(var(--vd-grid-cols, 5), minmax(0, 1fr)); } }
+
+/* Full width: edge to edge; captions keep a small inset so text never touches the screen edge */
+.vd-bleed { width: 100%; }
+.vd-bleed .vd-tile-link { gap: 2px; }
+.vd-bleed .vd-tile-media { margin-bottom: 10px; }
+.vd-bleed .vd-tile-client, .vd-bleed .vd-tile-meta { padding-inline: clamp(10px, 1.2vw, 16px); }
+.vd-bleed .vd-tile-link > :last-child:not(.vd-tile-media) { padding-bottom: clamp(20px, 2vw, 32px); }
+
+/* Red panel with the Work's text, covering the whole image on hover/focus */
+.vd-tile-overlay {
+  position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 12%;
+  background: var(--vd-red); color: #fff; transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.55s var(--vd-ease);
+}
+.vd-tile-overlay-text {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 9; overflow: hidden;
+  font-size: var(--vd-t-m); line-height: 1.45; font-weight: 500; text-align: center; color: #fff;
+  opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease, transform 0.45s var(--vd-ease);
+}
+.vd-tile-link:hover .vd-tile-overlay, .vd-tile-link:focus-visible .vd-tile-overlay { transform: scaleY(1); }
+.vd-tile-link:hover .vd-tile-overlay-text, .vd-tile-link:focus-visible .vd-tile-overlay-text { opacity: 1; transform: none; transition-delay: 0.18s; }
+.vd-tiles-overlay .vd-tile-link:focus-visible { outline-offset: -3px; }
+@media (min-width: 1200px) { .vd-tiles-grid[style*="--vd-grid-cols:6"] .vd-tile-overlay-text { font-size: var(--vd-t-s); } }
+/* Touch screens have no hover: tiles simply link through */
+@media (hover: none) { .vd-tile-overlay { display: none; } }
 
 /* ==========================================================================
    Logo wall

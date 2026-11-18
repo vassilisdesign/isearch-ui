@@ -71,25 +71,49 @@ function vd_img( $attachment_id, $size = 'large', $eager = false, $alt = null ) 
 
 /* ---------- Works ---------- */
 
-/** One homepage tile. */
-function vd_work_tile( $post ) {
+/** Text shown on the red hover panel: the Excerpt, otherwise the start of the post content. */
+function vd_work_hover_text( $post ) {
+	$post = get_post( $post );
+	if ( has_excerpt( $post ) ) {
+		return wp_strip_all_tags( $post->post_excerpt );
+	}
+	$text = wp_strip_all_tags( strip_shortcodes( (string) $post->post_content ) );
+	$text = trim( preg_replace( '/\s+/', ' ', $text ) );
+	return $text ? wp_trim_words( $text, 32, '…' ) : get_the_title( $post );
+}
+
+/**
+ * One Work tile.
+ *
+ * @param WP_Post|int $post     The Work.
+ * @param bool        $overlay  Red panel with the Work's text on hover (instead of the red block).
+ * @param bool        $captions Title, services and location under the image.
+ */
+function vd_work_tile( $post, $overlay = false, $captions = true ) {
 	$post  = get_post( $post );
 	$fit   = vd_cover_fit( $post->ID );
 	$thumb = get_post_thumbnail_id( $post );
+	$title = get_the_title( $post );
 	ob_start();
 	?>
 	<li class="vd-tile">
-		<a class="vd-tile-link" href="<?php echo esc_url( get_permalink( $post ) ); ?>">
+		<a class="vd-tile-link" href="<?php echo esc_url( get_permalink( $post ) ); ?>"<?php echo $captions ? '' : ' aria-label="' . esc_attr( $title ) . '"'; ?>>
 			<span class="vd-tile-media vd-photo<?php echo 'contain' === $fit ? ' vd-fit-contain' : ''; ?>">
 				<?php echo vd_img( $thumb, 'vd-tile', false, '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				<span class="vd-red-block" aria-hidden="true"></span>
+				<?php if ( $overlay ) : ?>
+					<span class="vd-tile-overlay" aria-hidden="true"><span class="vd-tile-overlay-text"><?php echo esc_html( vd_work_hover_text( $post ) ); ?></span></span>
+				<?php else : ?>
+					<span class="vd-red-block" aria-hidden="true"></span>
+				<?php endif; ?>
 			</span>
-			<span class="vd-tile-client"><?php echo esc_html( get_the_title( $post ) ); ?></span>
-			<?php if ( $services = get_post_meta( $post->ID, 'vd_services', true ) ) : ?>
-				<span class="vd-tile-meta"><?php echo esc_html( $services ); ?></span>
-			<?php endif; ?>
-			<?php if ( $location = get_post_meta( $post->ID, 'vd_location', true ) ) : ?>
-				<span class="vd-tile-meta"><?php echo esc_html( $location ); ?></span>
+			<?php if ( $captions ) : ?>
+				<span class="vd-tile-client"><?php echo esc_html( $title ); ?></span>
+				<?php if ( $services = get_post_meta( $post->ID, 'vd_services', true ) ) : ?>
+					<span class="vd-tile-meta"><?php echo esc_html( $services ); ?></span>
+				<?php endif; ?>
+				<?php if ( $location = get_post_meta( $post->ID, 'vd_location', true ) ) : ?>
+					<span class="vd-tile-meta"><?php echo esc_html( $location ); ?></span>
+				<?php endif; ?>
 			<?php endif; ?>
 		</a>
 	</li>
@@ -97,13 +121,23 @@ function vd_work_tile( $post ) {
 	return ob_get_clean();
 }
 
-/** Grid of Work tiles. */
+/**
+ * Grid of Work tiles.
+ *
+ * Args: count, sector (slug), columns (desktop), gap (px), full (edge to edge), overlay (red hover panel
+ * with text), captions (text under the image), staggered (varying heights; off = uniform grid).
+ */
 function vd_works_grid( $args = array() ) {
 	$args  = wp_parse_args(
 		$args,
 		array(
-			'count'  => 8,
-			'sector' => '',
+			'count'     => 8,
+			'sector'    => '',
+			'columns'   => 4,
+			'gap'       => null,
+			'overlay'   => false,
+			'captions'  => true,
+			'staggered' => true,
 		)
 	);
 	$query = array(
@@ -128,7 +162,28 @@ function vd_works_grid( $args = array() ) {
 			? '<p class="vd-empty">' . esc_html__( 'No Works yet. Add them under Works → Add Work.', 'vassilisdesign' ) . '</p>'
 			: '';
 	}
-	return '<ul class="vd-tiles" role="list">' . implode( '', array_map( 'vd_work_tile', $posts ) ) . '</ul>';
+	$classes = array( 'vd-tiles' );
+	$style   = array();
+	if ( ! $args['staggered'] ) {
+		$classes[] = 'vd-tiles-grid';
+		$style[]   = '--vd-grid-cols:' . max( 1, min( 8, (int) $args['columns'] ) );
+		if ( null !== $args['gap'] && '' !== $args['gap'] ) {
+			$style[] = '--vd-grid-gap:' . max( 0, (int) $args['gap'] ) . 'px';
+		}
+	}
+	if ( $args['overlay'] ) {
+		$classes[] = 'vd-tiles-overlay';
+	}
+	$tiles = '';
+	foreach ( $posts as $post ) {
+		$tiles .= vd_work_tile( $post, (bool) $args['overlay'], (bool) $args['captions'] );
+	}
+	return sprintf(
+		'<ul class="%s" role="list"%s>%s</ul>',
+		esc_attr( implode( ' ', $classes ) ),
+		$style ? ' style="' . esc_attr( implode( ';', $style ) ) . '"' : '',
+		$tiles
+	);
 }
 
 /**

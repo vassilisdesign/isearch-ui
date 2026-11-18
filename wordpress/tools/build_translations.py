@@ -96,6 +96,13 @@ EL = {
     'Accountant or accounting software (optional)': 'Λογιστής ή λογισμικό (προαιρετικό)',
     'Server log retention (days)': 'Διατήρηση αρχείων καταγραφής (ημέρες)',
     'Works archive': 'Αρχείο έργων',
+    'Layout': 'Διάταξη',
+    'Works per row (desktop)': 'Έργα ανά σειρά (υπολογιστής)',
+    'Full width (no side margins)': 'Πλήρες πλάτος (χωρίς πλευρικά περιθώρια)',
+    'Space between Works (px)': 'Απόσταση μεταξύ έργων (px)',
+    'Red panel with text on hover': 'Κόκκινο πλαίσιο με κείμενο στο hover',
+    'Title and details under each image': 'Τίτλος και στοιχεία κάτω από κάθε εικόνα',
+    'Staggered heights': 'Κλιμακωτά ύψη',
 }
 # 'Work' means "Work" (menu, plural sense) on the front end and "Work" (one item) in the admin:
 # the front-end menu label wins, since visitors see it.

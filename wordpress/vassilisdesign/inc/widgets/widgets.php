@@ -184,7 +184,7 @@ class VD_Widget_Works_Grid extends VD_Widget {
 	}
 	protected function register_controls() {
 		$this->start( __( 'Works', 'vassilisdesign' ) );
-		$this->add_control( 'count', array( 'label' => __( 'Number of Works', 'vassilisdesign' ), 'type' => Controls_Manager::NUMBER, 'default' => 8, 'min' => 1, 'max' => 48 ) );
+		$this->add_control( 'count', array( 'label' => __( 'Number of Works', 'vassilisdesign' ), 'type' => Controls_Manager::NUMBER, 'default' => 10, 'min' => 1, 'max' => 48, 'description' => __( 'Tip: a multiple of the Works per row fills every row.', 'vassilisdesign' ) ) );
 		$options = array( '' => __( 'All sectors', 'vassilisdesign' ) );
 		$terms   = get_terms( array( 'taxonomy' => 'work_sector', 'hide_empty' => false ) );
 		if ( ! is_wp_error( $terms ) ) {
@@ -202,15 +202,78 @@ class VD_Widget_Works_Grid extends VD_Widget {
 			)
 		);
 		$this->end_controls_section();
+
+		$this->start_controls_section( 'layout', array( 'label' => __( 'Layout', 'vassilisdesign' ) ) );
+		$this->add_control(
+			'columns',
+			array(
+				'label'       => __( 'Works per row (desktop)', 'vassilisdesign' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => '5',
+				'options'     => array( '3' => '3', '4' => '4', '5' => '5', '6' => '6' ),
+				'description' => __( 'Tablets show 3 per row, phones 2.', 'vassilisdesign' ),
+			)
+		);
+		$this->add_control(
+			'full',
+			array(
+				'label'        => __( 'Full width (no side margins)', 'vassilisdesign' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+			)
+		);
+		$this->add_control( 'gap', array( 'label' => __( 'Space between Works (px)', 'vassilisdesign' ), 'type' => Controls_Manager::NUMBER, 'default' => 0, 'min' => 0, 'max' => 80 ) );
+		$this->add_control(
+			'overlay',
+			array(
+				'label'        => __( 'Red panel with text on hover', 'vassilisdesign' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+				'description'  => __( 'Shows the Work\'s Excerpt, or the start of its content.', 'vassilisdesign' ),
+			)
+		);
+		$this->add_control(
+			'captions',
+			array(
+				'label'        => __( 'Title and details under each image', 'vassilisdesign' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+			)
+		);
+		$this->add_control(
+			'staggered',
+			array(
+				'label'        => __( 'Staggered heights', 'vassilisdesign' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '',
+				'return_value' => 'yes',
+				'description'  => __( 'Off: all images the same size. On: varying heights, 4 per row, with margins.', 'vassilisdesign' ),
+			)
+		);
+		$this->end_controls_section();
 	}
 	protected function render() {
-		$s = $this->get_settings_for_display();
-		echo '<div class="vd-wrap">';
-		echo vd_works_grid( array( 'count' => $s['count'], 'sector' => $s['sector'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$s         = $this->get_settings_for_display();
+		$staggered = 'yes' === $s['staggered'];
+		$full      = ! $staggered && 'yes' === $s['full'];
+		$grid      = vd_works_grid(
+			array(
+				'count'     => $s['count'],
+				'sector'    => $s['sector'],
+				'columns'   => $s['columns'],
+				'gap'       => $s['gap'],
+				'overlay'   => 'yes' === $s['overlay'],
+				'captions'  => 'yes' === $s['captions'],
+				'staggered' => $staggered,
+			)
+		);
+		echo $full ? '<div class="vd-bleed">' . $grid . '</div>' : '<div class="vd-wrap">' . $grid . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		if ( $s['all_link'] ) {
-			printf( '<p class="vd-all-link"><a class="vd-text-link" href="%s">%s %s</a></p>', esc_url( get_post_type_archive_link( 'works' ) ), esc_html( $s['all_link'] ), vd_arrow() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			printf( '<div class="vd-wrap"><p class="vd-all-link"><a class="vd-text-link" href="%s">%s %s</a></p></div>', esc_url( get_post_type_archive_link( 'works' ) ), esc_html( $s['all_link'] ), vd_arrow() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
-		echo '</div>';
 	}
 }
 

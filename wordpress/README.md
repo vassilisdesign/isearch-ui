@@ -57,6 +57,8 @@ The setup never overwrites anything. If the site already has a page with the slu
 | Work details → Gallery | Images on the Work page, in order |
 | Content (editor) | Optional longer description |
 
+On the homepage, the **VD Works grid** shows 5 Works per row, edge to edge, with a red panel and the Work's Excerpt on hover (or the start of its content if there is no Excerpt). Columns, full width, spacing, hover text, captions and staggered heights are in the widget's **Layout** settings.
+
 Images: about 1600–2000px on the long edge, JPEG quality 75–80 or WebP. On the homepage, images show in black and white with the red block on hover. On Work pages they show in full colour. Packshots on a white background blend into the page colour automatically.
 
 Each Work can also be built with Elementor if you want a custom layout for a special project. Its Elementor content then appears between the gallery and "Next project".

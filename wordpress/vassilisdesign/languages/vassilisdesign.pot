@@ -254,55 +254,55 @@ msgstr ""
 msgid "Footer legal menu"
 msgstr ""
 
-#: inc/template-functions.php:128
+#: inc/template-functions.php:162
 msgid "No Works yet. Add them under Works → Add Work."
 msgstr ""
 
-#: inc/template-functions.php:149 inc/widgets/widgets.php:186 inc/works.php:61
+#: inc/template-functions.php:204 inc/widgets/widgets.php:186 inc/works.php:61
 msgid "Works"
 msgstr ""
 
-#: inc/template-functions.php:156 inc/works.php:34 inc/works.php:39
+#: inc/template-functions.php:211 inc/works.php:34 inc/works.php:39
 msgid "Sectors"
 msgstr ""
 
-#: inc/template-functions.php:157
+#: inc/template-functions.php:212
 msgid "All"
 msgstr ""
 
-#: inc/template-functions.php:179
+#: inc/template-functions.php:234
 msgid "No Works yet."
 msgstr ""
 
-#: inc/template-functions.php:198 inc/widgets/widgets.php:195 inc/widgets/widgets.php:349
+#: inc/template-functions.php:253 inc/widgets/widgets.php:195 inc/widgets/widgets.php:412
 msgid "Sector"
 msgstr ""
 
-#: inc/template-functions.php:199 inc/works.php:18 inc/works.php:157
+#: inc/template-functions.php:254 inc/works.php:18 inc/works.php:157
 msgid "Services"
 msgstr ""
 
-#: inc/template-functions.php:200 inc/works.php:17 inc/works.php:153
+#: inc/template-functions.php:255 inc/works.php:17 inc/works.php:153
 msgid "Location"
 msgstr ""
 
-#: inc/template-functions.php:206
+#: inc/template-functions.php:261
 msgid "All work"
 msgstr ""
 
-#: inc/template-functions.php:214
+#: inc/template-functions.php:269
 msgid "Project"
 msgstr ""
 
-#: inc/template-functions.php:219 inc/works.php:161
+#: inc/template-functions.php:274 inc/works.php:161
 msgid "Scope"
 msgstr ""
 
-#: inc/template-functions.php:251
+#: inc/template-functions.php:306
 msgid "About the project"
 msgstr ""
 
-#: inc/template-functions.php:296 inc/template-functions.php:298
+#: inc/template-functions.php:351 inc/template-functions.php:353
 msgid "Next project"
 msgstr ""
 
@@ -346,7 +346,7 @@ msgstr ""
 msgid "Rotated corner text"
 msgstr ""
 
-#: inc/widgets/widgets.php:80 inc/widgets/widgets.php:308
+#: inc/widgets/widgets.php:80 inc/widgets/widgets.php:371
 msgid "Image"
 msgstr ""
 
@@ -402,6 +402,10 @@ msgstr ""
 msgid "Number of Works"
 msgstr ""
 
+#: inc/widgets/widgets.php:187
+msgid "Tip: a multiple of the Works per row fills every row."
+msgstr ""
+
 #: inc/widgets/widgets.php:188
 msgid "All sectors"
 msgstr ""
@@ -414,127 +418,167 @@ msgstr ""
 msgid "Order Works with the \"Order\" field on each Work (lowest first)."
 msgstr ""
 
-#: inc/widgets/widgets.php:224
+#: inc/widgets/widgets.php:206
+msgid "Layout"
+msgstr ""
+
+#: inc/widgets/widgets.php:210
+msgid "Works per row (desktop)"
+msgstr ""
+
+#: inc/widgets/widgets.php:214
+msgid "Tablets show 3 per row, phones 2."
+msgstr ""
+
+#: inc/widgets/widgets.php:220
+msgid "Full width (no side margins)"
+msgstr ""
+
+#: inc/widgets/widgets.php:226
+msgid "Space between Works (px)"
+msgstr ""
+
+#: inc/widgets/widgets.php:230
+msgid "Red panel with text on hover"
+msgstr ""
+
+#: inc/widgets/widgets.php:234
+msgid "Shows the Work's Excerpt, or the start of its content."
+msgstr ""
+
+#: inc/widgets/widgets.php:240
+msgid "Title and details under each image"
+msgstr ""
+
+#: inc/widgets/widgets.php:249
+msgid "Staggered heights"
+msgstr ""
+
+#: inc/widgets/widgets.php:253
+msgid "Off: all images the same size. On: varying heights, 4 per row, with margins."
+msgstr ""
+
+#: inc/widgets/widgets.php:287
 msgid "VD Logo wall"
 msgstr ""
 
-#: inc/widgets/widgets.php:227
+#: inc/widgets/widgets.php:290
 msgid "Logos"
 msgstr ""
 
-#: inc/widgets/widgets.php:228
+#: inc/widgets/widgets.php:291
 msgid "Logos (on white, any size)"
 msgstr ""
 
-#: inc/widgets/widgets.php:255
+#: inc/widgets/widgets.php:318
 msgid "VD Numbered list"
 msgstr ""
 
-#: inc/widgets/widgets.php:258 inc/widgets/widgets.php:265
+#: inc/widgets/widgets.php:321 inc/widgets/widgets.php:328
 msgid "Items"
 msgstr ""
 
-#: inc/widgets/widgets.php:260 inc/widgets/widgets.php:303 inc/widgets/widgets.php:392
+#: inc/widgets/widgets.php:323 inc/widgets/widgets.php:366 inc/widgets/widgets.php:455
 msgid "Title"
 msgstr ""
 
-#: inc/widgets/widgets.php:261 inc/widgets/widgets.php:393
+#: inc/widgets/widgets.php:324 inc/widgets/widgets.php:456
 msgid "Text"
 msgstr ""
 
-#: inc/widgets/widgets.php:299
+#: inc/widgets/widgets.php:362
 msgid "VD Studio"
 msgstr ""
 
-#: inc/widgets/widgets.php:302 template-parts/header.php:38
+#: inc/widgets/widgets.php:365 template-parts/header.php:38
 msgid "Studio"
 msgstr ""
 
-#: inc/widgets/widgets.php:304
+#: inc/widgets/widgets.php:367
 msgid "Red box label"
 msgstr ""
 
-#: inc/widgets/widgets.php:305
+#: inc/widgets/widgets.php:368
 msgid "Red box list (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:306
+#: inc/widgets/widgets.php:369
 msgid "Side label"
 msgstr ""
 
-#: inc/widgets/widgets.php:307
+#: inc/widgets/widgets.php:370
 msgid "Side list (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:309
+#: inc/widgets/widgets.php:372
 msgid "Text (first paragraph is shown large)"
 msgstr ""
 
-#: inc/widgets/widgets.php:344
+#: inc/widgets/widgets.php:407
 msgid "VD Client index"
 msgstr ""
 
-#: inc/widgets/widgets.php:347
+#: inc/widgets/widgets.php:410
 msgid "Clients"
 msgstr ""
 
-#: inc/widgets/widgets.php:350
+#: inc/widgets/widgets.php:413
 msgid "Clients (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:354
+#: inc/widgets/widgets.php:417
 msgid "Groups"
 msgstr ""
 
-#: inc/widgets/widgets.php:388
+#: inc/widgets/widgets.php:451
 msgid "VD Contact intro"
 msgstr ""
 
-#: inc/widgets/widgets.php:391 template-parts/header.php:40
+#: inc/widgets/widgets.php:454 template-parts/header.php:40
 msgid "Contact"
 msgstr ""
 
-#: inc/widgets/widgets.php:394
+#: inc/widgets/widgets.php:457
 msgid "Line above the contact details"
 msgstr ""
 
-#: inc/widgets/widgets.php:399
+#: inc/widgets/widgets.php:462
 msgid "Email and phone come from Appearance → Customize → Studio details."
 msgstr ""
 
-#: inc/widgets/widgets.php:423 inc/works.php:62 template-parts/header.php:36
+#: inc/widgets/widgets.php:486 inc/works.php:62 template-parts/header.php:36
 msgid "Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:428
+#: inc/widgets/widgets.php:491
 msgid "Shows the current Work. Use inside a Theme Builder \"Single\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:449
+#: inc/widgets/widgets.php:512
 msgid "VD Work header"
 msgstr ""
 
-#: inc/widgets/widgets.php:464
+#: inc/widgets/widgets.php:527
 msgid "VD Work cover and summary"
 msgstr ""
 
-#: inc/widgets/widgets.php:479
+#: inc/widgets/widgets.php:542
 msgid "VD Work gallery"
 msgstr ""
 
-#: inc/widgets/widgets.php:494
+#: inc/widgets/widgets.php:557
 msgid "VD Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:500
+#: inc/widgets/widgets.php:563
 msgid "Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:505
+#: inc/widgets/widgets.php:568
 msgid "Title, Sector filter and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:520
+#: inc/widgets/widgets.php:583
 msgid "VD Next Work"
 msgstr ""
 
