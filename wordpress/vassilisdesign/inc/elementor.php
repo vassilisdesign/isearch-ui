@@ -38,7 +38,8 @@ function vd_recommended_elementor_options() {
 	return array(
 		'elementor_disable_color_schemes'      => 'yes',     // Use the theme colours, not Elementor's defaults.
 		'elementor_disable_typography_schemes' => 'yes',     // Use the theme font, not Elementor's defaults.
-		'elementor_google_font'                => '0',       // No Google Fonts (self-hosted font, GDPR).
+		'elementor_google_font'                => '1',       // Google Fonts allowed for Elementor's global fonts…
+		'elementor_local_google_fonts'         => '1',       // …but only hosted on this server, never loaded from Google (GDPR).
 		'elementor_font_display'               => 'swap',
 		'elementor_css_print_method'           => 'external', // Cacheable CSS files.
 		'elementor_load_fa4_shim'              => '',        // No Font Awesome 4 compatibility layer.

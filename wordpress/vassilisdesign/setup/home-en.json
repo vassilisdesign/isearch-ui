@@ -73,14 +73,15 @@
      "widgetType": "vd-works-grid",
      "settings": {
       "count": 10,
+      "source": "all",
       "sector": "",
       "all_link": "All work",
       "columns": "5",
       "full": "yes",
-      "gap": 0,
+      "gap": "",
       "overlay": "yes",
       "captions": "yes",
-      "staggered": ""
+      "staggered": "yes"
      },
      "elements": [],
      "isInner": false

@@ -57,7 +57,9 @@ The setup never overwrites anything. If the site already has a page with the slu
 | Work details → Gallery | Images on the Work page, in order |
 | Content (editor) | Optional longer description |
 
-On the homepage, the **VD Works grid** shows 5 Works per row, edge to edge, with a red panel and the Work's Excerpt on hover (or the start of its content if there is no Excerpt). Columns, full width, spacing, hover text, captions and staggered heights are in the widget's **Layout** settings.
+On the homepage, the **VD Works grid** shows 5 Works per row, edge to edge, with staggered heights. On hover, a red block (multiplied over the image) covers the whole tile and the Work's Excerpt appears in white, or the start of its content if there is no Excerpt. Titles use Elementor's global **Accent** font (Site Settings → Global Fonts).
+
+Which Works appear: in the widget, **Show** → *All Works (by Order)*, *Works in one Sector*, or *Works I choose* (pick them in the order you want). Columns, full width, spacing, hover text, captions and staggered heights are in the **Layout** settings.
 
 Images: about 1600–2000px on the long edge, JPEG quality 75–80 or WebP. On the homepage, images show in black and white with the red block on hover. On Work pages they show in full colour. Packshots on a white background blend into the page colour automatically.
 

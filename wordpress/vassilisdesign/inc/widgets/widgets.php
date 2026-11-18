@@ -192,7 +192,46 @@ class VD_Widget_Works_Grid extends VD_Widget {
 				$options[ $term->slug ] = $term->name;
 			}
 		}
-		$this->add_control( 'sector', array( 'label' => __( 'Sector', 'vassilisdesign' ), 'type' => Controls_Manager::SELECT, 'default' => '', 'options' => $options ) );
+		$this->add_control(
+			'source',
+			array(
+				'label'   => __( 'Show', 'vassilisdesign' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'all',
+				'options' => array(
+					'all'    => __( 'All Works (by Order)', 'vassilisdesign' ),
+					'sector' => __( 'Works in one Sector', 'vassilisdesign' ),
+					'pick'   => __( 'Works I choose', 'vassilisdesign' ),
+				),
+			)
+		);
+		unset( $options[''] );
+		$this->add_control(
+			'sector',
+			array(
+				'label'     => __( 'Sector', 'vassilisdesign' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => array( '' => __( 'Choose a Sector', 'vassilisdesign' ) ) + $options,
+				'condition' => array( 'source' => 'sector' ),
+			)
+		);
+		$works = array();
+		foreach ( get_posts( array( 'post_type' => 'works', 'post_status' => 'publish', 'posts_per_page' => 200, 'orderby' => 'title', 'order' => 'ASC' ) ) as $work ) {
+			$works[ $work->ID ] = $work->post_title;
+		}
+		$this->add_control(
+			'works',
+			array(
+				'label'       => __( 'Works (in this order)', 'vassilisdesign' ),
+				'type'        => Controls_Manager::SELECT2,
+				'multiple'    => true,
+				'label_block' => true,
+				'options'     => $works,
+				'default'     => array(),
+				'condition'   => array( 'source' => 'pick' ),
+			)
+		);
 		$this->add_control( 'all_link', array( 'label' => __( '"All work" link text (empty to hide)', 'vassilisdesign' ), 'type' => Controls_Manager::TEXT, 'default' => 'All work' ) );
 		$this->add_control(
 			'order_note',
@@ -223,11 +262,11 @@ class VD_Widget_Works_Grid extends VD_Widget {
 				'return_value' => 'yes',
 			)
 		);
-		$this->add_control( 'gap', array( 'label' => __( 'Space between Works (px)', 'vassilisdesign' ), 'type' => Controls_Manager::NUMBER, 'default' => 0, 'min' => 0, 'max' => 80 ) );
+		$this->add_control( 'gap', array( 'label' => __( 'Space between Works (px, empty = default)', 'vassilisdesign' ), 'type' => Controls_Manager::NUMBER, 'default' => '', 'min' => 0, 'max' => 80 ) );
 		$this->add_control(
 			'overlay',
 			array(
-				'label'        => __( 'Red panel with text on hover', 'vassilisdesign' ),
+				'label'        => __( 'Red cover with text on hover', 'vassilisdesign' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',
@@ -248,26 +287,29 @@ class VD_Widget_Works_Grid extends VD_Widget {
 			array(
 				'label'        => __( 'Staggered heights', 'vassilisdesign' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'default'      => '',
+				'default'      => 'yes',
 				'return_value' => 'yes',
-				'description'  => __( 'Off: all images the same size. On: varying heights, 4 per row, with margins.', 'vassilisdesign' ),
+				'description'  => __( 'On: each column has its own image height. Off: all images the same size.', 'vassilisdesign' ),
 			)
 		);
 		$this->end_controls_section();
 	}
 	protected function render() {
-		$s         = $this->get_settings_for_display();
-		$staggered = 'yes' === $s['staggered'];
-		$full      = ! $staggered && 'yes' === $s['full'];
-		$grid      = vd_works_grid(
+		$s      = $this->get_settings_for_display();
+		$raw    = (array) ( $this->get_raw_data()['settings'] ?? array() );
+		$sector = isset( $raw['sector'] ) ? (string) $raw['sector'] : ''; // Read raw: Elementor blanks settings whose condition is not met.
+		$source = isset( $raw['source'] ) ? $s['source'] : ( '' !== $sector ? 'sector' : 'all' ); // Widgets saved before "Show" existed keep their Sector.
+		$full   = 'yes' === $s['full'];
+		$grid   = vd_works_grid(
 			array(
 				'count'     => $s['count'],
-				'sector'    => $s['sector'],
+				'sector'    => 'sector' === $source ? $sector : '',
+				'ids'       => 'pick' === $source ? (array) $s['works'] : array(),
 				'columns'   => $s['columns'],
 				'gap'       => $s['gap'],
 				'overlay'   => 'yes' === $s['overlay'],
 				'captions'  => 'yes' === $s['captions'],
-				'staggered' => $staggered,
+				'staggered' => 'yes' === $s['staggered'],
 			)
 		);
 		echo $full ? '<div class="vd-bleed">' . $grid . '</div>' : '<div class="vd-wrap">' . $grid . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

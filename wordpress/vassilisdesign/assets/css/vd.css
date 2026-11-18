@@ -258,7 +258,16 @@ body {
 .vd-tile:nth-child(4n + 2) .vd-tile-media, .vd-tile:nth-child(4n + 3) .vd-tile-media { aspect-ratio: 4 / 5.6; }
 .vd-tile-media > .vd-photo-img { transition: transform 0.9s var(--vd-ease); }
 .vd-tile-media .vd-red-block { transform: scaleY(0); transition: transform 0.6s var(--vd-ease); }
-.vd-tile-client { font-weight: 700; font-size: var(--vd-t-m); letter-spacing: -0.01em; line-height: 1.2; transition: color 0.3s; }
+/* Work titles use Elementor's global "Accent" font (Site Settings → Global Fonts), falling back to the theme style */
+.vd-tile-client {
+  font-family: var(--e-global-typography-accent-font-family, var(--vd-font));
+  font-size: var(--e-global-typography-accent-font-size, var(--vd-t-m));
+  font-weight: var(--e-global-typography-accent-font-weight, 700);
+  line-height: var(--e-global-typography-accent-line-height, 1.2);
+  letter-spacing: var(--e-global-typography-accent-letter-spacing, -0.01em);
+  text-transform: var(--e-global-typography-accent-text-transform, none);
+  transition: color 0.3s;
+}
 .vd-tile-meta { font-size: var(--vd-t-xs); color: var(--vd-grey); }
 .vd-tile-link:hover .vd-red-block, .vd-tile-link:focus-visible .vd-red-block { transform: scaleY(1); }
 .vd-tile-link:hover .vd-photo-img, .vd-tile-link:focus-visible .vd-photo-img { transform: scale(1.04); }
@@ -271,38 +280,41 @@ body {
   .vd-tile:nth-child(4n + 3) .vd-tile-media { aspect-ratio: 4 / 4.6; }
   .vd-tile:nth-child(4n + 4) .vd-tile-media { aspect-ratio: 4 / 5.7; }
 }
-.vd-all-link { margin-top: clamp(32px, 4vw, 56px); }
+.vd-all-link { margin: 0; padding-top: 30px; }
 
-/* Uniform grid (VD Works grid, "Staggered heights" off): N per row on desktop, 3 on tablet, 2 on phones */
-.vd-tiles.vd-tiles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--vd-grid-gap, 0px); align-items: start; }
-.vd-tiles-grid .vd-tile .vd-tile-media { aspect-ratio: 4 / 5; }
-@media (min-width: 720px) { .vd-tiles.vd-tiles-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (min-width: 1200px) { .vd-tiles.vd-tiles-grid { grid-template-columns: repeat(var(--vd-grid-cols, 5), minmax(0, 1fr)); } }
+/* Works grid with a column count (VD Works grid): N per row on desktop, 3 on tablet, 2 on phones.
+   Staggered: each column keeps its own image height (set per tile in --vd-ar); gaps as the default tiles. */
+@media (min-width: 720px) { .vd-tiles.vd-tiles-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .vd-tiles.vd-tiles-cols { grid-template-columns: repeat(var(--vd-grid-cols, 5), minmax(0, 1fr)); gap: 48px var(--vd-gap); } }
+.vd-tiles.vd-tiles-stagger .vd-tile .vd-tile-media { aspect-ratio: var(--vd-ar, 4 / 5); }
+/* Uniform heights (option) */
+.vd-tiles.vd-tiles-grid { align-items: start; }
+.vd-tiles.vd-tiles-grid .vd-tile .vd-tile-media { aspect-ratio: 4 / 5; }
+.vd-tiles.vd-tiles-gap { gap: var(--vd-grid-gap); }
 
 /* Full width: edge to edge; captions keep a small inset so text never touches the screen edge */
 .vd-bleed { width: 100%; }
-.vd-bleed .vd-tile-link { gap: 2px; }
-.vd-bleed .vd-tile-media { margin-bottom: 10px; }
 .vd-bleed .vd-tile-client, .vd-bleed .vd-tile-meta { padding-inline: clamp(10px, 1.2vw, 16px); }
-.vd-bleed .vd-tile-link > :last-child:not(.vd-tile-media) { padding-bottom: clamp(20px, 2vw, 32px); }
 
-/* Red panel with the Work's text, covering the whole image on hover/focus */
-.vd-tile-overlay {
-  position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 12%;
-  background: var(--vd-red); color: #fff; transform: scaleY(0); transform-origin: bottom;
-  transition: transform 0.55s var(--vd-ease);
+/* Hover: the red multiply block covers the whole image; the Work's text sits above it in white */
+.vd-tile-media .vd-red-block.vd-red-full { height: 100%; }
+.vd-tile-hover-text {
+  position: absolute; inset: 0; z-index: 4; display: grid; place-items: center; padding: 12%; pointer-events: none;
 }
-.vd-tile-overlay-text {
+.vd-tile-hover-text > span {
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 9; overflow: hidden;
   font-size: var(--vd-t-m); line-height: 1.45; font-weight: 500; text-align: center; color: #fff;
+  text-shadow: 0 1px 12px rgba(80, 0, 0, 0.35);
   opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease, transform 0.45s var(--vd-ease);
 }
-.vd-tile-link:hover .vd-tile-overlay, .vd-tile-link:focus-visible .vd-tile-overlay { transform: scaleY(1); }
-.vd-tile-link:hover .vd-tile-overlay-text, .vd-tile-link:focus-visible .vd-tile-overlay-text { opacity: 1; transform: none; transition-delay: 0.18s; }
+.vd-tile-link:hover .vd-tile-hover-text > span, .vd-tile-link:focus-visible .vd-tile-hover-text > span { opacity: 1; transform: none; transition-delay: 0.18s; }
 .vd-tiles-overlay .vd-tile-link:focus-visible { outline-offset: -3px; }
-@media (min-width: 1200px) { .vd-tiles-grid[style*="--vd-grid-cols:6"] .vd-tile-overlay-text { font-size: var(--vd-t-s); } }
-/* Touch screens have no hover: tiles simply link through */
-@media (hover: none) { .vd-tile-overlay { display: none; } }
+@media (min-width: 1200px) { .vd-tiles-cols[style*="--vd-grid-cols:6"] .vd-tile-hover-text > span { font-size: var(--vd-t-s); } }
+/* Touch screens have no hover: keep the small red block, no text */
+@media (hover: none) {
+  .vd-tile-media .vd-red-block.vd-red-full { transform: scaleY(0.32); }
+  .vd-tile-hover-text { display: none; }
+}
 
 /* ==========================================================================
    Logo wall

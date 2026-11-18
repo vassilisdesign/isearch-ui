@@ -135,7 +135,7 @@ function vd_page_uses_elementor() {
 	return false;
 }
 
-// Pages without Elementor content (legal pages, Works archive, Work pages) skip Elementor's CSS (~55 KB).
+// Pages without Elementor content (legal pages, Works archive, Work pages) skip Elementor's main CSS (~55 KB).
 add_action(
 	'wp_enqueue_scripts',
 	function () {
@@ -143,14 +143,21 @@ add_action(
 			return;
 		}
 		wp_dequeue_style( 'elementor-frontend' );
-		wp_dequeue_style( 'elementor-post-' . (int) get_option( 'elementor_active_kit' ) );
 		wp_dequeue_style( 'elementor-icons' );
+		// The small Site Settings stylesheet (global fonts and colours) stays, so titles use the Accent font everywhere.
 	},
 	999
 );
 
-// No Google Fonts from Elementor: the theme self-hosts Commissioner (privacy + speed).
-add_filter( 'elementor/frontend/print_google_fonts', '__return_false' );
+// Google Fonts chosen in Elementor (for example the global "Accent" font) load only when Elementor hosts
+// them on this server (Elementor → Settings → Advanced → Load Google Fonts Locally). Nothing is ever
+// requested from Google, which keeps the site GDPR-friendly.
+add_filter(
+	'elementor/frontend/print_google_fonts',
+	function ( $print ) {
+		return $print && '1' === get_option( 'elementor_local_google_fonts' );
+	}
+);
 
 add_action(
 	'wp_enqueue_scripts',

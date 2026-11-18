@@ -103,6 +103,14 @@ EL = {
     'Red panel with text on hover': 'Κόκκινο πλαίσιο με κείμενο στο hover',
     'Title and details under each image': 'Τίτλος και στοιχεία κάτω από κάθε εικόνα',
     'Staggered heights': 'Κλιμακωτά ύψη',
+    'Show': 'Εμφάνιση',
+    'All Works (by Order)': 'Όλα τα έργα (κατά σειρά)',
+    'Works in one Sector': 'Έργα ενός τομέα',
+    'Works I choose': 'Έργα της επιλογής μου',
+    'Choose a Sector': 'Επιλέξτε τομέα',
+    'Works (in this order)': 'Έργα (με αυτή τη σειρά)',
+    'Red cover with text on hover': 'Κόκκινη επικάλυψη με κείμενο στο hover',
+    'Space between Works (px, empty = default)': 'Απόσταση μεταξύ έργων (px, κενό = προεπιλογή)',
 }
 # 'Work' means "Work" (menu, plural sense) on the front end and "Work" (one item) in the admin:
 # the front-end menu label wins, since visitors see it.

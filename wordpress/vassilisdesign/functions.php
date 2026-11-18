@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'VD_VERSION', '1.2.0' );
+define( 'VD_VERSION', '1.3.0' );
 define( 'VD_DIR', get_stylesheet_directory() );
 define( 'VD_URI', get_stylesheet_directory_uri() );
 

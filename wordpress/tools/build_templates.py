@@ -189,7 +189,7 @@ def build(lang):
             'image': {'id': '', 'url': ''}, 'image_alt': h['image_alt'], 'fit': 'contain',
             'cta': '#work', 'cta_label': h['cta_label'],
         })], classes='vd-bare', title='Hero'),
-        container([head(*c['work'][:2]), widget('vd-works-grid', {'count': 10, 'sector': '', 'all_link': c['work'][2], 'columns': '5', 'full': 'yes', 'gap': 0, 'overlay': 'yes', 'captions': 'yes', 'staggered': ''})], anchor='work', title='Selected work'),
+        container([head(*c['work'][:2]), widget('vd-works-grid', {'count': 10, 'source': 'all', 'sector': '', 'all_link': c['work'][2], 'columns': '5', 'full': 'yes', 'gap': '', 'overlay': 'yes', 'captions': 'yes', 'staggered': 'yes'})], anchor='work', title='Selected work'),
         container([head(*c['ids']), widget('vd-logo-wall', {'logos': []})], title='Identities'),
         container([head(*c['services'][:2]), widget('vd-numbered-list', {'items': repeat(c['services'][2], ('title', 'text'))})], title='Services'),
         container([widget('vd-studio', dict(c['studio'], image={'id': '', 'url': ''}))], anchor='studio', title='Studio'),
