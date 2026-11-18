@@ -17,10 +17,6 @@ add_action(
 		add_theme_support( 'html5', array( 'search-form', 'gallery', 'caption', 'style', 'script' ) );
 		add_theme_support( 'responsive-embeds' );
 
-		// Tile (4:5) and wide images for Works.
-		add_image_size( 'vd-tile', 800, 1000, false );
-		add_image_size( 'vd-wide', 1800, 1200, false );
-
 		register_nav_menus(
 			array(
 				'vd-primary' => __( 'Header menu', 'vassilisdesign' ),
@@ -81,10 +77,11 @@ add_filter(
 	2
 );
 
+// The design system's base styles are scoped to body.vd (also added by the plugin).
 add_filter(
 	'body_class',
 	function ( $classes ) {
 		$classes[] = 'vd';
-		return $classes;
+		return array_unique( $classes );
 	}
 );

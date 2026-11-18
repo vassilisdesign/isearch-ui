@@ -7,8 +7,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$vd_w1 = vd_opt( 'vd_wordmark_1' );
-$vd_w2 = vd_opt( 'vd_wordmark_2' );
+$vd_w1 = vdt_opt( 'vd_wordmark_1' );
+$vd_w2 = vdt_opt( 'vd_wordmark_2' );
 ?>
 <a class="vd-skip" href="#content"><?php esc_html_e( 'Skip to content', 'vassilisdesign' ); ?></a>
 <header class="vd-header">
@@ -42,8 +42,8 @@ $vd_w2 = vd_opt( 'vd_wordmark_2' );
 			}
 			?>
 		</nav>
-		<?php if ( vd_opt( 'vd_clock_name' ) ) : ?>
-			<p class="vd-clock"><?php echo esc_html( vd_opt( 'vd_clock_name' ) ); ?> <time data-vd-clock data-tz="<?php echo esc_attr( vd_opt( 'vd_clock_tz' ) ); ?>"></time></p>
+		<?php if ( vdt_opt( 'vd_clock_name' ) ) : ?>
+			<p class="vd-clock"><?php echo esc_html( vdt_opt( 'vd_clock_name' ) ); ?> <time data-vd-clock data-tz="<?php echo esc_attr( vdt_opt( 'vd_clock_tz' ) ); ?>"></time></p>
 		<?php endif; ?>
 		<?php
 		// Language switch, shown only when Polylang is active.

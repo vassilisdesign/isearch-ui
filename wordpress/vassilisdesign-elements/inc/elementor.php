@@ -2,7 +2,7 @@
 /**
  * Elementor integration: widget category, theme widgets and the recommended performance settings.
  *
- * @package vassilisdesign
+ * @package vassilisdesign-elements
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -11,7 +11,7 @@ add_action(
 	'elementor/elements/categories_registered',
 	function ( $manager ) {
 		$manager->add_category(
-			'vassilisdesign',
+			'vassilisdesign-elements',
 			array(
 				'title' => 'VASSILISDESIGN',
 				'icon'  => 'eicon-font',
@@ -23,8 +23,8 @@ add_action(
 add_action(
 	'elementor/widgets/register',
 	function ( $widgets_manager ) {
-		require_once VD_DIR . '/inc/widgets/widgets.php';
-		foreach ( vd_widget_classes() as $class ) {
+		require_once VDE_DIR . 'inc/widgets/widgets.php';
+		foreach ( vde_widget_classes() as $class ) {
 			$widgets_manager->register( new $class() );
 		}
 	}
@@ -34,7 +34,7 @@ add_action(
  * Elementor settings that keep the site light. Applied by the one-click setup
  * (Appearance → VASSILISDESIGN setup); each one can be changed back in Elementor → Settings.
  */
-function vd_recommended_elementor_options() {
+function vde_recommended_elementor_options() {
 	return array(
 		'elementor_disable_color_schemes'      => 'yes',     // Use the theme colours, not Elementor's defaults.
 		'elementor_disable_typography_schemes' => 'yes',     // Use the theme font, not Elementor's defaults.
@@ -52,8 +52,8 @@ function vd_recommended_elementor_options() {
 	);
 }
 
-function vd_apply_elementor_options() {
-	foreach ( vd_recommended_elementor_options() as $key => $value ) {
+function vde_apply_elementor_options() {
+	foreach ( vde_recommended_elementor_options() as $key => $value ) {
 		update_option( $key, $value );
 	}
 	$cpt = (array) get_option( 'elementor_cpt_support', array( 'page', 'post' ) );

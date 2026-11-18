@@ -6,7 +6,7 @@
  * and builds the header and footer menus. Every step skips anything that already exists, so it is
  * safe to run more than once. Nothing runs until the button is pressed.
  *
- * @package vassilisdesign
+ * @package vassilisdesign-elements
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,15 +14,16 @@ defined( 'ABSPATH' ) || exit;
 add_action(
 	'admin_menu',
 	function () {
-		add_theme_page( __( 'VASSILISDESIGN setup', 'vassilisdesign' ), __( 'VASSILISDESIGN setup', 'vassilisdesign' ), 'manage_options', 'vd-setup', 'vd_render_setup_page' );
+		add_theme_page( __( 'VASSILISDESIGN setup', 'vassilisdesign-elements' ), __( 'VASSILISDESIGN setup', 'vassilisdesign-elements' ), 'manage_options', 'vd-setup', 'vde_render_setup_page' );
 	}
 );
 
 /** Plugin checklist shown on the setup page. */
-function vd_setup_checks() {
+function vde_setup_checks() {
 	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 	return array(
 		array( 'Hello Elementor (parent theme)', (bool) wp_get_theme( 'hello-elementor' )->exists(), true ),
+		array( 'VASSILISDESIGN theme 2.0 (header, footer, text pages)', 'vassilisdesign' === get_stylesheet() && version_compare( (string) wp_get_theme()->get( 'Version' ), '2.0.0', '>=' ), true ),
 		array( 'Elementor', is_plugin_active( 'elementor/elementor.php' ), true ),
 		array( 'Elementor Pro (contact form, optional Theme Builder)', is_plugin_active( 'elementor-pro/elementor-pro.php' ), true ),
 		array( 'Complianz (cookie consent and cookie policy)', is_plugin_active( 'complianz-gdpr/complianz-gpdr.php' ) || is_plugin_active( 'complianz-gdpr-premium/complianz-gpdr-premium.php' ), true ),
@@ -30,7 +31,7 @@ function vd_setup_checks() {
 	);
 }
 
-function vd_render_setup_page() {
+function vde_render_setup_page() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
@@ -38,35 +39,35 @@ function vd_render_setup_page() {
 	delete_transient( 'vd_setup_log' );
 	?>
 	<div class="wrap">
-		<h1><?php esc_html_e( 'VASSILISDESIGN setup', 'vassilisdesign' ); ?></h1>
+		<h1><?php esc_html_e( 'VASSILISDESIGN setup', 'vassilisdesign-elements' ); ?></h1>
 
 		<?php if ( $log ) : ?>
-			<div class="notice notice-success"><p><strong><?php esc_html_e( 'Setup finished.', 'vassilisdesign' ); ?></strong></p><ul style="list-style:disc;padding-left:1.5em">
+			<div class="notice notice-success"><p><strong><?php esc_html_e( 'Setup finished.', 'vassilisdesign-elements' ); ?></strong></p><ul style="list-style:disc;padding-left:1.5em">
 				<?php foreach ( $log as $line ) : ?>
 					<li><?php echo esc_html( $line ); ?></li>
 				<?php endforeach; ?>
 			</ul></div>
 		<?php endif; ?>
 
-		<h2><?php esc_html_e( 'Plugins', 'vassilisdesign' ); ?></h2>
+		<h2><?php esc_html_e( 'Plugins', 'vassilisdesign-elements' ); ?></h2>
 		<table class="widefat striped" style="max-width:760px">
 			<tbody>
-			<?php foreach ( vd_setup_checks() as $check ) : ?>
+			<?php foreach ( vde_setup_checks() as $check ) : ?>
 				<tr>
 					<td><?php echo esc_html( $check[0] ); ?></td>
-					<td><?php echo $check[1] ? '<span style="color:#008a20">&#10003; ' . esc_html__( 'Active', 'vassilisdesign' ) . '</span>' : ( $check[2] ? '<span style="color:#d63638">' . esc_html__( 'Install and activate', 'vassilisdesign' ) . '</span>' : esc_html__( 'Not installed (optional)', 'vassilisdesign' ) ); ?></td>
+					<td><?php echo $check[1] ? '<span style="color:#008a20">&#10003; ' . esc_html__( 'Active', 'vassilisdesign-elements' ) . '</span>' : ( $check[2] ? '<span style="color:#d63638">' . esc_html__( 'Install and activate', 'vassilisdesign-elements' ) . '</span>' : esc_html__( 'Not installed (optional)', 'vassilisdesign-elements' ) ); ?></td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>
 		</table>
-		<p class="description" style="max-width:760px"><?php esc_html_e( 'No add-on packs are needed (Essential Addons, Premium Addons, UAE, Unlimited Elements, Sticky Header Effects): the theme widgets and Elementor Pro cover everything, and each add-on would add CSS and JavaScript to every page.', 'vassilisdesign' ); ?></p>
+		<p class="description" style="max-width:760px"><?php esc_html_e( 'No add-on packs are needed (Essential Addons, Premium Addons, UAE, Unlimited Elements, Sticky Header Effects): the theme widgets and Elementor Pro cover everything, and each add-on would add CSS and JavaScript to every page.', 'vassilisdesign-elements' ); ?></p>
 
-		<h2><?php esc_html_e( 'Legal pages', 'vassilisdesign' ); ?></h2>
-		<?php $vd_missing = vd_legal_missing(); ?>
+		<h2><?php esc_html_e( 'Legal pages', 'vassilisdesign-elements' ); ?></h2>
+		<?php $vd_missing = vde_legal_missing(); ?>
 		<?php if ( $vd_missing ) : ?>
 			<p style="max-width:760px">
-				<?php esc_html_e( 'These details are still missing. Fill them in under Appearance → Customize → Legal details and click Publish: the pages complete themselves.', 'vassilisdesign' ); ?>
-				<a class="button" href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=vd_legal' ) ); ?>"><?php esc_html_e( 'Open Legal details', 'vassilisdesign' ); ?></a>
+				<?php esc_html_e( 'These details are still missing. Fill them in under Appearance → Customize → Legal details and click Publish: the pages complete themselves.', 'vassilisdesign-elements' ); ?>
+				<a class="button" href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=vde_legal' ) ); ?>"><?php esc_html_e( 'Open Legal details', 'vassilisdesign-elements' ); ?></a>
 			</p>
 			<ul style="list-style:disc;padding-left:1.5em;max-width:760px">
 				<?php foreach ( $vd_missing as $vd_title => $vd_tokens ) : ?>
@@ -74,25 +75,25 @@ function vd_render_setup_page() {
 				<?php endforeach; ?>
 			</ul>
 		<?php else : ?>
-			<p><span style="color:#008a20">&#10003;</span> <?php esc_html_e( 'All legal details are filled in.', 'vassilisdesign' ); ?></p>
+			<p><span style="color:#008a20">&#10003;</span> <?php esc_html_e( 'All legal details are filled in.', 'vassilisdesign-elements' ); ?></p>
 		<?php endif; ?>
 
-		<h2><?php esc_html_e( 'What the setup does', 'vassilisdesign' ); ?></h2>
+		<h2><?php esc_html_e( 'What the setup does', 'vassilisdesign-elements' ); ?></h2>
 		<ol style="max-width:760px">
-			<li><?php esc_html_e( 'Applies Elementor performance settings: no Google Fonts, no default colours or fonts, external CSS files, leaner markup, CSS loaded per page, SVG icons, lightbox off, Works editable with Elementor.', 'vassilisdesign' ); ?></li>
-			<li><?php esc_html_e( 'Creates the four Sectors for Works.', 'vassilisdesign' ); ?></li>
-			<li><?php esc_html_e( 'Creates the Privacy Policy, Terms of Use and Legal Notice pages (English) and sets the WordPress privacy page. The Cookie Policy is created by the Complianz wizard.', 'vassilisdesign' ); ?></li>
-			<li><?php esc_html_e( 'Creates the Home page from the Elementor template and sets it as the front page.', 'vassilisdesign' ); ?></li>
-			<li><?php esc_html_e( 'Creates the header and footer menus.', 'vassilisdesign' ); ?></li>
-			<li><?php esc_html_e( 'With Elementor Pro: creates the "Single Work" and "Works archive" Theme Builder templates, shown on Works only.', 'vassilisdesign' ); ?></li>
-			<li><?php esc_html_e( 'Fills the legal pages with your Legal details.', 'vassilisdesign' ); ?></li>
+			<li><?php esc_html_e( 'Applies Elementor performance settings: no Google Fonts, no default colours or fonts, external CSS files, leaner markup, CSS loaded per page, SVG icons, lightbox off, Works editable with Elementor.', 'vassilisdesign-elements' ); ?></li>
+			<li><?php esc_html_e( 'Creates the four Sectors for Works.', 'vassilisdesign-elements' ); ?></li>
+			<li><?php esc_html_e( 'Creates the Privacy Policy, Terms of Use and Legal Notice pages (English) and sets the WordPress privacy page. The Cookie Policy is created by the Complianz wizard.', 'vassilisdesign-elements' ); ?></li>
+			<li><?php esc_html_e( 'Creates the Home page from the Elementor template and sets it as the front page.', 'vassilisdesign-elements' ); ?></li>
+			<li><?php esc_html_e( 'Creates the header and footer menus.', 'vassilisdesign-elements' ); ?></li>
+			<li><?php esc_html_e( 'With Elementor Pro: creates the "Single Work" and "Works archive" Theme Builder templates, shown on Works only.', 'vassilisdesign-elements' ); ?></li>
+			<li><?php esc_html_e( 'Fills the legal pages with your Legal details.', 'vassilisdesign-elements' ); ?></li>
 		</ol>
-		<p><?php esc_html_e( 'Existing pages, menus and terms with the same names are left untouched.', 'vassilisdesign' ); ?></p>
+		<p><?php esc_html_e( 'Existing pages, menus and terms with the same names are left untouched.', 'vassilisdesign-elements' ); ?></p>
 
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<input type="hidden" name="action" value="vd_run_setup">
-			<?php wp_nonce_field( 'vd_run_setup' ); ?>
-			<?php submit_button( __( 'Run setup', 'vassilisdesign' ), 'primary large' ); ?>
+			<?php wp_nonce_field( 'vde_run_setup' ); ?>
+			<?php submit_button( __( 'Run setup', 'vassilisdesign-elements' ), 'primary large' ); ?>
 		</form>
 	</div>
 	<?php
@@ -102,25 +103,25 @@ add_action(
 	'admin_post_vd_run_setup',
 	function () {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to do this.', 'vassilisdesign' ) );
+			wp_die( esc_html__( 'You are not allowed to do this.', 'vassilisdesign-elements' ) );
 		}
-		check_admin_referer( 'vd_run_setup' );
-		set_transient( 'vd_setup_log', vd_run_setup(), 300 );
+		check_admin_referer( 'vde_run_setup' );
+		set_transient( 'vd_setup_log', vde_run_setup(), 300 );
 		wp_safe_redirect( admin_url( 'themes.php?page=vd-setup' ) );
 		exit;
 	}
 );
 
 /** Returns a list of what was done. */
-function vd_run_setup() {
+function vde_run_setup() {
 	$log = array();
 
 	// 1. Elementor settings.
 	if ( did_action( 'elementor/loaded' ) ) {
-		vd_apply_elementor_options();
-		$log[] = __( 'Elementor performance settings applied.', 'vassilisdesign' );
+		vde_apply_elementor_options();
+		$log[] = __( 'Elementor performance settings applied.', 'vassilisdesign-elements' );
 	} else {
-		$log[] = __( 'Elementor is not active: settings skipped.', 'vassilisdesign' );
+		$log[] = __( 'Elementor is not active: settings skipped.', 'vassilisdesign-elements' );
 	}
 
 	// 2. Sectors.
@@ -128,7 +129,7 @@ function vd_run_setup() {
 		if ( ! term_exists( $name, 'work_sector' ) ) {
 			wp_insert_term( $name, 'work_sector' );
 			/* translators: %s: sector name */
-			$log[] = sprintf( __( 'Sector created: %s', 'vassilisdesign' ), $name );
+			$log[] = sprintf( __( 'Sector created: %s', 'vassilisdesign-elements' ), $name );
 		}
 	}
 
@@ -141,7 +142,7 @@ function vd_run_setup() {
 	$ids   = array();
 	foreach ( $pages as $slug => $page ) {
 		$existing = get_page_by_path( $slug );
-		$content  = vd_setup_file( 'legal/' . $page[1] );
+		$content  = vde_setup_file( 'legal/' . $page[1] );
 		if ( $existing ) {
 			$ids[ $slug ] = $existing->ID;
 			// WordPress creates an unpublished sample "Privacy Policy" on install: replace it once.
@@ -150,10 +151,10 @@ function vd_run_setup() {
 					array(
 						'ID'           => $existing->ID,
 						'post_status'  => 'publish',
-						'post_content' => vd_fill_placeholders( $content ),
+						'post_content' => vde_fill_placeholders( $content ),
 					)
 				);
-				$log[] = __( 'WordPress sample privacy page replaced with the Privacy Policy and published.', 'vassilisdesign' );
+				$log[] = __( 'WordPress sample privacy page replaced with the Privacy Policy and published.', 'vassilisdesign-elements' );
 			}
 			continue;
 		}
@@ -166,11 +167,11 @@ function vd_run_setup() {
 				'post_status'  => 'publish',
 				'post_title'   => $page[0],
 				'post_name'    => $slug,
-				'post_content' => vd_fill_placeholders( $content ),
+				'post_content' => vde_fill_placeholders( $content ),
 			)
 		);
 		/* translators: %s: page title */
-		$log[] = sprintf( __( 'Page created: %s', 'vassilisdesign' ), $page[0] );
+		$log[] = sprintf( __( 'Page created: %s', 'vassilisdesign-elements' ), $page[0] );
 	}
 	if ( ! empty( $ids['privacy-policy'] ) ) {
 		update_option( 'wp_page_for_privacy_policy', (int) $ids['privacy-policy'] );
@@ -179,11 +180,11 @@ function vd_run_setup() {
 	// 4. Home page from the Elementor template.
 	$home = get_page_by_path( 'home' );
 	if ( ! $home ) {
-		$template = json_decode( vd_setup_file( 'home-en.json' ), true );
+		$template = json_decode( vde_setup_file( 'home-en.json' ), true );
 		if ( $template && ! empty( $template['content'] ) ) {
 			$privacy = ! empty( $ids['privacy-policy'] ) ? get_permalink( $ids['privacy-policy'] ) : home_url( '/privacy-policy/' );
 			$data    = wp_json_encode( $template['content'] );
-			$data    = str_replace( array( '{{privacy_url}}', '{{email}}' ), array( esc_url( $privacy ), sanitize_email( vd_opt( 'vd_email' ) ) ), $data );
+			$data    = str_replace( array( '{{privacy_url}}', '{{email}}' ), array( esc_url( $privacy ), sanitize_email( vde_opt( 'vd_email' ) ) ), $data );
 			$home_id = wp_insert_post(
 				array(
 					'post_type'   => 'page',
@@ -202,14 +203,16 @@ function vd_run_setup() {
 				}
 				update_option( 'show_on_front', 'page' );
 				update_option( 'page_on_front', $home_id );
-				$log[] = __( 'Home page created from the Elementor template and set as the front page. Add the hero image, logos and studio image in Elementor.', 'vassilisdesign' );
+				$log[] = __( 'Home page created from the Elementor template and set as the front page. Add the hero image, logos and studio image in Elementor.', 'vassilisdesign-elements' );
 			}
 		}
 	}
 
 	// 5. Menus.
-	$locations = get_theme_mod( 'nav_menu_locations', array() );
-	if ( empty( $locations['vd-primary'] ) ) {
+	// Menus only when the theme provides the VASSILISDESIGN menu locations.
+	$locations  = get_theme_mod( 'nav_menu_locations', array() );
+	$registered = get_registered_nav_menus();
+	if ( empty( $locations['vd-primary'] ) && isset( $registered['vd-primary'] ) ) {
 		$menu_id = wp_create_nav_menu( 'Header' );
 		if ( ! is_wp_error( $menu_id ) ) {
 			$home_url = home_url( '/' );
@@ -231,10 +234,10 @@ function vd_run_setup() {
 				);
 			}
 			$locations['vd-primary'] = $menu_id;
-			$log[]                   = __( 'Header menu created.', 'vassilisdesign' );
+			$log[]                   = __( 'Header menu created.', 'vassilisdesign-elements' );
 		}
 	}
-	if ( empty( $locations['vd-legal'] ) ) {
+	if ( empty( $locations['vd-legal'] ) && isset( $registered['vd-legal'] ) ) {
 		$menu_id = wp_create_nav_menu( 'Legal' );
 		if ( ! is_wp_error( $menu_id ) ) {
 			foreach ( array( 'privacy-policy', 'terms-of-use', 'legal-notice', 'cookie-policy-eu' ) as $slug ) {
@@ -253,28 +256,28 @@ function vd_run_setup() {
 				}
 			}
 			$locations['vd-legal'] = $menu_id;
-			$log[]                 = __( 'Footer legal menu created. After the Complianz wizard, add its Cookie Policy page to this menu.', 'vassilisdesign' );
+			$log[]                 = __( 'Footer legal menu created. After the Complianz wizard, add its Cookie Policy page to this menu.', 'vassilisdesign-elements' );
 		}
 	}
 	set_theme_mod( 'nav_menu_locations', $locations );
 
 	// 6. Elementor Pro Theme Builder templates for Works (editable in Templates → Theme Builder).
 	if ( defined( 'ELEMENTOR_PRO_VERSION' ) ) {
-		foreach ( vd_create_theme_builder_templates() as $line ) {
+		foreach ( vde_create_theme_builder_templates() as $line ) {
 			$log[] = $line;
 		}
 	}
 
 	// 7. Legal details from Appearance → Customize → Legal details.
-	$filled = vd_fill_legal_pages();
+	$filled = vde_fill_legal_pages();
 	if ( $filled ) {
 		/* translators: %s: list of page titles */
-		$log[] = sprintf( __( 'Legal details filled in on: %s', 'vassilisdesign' ), implode( ', ', $filled ) );
+		$log[] = sprintf( __( 'Legal details filled in on: %s', 'vassilisdesign-elements' ), implode( ', ', $filled ) );
 	}
 
 	update_option( 'permalink_structure', get_option( 'permalink_structure' ) ? get_option( 'permalink_structure' ) : '/%postname%/' );
 	flush_rewrite_rules();
-	$log[] = __( 'Permalinks refreshed.', 'vassilisdesign' );
+	$log[] = __( 'Permalinks refreshed.', 'vassilisdesign-elements' );
 
 	return $log;
 }
@@ -283,7 +286,7 @@ function vd_run_setup() {
  * Creates the "Single Work" and "Works archive" Theme Builder templates (Elementor Pro), built from
  * the theme widgets and shown only for Works. Existing ones (created earlier by this setup) are kept.
  */
-function vd_create_theme_builder_templates() {
+function vde_create_theme_builder_templates() {
 	$log       = array();
 	$templates = array(
 		'single-post' => array(
@@ -357,7 +360,7 @@ function vd_create_theme_builder_templates() {
 		wp_set_object_terms( $id, $type, 'elementor_library_type' );
 		$cache[ $t['location'] ][ $id ] = $t['conditions'];
 		/* translators: %s: template name */
-		$log[] = sprintf( __( 'Theme Builder template created: %s (shown on Works only).', 'vassilisdesign' ), $t['title'] );
+		$log[] = sprintf( __( 'Theme Builder template created: %s (shown on Works only).', 'vassilisdesign-elements' ), $t['title'] );
 	}
 
 	if ( $log ) {
@@ -377,25 +380,25 @@ function vd_create_theme_builder_templates() {
 		if ( ! $regenerated ) {
 			update_option( 'elementor_pro_theme_builder_conditions', $cache );
 		}
-		$log[] = __( 'Check Templates → Theme Builder: "Single Work" and "Works archive" should show the condition "Works". If not, open each one and set Display Conditions → Include → Works.', 'vassilisdesign' );
+		$log[] = __( 'Check Templates → Theme Builder: "Single Work" and "Works archive" should show the condition "Works". If not, open each one and set Display Conditions → Include → Works.', 'vassilisdesign-elements' );
 	}
 	return $log;
 }
 
-function vd_setup_file( $relative ) {
-	$path = VD_DIR . '/setup/' . $relative;
+function vde_setup_file( $relative ) {
+	$path = VDE_DIR . 'setup/' . $relative;
 	return is_readable( $path ) ? (string) file_get_contents( $path ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 }
 
 /** Replaces {{tokens}} in the legal page templates with the Customizer studio details. */
-function vd_fill_placeholders( $content ) {
+function vde_fill_placeholders( $content ) {
 	return strtr(
 		$content,
 		array(
 			'{{site_name}}' => get_bloginfo( 'name' ),
 			'{{site_url}}'  => home_url( '/' ),
-			'{{email}}'     => sanitize_email( vd_opt( 'vd_email' ) ),
-			'{{phone}}'     => vd_opt( 'vd_phone' ),
+			'{{email}}'     => sanitize_email( vde_opt( 'vd_email' ) ),
+			'{{phone}}'     => vde_opt( 'vd_phone' ),
 			'{{date}}'      => wp_date( get_option( 'date_format' ) ),
 		)
 	);

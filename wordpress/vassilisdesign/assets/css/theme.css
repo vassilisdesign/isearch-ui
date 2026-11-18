@@ -1,0 +1,80 @@
+/* VASSILISDESIGN theme: header, footer, text pages and Complianz styling.
+   Tokens, fonts and base styles come from the VASSILISDESIGN Elements plugin (elements.css). */
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.vd-header { position: absolute; inset: 0 0 auto; z-index: 30; }
+.admin-bar .vd-header { top: 32px; }
+@media (max-width: 782px) { .admin-bar .vd-header { top: 46px; } }
+.vd-header-inner { display: flex; align-items: center; gap: clamp(12px, 3vw, 40px); height: var(--vd-header-h); font-size: var(--vd-t-s); }
+.vd-brand { font-weight: 800; font-size: 1.0625rem; letter-spacing: -0.02em; margin-right: auto; line-height: 1; }
+.vd-brand-break { display: none; }
+.vd-menu { display: flex; gap: clamp(12px, 2.4vw, 32px); font-weight: 500; }
+.vd-menu a { position: relative; display: inline-block; padding-block: 8px; }
+.vd-menu a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 4px; height: 2px; background: var(--vd-red);
+  transform: scaleX(0); transform-origin: right; transition: transform 0.45s var(--vd-ease);
+}
+.vd-menu a:hover::after, .vd-menu .current-menu-item > a::after { transform: scaleX(1); transform-origin: left; }
+.vd-clock { display: none; color: var(--vd-grey); font-variant-numeric: tabular-nums; }
+.vd-clock time { color: var(--vd-ink); }
+.vd-lang {
+  width: 44px; height: 44px; display: inline-grid; place-items: center; flex: none;
+  box-shadow: inset 0 0 0 1.5px var(--vd-ink); font-size: var(--vd-t-xs); font-weight: 700; transition: background-color 0.3s, color 0.3s;
+}
+.vd-lang:hover { background: var(--vd-ink); color: var(--vd-paper); }
+@media (min-width: 900px) { .vd-clock { display: block; } }
+@media (max-width: 520px) { .vd-brand { font-size: 0.9375rem; line-height: 0.95; } .vd-brand-break { display: block; } }
+@media (max-width: 380px) { .vd-menu { gap: 10px; } .vd-header-inner { gap: 10px; font-size: var(--vd-t-xs); } }
+
+/* Pages without a hero start below the header */
+body:not(.home) .site-main { padding-top: calc(var(--vd-header-h) + clamp(24px, 4vw, 56px)); }
+.elementor-page .site-main { padding-top: 0; }
+
+/* ==========================================================================
+   Footer (Swiss meta columns with vertical rules)
+   ========================================================================== */
+.vd-footer { padding-block: 40px 32px; font-size: var(--vd-t-s); border-top: 1.5px solid var(--vd-ink); }
+.vd-footer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px var(--vd-gap); }
+.vd-footer-mark { grid-column: 1 / -1; font-weight: 800; font-size: clamp(2.25rem, 10vw, 3rem); letter-spacing: -0.045em; line-height: 0.88; }
+.vd-footer-col { padding-left: 12px; border-left: 1px solid var(--vd-ink); overflow-wrap: anywhere; min-width: 0; }
+.vd-footer-col ul { list-style: none; margin: 0; padding: 0; }
+.vd-footer-col a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.4s var(--vd-ease); }
+.vd-footer-col a:hover { background-size: 100% 1px; }
+.vd-footer-legal .vd-link-button { font-size: inherit; margin-top: 2px; }
+.vd-footer-rights { color: var(--vd-grey); align-self: end; }
+.vd-footer-top { grid-column: 2; justify-self: end; }
+@media (min-width: 900px) {
+  .vd-footer-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .vd-footer-mark { grid-column: 1 / 6; grid-row: 1 / 3; font-size: clamp(3rem, 6.4vw, 7.5rem); align-self: end; }
+  .vd-footer-col { grid-column: span 2; align-self: start; }
+  .vd-footer-col:nth-of-type(1) { grid-column: 7 / 9; }
+  .vd-footer-rights { grid-column: 7 / 11; }
+  .vd-footer-top { grid-column: 12; }
+}
+
+/* ==========================================================================
+   Text pages (privacy, terms, legal notice): WordPress pages not built with Elementor
+   ========================================================================== */
+body:not(.elementor-page) .site-main:not(.vd-main) { width: 100%; max-width: 1760px; margin-inline: auto; padding-inline: var(--vd-gutter); padding-bottom: var(--vd-section); }
+body:not(.elementor-page) .site-main .page-header { margin-bottom: clamp(32px, 5vw, 72px); }
+body:not(.elementor-page) .site-main .entry-title { font-size: clamp(2.4rem, 1.4rem + 4vw, 5.5rem); font-weight: 700; line-height: 0.95; letter-spacing: -0.05em; text-transform: lowercase; }
+body:not(.elementor-page) .site-main .entry-title::after { content: '.'; color: var(--vd-red); }
+.vd-prose, body:not(.elementor-page) .site-main .page-content { max-width: 46rem; font-size: var(--vd-t-m); line-height: 1.65; }
+.vd-prose > * + *, body:not(.elementor-page) .page-content > * + * { margin-top: 1em; }
+.vd-prose h2, body:not(.elementor-page) .page-content h2 { font-size: var(--vd-t-xl); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-top: 2em; }
+.vd-prose h3, body:not(.elementor-page) .page-content h3 { font-size: var(--vd-t-l); font-weight: 700; letter-spacing: -0.01em; margin-top: 1.6em; }
+.vd-prose a, body:not(.elementor-page) .page-content a { text-decoration: underline; text-decoration-color: var(--vd-red); text-underline-offset: 3px; }
+.vd-prose ul, body:not(.elementor-page) .page-content ul { padding-left: 1.2em; }
+.vd-prose li + li, body:not(.elementor-page) .page-content li + li { margin-top: 0.35em; }
+body:not(.elementor-page) .page-content table { border-collapse: collapse; width: 100%; font-size: var(--vd-t-s); }
+body:not(.elementor-page) .page-content th, body:not(.elementor-page) .page-content td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--vd-rule); vertical-align: top; }
+.vd-updated { color: var(--vd-grey); font-size: var(--vd-t-s); }
+
+/* ==========================================================================
+   Complianz banner, matched to the design system (colours are also set in Complianz)
+   ========================================================================== */
+.cmplz-cookiebanner { font-family: var(--vd-font) !important; border-radius: 0 !important; box-shadow: none !important; border: 1.5px solid var(--vd-ink) !important; }
+.cmplz-cookiebanner .cmplz-btn { border-radius: 0 !important; font-weight: 700 !important; }
+

@@ -2,18 +2,18 @@
 /**
  * Markup helpers shared by the theme templates and the Elementor widgets.
  *
- * @package vassilisdesign
+ * @package vassilisdesign-elements
  */
 
 defined( 'ABSPATH' ) || exit;
 
-function vd_arrow( $dir = 'right' ) {
+function vde_arrow( $dir = 'right' ) {
 	$d = 'down' === $dir ? 'M12 4v15m-6-6 6 6 6-6' : ( 'left' === $dir ? 'M20 12H5m6-6-6 6 6 6' : 'M4 12h15m-6-6 6 6-6 6' );
 	return '<svg class="vd-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' . $d . '" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
 }
 
 /** Lowercase display heading with the red full stop. */
-function vd_display_title( $text, $tag = 'h2', $id = '' ) {
+function vde_display_title( $text, $tag = 'h2', $id = '' ) {
 	$tag = in_array( $tag, array( 'h1', 'h2', 'h3', 'p' ), true ) ? $tag : 'h2';
 	return sprintf(
 		'<%1$s class="vd-display"%2$s>%3$s<span class="vd-stop" aria-hidden="true">.</span></%1$s>',
@@ -24,12 +24,12 @@ function vd_display_title( $text, $tag = 'h2', $id = '' ) {
 }
 
 /** Text with line breaks preserved. */
-function vd_lines( $text ) {
+function vde_lines( $text ) {
 	return nl2br( esc_html( trim( (string) $text ) ) );
 }
 
 /** Ordered list of all published Work IDs (menu order, then newest). Cached per request. */
-function vd_work_ids() {
+function vde_work_ids() {
 	static $ids = null;
 	if ( null === $ids ) {
 		$ids = get_posts(
@@ -46,12 +46,12 @@ function vd_work_ids() {
 	return $ids;
 }
 
-function vd_cover_fit( $post_id ) {
+function vde_cover_fit( $post_id ) {
 	return 'contain' === get_post_meta( $post_id, 'vd_cover_fit', true ) ? 'contain' : 'cover';
 }
 
 /** Portfolio <img>. Lazy by default; pass $eager for the first image on screen. */
-function vd_img( $attachment_id, $size = 'large', $eager = false, $alt = null ) {
+function vde_img( $attachment_id, $size = 'large', $eager = false, $alt = null ) {
 	if ( ! $attachment_id ) {
 		return '';
 	}
@@ -72,7 +72,7 @@ function vd_img( $attachment_id, $size = 'large', $eager = false, $alt = null ) 
 /* ---------- Works ---------- */
 
 /** Text shown on the red hover panel: the Excerpt, otherwise the start of the post content. */
-function vd_work_hover_text( $post ) {
+function vde_work_hover_text( $post ) {
 	$post = get_post( $post );
 	if ( has_excerpt( $post ) ) {
 		return wp_strip_all_tags( $post->post_excerpt );
@@ -89,9 +89,9 @@ function vd_work_hover_text( $post ) {
  * @param bool        $overlay  Red panel with the Work's text on hover (instead of the red block).
  * @param bool        $captions Title, services and location under the image.
  */
-function vd_work_tile( $post, $overlay = false, $captions = true, $ratio = '' ) {
+function vde_work_tile( $post, $overlay = false, $captions = true, $ratio = '' ) {
 	$post  = get_post( $post );
-	$fit   = vd_cover_fit( $post->ID );
+	$fit   = vde_cover_fit( $post->ID );
 	$thumb = get_post_thumbnail_id( $post );
 	$title = get_the_title( $post );
 	ob_start();
@@ -99,10 +99,10 @@ function vd_work_tile( $post, $overlay = false, $captions = true, $ratio = '' ) 
 	<li class="vd-tile"<?php echo $ratio ? ' style="--vd-ar:4 / ' . esc_attr( $ratio ) . '"' : ''; ?>>
 		<a class="vd-tile-link" href="<?php echo esc_url( get_permalink( $post ) ); ?>"<?php echo $captions ? '' : ' aria-label="' . esc_attr( $title ) . '"'; ?>>
 			<span class="vd-tile-media vd-photo<?php echo 'contain' === $fit ? ' vd-fit-contain' : ''; ?>">
-				<?php echo vd_img( $thumb, 'vd-tile', false, '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php echo vde_img( $thumb, 'vd-tile', false, '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<?php if ( $overlay ) : ?>
 					<span class="vd-red-block vd-red-full" aria-hidden="true"></span>
-					<span class="vd-tile-hover-text" aria-hidden="true"><span><?php echo esc_html( vd_work_hover_text( $post ) ); ?></span></span>
+					<span class="vd-tile-hover-text" aria-hidden="true"><span><?php echo esc_html( vde_work_hover_text( $post ) ); ?></span></span>
 				<?php else : ?>
 					<span class="vd-red-block" aria-hidden="true"></span>
 				<?php endif; ?>
@@ -129,7 +129,7 @@ function vd_work_tile( $post, $overlay = false, $captions = true, $ratio = '' ) 
  * default 4-column tiles), gap (px; empty = default spacing), overlay (red cover with text on hover),
  * captions (text under the image), staggered (varying heights per column; off = uniform).
  */
-function vd_works_grid( $args = array() ) {
+function vde_works_grid( $args = array() ) {
 	$args  = wp_parse_args(
 		$args,
 		array(
@@ -167,7 +167,7 @@ function vd_works_grid( $args = array() ) {
 	$posts = get_posts( $query );
 	if ( ! $posts ) {
 		return current_user_can( 'edit_posts' )
-			? '<p class="vd-empty">' . esc_html__( 'No Works yet. Add them under Works → Add Work.', 'vassilisdesign' ) . '</p>'
+			? '<p class="vd-empty">' . esc_html__( 'No Works yet. Add them under Works → Add Work.', 'vassilisdesign-elements' ) . '</p>'
 			: '';
 	}
 	$classes = array( 'vd-tiles' );
@@ -190,7 +190,7 @@ function vd_works_grid( $args = array() ) {
 	$tiles  = '';
 	foreach ( array_values( $posts ) as $i => $post ) {
 		$ratio  = ( $cols && $args['staggered'] ) ? $ratios[ $i % $cols ] : '';
-		$tiles .= vd_work_tile( $post, (bool) $args['overlay'], (bool) $args['captions'], $ratio );
+		$tiles .= vde_work_tile( $post, (bool) $args['overlay'], (bool) $args['captions'], $ratio );
 	}
 	return sprintf(
 		'<ul class="%s" role="list"%s>%s</ul>',
@@ -204,7 +204,7 @@ function vd_works_grid( $args = array() ) {
  * Works archive: title, Sector filter and tiles from the current archive query.
  * Outside a Works archive (for example in the Elementor editor) it shows the latest Works.
  */
-function vd_works_archive() {
+function vde_works_archive() {
 	global $wp_query;
 	$is_archive = is_post_type_archive( 'works' ) || is_tax( 'work_sector' );
 	$query      = $is_archive ? $wp_query : new WP_Query(
@@ -215,15 +215,15 @@ function vd_works_archive() {
 			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
 		)
 	);
-	$title      = is_tax( 'work_sector' ) ? single_term_title( '', false ) : __( 'Works', 'vassilisdesign' );
+	$title      = is_tax( 'work_sector' ) ? single_term_title( '', false ) : __( 'Works', 'vassilisdesign-elements' );
 	$terms      = get_terms( array( 'taxonomy' => 'work_sector', 'hide_empty' => true ) );
 	ob_start();
 	?>
 	<div class="vd-wrap vd-archive-head">
-		<?php echo vd_display_title( $title, 'h1' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo vde_display_title( $title, 'h1' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php if ( $terms && ! is_wp_error( $terms ) ) : ?>
-			<nav class="vd-filter" aria-label="<?php esc_attr_e( 'Sectors', 'vassilisdesign' ); ?>">
-				<a href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>"<?php echo is_post_type_archive( 'works' ) ? ' aria-current="page"' : ''; ?>><?php esc_html_e( 'All', 'vassilisdesign' ); ?></a>
+			<nav class="vd-filter" aria-label="<?php esc_attr_e( 'Sectors', 'vassilisdesign-elements' ); ?>">
+				<a href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>"<?php echo is_post_type_archive( 'works' ) ? ' aria-current="page"' : ''; ?>><?php esc_html_e( 'All', 'vassilisdesign-elements' ); ?></a>
 				<?php foreach ( $terms as $term ) : ?>
 					<a href="<?php echo esc_url( get_term_link( $term ) ); ?>"<?php echo is_tax( 'work_sector', $term->term_id ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $term->name ); ?></a>
 				<?php endforeach; ?>
@@ -235,7 +235,7 @@ function vd_works_archive() {
 			<ul class="vd-tiles" role="list">
 				<?php
 				foreach ( $query->posts as $work ) {
-					echo vd_work_tile( $work ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo vde_work_tile( $work ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 				?>
 			</ul>
@@ -245,34 +245,34 @@ function vd_works_archive() {
 			}
 			?>
 		<?php else : ?>
-			<p class="vd-empty"><?php esc_html_e( 'No Works yet.', 'vassilisdesign' ); ?></p>
+			<p class="vd-empty"><?php esc_html_e( 'No Works yet.', 'vassilisdesign-elements' ); ?></p>
 		<?php endif; ?>
 	</div>
 	<?php
 	return ob_get_clean();
 }
 
-function vd_scope_items( $post_id ) {
+function vde_scope_items( $post_id ) {
 	return array_filter( array_map( 'trim', explode( "\n", (string) get_post_meta( $post_id, 'vd_scope', true ) ) ) );
 }
 
 /** Work page header: meta columns, index number, title and red scope box. */
-function vd_work_header( $post = null, $show_back = true ) {
+function vde_work_header( $post = null, $show_back = true ) {
 	$post    = get_post( $post );
-	$ids     = vd_work_ids();
+	$ids     = vde_work_ids();
 	$pos     = array_search( $post->ID, $ids, true );
 	$sectors = get_the_terms( $post, 'work_sector' );
-	$scope   = vd_scope_items( $post->ID );
+	$scope   = vde_scope_items( $post->ID );
 	$meta    = array(
-		__( 'Sector', 'vassilisdesign' )   => $sectors && ! is_wp_error( $sectors ) ? implode( ', ', wp_list_pluck( $sectors, 'name' ) ) : '',
-		__( 'Services', 'vassilisdesign' ) => get_post_meta( $post->ID, 'vd_services', true ),
-		__( 'Location', 'vassilisdesign' ) => get_post_meta( $post->ID, 'vd_location', true ),
+		__( 'Sector', 'vassilisdesign-elements' )   => $sectors && ! is_wp_error( $sectors ) ? implode( ', ', wp_list_pluck( $sectors, 'name' ) ) : '',
+		__( 'Services', 'vassilisdesign-elements' ) => get_post_meta( $post->ID, 'vd_services', true ),
+		__( 'Location', 'vassilisdesign-elements' ) => get_post_meta( $post->ID, 'vd_location', true ),
 	);
 	ob_start();
 	?>
 	<header class="vd-case-head vd-wrap">
 		<?php if ( $show_back ) : ?>
-			<a class="vd-case-back" href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>"><?php esc_html_e( 'All work', 'vassilisdesign' ); ?></a>
+			<a class="vd-case-back" href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>"><?php esc_html_e( 'All work', 'vassilisdesign-elements' ); ?></a>
 		<?php endif; ?>
 		<dl class="vd-case-meta">
 			<?php foreach ( array_filter( $meta ) as $label => $value ) : ?>
@@ -280,12 +280,12 @@ function vd_work_header( $post = null, $show_back = true ) {
 			<?php endforeach; ?>
 		</dl>
 		<?php if ( false !== $pos ) : ?>
-			<p class="vd-case-index"><span class="screen-reader-text"><?php esc_html_e( 'Project', 'vassilisdesign' ); ?> </span><?php echo esc_html( str_pad( (string) ( $pos + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></p>
+			<p class="vd-case-index"><span class="screen-reader-text"><?php esc_html_e( 'Project', 'vassilisdesign-elements' ); ?> </span><?php echo esc_html( str_pad( (string) ( $pos + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></p>
 		<?php endif; ?>
 		<h1 class="vd-case-title"><span class="vd-line"><span><?php echo esc_html( get_the_title( $post ) ); ?><span class="vd-stop" aria-hidden="true">.</span></span></span></h1>
 		<?php if ( $scope ) : ?>
 			<div class="vd-case-red">
-				<p class="vd-case-red-title"><?php esc_html_e( 'Scope', 'vassilisdesign' ); ?></p>
+				<p class="vd-case-red-title"><?php esc_html_e( 'Scope', 'vassilisdesign-elements' ); ?></p>
 				<ul class="vd-case-facts" role="list">
 					<?php foreach ( $scope as $item ) : ?>
 						<li><?php echo esc_html( $item ); ?></li>
@@ -299,15 +299,15 @@ function vd_work_header( $post = null, $show_back = true ) {
 }
 
 /** Cover image, summary and long description. */
-function vd_work_intro( $post = null ) {
+function vde_work_intro( $post = null ) {
 	$post  = get_post( $post );
 	$thumb = get_post_thumbnail_id( $post );
 	ob_start();
 	if ( $thumb ) :
 		?>
 		<figure class="vd-case-hero vd-wrap">
-			<div class="vd-case-poster vd-photo vd-is-color<?php echo 'contain' === vd_cover_fit( $post->ID ) ? ' vd-fit-contain' : ''; ?>">
-				<?php echo vd_img( $thumb, 'vd-wide', true, get_the_title( $post ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<div class="vd-case-poster vd-photo vd-is-color<?php echo 'contain' === vde_cover_fit( $post->ID ) ? ' vd-fit-contain' : ''; ?>">
+				<?php echo vde_img( $thumb, 'vd-wide', true, get_the_title( $post ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 			<span class="vd-plus" aria-hidden="true"></span>
 			<span class="vd-dots" aria-hidden="true"></span>
@@ -317,7 +317,7 @@ function vd_work_intro( $post = null ) {
 	if ( has_excerpt( $post ) || trim( $post->post_content ) ) :
 		?>
 		<section class="vd-case-block vd-wrap">
-			<h2 class="vd-case-label"><?php esc_html_e( 'About the project', 'vassilisdesign' ); ?></h2>
+			<h2 class="vd-case-label"><?php esc_html_e( 'About the project', 'vassilisdesign-elements' ); ?></h2>
 			<div class="vd-case-text">
 				<?php if ( has_excerpt( $post ) ) : ?>
 					<p class="vd-case-summary"><?php echo esc_html( get_the_excerpt( $post ) ); ?></p>
@@ -337,7 +337,7 @@ function vd_work_intro( $post = null ) {
 }
 
 /** Work gallery: images at their natural proportions, in full colour. */
-function vd_work_gallery( $post = null ) {
+function vde_work_gallery( $post = null ) {
 	$post = get_post( $post );
 	$ids  = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post->ID, 'vd_gallery', true ) ) ) );
 	if ( ! $ids ) {
@@ -346,15 +346,15 @@ function vd_work_gallery( $post = null ) {
 	$out = '';
 	foreach ( $ids as $id ) {
 		$alt  = get_post_meta( $id, '_wp_attachment_image_alt', true );
-		$out .= '<figure class="vd-gallery-item">' . vd_img( $id, 'vd-wide', false, $alt ? $alt : get_the_title( $post ) ) . '</figure>';
+		$out .= '<figure class="vd-gallery-item">' . vde_img( $id, 'vd-wide', false, $alt ? $alt : get_the_title( $post ) ) . '</figure>';
 	}
 	return '<div class="vd-gallery vd-wrap">' . $out . '</div>';
 }
 
 /** Link to the next Work (wraps around). */
-function vd_next_work( $post = null ) {
+function vde_next_work( $post = null ) {
 	$post = get_post( $post );
-	$ids  = vd_work_ids();
+	$ids  = vde_work_ids();
 	if ( count( $ids ) < 2 ) {
 		return '';
 	}
@@ -362,12 +362,12 @@ function vd_next_work( $post = null ) {
 	$next = get_post( $ids[ ( false === $pos ? 0 : $pos + 1 ) % count( $ids ) ] );
 	ob_start();
 	?>
-	<nav class="vd-case-next vd-wrap" aria-label="<?php esc_attr_e( 'Next project', 'vassilisdesign' ); ?>">
+	<nav class="vd-case-next vd-wrap" aria-label="<?php esc_attr_e( 'Next project', 'vassilisdesign-elements' ); ?>">
 		<a class="vd-case-next-link" href="<?php echo esc_url( get_permalink( $next ) ); ?>">
-			<span class="vd-case-next-label"><?php esc_html_e( 'Next project', 'vassilisdesign' ); ?></span>
+			<span class="vd-case-next-label"><?php esc_html_e( 'Next project', 'vassilisdesign-elements' ); ?></span>
 			<span class="vd-case-next-client"><?php echo esc_html( get_the_title( $next ) ); ?><span class="vd-stop" aria-hidden="true">.</span></span>
-			<span class="vd-case-next-thumb vd-photo<?php echo 'contain' === vd_cover_fit( $next->ID ) ? ' vd-fit-contain' : ''; ?>">
-				<?php echo vd_img( get_post_thumbnail_id( $next ), 'vd-tile', false, '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<span class="vd-case-next-thumb vd-photo<?php echo 'contain' === vde_cover_fit( $next->ID ) ? ' vd-fit-contain' : ''; ?>">
+				<?php echo vde_img( get_post_thumbnail_id( $next ), 'vd-tile', false, '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<span class="vd-red-block" aria-hidden="true"></span>
 			</span>
 		</a>
@@ -377,9 +377,9 @@ function vd_next_work( $post = null ) {
 }
 
 /** Contact lines from the Customizer. */
-function vd_contact_lines() {
-	$email = vd_opt( 'vd_email' );
-	$phone = vd_opt( 'vd_phone' );
+function vde_contact_lines() {
+	$email = vde_opt( 'vd_email' );
+	$phone = vde_opt( 'vd_phone' );
 	$out   = array();
 	if ( $email ) {
 		$out[] = '<a href="mailto:' . esc_attr( antispambot( $email ) ) . '">' . esc_html( antispambot( $email ) ) . '</a>';
@@ -387,8 +387,8 @@ function vd_contact_lines() {
 	if ( $phone ) {
 		$out[] = '<a href="tel:' . esc_attr( preg_replace( '/[^\d+]/', '', $phone ) ) . '">' . esc_html( $phone ) . '</a>';
 	}
-	if ( vd_opt( 'vd_messaging' ) ) {
-		$out[] = esc_html( vd_opt( 'vd_messaging' ) );
+	if ( vde_opt( 'vd_messaging' ) ) {
+		$out[] = esc_html( vde_opt( 'vd_messaging' ) );
 	}
 	return implode( '<br>', $out );
 }

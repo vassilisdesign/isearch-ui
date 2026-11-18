@@ -1,14 +1,14 @@
 """Builds the Elementor homepage templates (English and Greek) for the VASSILISDESIGN theme.
 
 Run:  python3 wordpress/tools/build_templates.py
-Writes wordpress/vassilisdesign/setup/home-en.json and home-el.json, importable via
-Elementor -> Templates -> Saved Templates -> Import, and used by the theme's one-click setup.
+Writes wordpress/vassilisdesign-elements/setup/home-en.json and home-el.json, importable via
+Elementor -> Templates -> Saved Templates -> Import, and used by the plugin's one-click setup.
 """
 import hashlib
 import json
 import pathlib
 
-OUT = pathlib.Path(__file__).resolve().parent.parent / 'vassilisdesign' / 'setup'
+OUT = pathlib.Path(__file__).resolve().parent.parent / 'vassilisdesign-elements' / 'setup'
 
 COPY = {
     'en': {

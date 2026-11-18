@@ -1,0 +1,745 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: vassilisdesign-elements\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: vassilisdesign-elements\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: inc/admin-setup.php:17 inc/admin-setup.php:17 inc/admin-setup.php:42
+msgid "VASSILISDESIGN setup"
+msgstr ""
+
+#: inc/admin-setup.php:45
+msgid "Setup finished."
+msgstr ""
+
+#: inc/admin-setup.php:52
+msgid "Plugins"
+msgstr ""
+
+#: inc/admin-setup.php:58
+msgid "Active"
+msgstr ""
+
+#: inc/admin-setup.php:58
+msgid "Install and activate"
+msgstr ""
+
+#: inc/admin-setup.php:58
+msgid "Not installed (optional)"
+msgstr ""
+
+#: inc/admin-setup.php:63
+msgid "No add-on packs are needed (Essential Addons, Premium Addons, UAE, Unlimited Elements, Sticky Header Effects): the theme widgets and Elementor Pro cover everything, and each add-on would add CSS and JavaScript to every page."
+msgstr ""
+
+#: inc/admin-setup.php:65
+msgid "Legal pages"
+msgstr ""
+
+#: inc/admin-setup.php:69
+msgid "These details are still missing. Fill them in under Appearance → Customize → Legal details and click Publish: the pages complete themselves."
+msgstr ""
+
+#: inc/admin-setup.php:70
+msgid "Open Legal details"
+msgstr ""
+
+#: inc/admin-setup.php:78
+msgid "All legal details are filled in."
+msgstr ""
+
+#: inc/admin-setup.php:81
+msgid "What the setup does"
+msgstr ""
+
+#: inc/admin-setup.php:83
+msgid "Applies Elementor performance settings: no Google Fonts, no default colours or fonts, external CSS files, leaner markup, CSS loaded per page, SVG icons, lightbox off, Works editable with Elementor."
+msgstr ""
+
+#: inc/admin-setup.php:84
+msgid "Creates the four Sectors for Works."
+msgstr ""
+
+#: inc/admin-setup.php:85
+msgid "Creates the Privacy Policy, Terms of Use and Legal Notice pages (English) and sets the WordPress privacy page. The Cookie Policy is created by the Complianz wizard."
+msgstr ""
+
+#: inc/admin-setup.php:86
+msgid "Creates the Home page from the Elementor template and sets it as the front page."
+msgstr ""
+
+#: inc/admin-setup.php:87
+msgid "Creates the header and footer menus."
+msgstr ""
+
+#: inc/admin-setup.php:88
+msgid "With Elementor Pro: creates the \"Single Work\" and \"Works archive\" Theme Builder templates, shown on Works only."
+msgstr ""
+
+#: inc/admin-setup.php:89
+msgid "Fills the legal pages with your Legal details."
+msgstr ""
+
+#: inc/admin-setup.php:91
+msgid "Existing pages, menus and terms with the same names are left untouched."
+msgstr ""
+
+#: inc/admin-setup.php:96
+msgid "Run setup"
+msgstr ""
+
+#: inc/admin-setup.php:106
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: inc/admin-setup.php:122
+msgid "Elementor performance settings applied."
+msgstr ""
+
+#: inc/admin-setup.php:124
+msgid "Elementor is not active: settings skipped."
+msgstr ""
+
+#: inc/admin-setup.php:132
+msgid "Sector created: %s"
+msgstr ""
+
+#: inc/admin-setup.php:157
+msgid "WordPress sample privacy page replaced with the Privacy Policy and published."
+msgstr ""
+
+#: inc/admin-setup.php:174
+msgid "Page created: %s"
+msgstr ""
+
+#: inc/admin-setup.php:206
+msgid "Home page created from the Elementor template and set as the front page. Add the hero image, logos and studio image in Elementor."
+msgstr ""
+
+#: inc/admin-setup.php:237
+msgid "Header menu created."
+msgstr ""
+
+#: inc/admin-setup.php:259
+msgid "Footer legal menu created. After the Complianz wizard, add its Cookie Policy page to this menu."
+msgstr ""
+
+#: inc/admin-setup.php:275
+msgid "Legal details filled in on: %s"
+msgstr ""
+
+#: inc/admin-setup.php:280
+msgid "Permalinks refreshed."
+msgstr ""
+
+#: inc/admin-setup.php:363
+msgid "Theme Builder template created: %s (shown on Works only)."
+msgstr ""
+
+#: inc/admin-setup.php:383
+msgid "Check Templates → Theme Builder: \"Single Work\" and \"Works archive\" should show the condition \"Works\". If not, open each one and set Display Conditions → Include → Works."
+msgstr ""
+
+#: inc/legal.php:18
+msgid "Legal name (person or company)"
+msgstr "Επωνυμία (φυσικό πρόσωπο ή εταιρεία)"
+
+#: inc/legal.php:19
+msgid "Person responsible for content"
+msgstr "Υπεύθυνος περιεχομένου"
+
+#: inc/legal.php:20
+msgid "Street address"
+msgstr "Διεύθυνση"
+
+#: inc/legal.php:21
+msgid "Postcode"
+msgstr "Ταχυδρομικός κώδικας"
+
+#: inc/legal.php:22
+msgid "City"
+msgstr "Πόλη"
+
+#: inc/legal.php:23
+msgid "VAT number (ΑΦΜ)"
+msgstr "ΑΦΜ"
+
+#: inc/legal.php:24
+msgid "Tax office (ΔΟΥ)"
+msgstr "ΔΟΥ"
+
+#: inc/legal.php:25
+msgid "GEMI number (ΓΕΜΗ), or \"Not registered\""
+msgstr "Αριθμός ΓΕΜΗ, ή «Δεν απαιτείται»"
+
+#: inc/legal.php:26
+msgid "Courts of (city)"
+msgstr "Αρμόδια δικαστήρια (πόλη)"
+
+#: inc/legal.php:27
+msgid "Hosting provider (name, country)"
+msgstr "Πάροχος φιλοξενίας (όνομα, χώρα)"
+
+#: inc/legal.php:28
+msgid "Email provider"
+msgstr "Πάροχος email"
+
+#: inc/legal.php:29
+msgid "Accountant or accounting software (optional)"
+msgstr "Λογιστής ή λογισμικό (προαιρετικό)"
+
+#: inc/legal.php:30
+msgid "Server log retention (days)"
+msgstr "Διατήρηση αρχείων καταγραφής (ημέρες)"
+
+#: inc/legal.php:46
+msgid "Legal details"
+msgstr "Νομικά στοιχεία"
+
+#: inc/legal.php:47
+msgid "Used to complete the Privacy Policy, Terms of Use and Legal Notice (English and Greek). Saving fills in every placeholder that is still on those pages."
+msgstr ""
+
+#: inc/settings.php:16
+msgid "Viber and WhatsApp available"
+msgstr "Διαθέσιμο σε Viber και WhatsApp"
+
+#: inc/settings.php:18
+msgid "Greece"
+msgstr "Ελλάδα"
+
+#: inc/settings.php:19
+msgid "Independent design studio\nGreece"
+msgstr "Ανεξάρτητο στούντιο σχεδιασμού\nΕλλάδα"
+
+#: inc/settings.php:37
+msgid "Studio details"
+msgstr "Στοιχεία στούντιο"
+
+#: inc/settings.php:42
+msgid "Wordmark, first line"
+msgstr "Λογότυπο, πρώτη γραμμή"
+
+#: inc/settings.php:43
+msgid "Wordmark, second line"
+msgstr "Λογότυπο, δεύτερη γραμμή"
+
+#: inc/settings.php:44
+msgid "Email"
+msgstr "Email"
+
+#: inc/settings.php:45
+msgid "Phone"
+msgstr "Τηλέφωνο"
+
+#: inc/settings.php:46
+msgid "Messaging note"
+msgstr "Σημείωση μηνυμάτων"
+
+#: inc/settings.php:47
+msgid "Clock label"
+msgstr "Ετικέτα ρολογιού"
+
+#: inc/settings.php:48
+msgid "Footer text"
+msgstr "Κείμενο υποσέλιδου"
+
+#: inc/template-functions.php:170
+msgid "No Works yet. Add them under Works → Add Work."
+msgstr "Δεν υπάρχουν ακόμη έργα. Προσθέστε τα από Έργα → Προσθήκη έργου."
+
+#: inc/template-functions.php:218 inc/widgets/widgets.php:186 inc/works.php:61
+msgid "Works"
+msgstr "Έργα"
+
+#: inc/template-functions.php:225 inc/works.php:34 inc/works.php:39
+msgid "Sectors"
+msgstr "Τομείς"
+
+#: inc/template-functions.php:226
+msgid "All"
+msgstr "Όλα"
+
+#: inc/template-functions.php:248
+msgid "No Works yet."
+msgstr "Δεν υπάρχουν ακόμη έργα."
+
+#: inc/template-functions.php:267 inc/widgets/widgets.php:212 inc/widgets/widgets.php:454
+msgid "Sector"
+msgstr "Τομέας"
+
+#: inc/template-functions.php:268 inc/works.php:18 inc/works.php:157
+msgid "Services"
+msgstr "Υπηρεσίες"
+
+#: inc/template-functions.php:269 inc/works.php:17 inc/works.php:153
+msgid "Location"
+msgstr "Τοποθεσία"
+
+#: inc/template-functions.php:275
+msgid "All work"
+msgstr "Όλα τα έργα"
+
+#: inc/template-functions.php:283
+msgid "Project"
+msgstr "Έργο"
+
+#: inc/template-functions.php:288 inc/works.php:161
+msgid "Scope"
+msgstr "Εύρος εργασιών"
+
+#: inc/template-functions.php:320
+msgid "About the project"
+msgstr "Για το έργο"
+
+#: inc/template-functions.php:365 inc/template-functions.php:367
+msgid "Next project"
+msgstr "Επόμενο έργο"
+
+#: inc/widgets/widgets.php:68
+msgid "VD Hero"
+msgstr ""
+
+#: inc/widgets/widgets.php:71
+msgid "Hero"
+msgstr ""
+
+#: inc/widgets/widgets.php:72
+msgid "Wordmark line 1"
+msgstr ""
+
+#: inc/widgets/widgets.php:73
+msgid "Wordmark line 2"
+msgstr ""
+
+#: inc/widgets/widgets.php:74
+msgid "Accessible name"
+msgstr ""
+
+#: inc/widgets/widgets.php:75
+msgid "Positioning"
+msgstr ""
+
+#: inc/widgets/widgets.php:76
+msgid "Column 1"
+msgstr ""
+
+#: inc/widgets/widgets.php:77
+msgid "Column 2"
+msgstr ""
+
+#: inc/widgets/widgets.php:78
+msgid "Vertical text"
+msgstr ""
+
+#: inc/widgets/widgets.php:79
+msgid "Rotated corner text"
+msgstr ""
+
+#: inc/widgets/widgets.php:80 inc/widgets/widgets.php:413
+msgid "Image"
+msgstr ""
+
+#: inc/widgets/widgets.php:81
+msgid "Image description"
+msgstr ""
+
+#: inc/widgets/widgets.php:85
+msgid "Image display"
+msgstr ""
+
+#: inc/widgets/widgets.php:89
+msgid "Packshot on white: fit"
+msgstr ""
+
+#: inc/widgets/widgets.php:90
+msgid "Photo: fill"
+msgstr ""
+
+#: inc/widgets/widgets.php:94
+msgid "Arrow button link"
+msgstr ""
+
+#: inc/widgets/widgets.php:95
+msgid "Arrow button label"
+msgstr ""
+
+#: inc/widgets/widgets.php:145
+msgid "VD Section heading"
+msgstr ""
+
+#: inc/widgets/widgets.php:148
+msgid "Heading"
+msgstr ""
+
+#: inc/widgets/widgets.php:149
+msgid "Intro (left)"
+msgstr ""
+
+#: inc/widgets/widgets.php:150
+msgid "Title (right, shown lowercase with a red full stop)"
+msgstr ""
+
+#: inc/widgets/widgets.php:154
+msgid "Heading level"
+msgstr ""
+
+#: inc/widgets/widgets.php:180
+msgid "VD Works grid"
+msgstr ""
+
+#: inc/widgets/widgets.php:187
+msgid "Number of Works"
+msgstr ""
+
+#: inc/widgets/widgets.php:187
+msgid "Tip: a multiple of the Works per row fills every row."
+msgstr ""
+
+#: inc/widgets/widgets.php:188
+msgid "All sectors"
+msgstr ""
+
+#: inc/widgets/widgets.php:198
+msgid "Show"
+msgstr "Εμφάνιση"
+
+#: inc/widgets/widgets.php:202
+msgid "All Works (by Order)"
+msgstr "Όλα τα έργα (κατά σειρά)"
+
+#: inc/widgets/widgets.php:203
+msgid "Works in one Sector"
+msgstr "Έργα ενός τομέα"
+
+#: inc/widgets/widgets.php:204
+msgid "Works I choose"
+msgstr "Έργα της επιλογής μου"
+
+#: inc/widgets/widgets.php:215
+msgid "Choose a Sector"
+msgstr "Επιλέξτε τομέα"
+
+#: inc/widgets/widgets.php:226
+msgid "Works (in this order)"
+msgstr "Έργα (με αυτή τη σειρά)"
+
+#: inc/widgets/widgets.php:235
+msgid "\"All work\" link text (empty to hide)"
+msgstr ""
+
+#: inc/widgets/widgets.php:240
+msgid "Order Works with the \"Order\" field on each Work (lowest first)."
+msgstr ""
+
+#: inc/widgets/widgets.php:245
+msgid "Layout"
+msgstr "Διάταξη"
+
+#: inc/widgets/widgets.php:249
+msgid "Works per row (desktop)"
+msgstr "Έργα ανά σειρά (υπολογιστής)"
+
+#: inc/widgets/widgets.php:253
+msgid "Tablets show 3 per row, phones 2."
+msgstr ""
+
+#: inc/widgets/widgets.php:259
+msgid "Full width (no side margins)"
+msgstr "Πλήρες πλάτος (χωρίς πλευρικά περιθώρια)"
+
+#: inc/widgets/widgets.php:265
+msgid "Space between Works (px, empty = default)"
+msgstr "Απόσταση μεταξύ έργων (px, κενό = προεπιλογή)"
+
+#: inc/widgets/widgets.php:269
+msgid "Red cover with text on hover"
+msgstr "Κόκκινη επικάλυψη με κείμενο στο hover"
+
+#: inc/widgets/widgets.php:273
+msgid "Shows the Work's Excerpt, or the start of its content."
+msgstr ""
+
+#: inc/widgets/widgets.php:279
+msgid "Title and details under each image"
+msgstr "Τίτλος και στοιχεία κάτω από κάθε εικόνα"
+
+#: inc/widgets/widgets.php:288
+msgid "Staggered heights"
+msgstr "Κλιμακωτά ύψη"
+
+#: inc/widgets/widgets.php:292
+msgid "On: each column has its own image height. Off: all images the same size."
+msgstr ""
+
+#: inc/widgets/widgets.php:329
+msgid "VD Logo wall"
+msgstr ""
+
+#: inc/widgets/widgets.php:332
+msgid "Logos"
+msgstr ""
+
+#: inc/widgets/widgets.php:333
+msgid "Logos (on white, any size)"
+msgstr ""
+
+#: inc/widgets/widgets.php:360
+msgid "VD Numbered list"
+msgstr ""
+
+#: inc/widgets/widgets.php:363 inc/widgets/widgets.php:370
+msgid "Items"
+msgstr ""
+
+#: inc/widgets/widgets.php:365 inc/widgets/widgets.php:408 inc/widgets/widgets.php:497
+msgid "Title"
+msgstr ""
+
+#: inc/widgets/widgets.php:366 inc/widgets/widgets.php:498
+msgid "Text"
+msgstr ""
+
+#: inc/widgets/widgets.php:404
+msgid "VD Studio"
+msgstr ""
+
+#: inc/widgets/widgets.php:407
+msgid "Studio"
+msgstr "Στούντιο"
+
+#: inc/widgets/widgets.php:409
+msgid "Red box label"
+msgstr ""
+
+#: inc/widgets/widgets.php:410
+msgid "Red box list (one per line)"
+msgstr ""
+
+#: inc/widgets/widgets.php:411
+msgid "Side label"
+msgstr ""
+
+#: inc/widgets/widgets.php:412
+msgid "Side list (one per line)"
+msgstr ""
+
+#: inc/widgets/widgets.php:414
+msgid "Text (first paragraph is shown large)"
+msgstr ""
+
+#: inc/widgets/widgets.php:449
+msgid "VD Client index"
+msgstr ""
+
+#: inc/widgets/widgets.php:452
+msgid "Clients"
+msgstr ""
+
+#: inc/widgets/widgets.php:455
+msgid "Clients (one per line)"
+msgstr ""
+
+#: inc/widgets/widgets.php:459
+msgid "Groups"
+msgstr ""
+
+#: inc/widgets/widgets.php:493
+msgid "VD Contact intro"
+msgstr ""
+
+#: inc/widgets/widgets.php:496
+msgid "Contact"
+msgstr "Επικοινωνία"
+
+#: inc/widgets/widgets.php:499
+msgid "Line above the contact details"
+msgstr ""
+
+#: inc/widgets/widgets.php:504
+msgid "Email and phone come from Appearance → Customize → Studio details."
+msgstr ""
+
+#: inc/widgets/widgets.php:528 inc/works.php:62
+msgid "Work"
+msgstr "Έργα"
+
+#: inc/widgets/widgets.php:533
+msgid "Shows the current Work. Use inside a Theme Builder \"Single\" template for Works."
+msgstr ""
+
+#: inc/widgets/widgets.php:554
+msgid "VD Work header"
+msgstr ""
+
+#: inc/widgets/widgets.php:569
+msgid "VD Work cover and summary"
+msgstr ""
+
+#: inc/widgets/widgets.php:584
+msgid "VD Work gallery"
+msgstr ""
+
+#: inc/widgets/widgets.php:599
+msgid "VD Works archive"
+msgstr ""
+
+#: inc/widgets/widgets.php:605
+msgid "Works archive"
+msgstr "Αρχείο έργων"
+
+#: inc/widgets/widgets.php:610
+msgid "Title, Sector filter and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
+msgstr ""
+
+#: inc/widgets/widgets.php:625
+msgid "VD Next Work"
+msgstr ""
+
+#: inc/works.php:19
+msgid "Scope (one item per line)"
+msgstr "Εύρος εργασιών (ένα ανά γραμμή)"
+
+#: inc/works.php:20 inc/works.php:177
+msgid "Gallery"
+msgstr "Γκαλερί"
+
+#: inc/works.php:21 inc/works.php:168
+msgid "Cover display"
+msgstr "Εμφάνιση εξωφύλλου"
+
+#: inc/works.php:36
+msgid "Add new Sector"
+msgstr "Προσθήκη νέου τομέα"
+
+#: inc/works.php:37
+msgid "Edit Sector"
+msgstr "Επεξεργασία τομέα"
+
+#: inc/works.php:38
+msgid "All Sectors"
+msgstr "Όλοι οι τομείς"
+
+#: inc/works.php:64
+msgid "Add Work"
+msgstr "Προσθήκη έργου"
+
+#: inc/works.php:65
+msgid "Add new Work"
+msgstr "Προσθήκη νέου έργου"
+
+#: inc/works.php:66
+msgid "Edit Work"
+msgstr "Επεξεργασία έργου"
+
+#: inc/works.php:67
+msgid "New Work"
+msgstr "Νέο έργο"
+
+#: inc/works.php:68
+msgid "View Work"
+msgstr "Προβολή έργου"
+
+#: inc/works.php:69
+msgid "View Works"
+msgstr "Προβολή έργων"
+
+#: inc/works.php:70
+msgid "Search Works"
+msgstr "Αναζήτηση έργων"
+
+#: inc/works.php:71
+msgid "No Works found."
+msgstr "Δεν βρέθηκαν έργα."
+
+#: inc/works.php:72
+msgid "No Works found in Trash."
+msgstr "Δεν βρέθηκαν έργα στα διαγραμμένα."
+
+#: inc/works.php:73
+msgid "All Works"
+msgstr "Όλα τα έργα"
+
+#: inc/works.php:74
+msgid "Cover image"
+msgstr "Εικόνα εξωφύλλου"
+
+#: inc/works.php:75
+msgid "Set cover image"
+msgstr "Ορισμός εικόνας εξωφύλλου"
+
+#: inc/works.php:76
+msgid "Remove cover image"
+msgstr "Αφαίρεση εικόνας εξωφύλλου"
+
+#: inc/works.php:77
+msgid "Use as cover image"
+msgstr "Χρήση ως εικόνα εξωφύλλου"
+
+#: inc/works.php:78
+msgid "Work published."
+msgstr "Το έργο δημοσιεύτηκε."
+
+#: inc/works.php:79
+msgid "Work updated."
+msgstr "Το έργο ενημερώθηκε."
+
+#: inc/works.php:138
+msgid "Work details"
+msgstr "Στοιχεία έργου"
+
+#: inc/works.php:150
+msgid "Title = client or project name. Excerpt = the short summary shown on the Work page. Cover image = the tile on the homepage."
+msgstr ""
+
+#: inc/works.php:154
+msgid "Thessaloniki, Greece"
+msgstr ""
+
+#: inc/works.php:158
+msgid "Identity, packaging, website"
+msgstr ""
+
+#: inc/works.php:164
+msgid "One item per line. Shown in the red box on the Work page."
+msgstr "Ένα στοιχείο ανά γραμμή. Εμφανίζεται στο κόκκινο πλαίσιο της σελίδας του έργου."
+
+#: inc/works.php:171
+msgid "Photo or screenshot: fill the frame"
+msgstr "Φωτογραφία ή στιγμιότυπο: γέμισμα πλαισίου"
+
+#: inc/works.php:172
+msgid "Packshot or logo on white: fit inside the frame"
+msgstr "Προϊόν ή λογότυπο σε λευκό: προσαρμογή στο πλαίσιο"
+
+#: inc/works.php:188
+msgid "Choose images"
+msgstr "Επιλογή εικόνων"
+
+#: inc/works.php:189
+msgid "Remove all"
+msgstr "Αφαίρεση όλων"
+
+#: inc/works.php:191
+msgid "Images shown on the Work page, in this order. Drag to reorder inside the media window. Packshots on white blend into the page automatically."
+msgstr ""
+
+#: inc/works.php:230
+msgid "Work gallery"
+msgstr "Γκαλερί έργου"
+
+#: inc/works.php:231
+msgid "Use these images"
+msgstr "Χρήση αυτών των εικόνων"
+
+#: inc/works.php:242
+msgid "Cover"
+msgstr "Εξώφυλλο"
+
+#: vassilisdesign-elements.php:39
+msgid "update the VASSILISDESIGN theme to version 2.0 (Appearance → Themes → Add New → Upload Theme). The plugin starts automatically after the update; your Works and settings are kept."
+msgstr ""

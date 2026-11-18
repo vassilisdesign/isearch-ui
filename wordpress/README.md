@@ -1,30 +1,36 @@
 # VASSILISDESIGN for WordPress (Hello Elementor + Elementor Pro)
 
-A child theme of **Hello Elementor** that turns the VASSILISDESIGN design into a fast, editable WordPress site:
+Two packages, each with its own job:
 
+**Plugin: VASSILISDESIGN Elements** (`vassilisdesign-elements.zip`): features and content structure, kept even if the theme changes.
 - **Works** custom post type for the portfolio, with Sectors and simple fields (no ACF needed).
-- 12 lightweight **Elementor widgets** in a "VASSILISDESIGN" category: hero, section heading, Works grid, logo wall, numbered list, studio, client index, contact intro, and four widgets for single Work pages.
-- Fast PHP **header, footer, single Work and Works archive** templates. An Elementor Pro Theme Builder template, if you make one, replaces any of them automatically.
-- **EU legal pages** (Privacy Policy, Terms of Use, Legal Notice) in English and Greek, plus a **Complianz** setup sheet.
-- **One-click setup** that creates the pages, homepage, menus and Sectors and applies Elementor's speed settings.
+- 13 lightweight **Elementor widgets** in a "VASSILISDESIGN" category: hero, section heading, Works grid, logo wall, numbered list, studio, client index, contact intro, Works archive and four widgets for single Work pages.
+- The design system: colours, the Commissioner font (self-hosted), widget styles and animations.
+- **Single Work and Works archive** layouts. An Elementor Pro Theme Builder template replaces them automatically.
+- **Studio details** and **Legal details** (Appearance → Customize), the **EU legal pages** (Privacy Policy, Terms of Use, Legal Notice, English and Greek) and the **one-click setup**.
+
+**Theme: VASSILISDESIGN** (`vassilisdesign.zip`), a child theme of Hello Elementor: appearance only.
+- Header, footer, text-page typography, Complianz banner styling, Hello Elementor tweaks and speed settings.
 
 ## Plugins
 
 | Plugin | Status | Why |
 | --- | --- | --- |
 | Hello Elementor (theme) | Required | Parent theme |
+| VASSILISDESIGN Elements (this plugin) | Required | Works, widgets, design system, setup |
 | Elementor | Required | Page builder |
 | Elementor Pro | Required | Contact form widget; optional Theme Builder |
 | Complianz – GDPR/CCPA Cookie Consent | Required | Cookie banner, consent records, Cookie Policy |
 | Polylang | Optional | Only if the site is bilingual (English and Greek) |
 
-**Not used:** Essential Addons, Premium Addons, Ultimate Addons (UAE), Unlimited Elements, Sticky Header Effects. The theme widgets and Elementor Pro already cover everything those would add. Each add-on pack loads extra CSS and JavaScript, so leaving them out keeps the site fast. If any are installed now, deactivate and delete them.
+**Not used:** Essential Addons, Premium Addons, Ultimate Addons (UAE), Unlimited Elements, Sticky Header Effects. The VD widgets and Elementor Pro already cover everything those would add. Each add-on pack loads extra CSS and JavaScript, so leaving them out keeps the site fast. If any are installed now, deactivate and delete them.
 
 ## Install
 
 1. **Back up** the current site (files and database). Do this on a staging copy first if your host offers one.
 2. Make sure **Hello Elementor**, **Elementor**, **Elementor Pro** and **Complianz** are installed and active.
-3. Upload the theme: **Appearance → Themes → Add New → Upload Theme**, choose `vassilisdesign.zip`, then **Activate**.
+3. Upload the plugin: **Plugins → Add New → Upload Plugin**, choose `vassilisdesign-elements.zip`, then **Activate**.
+   Upload the theme: **Appearance → Themes → Add New → Upload Theme**, choose `vassilisdesign.zip`, then **Activate**.
 4. Fill in your details: **Appearance → Customize → Studio details** (email, phone, footer text, wordmark).
 5. Run the setup: **Appearance → VASSILISDESIGN setup → Run setup**. It skips anything that already exists, so it is safe to run again.
 6. Open **Pages → Home → Edit with Elementor** and add:
@@ -35,6 +41,13 @@ A child theme of **Hello Elementor** that turns the VASSILISDESIGN design into a
 8. Set up Complianz (see below).
 9. Fill in the `[BRACKETED]` details on **Privacy Policy**, **Terms of Use** and **Legal Notice**.
 10. Check the contact form: send a test message and confirm it arrives.
+
+### Updating from theme 1.x (one theme with everything)
+
+Do it in this order and the site never breaks:
+1. **Plugins → Add New → Upload Plugin** → `vassilisdesign-elements.zip` → **Activate**. A notice says it is waiting for the theme update. Your site keeps working.
+2. **Appearance → Themes → Add New → Upload Theme** → `vassilisdesign.zip` → **Replace current with uploaded**.
+3. Done: the plugin starts on its own. Your Works, Sectors, homepage widgets, Studio details and Legal details are all kept.
 
 ### Existing content
 
@@ -111,18 +124,18 @@ Use Complianz's statistics settings so that the analytics script runs only after
 WordPress needs a translation plugin for two languages. **Polylang** (free) is the lightest option:
 
 1. Install Polylang, add **English** and **Ελληνικά**, and allow it to translate **Works** and **Sectors** (Languages → Settings → Custom post types and Taxonomies).
-2. Homepage in Greek: create a Greek translation of Home, open it with Elementor, then import `setup/home-el.json` from the theme folder (Templates → Saved Templates → Import, then insert it).
+2. Homepage in Greek: create a Greek translation of Home, open it with Elementor, then import `setup/home-el.json` from the plugin folder (Templates → Saved Templates → Import, then insert it).
 3. Legal pages in Greek: create translations of the three pages and paste the content from `setup/legal/*-el.html`, after replacing `{{...}}` with your details.
 4. The header shows an **EN / ΕΛ** switch automatically when Polylang is active.
-5. Theme texts ("Next project", "Scope" and so on) are translated by `languages/el.po` / `el.mo`.
+5. Texts such as "Next project" and "Scope" are translated by the plugin's and the theme's `languages/` files.
 
 ## Speed
 
-The theme already removes WordPress output the site does not use: emoji scripts, oEmbed, jQuery Migrate, block styles on Elementor pages, Dashicons for visitors and front-end Heartbeat. It also self-hosts the font and loads the animation scripts deferred.
+The theme removes WordPress output the site does not use: emoji scripts, oEmbed, jQuery Migrate, block styles on Elementor pages, Dashicons for visitors and front-end Heartbeat. The plugin self-hosts the font and loads the animation scripts deferred.
 
 The setup applies these Elementor settings (you can change them back under Elementor → Settings):
 
-- Google Fonts off, default colours and fonts off, font display swap
+- Google Fonts only when hosted on your server (never loaded from Google), default colours and fonts off, font display swap
 - External CSS files, leaner markup, CSS loaded per page, inline SVG icons
 - Lightbox off, optimised image loading, lazy-loaded background images
 
@@ -139,15 +152,21 @@ The contact form sends email through your hosting server. If test messages do no
 ## Files
 
 ```
-vassilisdesign/
-  style.css, functions.php
-  inc/            setup, Works, Customizer, templates, assets, performance, Elementor, widgets, one-click setup
-  template-parts/ header and footer
-  single-works.php, archive-works.php, taxonomy-work_sector.php
-  assets/         css/vd.css, js/vd.js, vendor/ (GSAP), fonts/ (Commissioner: Latin, Latin Extended, Greek)
-  languages/      Greek translation of the theme texts
+vassilisdesign-elements/        PLUGIN
+  vassilisdesign-elements.php   plugin file
+  inc/            Works, settings, legal details, markup helpers, assets, page layouts, Elementor, widgets, setup
+  templates/      single-works.php, archive-works.php (a theme can override them)
+  assets/         css/elements.css, js/elements.js, vendor/ (GSAP), fonts/ (Commissioner: Latin, Latin Extended, Greek)
   setup/          home-en.json, home-el.json (Elementor templates), legal/ (EN and EL legal pages)
-tools/build_templates.py   regenerates the Elementor templates
+  languages/      Greek translation
+vassilisdesign/                 THEME (child of Hello Elementor)
+  style.css, functions.php
+  inc/            helpers, setup, assets, performance
+  template-parts/ header and footer
+  assets/css/theme.css
+  languages/      Greek translation
+tools/            build_templates.py (Elementor templates), build_translations.py (Greek translations)
+dist/             vassilisdesign-elements.zip and vassilisdesign.zip, ready to upload
 ```
 
 ## Legal note

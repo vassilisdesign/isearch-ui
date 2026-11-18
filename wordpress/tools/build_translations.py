@@ -1,7 +1,9 @@
-"""Extracts the theme's translatable strings and builds the Greek translation.
+"""Extracts the translatable strings of the theme and the plugin and builds their Greek translations.
 
 Run:  python3 wordpress/tools/build_translations.py
-Writes languages/vassilisdesign.pot, languages/el.po and languages/el.mo in the theme folder.
+Theme  (text domain vassilisdesign):          vassilisdesign/languages/vassilisdesign.pot, el.po, el.mo
+Plugin (text domain vassilisdesign-elements): vassilisdesign-elements/languages/vassilisdesign-elements.pot,
+                                               vassilisdesign-elements-el.po, vassilisdesign-elements-el.mo
 Strings without a Greek entry below stay in English.
 """
 import ast
@@ -9,8 +11,11 @@ import pathlib
 import re
 import struct
 
-THEME = pathlib.Path(__file__).resolve().parent.parent / 'vassilisdesign'
-LANG = THEME / 'languages'
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+PACKAGES = [
+    (ROOT / 'vassilisdesign', 'vassilisdesign', 'el'),
+    (ROOT / 'vassilisdesign-elements', 'vassilisdesign-elements', 'vassilisdesign-elements-el'),
+]
 
 EL = {
     # Front end
@@ -99,8 +104,6 @@ EL = {
     'Layout': 'Διάταξη',
     'Works per row (desktop)': 'Έργα ανά σειρά (υπολογιστής)',
     'Full width (no side margins)': 'Πλήρες πλάτος (χωρίς πλευρικά περιθώρια)',
-    'Space between Works (px)': 'Απόσταση μεταξύ έργων (px)',
-    'Red panel with text on hover': 'Κόκκινο πλαίσιο με κείμενο στο hover',
     'Title and details under each image': 'Τίτλος και στοιχεία κάτω από κάθε εικόνα',
     'Staggered heights': 'Κλιμακωτά ύψη',
     'Show': 'Εμφάνιση',
@@ -116,7 +119,8 @@ EL = {
 # the front-end menu label wins, since visitors see it.
 EL['Work'] = 'Έργα'
 
-CALL = re.compile(r"""(?:__|_e|esc_html__|esc_html_e|esc_attr__|esc_attr_e)\(\s*('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")\s*,\s*'vassilisdesign'""")
+def call_re(domain):
+    return re.compile(r"""(?:__|_e|esc_html__|esc_html_e|esc_attr__|esc_attr_e)\(\s*('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")\s*,\s*'""" + re.escape(domain) + "'")
 
 
 def php_string(token):
@@ -125,12 +129,13 @@ def php_string(token):
     return ast.literal_eval(token)  # double-quoted: \n etc. are real escapes
 
 
-def extract():
+def extract(folder, domain):
     found = {}
-    for path in sorted(THEME.rglob('*.php')):
-        rel = path.relative_to(THEME).as_posix()
+    call = call_re(domain)
+    for path in sorted(folder.rglob('*.php')):
+        rel = path.relative_to(folder).as_posix()
         for i, line in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):
-            for m in CALL.finditer(line):
+            for m in call.finditer(line):
                 found.setdefault(php_string(m.group(1)), []).append(f'{rel}:{i}')
     return found
 
@@ -165,14 +170,18 @@ def write_mo(path, translations, header):
 
 
 if __name__ == '__main__':
-    LANG.mkdir(exist_ok=True)
-    strings = extract()
-    base = '"Project-Id-Version: VASSILISDESIGN 1.0.0\\n"\n"MIME-Version: 1.0\\n"\n"Content-Type: text/plain; charset=UTF-8\\n"\n"Content-Transfer-Encoding: 8bit\\n"\n"X-Domain: vassilisdesign\\n"\n'
-    write_po(LANG / 'vassilisdesign.pot', strings, {}, base)
-    write_po(LANG / 'el.po', strings, EL, base + '"Language: el\\n"\n"Plural-Forms: nplurals=2; plural=(n != 1);\\n"\n')
-    done = {k: v for k, v in EL.items() if k in strings}
-    write_mo(LANG / 'el.mo', done, 'Project-Id-Version: VASSILISDESIGN 1.0.0\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nLanguage: el\nPlural-Forms: nplurals=2; plural=(n != 1);\n')
-    print(f'{len(strings)} strings extracted, {len(done)} translated to Greek')
-    missing = [k for k in EL if k not in strings]
-    if missing:
-        print('not found in source:', missing)
+    used = set()
+    for folder, domain, mo_name in PACKAGES:
+        lang = folder / 'languages'
+        lang.mkdir(exist_ok=True)
+        strings = extract(folder, domain)
+        base = f'"Project-Id-Version: {domain}\\n"\n"MIME-Version: 1.0\\n"\n"Content-Type: text/plain; charset=UTF-8\\n"\n"Content-Transfer-Encoding: 8bit\\n"\n"X-Domain: {domain}\\n"\n'
+        write_po(lang / f'{domain}.pot', strings, {}, base)
+        write_po(lang / f'{mo_name}.po', strings, EL, base + '"Language: el\\n"\n"Plural-Forms: nplurals=2; plural=(n != 1);\\n"\n')
+        done = {k: v for k, v in EL.items() if k in strings}
+        used |= set(done)
+        write_mo(lang / f'{mo_name}.mo', done, f'Project-Id-Version: {domain}\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nLanguage: el\nPlural-Forms: nplurals=2; plural=(n != 1);\n')
+        print(f'{domain}: {len(strings)} strings, {len(done)} translated to Greek')
+    unused = [k for k in EL if k not in used]
+    if unused:
+        print('not used anywhere:', unused)
