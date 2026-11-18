@@ -104,7 +104,7 @@ body {
 
 .vd-text-link {
   display: inline-flex; align-items: center; gap: 8px; font-weight: 700;
-  background: linear-gradient(var(--vd-red), var(--vd-red)) 0 100% / 100% 2px no-repeat; transition: background-size 0.4s var(--vd-ease);
+  background: linear-gradient(var(--vd-link-line, var(--vd-red)), var(--vd-link-line, var(--vd-red))) 0 100% / 100% 2px no-repeat; transition: background-size 0.4s var(--vd-ease);
 }
 .vd-text-link .vd-arrow { width: 1em; height: 1em; }
 .vd-text-link:hover { background-size: 0 2px; background-position: 100% 100%; }

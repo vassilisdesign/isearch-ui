@@ -9,6 +9,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
 
@@ -53,6 +54,36 @@ abstract class VDE_Widget extends Widget_Base {
 		}
 		return '';
 	}
+	/**
+	 * Style tab: font and colour controls for each part of the widget, scoped to this widget only.
+	 * Items: array( 'text', key, label, selector ) adds Typography + Color;
+	 *        array( 'color', key, label, selector, css property ) adds one colour.
+	 */
+	protected function add_style_controls( array $items ) {
+		if ( ! $items ) {
+			return;
+		}
+		$this->start_controls_section(
+			'vd_style',
+			array(
+				'label' => __( 'Fonts and colours', 'vassilisdesign-elements' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		foreach ( $items as $i => $item ) {
+			$selector = implode( ', ', array_map( function ( $part ) {
+				return '{{WRAPPER}} ' . trim( $part );
+			}, explode( ',', $item[3] ) ) );
+			if ( 'text' === $item[0] ) {
+				$this->add_control( $item[1] . '_heading', array( 'label' => $item[2], 'type' => Controls_Manager::HEADING, 'separator' => $i ? 'before' : 'none' ) );
+				$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => $item[1] . '_typography', 'selector' => $selector ) );
+				$this->add_control( $item[1] . '_color', array( 'label' => __( 'Colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( $selector => 'color: {{VALUE}} !important;' ) ) );
+			} else {
+				$this->add_control( $item[1], array( 'label' => $item[2], 'type' => Controls_Manager::COLOR, 'separator' => 'before', 'selectors' => array( $selector => $item[4] . ': {{VALUE}} !important;' ) ) );
+			}
+		}
+		$this->end_controls_section();
+	}
 	protected function start( $label ) {
 		$this->start_controls_section( 'content', array( 'label' => $label ) );
 	}
@@ -94,6 +125,21 @@ class VDE_Widget_Hero extends VDE_Widget {
 		$this->add_control( 'cta', array( 'label' => __( 'Arrow button link', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '#work' ) );
 		$this->add_control( 'cta_label', array( 'label' => __( 'Arrow button label', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'See selected work' ) );
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'text', 'wordmark', __( 'Wordmark', 'vassilisdesign-elements' ), '.vd-wordmark' ),
+				array( 'color', 'stop', __( 'Wordmark full stop', 'vassilisdesign-elements' ), '.vd-wordmark .vd-stop', 'color' ),
+				array( 'text', 'lead', __( 'Positioning', 'vassilisdesign-elements' ), '.vd-hero-lead' ),
+				array( 'text', 'meta', __( 'Columns', 'vassilisdesign-elements' ), '.vd-hero-meta' ),
+				array( 'color', 'meta_line', __( 'Column lines', 'vassilisdesign-elements' ), '.vd-hero-meta', 'border-top-color' ),
+				array( 'text', 'vertical', __( 'Vertical text', 'vassilisdesign-elements' ), '.vd-hero-vertical' ),
+				array( 'color', 'vertical_line', __( 'Vertical text line', 'vassilisdesign-elements' ), '.vd-hero-vertical', 'border-left-color' ),
+				array( 'text', 'corner', __( 'Rotated corner text', 'vassilisdesign-elements' ), '.vd-hero-corner' ),
+				array( 'color', 'band', __( 'Red band', 'vassilisdesign-elements' ), '.vd-hero-band', 'background-color' ),
+				array( 'color', 'cta_bg', __( 'Arrow button', 'vassilisdesign-elements' ), '.vd-hero-cta', 'background-color' ),
+				array( 'color', 'cta_icon', __( 'Arrow', 'vassilisdesign-elements' ), '.vd-hero-cta', 'color' ),
+			)
+		);
 	}
 	protected function render() {
 		$s     = $this->get_settings_for_display();
@@ -158,6 +204,14 @@ class VDE_Widget_Section_Head extends VDE_Widget {
 			)
 		);
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'text', 'intro', __( 'Intro text', 'vassilisdesign-elements' ), '.vd-section-intro' ),
+				array( 'color', 'dot', __( 'Intro square', 'vassilisdesign-elements' ), '.vd-dot', 'background-color' ),
+				array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-display' ),
+				array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-display .vd-stop', 'color' ),
+			)
+		);
 	}
 	protected function render() {
 		$s = $this->get_settings_for_display();
@@ -293,6 +347,17 @@ class VDE_Widget_Works_Grid extends VDE_Widget {
 			)
 		);
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'text', 'client', __( 'Work title', 'vassilisdesign-elements' ), '.vd-tile-client' ),
+				array( 'color', 'client_hover', __( 'Work title on hover', 'vassilisdesign-elements' ), '.vd-tile-link:hover .vd-tile-client', 'color' ),
+				array( 'text', 'meta', __( 'Details under the title', 'vassilisdesign-elements' ), '.vd-tile-meta' ),
+				array( 'text', 'hover', __( 'Text on hover', 'vassilisdesign-elements' ), '.vd-tile-hover-text > span' ),
+				array( 'color', 'cover', __( 'Red cover / red block', 'vassilisdesign-elements' ), '.vd-red-block', 'background-color' ),
+				array( 'text', 'link', __( '"All work" link', 'vassilisdesign-elements' ), '.vd-all-link a' ),
+				array( 'color', 'link_line', __( '"All work" underline', 'vassilisdesign-elements' ), '.vd-all-link a', '--vd-link-line' ),
+			)
+		);
 	}
 	protected function render() {
 		$s      = $this->get_settings_for_display();
@@ -332,6 +397,11 @@ class VDE_Widget_Logo_Wall extends VDE_Widget {
 		$this->start( __( 'Logos', 'vassilisdesign-elements' ) );
 		$this->add_control( 'logos', array( 'label' => __( 'Logos (on white, any size)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::GALLERY, 'default' => array() ) );
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'color', 'lines', __( 'Grid lines', 'vassilisdesign-elements' ), '.vd-logos, .vd-logo-cell', 'border-color' ),
+			)
+		);
 	}
 	protected function render() {
 		$s = $this->get_settings_for_display();
@@ -375,6 +445,14 @@ class VDE_Widget_Numbered_List extends VDE_Widget {
 			)
 		);
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'text', 'number', __( 'Numbers', 'vassilisdesign-elements' ), '.vd-step-n' ),
+				array( 'text', 'title', __( 'Titles', 'vassilisdesign-elements' ), '.vd-step-title' ),
+				array( 'text', 'text', __( 'Text', 'vassilisdesign-elements' ), '.vd-step-text' ),
+				array( 'color', 'lines', __( 'Lines', 'vassilisdesign-elements' ), '.vd-steps, .vd-step', 'border-color' ),
+			)
+		);
 	}
 	protected function render() {
 		$s = $this->get_settings_for_display();
@@ -413,6 +491,20 @@ class VDE_Widget_Studio extends VDE_Widget {
 		$this->add_control( 'image', array( 'label' => __( 'Image', 'vassilisdesign-elements' ), 'type' => Controls_Manager::MEDIA ) );
 		$this->add_control( 'text', array( 'label' => __( 'Text (first paragraph is shown large)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::WYSIWYG ) );
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-display' ),
+				array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-display .vd-stop', 'color' ),
+				array( 'color', 'red_bg', __( 'Red box', 'vassilisdesign-elements' ), '.vd-studio-red', 'background-color' ),
+				array( 'text', 'red_title', __( 'Red box label', 'vassilisdesign-elements' ), '.vd-studio-red-title' ),
+				array( 'text', 'red_list', __( 'Red box list', 'vassilisdesign-elements' ), '.vd-studio-red-list' ),
+				array( 'text', 'side_title', __( 'Side label', 'vassilisdesign-elements' ), '.vd-red-label' ),
+				array( 'text', 'side_list', __( 'Side list', 'vassilisdesign-elements' ), '.vd-studio-side-list' ),
+				array( 'text', 'intro', __( 'First paragraph', 'vassilisdesign-elements' ), '.vd-studio-copy p:first-child' ),
+				array( 'text', 'body', __( 'Other paragraphs', 'vassilisdesign-elements' ), '.vd-studio-copy p:not(:first-child)' ),
+				array( 'color', 'circle', __( 'Circle', 'vassilisdesign-elements' ), '.vd-studio-circle', 'background-color' ),
+			)
+		);
 	}
 	protected function render() {
 		$s = $this->get_settings_for_display();
@@ -464,6 +556,14 @@ class VDE_Widget_Client_Index extends VDE_Widget {
 			)
 		);
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'text', 'sector', __( 'Sector titles', 'vassilisdesign-elements' ), '.vd-client-sector' ),
+				array( 'color', 'sector_line', __( 'Sector title line', 'vassilisdesign-elements' ), '.vd-client-sector', 'border-bottom-color' ),
+				array( 'text', 'names', __( 'Client names', 'vassilisdesign-elements' ), '.vd-client-list li' ),
+				array( 'color', 'name_lines', __( 'Lines between names', 'vassilisdesign-elements' ), '.vd-client-list li', 'border-bottom-color' ),
+			)
+		);
 	}
 	protected function render() {
 		$s = $this->get_settings_for_display();
@@ -505,6 +605,15 @@ class VDE_Widget_Contact_Intro extends VDE_Widget {
 			)
 		);
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-display' ),
+				array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-display .vd-stop', 'color' ),
+				array( 'text', 'lead', __( 'Text', 'vassilisdesign-elements' ), '.vd-contact-lead' ),
+				array( 'text', 'direct', __( 'Line above contact details', 'vassilisdesign-elements' ), '.vd-contact-direct' ),
+				array( 'text', 'links', __( 'Email and phone', 'vassilisdesign-elements' ), '.vd-contact-direct a' ),
+			)
+		);
 	}
 	protected function render() {
 		$s = $this->get_settings_for_display();
@@ -534,6 +643,10 @@ abstract class VDE_Work_Widget extends VDE_Widget {
 			)
 		);
 		$this->end_controls_section();
+		$this->add_style_controls( $this->style_items() );
+	}
+	protected function style_items() {
+		return array();
 	}
 	/** The current Work, or the latest one while previewing a template in the editor. */
 	protected function work() {
@@ -553,6 +666,20 @@ class VDE_Widget_Work_Header extends VDE_Work_Widget {
 	public function get_title() {
 		return __( 'VD Work header', 'vassilisdesign-elements' );
 	}
+	protected function style_items() {
+		return array(
+			array( 'text', 'back', __( '"All work" link', 'vassilisdesign-elements' ), '.vd-case-back' ),
+			array( 'text', 'meta_label', __( 'Detail labels', 'vassilisdesign-elements' ), '.vd-case-meta dt' ),
+			array( 'text', 'meta_value', __( 'Detail values', 'vassilisdesign-elements' ), '.vd-case-meta dd' ),
+			array( 'color', 'meta_line', __( 'Detail lines', 'vassilisdesign-elements' ), '.vd-case-meta > div', 'border-left-color' ),
+			array( 'text', 'index', __( 'Project number', 'vassilisdesign-elements' ), '.vd-case-index' ),
+			array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-case-title' ),
+			array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-case-title .vd-stop', 'color' ),
+			array( 'color', 'red_bg', __( 'Red box', 'vassilisdesign-elements' ), '.vd-case-red', 'background-color' ),
+			array( 'text', 'red_title', __( 'Red box label', 'vassilisdesign-elements' ), '.vd-case-red-title' ),
+			array( 'text', 'facts', __( 'Red box list', 'vassilisdesign-elements' ), '.vd-case-facts li' ),
+		);
+	}
 	protected function render() {
 		$w = $this->work();
 		if ( $w ) {
@@ -567,6 +694,13 @@ class VDE_Widget_Work_Intro extends VDE_Work_Widget {
 	}
 	public function get_title() {
 		return __( 'VD Work cover and summary', 'vassilisdesign-elements' );
+	}
+	protected function style_items() {
+		return array(
+			array( 'text', 'label', __( 'Label', 'vassilisdesign-elements' ), '.vd-case-label' ),
+			array( 'text', 'summary', __( 'Summary', 'vassilisdesign-elements' ), '.vd-case-summary' ),
+			array( 'text', 'body', __( 'Description', 'vassilisdesign-elements' ), '.vd-case-text .vd-prose' ),
+		);
 	}
 	protected function render() {
 		$w = $this->work();
@@ -611,6 +745,15 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 			)
 		);
 		$this->end_controls_section();
+		$this->add_style_controls(
+			array(
+				array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-display' ),
+				array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-display .vd-stop', 'color' ),
+				array( 'text', 'filter', __( 'Sector filter', 'vassilisdesign-elements' ), '.vd-filter a' ),
+				array( 'text', 'client', __( 'Work title', 'vassilisdesign-elements' ), '.vd-tile-client' ),
+				array( 'text', 'meta', __( 'Details under the title', 'vassilisdesign-elements' ), '.vd-tile-meta' ),
+			)
+		);
 	}
 	protected function render() {
 		echo vde_works_archive(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -623,6 +766,14 @@ class VDE_Widget_Next_Work extends VDE_Work_Widget {
 	}
 	public function get_title() {
 		return __( 'VD Next Work', 'vassilisdesign-elements' );
+	}
+	protected function style_items() {
+		return array(
+			array( 'text', 'label', __( '"Next project" label', 'vassilisdesign-elements' ), '.vd-case-next-label' ),
+			array( 'text', 'client', __( 'Next Work title', 'vassilisdesign-elements' ), '.vd-case-next-client' ),
+			array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-case-next-client .vd-stop', 'color' ),
+			array( 'color', 'line', __( 'Top line', 'vassilisdesign-elements' ), '.vd-case-next-link', 'border-top-color' ),
+		);
 	}
 	protected function render() {
 		$w = $this->work();
