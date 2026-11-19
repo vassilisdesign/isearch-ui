@@ -4,7 +4,7 @@ Two packages, each with its own job:
 
 **Plugin: VASSILISDESIGN Elements** (`vassilisdesign-elements.zip`): features and content structure, kept even if the theme changes.
 - **Works** custom post type for the portfolio, with Sectors and simple fields (no ACF needed).
-- 13 lightweight **Elementor widgets** in a "VASSILISDESIGN" category: hero, section heading, Works grid, logo wall, numbered list, studio, client index, contact intro, Works archive and four widgets for single Work pages.
+- 14 lightweight **Elementor widgets** in a "VASSILISDESIGN" category: hero, hero image (the hero's image, red band and arrow on their own, 100% of their container), section heading, Works grid, logo wall, numbered list, studio, client index, contact intro, Works archive and four widgets for single Work pages.
 - The design system: colours, the Commissioner font (self-hosted), widget styles and animations.
 - **Single Work and Works archive** layouts. An Elementor Pro Theme Builder template replaces them automatically.
 - **Studio details** and **Legal details** (Appearance → Customize), the **EU legal pages** (Privacy Policy, Terms of Use, Legal Notice, English and Greek) and the **one-click setup**.

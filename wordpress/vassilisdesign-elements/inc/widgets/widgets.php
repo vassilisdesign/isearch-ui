@@ -11,11 +11,13 @@ defined( 'ABSPATH' ) || exit;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
+use Elementor\Utils;
 use Elementor\Widget_Base;
 
 function vde_widget_classes() {
 	return array(
 		'VDE_Widget_Hero',
+		'VDE_Widget_Hero_Image',
 		'VDE_Widget_Section_Head',
 		'VDE_Widget_Works_Grid',
 		'VDE_Widget_Logo_Wall',
@@ -177,6 +179,106 @@ class VDE_Widget_Hero extends VDE_Widget {
 				<?php endif; ?>
 			</div>
 		</section>
+		<?php
+	}
+}
+
+/* ---------- Hero image (image + red band + arrow, full width of its container) ---------- */
+
+class VDE_Widget_Hero_Image extends VDE_Widget {
+	public function get_name() {
+		return 'vd-hero-image';
+	}
+	public function get_title() {
+		return __( 'VD Hero image', 'vassilisdesign-elements' );
+	}
+	public function get_icon() {
+		return 'eicon-image';
+	}
+	protected function register_controls() {
+		$this->start( __( 'Image', 'vassilisdesign-elements' ) );
+		$this->add_control( 'image', array( 'label' => __( 'Image', 'vassilisdesign-elements' ), 'type' => Controls_Manager::MEDIA, 'default' => array( 'url' => Utils::get_placeholder_image_src() ) ) );
+		$this->add_control( 'image_alt', array( 'label' => __( 'Image description', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '' ) );
+		$this->add_control(
+			'fit',
+			array(
+				'label'   => __( 'Image display', 'vassilisdesign-elements' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'contain',
+				'options' => array(
+					'contain' => __( 'Packshot on white: fit', 'vassilisdesign-elements' ),
+					'cover'   => __( 'Photo: fill', 'vassilisdesign-elements' ),
+				),
+			)
+		);
+		$this->add_control( 'show_cta', array( 'label' => __( 'Arrow button', 'vassilisdesign-elements' ), 'type' => Controls_Manager::SWITCHER, 'default' => 'yes', 'return_value' => 'yes', 'separator' => 'before' ) );
+		$this->add_control( 'cta', array( 'label' => __( 'Arrow button link', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '#work', 'condition' => array( 'show_cta' => 'yes' ) ) );
+		$this->add_control( 'cta_label', array( 'label' => __( 'Arrow button label (for screen readers)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'See selected work', 'condition' => array( 'show_cta' => 'yes' ) ) );
+		$this->end_controls_section();
+
+		$this->start_controls_section( 'layout', array( 'label' => __( 'Layout', 'vassilisdesign-elements' ) ) );
+		$var = function ( $name ) {
+			return array( '{{WRAPPER}} .vd-hero-image' => '--vdhi-' . $name . ': {{SIZE}}{{UNIT}};' );
+		};
+		$this->add_responsive_control(
+			'height',
+			array(
+				'label'          => __( 'Height', 'vassilisdesign-elements' ),
+				'type'           => Controls_Manager::SLIDER,
+				'size_units'     => array( 'px', 'vh', 'vw' ),
+				'range'          => array( 'px' => array( 'min' => 200, 'max' => 1400 ), 'vh' => array( 'min' => 20, 'max' => 120 ), 'vw' => array( 'min' => 20, 'max' => 160 ) ),
+				'default'        => array( 'unit' => 'px', 'size' => 720 ),
+				'tablet_default' => array( 'unit' => 'px', 'size' => 620 ),
+				'mobile_default' => array( 'unit' => 'vw', 'size' => 118 ),
+				'selectors'      => $var( 'h' ),
+			)
+		);
+		$percent = function ( $label, $name, $desktop, $mobile ) use ( $var ) {
+			$this->add_responsive_control(
+				$name,
+				array(
+					'label'          => $label,
+					'type'           => Controls_Manager::SLIDER,
+					'size_units'     => array( '%' ),
+					'range'          => array( '%' => array( 'min' => 0, 'max' => 100 ) ),
+					'default'        => array( 'unit' => '%', 'size' => $desktop ),
+					'tablet_default' => array( 'unit' => '%', 'size' => $desktop ),
+					'mobile_default' => array( 'unit' => '%', 'size' => $mobile ),
+					'selectors'      => $var( str_replace( '_', '-', $name ) ),
+				)
+			);
+		};
+		$percent( __( 'Image: space on the left', 'vassilisdesign-elements' ), 'left', 14, 22 );
+		$percent( __( 'Image: space on the right', 'vassilisdesign-elements' ), 'right', 20, 0 );
+		$percent( __( 'Red band: distance from top', 'vassilisdesign-elements' ), 'band_top', 36, 40 );
+		$percent( __( 'Red band: height', 'vassilisdesign-elements' ), 'band_h', 44, 40 );
+		$this->add_control( 'motion', array( 'label' => __( 'Reveal animation', 'vassilisdesign-elements' ), 'type' => Controls_Manager::SWITCHER, 'default' => 'yes', 'return_value' => 'yes', 'separator' => 'before', 'description' => __( 'The red band sweeps in and the image rises when the element comes into view.', 'vassilisdesign-elements' ) ) );
+		$this->add_control( 'parallax', array( 'label' => __( 'Movement on scroll', 'vassilisdesign-elements' ), 'type' => Controls_Manager::SWITCHER, 'default' => 'yes', 'return_value' => 'yes' ) );
+		$this->end_controls_section();
+
+		$this->add_style_controls(
+			array(
+				array( 'color', 'band', __( 'Red band', 'vassilisdesign-elements' ), '.vd-hi-band', 'background-color' ),
+				array( 'color', 'frame', __( 'Image background', 'vassilisdesign-elements' ), '.vd-hi-photo', 'background-color' ),
+				array( 'color', 'cta_bg', __( 'Arrow button', 'vassilisdesign-elements' ), '.vd-hi-cta', 'background-color' ),
+				array( 'color', 'cta_bg_hover', __( 'Arrow button on hover', 'vassilisdesign-elements' ), '.vd-hi-cta:hover', 'background-color' ),
+				array( 'color', 'cta_icon', __( 'Arrow', 'vassilisdesign-elements' ), '.vd-hi-cta', 'color' ),
+			)
+		);
+	}
+	protected function render() {
+		$s   = $this->get_settings_for_display();
+		$alt = $s['image_alt'] ? $s['image_alt'] : ( ! empty( $s['image']['id'] ) ? get_post_meta( $s['image']['id'], '_wp_attachment_image_alt', true ) : '' );
+		?>
+		<div class="vd-hero-image" data-vd-motion="<?php echo esc_attr( $s['motion'] ); ?>" data-vd-parallax="<?php echo esc_attr( $s['parallax'] ); ?>">
+			<div class="vd-hi-photo vd-photo<?php echo 'contain' === $s['fit'] ? ' vd-fit-contain' : ''; ?>">
+				<?php echo $this->media_img( $s['image'], 'full', false, (string) $alt ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			</div>
+			<div class="vd-hi-band" aria-hidden="true"></div>
+			<?php if ( 'yes' === $s['show_cta'] && $s['cta'] ) : ?>
+				<a class="vd-hi-cta vd-square" href="<?php echo esc_url( $s['cta'] ); ?>" aria-label="<?php echo esc_attr( $s['cta_label'] ); ?>"><?php echo vde_arrow(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+			<?php endif; ?>
+		</div>
 		<?php
 	}
 }

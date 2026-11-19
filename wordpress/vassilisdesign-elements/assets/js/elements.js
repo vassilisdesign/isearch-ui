@@ -104,6 +104,33 @@
 		});
 	}
 
+	/* ---------- VD Hero image: reveal when in view, optional scroll movement ---------- */
+	function initHeroImages() {
+		$$('.vd-hero-image').forEach(function (el) {
+			var band = el.querySelector('.vd-hi-band'), photo = el.querySelector('.vd-hi-photo'), img = photo ? photo.firstElementChild : null, cta = el.querySelector('.vd-hi-cta');
+			if (el.getAttribute('data-vd-motion') === 'yes') {
+				gsap.set(band, { scaleX: 0 });
+				if (photo) gsap.set(photo, { clipPath: 'inset(100% 0% 0% 0%)' });
+				if (img) gsap.set(img, { scale: 1.2 });
+				if (cta) gsap.set(cta, { scale: 0 });
+				var play = function () {
+					var tl = gsap.timeline({ onComplete: function () { gsap.set([band, photo, img, cta].filter(Boolean), { clearProps: 'transform,clipPath' }); } })
+						.to(band, { scaleX: 1, duration: 1.1, ease: 'expo.inOut' });
+					if (photo) tl.to(photo, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.15);
+					if (img) tl.to(img, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0.15);
+					if (cta) tl.to(cta, { scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 0.9);
+				};
+				if (w.ScrollTrigger) w.ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: play });
+				else play();
+			}
+			if (el.getAttribute('data-vd-parallax') === 'yes' && w.ScrollTrigger && photo) {
+				var st = { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true };
+				gsap.fromTo(photo, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: st });
+				gsap.fromTo(band, { xPercent: -3 }, { xPercent: 3, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
+			}
+		});
+	}
+
 	/* ---------- Page wipe between internal pages ---------- */
 	function samePage(url) {
 		return url.pathname.replace(/index\.php$/, '') === location.pathname.replace(/index\.php$/, '') && url.search === location.search;
@@ -144,6 +171,7 @@
 			});
 			at = 0.3;
 		}
+		initHeroImages(); // sets its own starting state before the intro class is removed
 		if (d.querySelector('.vd-hero')) tl.add(homeIntro(), at);
 		else if (d.querySelector('.vd-case-head')) tl.add(caseIntro(), at);
 		else endIntro();
