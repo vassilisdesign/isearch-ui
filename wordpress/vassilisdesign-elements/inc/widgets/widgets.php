@@ -86,6 +86,114 @@ abstract class VDE_Widget extends Widget_Base {
 		}
 		$this->end_controls_section();
 	}
+	/**
+	 * Image placement like a container's background image: Display size, Position and Repeat,
+	 * each responsive. The key 'fit' keeps the value saved by earlier versions (contain / cover).
+	 */
+	protected function add_image_bg_controls() {
+		$sel = '{{WRAPPER}} .vd-photo-bg';
+		$this->add_responsive_control(
+			'fit',
+			array(
+				'label'     => __( 'Display size', 'vassilisdesign-elements' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'contain',
+				'options'   => array(
+					'cover'   => __( 'Cover', 'vassilisdesign-elements' ),
+					'contain' => __( 'Contain', 'vassilisdesign-elements' ),
+					'auto'    => __( 'Auto', 'vassilisdesign-elements' ),
+					'initial' => __( 'Custom', 'vassilisdesign-elements' ),
+				),
+				'separator' => 'before',
+				'selectors' => array( $sel => 'background-size: {{VALUE}};' ),
+			)
+		);
+		$this->add_responsive_control(
+			'fit_width',
+			array(
+				'label'      => __( 'Width', 'vassilisdesign-elements' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%', 'vw' ),
+				'range'      => array( 'px' => array( 'min' => 0, 'max' => 2000 ), '%' => array( 'min' => 0, 'max' => 200 ) ),
+				'default'    => array( 'unit' => '%', 'size' => 100 ),
+				'condition'  => array( 'fit' => 'initial' ),
+				'selectors'  => array( $sel => 'background-size: {{SIZE}}{{UNIT}} auto;' ),
+			)
+		);
+		$this->add_responsive_control(
+			'bg_position',
+			array(
+				'label'     => __( 'Position', 'vassilisdesign-elements' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'center center',
+				'options'   => array(
+					'center center' => __( 'Center Center', 'vassilisdesign-elements' ),
+					'center left'   => __( 'Center Left', 'vassilisdesign-elements' ),
+					'center right'  => __( 'Center Right', 'vassilisdesign-elements' ),
+					'top center'    => __( 'Top Center', 'vassilisdesign-elements' ),
+					'top left'      => __( 'Top Left', 'vassilisdesign-elements' ),
+					'top right'     => __( 'Top Right', 'vassilisdesign-elements' ),
+					'bottom center' => __( 'Bottom Center', 'vassilisdesign-elements' ),
+					'bottom left'   => __( 'Bottom Left', 'vassilisdesign-elements' ),
+					'bottom right'  => __( 'Bottom Right', 'vassilisdesign-elements' ),
+					'initial'       => __( 'Custom', 'vassilisdesign-elements' ),
+				),
+				'selectors' => array( $sel => 'background-position: {{VALUE}};' ),
+			)
+		);
+		foreach ( array( 'x' => __( 'X Position', 'vassilisdesign-elements' ), 'y' => __( 'Y Position', 'vassilisdesign-elements' ) ) as $axis => $label ) {
+			$this->add_responsive_control(
+				'bg_' . $axis . 'pos',
+				array(
+					'label'      => $label,
+					'type'       => Controls_Manager::SLIDER,
+					'size_units' => array( '%', 'px' ),
+					'range'      => array( '%' => array( 'min' => -100, 'max' => 200 ), 'px' => array( 'min' => -800, 'max' => 800 ) ),
+					'default'    => array( 'unit' => '%', 'size' => 50 ),
+					'condition'  => array( 'bg_position' => 'initial' ),
+					'selectors'  => array( $sel => 'background-position-' . $axis . ': {{SIZE}}{{UNIT}};' ),
+				)
+			);
+		}
+		$this->add_responsive_control(
+			'bg_repeat',
+			array(
+				'label'     => __( 'Repeat', 'vassilisdesign-elements' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'no-repeat',
+				'options'   => array(
+					'no-repeat' => __( 'No-repeat', 'vassilisdesign-elements' ),
+					'repeat'    => __( 'Repeat', 'vassilisdesign-elements' ),
+					'repeat-x'  => __( 'Repeat-x', 'vassilisdesign-elements' ),
+					'repeat-y'  => __( 'Repeat-y', 'vassilisdesign-elements' ),
+				),
+				'selectors' => array( $sel => 'background-repeat: {{VALUE}};' ),
+			)
+		);
+	}
+
+	/** The image as a background layer (black and white), described for screen readers. */
+	protected function image_bg( $media, $alt = '', $preload = false ) {
+		$url = '';
+		if ( ! empty( $media['id'] ) ) {
+			$url = wp_get_attachment_image_url( (int) $media['id'], 'vd-wide' );
+			if ( ! $url ) {
+				$url = wp_get_attachment_image_url( (int) $media['id'], 'full' );
+			}
+		}
+		if ( ! $url && ! empty( $media['url'] ) ) {
+			$url = $media['url'];
+		}
+		if ( ! $url ) {
+			return '';
+		}
+		$out = '';
+		if ( $preload ) {
+			$out .= '<link rel="preload" as="image" href="' . esc_url( $url ) . '" fetchpriority="high">';
+		}
+		$a11y = $alt ? ' role="img" aria-label="' . esc_attr( $alt ) . '"' : ' aria-hidden="true"';
+		return $out . '<div class="vd-photo-bg"' . $a11y . ' style="background-image:url(\'' . esc_url( $url ) . '\')"></div>';
+	}
 	protected function start( $label ) {
 		$this->start_controls_section( 'content', array( 'label' => $label ) );
 	}
@@ -112,18 +220,7 @@ class VDE_Widget_Hero extends VDE_Widget {
 		$this->add_control( 'corner', array( 'label' => __( 'Rotated corner text', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'GR / US' ) );
 		$this->add_control( 'image', array( 'label' => __( 'Image', 'vassilisdesign-elements' ), 'type' => Controls_Manager::MEDIA ) );
 		$this->add_control( 'image_alt', array( 'label' => __( 'Image description', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'Wine labels designed by VASSILISDESIGN' ) );
-		$this->add_control(
-			'fit',
-			array(
-				'label'   => __( 'Image display', 'vassilisdesign-elements' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'contain',
-				'options' => array(
-					'contain' => __( 'Packshot on white: fit', 'vassilisdesign-elements' ),
-					'cover'   => __( 'Photo: fill', 'vassilisdesign-elements' ),
-				),
-			)
-		);
+		$this->add_image_bg_controls();
 		$this->add_control( 'cta', array( 'label' => __( 'Arrow button link', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '#work' ) );
 		$this->add_control( 'cta_label', array( 'label' => __( 'Arrow button label', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'See selected work' ) );
 		$this->end_controls_section();
@@ -170,8 +267,8 @@ class VDE_Widget_Hero extends VDE_Widget {
 				<p class="vd-hero-vertical"><?php echo vde_lines( $s['vertical'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 			<?php endif; ?>
 			<div class="vd-hero-media">
-				<div class="vd-hero-photo vd-photo<?php echo 'contain' === $s['fit'] ? ' vd-fit-contain' : ''; ?>">
-					<?php echo $this->media_img( $s['image'], 'full', true, $s['image_alt'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<div class="vd-hero-photo vd-photo vd-photo-frame">
+					<?php echo $this->image_bg( $s['image'], $s['image_alt'], true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 				<div class="vd-hero-band" aria-hidden="true"></div>
 				<?php if ( $s['cta'] ) : ?>
@@ -199,18 +296,7 @@ class VDE_Widget_Hero_Image extends VDE_Widget {
 		$this->start( __( 'Image', 'vassilisdesign-elements' ) );
 		$this->add_control( 'image', array( 'label' => __( 'Image', 'vassilisdesign-elements' ), 'type' => Controls_Manager::MEDIA, 'default' => array( 'url' => Utils::get_placeholder_image_src() ) ) );
 		$this->add_control( 'image_alt', array( 'label' => __( 'Image description', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '' ) );
-		$this->add_control(
-			'fit',
-			array(
-				'label'   => __( 'Image display', 'vassilisdesign-elements' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'contain',
-				'options' => array(
-					'contain' => __( 'Packshot on white: fit', 'vassilisdesign-elements' ),
-					'cover'   => __( 'Photo: fill', 'vassilisdesign-elements' ),
-				),
-			)
-		);
+		$this->add_image_bg_controls();
 		$this->add_control( 'show_cta', array( 'label' => __( 'Arrow button', 'vassilisdesign-elements' ), 'type' => Controls_Manager::SWITCHER, 'default' => 'yes', 'return_value' => 'yes', 'separator' => 'before' ) );
 		$this->add_control( 'cta', array( 'label' => __( 'Arrow button link', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '#work', 'condition' => array( 'show_cta' => 'yes' ) ) );
 		$this->add_control( 'cta_label', array( 'label' => __( 'Arrow button label (for screen readers)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'See selected work', 'condition' => array( 'show_cta' => 'yes' ) ) );
@@ -271,8 +357,8 @@ class VDE_Widget_Hero_Image extends VDE_Widget {
 		$alt = $s['image_alt'] ? $s['image_alt'] : ( ! empty( $s['image']['id'] ) ? get_post_meta( $s['image']['id'], '_wp_attachment_image_alt', true ) : '' );
 		?>
 		<div class="vd-hero-image" data-vd-motion="<?php echo esc_attr( $s['motion'] ); ?>" data-vd-parallax="<?php echo esc_attr( $s['parallax'] ); ?>">
-			<div class="vd-hi-photo vd-photo<?php echo 'contain' === $s['fit'] ? ' vd-fit-contain' : ''; ?>">
-				<?php echo $this->media_img( $s['image'], 'full', false, (string) $alt ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<div class="vd-hi-photo vd-photo vd-photo-frame">
+				<?php echo $this->image_bg( $s['image'], (string) $alt ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 			<div class="vd-hi-band" aria-hidden="true"></div>
 			<?php if ( 'yes' === $s['show_cta'] && $s['cta'] ) : ?>

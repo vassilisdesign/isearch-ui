@@ -122,6 +122,13 @@ body {
 .vd-photo.vd-fit-contain { background: var(--vd-paper); }
 .vd-photo.vd-fit-contain > .vd-photo-img { inset: 7%; width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; }
 .vd-photo.vd-is-color > .vd-photo-img { filter: none; }
+/* Background-style image (VD Hero, VD Hero image): Display size / Position / Repeat set per widget.
+   Multiplied so a white ground blends into the frame colour (Style → Image background). */
+.vd-photo.vd-photo-frame { background: var(--vd-paper); }
+.vd-photo-bg {
+  position: absolute; inset: 0; background-repeat: no-repeat; background-position: center center; background-size: contain;
+  filter: grayscale(1) contrast(1.08); mix-blend-mode: multiply;
+}
 .vd-photo.vd-is-color::after { display: none; }
 .vd-red-block {
   position: absolute; left: 0; right: 0; bottom: 0; height: 42%; z-index: 1;
