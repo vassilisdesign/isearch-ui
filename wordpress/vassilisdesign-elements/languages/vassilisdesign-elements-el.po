@@ -248,55 +248,55 @@ msgstr "Ετικέτα ρολογιού"
 msgid "Footer text"
 msgstr "Κείμενο υποσέλιδου"
 
-#: inc/template-functions.php:170
+#: inc/template-functions.php:173
 msgid "No Works yet. Add them under Works → Add Work."
 msgstr "Δεν υπάρχουν ακόμη έργα. Προσθέστε τα από Έργα → Προσθήκη έργου."
 
-#: inc/template-functions.php:218 inc/widgets/widgets.php:342 inc/works.php:61
+#: inc/template-functions.php:230 inc/widgets/widgets.php:342 inc/works.php:61
 msgid "Works"
 msgstr "Έργα"
 
-#: inc/template-functions.php:225 inc/works.php:34 inc/works.php:39
+#: inc/template-functions.php:237 inc/works.php:34 inc/works.php:39
 msgid "Sectors"
 msgstr "Τομείς"
 
-#: inc/template-functions.php:226
+#: inc/template-functions.php:238
 msgid "All"
 msgstr "Όλα"
 
-#: inc/template-functions.php:248
+#: inc/template-functions.php:260
 msgid "No Works yet."
 msgstr "Δεν υπάρχουν ακόμη έργα."
 
-#: inc/template-functions.php:267 inc/widgets/widgets.php:368 inc/widgets/widgets.php:648
+#: inc/template-functions.php:279 inc/widgets/widgets.php:368 inc/widgets/widgets.php:663
 msgid "Sector"
 msgstr "Τομέας"
 
-#: inc/template-functions.php:268 inc/works.php:18 inc/works.php:157
+#: inc/template-functions.php:280 inc/works.php:18 inc/works.php:157
 msgid "Services"
 msgstr "Υπηρεσίες"
 
-#: inc/template-functions.php:269 inc/works.php:17 inc/works.php:153
+#: inc/template-functions.php:281 inc/works.php:17 inc/works.php:153
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: inc/template-functions.php:275
+#: inc/template-functions.php:287
 msgid "All work"
 msgstr "Όλα τα έργα"
 
-#: inc/template-functions.php:283
+#: inc/template-functions.php:295
 msgid "Project"
 msgstr "Έργο"
 
-#: inc/template-functions.php:288 inc/works.php:161
+#: inc/template-functions.php:300 inc/works.php:161
 msgid "Scope"
 msgstr "Εύρος εργασιών"
 
-#: inc/template-functions.php:320
+#: inc/template-functions.php:332
 msgid "About the project"
 msgstr "Για το έργο"
 
-#: inc/template-functions.php:365 inc/template-functions.php:367
+#: inc/template-functions.php:377 inc/template-functions.php:379
 msgid "Next project"
 msgstr "Επόμενο έργο"
 
@@ -488,11 +488,11 @@ msgstr ""
 msgid "Intro square"
 msgstr ""
 
-#: inc/widgets/widgets.php:313 inc/widgets/widgets.php:537 inc/widgets/widgets.php:588
+#: inc/widgets/widgets.php:313 inc/widgets/widgets.php:552 inc/widgets/widgets.php:603
 msgid "Title"
 msgstr "Τίτλος"
 
-#: inc/widgets/widgets.php:314 inc/widgets/widgets.php:599 inc/widgets/widgets.php:713
+#: inc/widgets/widgets.php:314 inc/widgets/widgets.php:614 inc/widgets/widgets.php:728
 msgid "Title full stop"
 msgstr "Τελεία τίτλου"
 
@@ -580,259 +580,275 @@ msgstr "Κλιμακωτά ύψη"
 msgid "On: each column has its own image height. Off: all images the same size."
 msgstr ""
 
-#: inc/widgets/widgets.php:454 inc/widgets/widgets.php:855
+#: inc/widgets/widgets.php:451
+msgid "Phones"
+msgstr "Κινητά"
+
+#: inc/widgets/widgets.php:452
+msgid "Works on phones (0 = all)"
+msgstr "Έργα στα κινητά (0 = όλα)"
+
+#: inc/widgets/widgets.php:456
+msgid "Works per row on phones"
+msgstr "Έργα ανά σειρά στα κινητά"
+
+#: inc/widgets/widgets.php:462
+msgid "Equal heights on phones"
+msgstr "Ίδιο ύψος στα κινητά"
+
+#: inc/widgets/widgets.php:466 inc/widgets/widgets.php:870
 msgid "Work title"
 msgstr "Τίτλος έργου"
 
-#: inc/widgets/widgets.php:455
+#: inc/widgets/widgets.php:467
 msgid "Work title on hover"
 msgstr "Τίτλος έργου στο hover"
 
-#: inc/widgets/widgets.php:456 inc/widgets/widgets.php:856
+#: inc/widgets/widgets.php:468 inc/widgets/widgets.php:871
 msgid "Details under the title"
 msgstr "Στοιχεία κάτω από τον τίτλο"
 
-#: inc/widgets/widgets.php:457
+#: inc/widgets/widgets.php:469
 msgid "Text on hover"
 msgstr "Κείμενο στο hover"
 
-#: inc/widgets/widgets.php:458
+#: inc/widgets/widgets.php:470
 msgid "Red cover / red block"
 msgstr "Κόκκινη επικάλυψη / κόκκινο μπλοκ"
 
-#: inc/widgets/widgets.php:459 inc/widgets/widgets.php:773
+#: inc/widgets/widgets.php:471 inc/widgets/widgets.php:788
 msgid "\"All work\" link"
 msgstr ""
 
-#: inc/widgets/widgets.php:460
+#: inc/widgets/widgets.php:472
 msgid "\"All work\" underline"
 msgstr ""
 
-#: inc/widgets/widgets.php:496
+#: inc/widgets/widgets.php:511
 msgid "VD Logo wall"
 msgstr ""
 
-#: inc/widgets/widgets.php:499
+#: inc/widgets/widgets.php:514
 msgid "Logos"
 msgstr ""
 
-#: inc/widgets/widgets.php:500
+#: inc/widgets/widgets.php:515
 msgid "Logos (on white, any size)"
 msgstr ""
 
-#: inc/widgets/widgets.php:504
+#: inc/widgets/widgets.php:519
 msgid "Grid lines"
 msgstr ""
 
-#: inc/widgets/widgets.php:532
+#: inc/widgets/widgets.php:547
 msgid "VD Numbered list"
 msgstr ""
 
-#: inc/widgets/widgets.php:535 inc/widgets/widgets.php:542
+#: inc/widgets/widgets.php:550 inc/widgets/widgets.php:557
 msgid "Items"
 msgstr ""
 
-#: inc/widgets/widgets.php:538 inc/widgets/widgets.php:554 inc/widgets/widgets.php:700
+#: inc/widgets/widgets.php:553 inc/widgets/widgets.php:569 inc/widgets/widgets.php:715
 msgid "Text"
 msgstr "Κείμενο"
 
-#: inc/widgets/widgets.php:552
+#: inc/widgets/widgets.php:567
 msgid "Numbers"
 msgstr ""
 
-#: inc/widgets/widgets.php:553
+#: inc/widgets/widgets.php:568
 msgid "Titles"
 msgstr ""
 
-#: inc/widgets/widgets.php:555
+#: inc/widgets/widgets.php:570
 msgid "Lines"
 msgstr "Γραμμές"
 
-#: inc/widgets/widgets.php:584
+#: inc/widgets/widgets.php:599
 msgid "VD Studio"
 msgstr ""
 
-#: inc/widgets/widgets.php:587
+#: inc/widgets/widgets.php:602
 msgid "Studio"
 msgstr "Στούντιο"
 
-#: inc/widgets/widgets.php:589 inc/widgets/widgets.php:601 inc/widgets/widgets.php:781
+#: inc/widgets/widgets.php:604 inc/widgets/widgets.php:616 inc/widgets/widgets.php:796
 msgid "Red box label"
 msgstr ""
 
-#: inc/widgets/widgets.php:590
+#: inc/widgets/widgets.php:605
 msgid "Red box list (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:591 inc/widgets/widgets.php:603
+#: inc/widgets/widgets.php:606 inc/widgets/widgets.php:618
 msgid "Side label"
 msgstr ""
 
-#: inc/widgets/widgets.php:592
+#: inc/widgets/widgets.php:607
 msgid "Side list (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:594
+#: inc/widgets/widgets.php:609
 msgid "Text (first paragraph is shown large)"
 msgstr ""
 
-#: inc/widgets/widgets.php:600 inc/widgets/widgets.php:780
+#: inc/widgets/widgets.php:615 inc/widgets/widgets.php:795
 msgid "Red box"
 msgstr "Κόκκινο πλαίσιο"
 
-#: inc/widgets/widgets.php:602 inc/widgets/widgets.php:782
+#: inc/widgets/widgets.php:617 inc/widgets/widgets.php:797
 msgid "Red box list"
 msgstr ""
 
-#: inc/widgets/widgets.php:604
+#: inc/widgets/widgets.php:619
 msgid "Side list"
 msgstr ""
 
-#: inc/widgets/widgets.php:605
+#: inc/widgets/widgets.php:620
 msgid "First paragraph"
 msgstr ""
 
-#: inc/widgets/widgets.php:606
+#: inc/widgets/widgets.php:621
 msgid "Other paragraphs"
 msgstr ""
 
-#: inc/widgets/widgets.php:607
+#: inc/widgets/widgets.php:622
 msgid "Circle"
 msgstr ""
 
-#: inc/widgets/widgets.php:643
+#: inc/widgets/widgets.php:658
 msgid "VD Client index"
 msgstr ""
 
-#: inc/widgets/widgets.php:646
+#: inc/widgets/widgets.php:661
 msgid "Clients"
 msgstr ""
 
-#: inc/widgets/widgets.php:649
+#: inc/widgets/widgets.php:664
 msgid "Clients (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:653
+#: inc/widgets/widgets.php:668
 msgid "Groups"
 msgstr ""
 
-#: inc/widgets/widgets.php:663
+#: inc/widgets/widgets.php:678
 msgid "Sector titles"
 msgstr ""
 
-#: inc/widgets/widgets.php:664
+#: inc/widgets/widgets.php:679
 msgid "Sector title line"
 msgstr ""
 
-#: inc/widgets/widgets.php:665
+#: inc/widgets/widgets.php:680
 msgid "Client names"
 msgstr ""
 
-#: inc/widgets/widgets.php:666
+#: inc/widgets/widgets.php:681
 msgid "Lines between names"
 msgstr ""
 
-#: inc/widgets/widgets.php:695
+#: inc/widgets/widgets.php:710
 msgid "VD Contact intro"
 msgstr ""
 
-#: inc/widgets/widgets.php:698
+#: inc/widgets/widgets.php:713
 msgid "Contact"
 msgstr "Επικοινωνία"
 
-#: inc/widgets/widgets.php:701
+#: inc/widgets/widgets.php:716
 msgid "Line above the contact details"
 msgstr ""
 
-#: inc/widgets/widgets.php:706
+#: inc/widgets/widgets.php:721
 msgid "Email and phone come from Appearance → Customize → Studio details."
 msgstr ""
 
-#: inc/widgets/widgets.php:715
+#: inc/widgets/widgets.php:730
 msgid "Line above contact details"
 msgstr ""
 
-#: inc/widgets/widgets.php:716
+#: inc/widgets/widgets.php:731
 msgid "Email and phone"
 msgstr ""
 
-#: inc/widgets/widgets.php:739 inc/works.php:62
+#: inc/widgets/widgets.php:754 inc/works.php:62
 msgid "Work"
 msgstr "Έργα"
 
-#: inc/widgets/widgets.php:744
+#: inc/widgets/widgets.php:759
 msgid "Shows the current Work. Use inside a Theme Builder \"Single\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:769
+#: inc/widgets/widgets.php:784
 msgid "VD Work header"
 msgstr ""
 
-#: inc/widgets/widgets.php:774
+#: inc/widgets/widgets.php:789
 msgid "Detail labels"
 msgstr ""
 
-#: inc/widgets/widgets.php:775
+#: inc/widgets/widgets.php:790
 msgid "Detail values"
 msgstr ""
 
-#: inc/widgets/widgets.php:776
+#: inc/widgets/widgets.php:791
 msgid "Detail lines"
 msgstr ""
 
-#: inc/widgets/widgets.php:777
+#: inc/widgets/widgets.php:792
 msgid "Project number"
 msgstr ""
 
-#: inc/widgets/widgets.php:798
+#: inc/widgets/widgets.php:813
 msgid "VD Work cover and summary"
 msgstr ""
 
-#: inc/widgets/widgets.php:802
+#: inc/widgets/widgets.php:817
 msgid "Label"
 msgstr ""
 
-#: inc/widgets/widgets.php:803
+#: inc/widgets/widgets.php:818
 msgid "Summary"
 msgstr ""
 
-#: inc/widgets/widgets.php:804
+#: inc/widgets/widgets.php:819
 msgid "Description"
 msgstr ""
 
-#: inc/widgets/widgets.php:820
+#: inc/widgets/widgets.php:835
 msgid "VD Work gallery"
 msgstr ""
 
-#: inc/widgets/widgets.php:835
+#: inc/widgets/widgets.php:850
 msgid "VD Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:841
+#: inc/widgets/widgets.php:856
 msgid "Works archive"
 msgstr "Αρχείο έργων"
 
-#: inc/widgets/widgets.php:846
+#: inc/widgets/widgets.php:861
 msgid "Title, Sector filter and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:854
+#: inc/widgets/widgets.php:869
 msgid "Sector filter"
 msgstr ""
 
-#: inc/widgets/widgets.php:870
+#: inc/widgets/widgets.php:885
 msgid "VD Next Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:874
+#: inc/widgets/widgets.php:889
 msgid "\"Next project\" label"
 msgstr ""
 
-#: inc/widgets/widgets.php:875
+#: inc/widgets/widgets.php:890
 msgid "Next Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:877
+#: inc/widgets/widgets.php:892
 msgid "Top line"
 msgstr ""
 

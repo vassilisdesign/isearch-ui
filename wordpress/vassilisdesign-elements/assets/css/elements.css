@@ -276,6 +276,14 @@ body {
 .vd-tiles.vd-tiles-grid .vd-tile .vd-tile-media { aspect-ratio: 4 / 5; }
 .vd-tiles.vd-tiles-gap { gap: var(--vd-grid-gap); }
 
+/* Phones (VD Works grid "Phones" settings): column count, equal heights, number of Works */
+@media (max-width: 719.98px) {
+  .vd-tiles.vd-tiles-mcols { grid-template-columns: repeat(var(--vd-m-cols, 2), minmax(0, 1fr)); }
+  .vd-tiles.vd-tiles-mequal { align-items: start; }
+  .vd-tiles.vd-tiles-mequal .vd-tile .vd-tile-media { aspect-ratio: 4 / 5; }
+  .vd-tile.vd-tile-mhide { display: none; }
+}
+
 /* Full width: edge to edge; captions keep a small inset so text never touches the screen edge */
 .vd-bleed { width: 100%; }
 .vd-bleed .vd-tile-client, .vd-bleed .vd-tile-meta { padding-inline: clamp(10px, 1.2vw, 16px); }

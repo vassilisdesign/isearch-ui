@@ -448,6 +448,18 @@ class VDE_Widget_Works_Grid extends VDE_Widget {
 				'description'  => __( 'On: each column has its own image height. Off: all images the same size.', 'vassilisdesign-elements' ),
 			)
 		);
+		$this->add_control( 'phone_heading', array( 'label' => __( 'Phones', 'vassilisdesign-elements' ), 'type' => Controls_Manager::HEADING, 'separator' => 'before' ) );
+		$this->add_control( 'mobile_count', array( 'label' => __( 'Works on phones (0 = all)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::NUMBER, 'default' => 4, 'min' => 0, 'max' => 48 ) );
+		$this->add_control(
+			'mobile_columns',
+			array(
+				'label'   => __( 'Works per row on phones', 'vassilisdesign-elements' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '2',
+				'options' => array( '1' => '1', '2' => '2', '3' => '3', '4' => '4' ),
+			)
+		);
+		$this->add_control( 'mobile_equal', array( 'label' => __( 'Equal heights on phones', 'vassilisdesign-elements' ), 'type' => Controls_Manager::SWITCHER, 'default' => 'yes', 'return_value' => 'yes' ) );
 		$this->end_controls_section();
 		$this->add_style_controls(
 			array(
@@ -477,6 +489,9 @@ class VDE_Widget_Works_Grid extends VDE_Widget {
 				'overlay'   => 'yes' === $s['overlay'],
 				'captions'  => 'yes' === $s['captions'],
 				'staggered' => 'yes' === $s['staggered'],
+				'm_count'   => isset( $s['mobile_count'] ) ? (int) $s['mobile_count'] : 0,
+				'm_cols'    => isset( $s['mobile_columns'] ) ? (int) $s['mobile_columns'] : 2,
+				'm_equal'   => isset( $s['mobile_equal'] ) && 'yes' === $s['mobile_equal'],
 			)
 		);
 		echo $full ? '<div class="vd-bleed">' . $grid . '</div>' : '<div class="vd-wrap">' . $grid . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

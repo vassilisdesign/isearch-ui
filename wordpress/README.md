@@ -72,7 +72,7 @@ The setup never overwrites anything. If the site already has a page with the slu
 
 On the homepage, the **VD Works grid** shows 5 Works per row, edge to edge, with staggered heights. On hover, a red block (multiplied over the image) covers the whole tile and the Work's Excerpt appears in white, or the start of its content if there is no Excerpt. Titles use Elementor's global **Accent** font (Site Settings → Global Fonts).
 
-Which Works appear: in the widget, **Show** → *All Works (by Order)*, *Works in one Sector*, or *Works I choose* (pick them in the order you want). Columns, full width, spacing, hover text, captions and staggered heights are in the **Layout** settings.
+Which Works appear: in the widget, **Show** → *All Works (by Order)*, *Works in one Sector*, or *Works I choose* (pick them in the order you want). Columns, full width, spacing, hover text, captions and staggered heights are in the **Layout** settings. On phones it shows 4 Works, 2 per row, with equal heights; change this under **Layout → Phones**.
 
 Images: about 1600–2000px on the long edge, JPEG quality 75–80 or WebP. On the homepage, images show in black and white with the red block on hover. On Work pages they show in full colour. Packshots on a white background blend into the page colour automatically.
 

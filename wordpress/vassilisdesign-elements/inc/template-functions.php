@@ -89,14 +89,14 @@ function vde_work_hover_text( $post ) {
  * @param bool        $overlay  Red panel with the Work's text on hover (instead of the red block).
  * @param bool        $captions Title, services and location under the image.
  */
-function vde_work_tile( $post, $overlay = false, $captions = true, $ratio = '' ) {
+function vde_work_tile( $post, $overlay = false, $captions = true, $ratio = '', $class = '' ) {
 	$post  = get_post( $post );
 	$fit   = vde_cover_fit( $post->ID );
 	$thumb = get_post_thumbnail_id( $post );
 	$title = get_the_title( $post );
 	ob_start();
 	?>
-	<li class="vd-tile"<?php echo $ratio ? ' style="--vd-ar:4 / ' . esc_attr( $ratio ) . '"' : ''; ?>>
+	<li class="vd-tile<?php echo $class ? ' ' . esc_attr( $class ) : ''; ?>"<?php echo $ratio ? ' style="--vd-ar:4 / ' . esc_attr( $ratio ) . '"' : ''; ?>>
 		<a class="vd-tile-link" href="<?php echo esc_url( get_permalink( $post ) ); ?>"<?php echo $captions ? '' : ' aria-label="' . esc_attr( $title ) . '"'; ?>>
 			<span class="vd-tile-media vd-photo<?php echo 'contain' === $fit ? ' vd-fit-contain' : ''; ?>">
 				<?php echo vde_img( $thumb, 'vd-tile', false, '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -141,6 +141,9 @@ function vde_works_grid( $args = array() ) {
 			'overlay'   => false,
 			'captions'  => true,
 			'staggered' => true,
+			'm_count'   => 0,
+			'm_cols'    => 0,
+			'm_equal'   => false,
 		)
 	);
 	$query = array(
@@ -185,12 +188,21 @@ function vde_works_grid( $args = array() ) {
 	if ( $args['overlay'] ) {
 		$classes[] = 'vd-tiles-overlay';
 	}
+	// Phones (under 720px): own column count, equal heights, and a limit on how many Works show.
+	if ( (int) $args['m_cols'] ) {
+		$classes[] = 'vd-tiles-mcols';
+		$style[]   = '--vd-m-cols:' . max( 1, min( 4, (int) $args['m_cols'] ) );
+	}
+	if ( $args['m_equal'] ) {
+		$classes[] = 'vd-tiles-mequal';
+	}
 	// Staggered: each column gets its own image height, repeated row after row.
 	$ratios = array( '5.2', '6.2', '4.6', '5.7', '5', '6.6', '4.9', '5.9' );
 	$tiles  = '';
 	foreach ( array_values( $posts ) as $i => $post ) {
 		$ratio  = ( $cols && $args['staggered'] ) ? $ratios[ $i % $cols ] : '';
-		$tiles .= vde_work_tile( $post, (bool) $args['overlay'], (bool) $args['captions'], $ratio );
+		$hide   = ( (int) $args['m_count'] > 0 && $i >= (int) $args['m_count'] ) ? 'vd-tile-mhide' : '';
+		$tiles .= vde_work_tile( $post, (bool) $args['overlay'], (bool) $args['captions'], $ratio, $hide );
 	}
 	return sprintf(
 		'<ul class="%s" role="list"%s>%s</ul>',
