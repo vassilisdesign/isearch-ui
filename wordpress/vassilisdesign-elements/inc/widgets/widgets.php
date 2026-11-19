@@ -747,7 +747,9 @@ class VDE_Widget_Studio extends VDE_Widget {
 		$this->add_control( 'side_title', array( 'label' => __( 'Side label', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'Industries' ) );
 		$this->add_control( 'side_list', array( 'label' => __( 'Side list (one per line)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXTAREA, 'default' => "Wine\nHospitality and tourism\nFood and beverage\nProfessional services" ) );
 		$this->add_control( 'image', array( 'label' => __( 'Image', 'vassilisdesign-elements' ), 'type' => Controls_Manager::MEDIA ) );
-		$this->add_control( 'text', array( 'label' => __( 'Text (first paragraph is shown large)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::WYSIWYG ) );
+		$this->add_control( 'image_alt', array( 'label' => __( 'Image description', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '' ) );
+		$this->add_image_bg_controls();
+		$this->add_control( 'text', array( 'label' => __( 'Text (first paragraph is shown large)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::WYSIWYG, 'separator' => 'before' ) );
 		$this->end_controls_section();
 		$this->add_style_controls(
 			array(
@@ -761,6 +763,7 @@ class VDE_Widget_Studio extends VDE_Widget {
 				array( 'text', 'intro', __( 'First paragraph', 'vassilisdesign-elements' ), '.vd-studio-copy p:first-child' ),
 				array( 'text', 'body', __( 'Other paragraphs', 'vassilisdesign-elements' ), '.vd-studio-copy p:not(:first-child)' ),
 				array( 'color', 'circle', __( 'Circle', 'vassilisdesign-elements' ), '.vd-studio-circle', 'background-color' ),
+				array( 'color', 'frame', __( 'Image background', 'vassilisdesign-elements' ), '.vd-studio-photo', 'background-color' ),
 			)
 		);
 	}
@@ -779,7 +782,7 @@ class VDE_Widget_Studio extends VDE_Widget {
 			</div>
 			<div class="vd-studio-media">
 				<span class="vd-studio-circle" aria-hidden="true"></span>
-				<div class="vd-studio-photo vd-photo vd-fit-contain"><?php echo $this->media_img( $s['image'], 'large', false, '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+				<div class="vd-studio-photo vd-photo vd-photo-frame"><?php echo $this->image_bg( $s['image'], isset( $s['image_alt'] ) ? (string) $s['image_alt'] : '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			</div>
 			<div class="vd-studio-copy"><?php echo wp_kses_post( $s['text'] ); ?></div>
 			<span class="vd-plus" aria-hidden="true"></span>

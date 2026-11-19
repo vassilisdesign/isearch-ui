@@ -82,7 +82,7 @@
 			gsap.to('.vd-hero-photo', { yPercent: 12, ease: 'none', scrollTrigger: st });
 			gsap.to('.vd-hero-band', { xPercent: 6, ease: 'none', scrollTrigger: { trigger: '.vd-hero', start: 'top top', end: 'bottom top', scrub: true } });
 		}
-		$$('.vd-studio-photo > .vd-photo-img').forEach(function (el) {
+		$$('.vd-studio-photo > .vd-photo-img, .vd-studio-photo > .vd-photo-bg').forEach(function (el) {
 			gsap.fromTo(el, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
 		});
 	}
