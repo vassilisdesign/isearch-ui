@@ -41,31 +41,32 @@
 	initClock();
 	clearWipeFlag();
 
-	if (reduce || inEditor || !w.gsap) {
-		html.classList.remove('vd-intro', 'vd-is-wiping');
+	if (reduce || inEditor || !w.gsap || !w.ScrollTrigger) {
+		html.classList.remove('vd-intro', 'vd-motion', 'vd-is-wiping');
 		return;
 	}
 
 	var gsap = w.gsap;
-	if (w.ScrollTrigger) gsap.registerPlugin(w.ScrollTrigger);
+	gsap.registerPlugin(w.ScrollTrigger);
 
 	/* ---------- Intros ---------- */
+	// The wordmark leads: each line rises as one piece straight away, the image and band follow, details fade in last.
 	function homeIntro() {
-		var targets = ['.vd-wordmark .vd-ch', '.vd-hero-band', '.vd-hero-photo', '.vd-hero-photo > *', '.vd-hero-cta', '.vd-hero-lead', '.vd-hero-meta', '.vd-hero-vertical', '.vd-hero-corner'];
-		return gsap.timeline({ onComplete: function () { endIntro(); gsap.set(targets, { clearProps: 'transform,clipPath,opacity,visibility' }); } })
-			.fromTo('.vd-hero-band', { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'expo.inOut' })
-			.fromTo('.vd-hero-photo', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.15)
-			.fromTo('.vd-hero-photo > *', { scale: 1.2 }, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0.15)
-			.fromTo('.vd-wordmark .vd-ch', { yPercent: 105 }, { yPercent: 0, duration: 1.2, ease: 'expo.out', stagger: 0.04 }, 0.45)
-			.fromTo('.vd-hero-cta', { scale: 0 }, { scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 1.1)
-			.fromTo(['.vd-hero-meta', '.vd-hero-vertical', '.vd-hero-lead', '.vd-hero-corner'], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, ease: 'power2.out', stagger: 0.07 }, 1);
+		var targets = ['.vd-wordmark .vd-wm-in', '.vd-hero-band', '.vd-hero-photo', '.vd-hero-photo > *', '.vd-hero-cta', '.vd-hero-lead', '.vd-hero-meta', '.vd-hero-vertical', '.vd-hero-corner'];
+		return gsap.timeline({ onComplete: function () { endIntro(); gsap.set(targets, { clearProps: 'transform,clipPath,opacity,visibility,willChange' }); } })
+			.fromTo('.vd-wordmark .vd-wm-in', { y: 0, yPercent: 110, willChange: 'transform' }, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12 }, 0)
+			.fromTo('.vd-hero-band', { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'expo.inOut' }, 0.1)
+			.fromTo('.vd-hero-photo', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' }, 0.2)
+			.fromTo('.vd-hero-photo > *', { scale: 1.15 }, { scale: 1, duration: 1.6, ease: 'expo.out' }, 0.2)
+			.fromTo(['.vd-hero-lead', '.vd-hero-meta', '.vd-hero-vertical', '.vd-hero-corner'], { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.06 }, 0.45)
+			.fromTo('.vd-hero-cta', { scale: 0 }, { scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, 0.85);
 	}
 
 	function caseIntro() {
 		var targets = ['.vd-case-title .vd-line > span', '.vd-case-poster', '.vd-case-poster > *', '.vd-case-meta > div', '.vd-case-red'];
 		var tl = gsap.timeline({ onComplete: function () { endIntro(); gsap.set(targets, { clearProps: 'transform,clipPath,opacity,visibility' }); } })
-			.fromTo('.vd-case-title .vd-line > span', { yPercent: 105 }, { yPercent: 0, duration: 1.2, ease: 'expo.out' })
-			.fromTo('.vd-case-meta > div', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, stagger: 0.06 }, 0.3);
+			.fromTo('.vd-case-title .vd-line > span', { y: 0, yPercent: 105 }, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.1 })
+			.fromTo('.vd-case-meta > div', { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06 }, 0.3);
 		if (d.querySelector('.vd-case-red')) tl.fromTo('.vd-case-red', { scaleY: 0 }, { scaleY: 1, duration: 1, ease: 'expo.inOut' }, 0.1);
 		if (d.querySelector('.vd-case-poster')) {
 			tl.fromTo('.vd-case-poster', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.25)
@@ -76,7 +77,6 @@
 
 	/* ---------- Scroll ---------- */
 	function initParallax() {
-		if (!w.ScrollTrigger) return;
 		if (d.querySelector('.vd-hero')) {
 			var st = { trigger: '.vd-hero', start: 'top top', end: 'bottom top', scrub: true };
 			gsap.to('.vd-hero-photo', { yPercent: 12, ease: 'none', scrollTrigger: st });
@@ -87,18 +87,17 @@
 		});
 	}
 
+	// Tiles are hidden by CSS from the first paint (html.vd-motion), so nothing flashes before they rise.
 	function initTiles() {
-		if (!w.ScrollTrigger) return;
 		var tiles = $$('.vd-tile-media');
 		if (!tiles.length) return;
-		gsap.set(tiles, { clipPath: 'inset(100% 0% 0% 0%)' });
 		w.ScrollTrigger.batch(tiles, {
 			start: 'top 92%',
 			once: true,
 			onEnter: function (batch) {
-				gsap.to(batch, {
-					clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'expo.inOut', stagger: 0.08,
-					onComplete: function () { gsap.set(batch, { clearProps: 'clipPath' }); }
+				gsap.fromTo(batch, { clipPath: 'inset(100% 0% 0% 0%)' }, {
+					clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'expo.inOut', stagger: 0.07,
+					onComplete: function () { batch.forEach(function (t) { t.classList.add('vd-in'); }); gsap.set(batch, { clearProps: 'clipPath' }); }
 				});
 			}
 		});
@@ -108,22 +107,20 @@
 	function initHeroImages() {
 		$$('.vd-hero-image').forEach(function (el) {
 			var band = el.querySelector('.vd-hi-band'), photo = el.querySelector('.vd-hi-photo'), img = photo ? photo.firstElementChild : null, cta = el.querySelector('.vd-hi-cta');
+			// The starting state comes from CSS (html.vd-motion), so the reveal never flashes.
 			if (el.getAttribute('data-vd-motion') === 'yes') {
-				gsap.set(band, { scaleX: 0 });
-				if (photo) gsap.set(photo, { clipPath: 'inset(100% 0% 0% 0%)' });
-				if (img) gsap.set(img, { scale: 1.2 });
-				if (cta) gsap.set(cta, { scale: 0 });
 				var play = function () {
-					var tl = gsap.timeline({ onComplete: function () { gsap.set([band, photo, img, cta].filter(Boolean), { clearProps: 'transform,clipPath' }); } })
-						.to(band, { scaleX: 1, duration: 1.1, ease: 'expo.inOut' });
-					if (photo) tl.to(photo, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.15);
-					if (img) tl.to(img, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0.15);
-					if (cta) tl.to(cta, { scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 0.9);
+					var tl = gsap.timeline({ onComplete: function () { el.classList.add('vd-in'); gsap.set([band, photo, img, cta].filter(Boolean), { clearProps: 'transform,clipPath' }); } })
+						.fromTo(band, { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'expo.inOut' });
+					if (photo) tl.fromTo(photo, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' }, 0.12);
+					if (img) tl.fromTo(img, { scale: 1.15 }, { scale: 1, duration: 1.6, ease: 'expo.out' }, 0.12);
+					if (cta) tl.fromTo(cta, { scale: 0 }, { scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, 0.8);
 				};
-				if (w.ScrollTrigger) w.ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: play });
-				else play();
+				w.ScrollTrigger.create({ trigger: el, start: 'top 88%', once: true, onEnter: play });
+			} else {
+				el.classList.add('vd-in');
 			}
-			if (el.getAttribute('data-vd-parallax') === 'yes' && w.ScrollTrigger && photo) {
+			if (el.getAttribute('data-vd-parallax') === 'yes' && photo) {
 				var st = { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true };
 				gsap.fromTo(photo, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: st });
 				gsap.fromTo(band, { xPercent: -3 }, { xPercent: 3, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
@@ -162,7 +159,7 @@
 
 	/* ---------- Start ---------- */
 	function start() {
-		var tl = gsap.timeline({ delay: 0.05 });
+		var tl = gsap.timeline();
 		var at = 0;
 		if (html.classList.contains('vd-is-wiping')) {
 			tl.to('.vd-wipe', {
@@ -181,9 +178,15 @@
 		initPageTransitions();
 	}
 
-	// Start once the font is ready (or after 1.2s) so letters never swap mid-animation.
-	var ready = d.fonts && d.fonts.ready ? d.fonts.ready : Promise.resolve();
-	Promise.race([ready, new Promise(function (r) { setTimeout(r, 1200); })]).then(function () {
-		try { start(); } catch (err) { html.classList.remove('vd-intro', 'vd-is-wiping'); }
+	// Start as soon as the headline's own font is ready (at most 600ms), so letters never swap mid-animation.
+	// Waiting only for that one font, not every font on the page, keeps the intro from starting late.
+	var ready = Promise.resolve();
+	var title = d.querySelector('.vd-wordmark, .vd-case-title');
+	if (title && d.fonts && d.fonts.load) {
+		var cs = getComputedStyle(title);
+		ready = d.fonts.load(cs.fontStyle + ' ' + cs.fontWeight + ' 1em ' + cs.fontFamily).catch(function () {});
+	}
+	Promise.race([ready, new Promise(function (r) { setTimeout(r, 600); })]).then(function () {
+		try { start(); } catch (err) { html.classList.remove('vd-intro', 'vd-motion', 'vd-is-wiping'); }
 	});
 })();

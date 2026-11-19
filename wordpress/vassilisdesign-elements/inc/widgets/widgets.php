@@ -254,8 +254,8 @@ class VDE_Widget_Hero extends VDE_Widget {
 			<div class="vd-hero-text">
 			<h1 class="vd-wordmark" aria-label="<?php echo esc_attr( $s['label'] ); ?>">
 				<span aria-hidden="true">
-					<span class="vd-wm-line"><?php echo $chars( $s['line1'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-					<span class="vd-wm-line"><?php echo $chars( $s['line2'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span class="vd-ch vd-stop">.</span></span>
+					<span class="vd-wm-line"><span class="vd-wm-in"><?php echo $chars( $s['line1'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></span>
+					<span class="vd-wm-line"><span class="vd-wm-in"><?php echo $chars( $s['line2'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span class="vd-ch vd-stop">.</span></span></span>
 				</span>
 			</h1>
 			<p class="vd-hero-lead"><?php echo vde_lines( $s['lead'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>

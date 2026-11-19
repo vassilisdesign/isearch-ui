@@ -18,11 +18,7 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 			echo vde_work_header(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo vde_work_intro(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo vde_work_gallery(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-			// Works built with Elementor show their Elementor content here.
-			if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->documents->get( get_the_ID() ) && \Elementor\Plugin::$instance->documents->get( get_the_ID() )->is_built_with_elementor() ) {
-				the_content();
-			}
+			echo vde_work_elementor_content( get_post() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- printed by the intro already; here for safety.
 
 			echo vde_next_work(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>

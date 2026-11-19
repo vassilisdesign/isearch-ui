@@ -290,11 +290,11 @@ msgstr ""
 msgid "Scope"
 msgstr ""
 
-#: inc/template-functions.php:332
+#: inc/template-functions.php:333
 msgid "About the project"
 msgstr ""
 
-#: inc/template-functions.php:377 inc/template-functions.php:379
+#: inc/template-functions.php:411 inc/template-functions.php:413
 msgid "Next project"
 msgstr ""
 

@@ -171,7 +171,11 @@ body {
   font-size: clamp(3rem, 21.5vw, 10rem); font-weight: 800; line-height: 0.86; letter-spacing: -0.045em;
   margin-left: -0.04em; white-space: nowrap; width: max-content; max-width: none; /* never clip letters when a wider font or size is chosen */
 }
-.vd-wm-line { display: block; overflow: hidden; padding-block: 0.03em 0.02em; }
+/* Extra room around each line (cancelled by the negative margin, so the layout is unchanged) lets tall or wide
+   fonts show in full; the line only clips while its letters rise during the intro. */
+.vd-wm-line { display: block; padding: 0.14em 0.1em 0.12em; margin: -0.14em -0.1em -0.12em; }
+.vd-wm-in { display: inline-block; }
+.vd-intro .vd-wm-line { overflow: hidden; }
 .vd-ch { display: inline-block; }
 /* Wordmark and positioning text share one column so the text always sits below the wordmark, whatever font or size is chosen. */
 .vd-hero-text { grid-column: 1 / -1; order: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
@@ -209,7 +213,7 @@ body {
 }
 
 /* Intro starting states (only while html.vd-intro is set; removed after the sequence or by the failsafe) */
-.vd-intro .vd-wordmark .vd-ch { transform: translateY(105%); }
+.vd-intro .vd-wordmark .vd-wm-in { transform: translateY(110%); }
 .vd-intro .vd-hero-band { transform: scaleX(0); }
 .vd-intro .vd-hero-photo { clip-path: inset(100% 0 0 0); }
 .vd-intro .vd-hero-cta { transform: scale(0); }
@@ -232,10 +236,10 @@ body {
   background: var(--vd-red); mix-blend-mode: multiply; transform-origin: left;
 }
 .vd-hi-cta { position: absolute; z-index: 4; left: 0; top: calc(var(--vdhi-band-top) + var(--vdhi-band-h) - var(--vd-square)); }
-/* Starting state before the reveal (only while the page intro is pending; the script takes over) */
-.vd-intro .vd-hero-image[data-vd-motion="yes"] .vd-hi-band { transform: scaleX(0); }
-.vd-intro .vd-hero-image[data-vd-motion="yes"] .vd-hi-photo { clip-path: inset(100% 0 0 0); }
-.vd-intro .vd-hero-image[data-vd-motion="yes"] .vd-hi-cta { transform: scale(0); }
+/* Starting state from the first paint until the reveal plays (html.vd-motion is set before paint and removed if scripts do not run) */
+.vd-motion .vd-hero-image[data-vd-motion="yes"]:not(.vd-in) .vd-hi-band { transform: scaleX(0); }
+.vd-motion .vd-hero-image[data-vd-motion="yes"]:not(.vd-in) .vd-hi-photo { clip-path: inset(100% 0 0 0); }
+.vd-motion .vd-hero-image[data-vd-motion="yes"]:not(.vd-in) .vd-hi-cta { transform: scale(0); }
 
 /* ==========================================================================
    Section heading
@@ -254,6 +258,7 @@ body {
 .vd-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px var(--vd-gap); align-items: end; }
 .vd-tile-link { display: grid; gap: 4px; }
 .vd-tile-media { aspect-ratio: 4 / 5; margin-bottom: 10px; }
+.vd-motion .vd-tile-media:not(.vd-in) { clip-path: inset(100% 0 0 0); } /* hidden from the first paint, revealed once in view (no flash) */
 .vd-tile:nth-child(4n + 2) .vd-tile-media, .vd-tile:nth-child(4n + 3) .vd-tile-media { aspect-ratio: 4 / 5.6; }
 .vd-tile-media > .vd-photo-img { transition: transform 0.9s var(--vd-ease); }
 .vd-tile-media .vd-red-block { transform: scaleY(0); transition: transform 0.6s var(--vd-ease); }

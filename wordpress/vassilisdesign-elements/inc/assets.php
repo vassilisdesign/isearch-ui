@@ -8,6 +8,16 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/** True while the page is shown inside the Elementor editor (its preview frame). */
+function vde_is_elementor_preview() {
+	static $preview = null;
+	if ( null === $preview ) {
+		$preview = isset( $_GET['elementor-preview'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			|| ( class_exists( '\\Elementor\\Plugin' ) && isset( \Elementor\Plugin::$instance->preview ) && \Elementor\Plugin::$instance->preview->is_preview_mode() );
+	}
+	return $preview;
+}
+
 // Image sizes for Work tiles (4:5) and wide images.
 add_action(
 	'after_setup_theme',
@@ -25,6 +35,12 @@ add_action(
 		$js_ver  = VDE_VERSION . '.' . filemtime( VDE_DIR . 'assets/js/elements.js' );
 
 		wp_enqueue_style( 'vde-elements', VDE_URI . 'assets/css/elements.css', array(), $css_ver );
+
+		// Inside the Elementor editor nothing animates, so the motion libraries are not loaded there.
+		if ( vde_is_elementor_preview() ) {
+			wp_enqueue_script( 'vde-elements', VDE_URI . 'assets/js/elements.js', array(), $js_ver, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+			return;
+		}
 
 		wp_enqueue_script( 'vde-gsap', VDE_URI . 'assets/vendor/gsap.min.js', array(), '3.15.1', array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		wp_enqueue_script( 'vde-scrolltrigger', VDE_URI . 'assets/vendor/ScrollTrigger.min.js', array( 'vde-gsap' ), '3.15.1', array( 'in_footer' => true, 'strategy' => 'defer' ) );
@@ -49,11 +65,11 @@ add_action(
 add_action(
 	'wp_head',
 	function () {
-		if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->preview->is_preview_mode() ) {
+		if ( vde_is_elementor_preview() ) {
 			return; // Never hide content inside the Elementor editor.
 		}
 		?>
-<script>(function(d,w){var h=d.documentElement;h.classList.add('vd-js');if(w.matchMedia&&w.matchMedia('(prefers-reduced-motion: reduce)').matches)return;h.classList.add('vd-intro');try{if(sessionStorage.getItem('vd-wipe'))h.classList.add('vd-is-wiping')}catch(e){}setTimeout(function(){if(!w.__vd)h.classList.remove('vd-intro','vd-is-wiping')},4000)})(document,window);</script>
+<script>(function(d,w){var h=d.documentElement;h.classList.add('vd-js');if(w.matchMedia&&w.matchMedia('(prefers-reduced-motion: reduce)').matches)return;h.classList.add('vd-intro','vd-motion');try{if(sessionStorage.getItem('vd-wipe'))h.classList.add('vd-is-wiping')}catch(e){}setTimeout(function(){if(!w.__vd)h.classList.remove('vd-intro','vd-motion','vd-is-wiping')},4000)})(document,window);</script>
 		<?php
 	},
 	2

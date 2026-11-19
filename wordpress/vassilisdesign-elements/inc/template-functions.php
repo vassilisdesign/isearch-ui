@@ -326,7 +326,8 @@ function vde_work_intro( $post = null ) {
 		</figure>
 		<?php
 	endif;
-	if ( has_excerpt( $post ) || trim( $post->post_content ) ) :
+	$elementor = vde_work_uses_elementor( $post->ID );
+	if ( has_excerpt( $post ) || ( trim( $post->post_content ) && ! $elementor ) ) :
 		?>
 		<section class="vd-case-block vd-wrap">
 			<h2 class="vd-case-label"><?php esc_html_e( 'About the project', 'vassilisdesign-elements' ); ?></h2>
@@ -335,8 +336,7 @@ function vde_work_intro( $post = null ) {
 					<p class="vd-case-summary"><?php echo esc_html( get_the_excerpt( $post ) ); ?></p>
 				<?php endif; ?>
 				<?php
-				// Long description from the editor, unless the Work is built with Elementor (then it renders itself).
-				$elementor = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->documents->get( $post->ID ) && \Elementor\Plugin::$instance->documents->get( $post->ID )->is_built_with_elementor();
+				// Long description from the editor, unless the Work is built with Elementor (that content follows below).
 				if ( trim( $post->post_content ) && ! $elementor ) {
 					echo '<div class="vd-prose">' . apply_filters( 'the_content', $post->post_content ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
@@ -345,7 +345,41 @@ function vde_work_intro( $post = null ) {
 		</section>
 		<?php
 	endif;
+	echo vde_work_elementor_content( $post ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	return ob_get_clean();
+}
+
+/** True when the Work is built with Elementor or is open in the Elementor editor right now. */
+function vde_work_uses_elementor( $post_id ) {
+	if ( ! class_exists( '\Elementor\Plugin' ) ) {
+		return false;
+	}
+	$elementor = \Elementor\Plugin::$instance;
+	if ( isset( $elementor->preview ) && $elementor->preview->is_preview_mode( $post_id ) ) {
+		return true;
+	}
+	$document = $elementor->documents->get( $post_id );
+	return $document && $document->is_built_with_elementor();
+}
+
+/**
+ * The Work's own Elementor content. The Elementor editor needs this spot (the_content) to place its editing
+ * area: without it, opening a Work in Elementor never finishes loading. Printed once per Work, so a Work
+ * that contains this widget cannot render itself again and again.
+ */
+function vde_work_elementor_content( $post ) {
+	static $printed = array();
+	$post = get_post( $post );
+	if ( ! $post || isset( $printed[ $post->ID ] ) || ! vde_work_uses_elementor( $post->ID ) ) {
+		return '';
+	}
+	$printed[ $post->ID ] = true;
+	$GLOBALS['post'] = $post; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- the_content() reads the global post.
+	setup_postdata( $post );
+	ob_start();
+	the_content();
+	$html = trim( (string) ob_get_clean() );
+	return '' === $html ? '' : '<div class="vd-work-content">' . $html . '</div>';
 }
 
 /** Work gallery: images at their natural proportions, in full colour. */
