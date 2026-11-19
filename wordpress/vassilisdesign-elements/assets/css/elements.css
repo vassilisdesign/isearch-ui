@@ -311,16 +311,21 @@ body {
 /* ==========================================================================
    Logo wall
    ========================================================================== */
-.vd-logos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--vd-ink); border-left: 1px solid var(--vd-rule); }
-.vd-logo-cell { border-right: 1px solid var(--vd-rule); border-bottom: 1px solid var(--vd-rule); }
-.vd-logo-frame { position: relative; display: block; aspect-ratio: 3 / 2; }
+/* Settings (VD Logo wall → Layout / Style) set these: logos per row, space around each logo, cell shape, line size and colours */
+.vd-logos {
+  --vdl-cols: 2; --vdl-pad: 17%; --vdl-ratio: 3 / 2; --vdl-line: 1px; --vdl-color: var(--vd-rule); --vdl-top: var(--vd-ink);
+  display: grid; grid-template-columns: repeat(var(--vdl-cols), minmax(0, 1fr));
+  border-top: var(--vdl-line) solid var(--vdl-top); border-left: var(--vdl-line) solid var(--vdl-color);
+}
+.vd-logo-cell { border-right: var(--vdl-line) solid var(--vdl-color); border-bottom: var(--vdl-line) solid var(--vdl-color); }
+.vd-logo-frame { position: relative; display: block; aspect-ratio: var(--vdl-ratio); }
 .vd-logo-frame .vd-photo-img {
-  position: absolute; inset: 18% 16%; width: 68%; height: 64%; object-fit: contain;
+  position: absolute; inset: var(--vdl-pad); width: calc(100% - 2 * var(--vdl-pad)); height: calc(100% - 2 * var(--vdl-pad)); object-fit: contain;
   filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; opacity: 0.85; transition: filter 0.5s, opacity 0.5s;
 }
 .vd-logo-cell:hover .vd-photo-img { filter: none; opacity: 1; }
-@media (min-width: 720px) { .vd-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (min-width: 1100px) { .vd-logos { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (min-width: 720px) { .vd-logos { --vdl-cols: 4; } }
+@media (min-width: 1100px) { .vd-logos { --vdl-cols: 6; } }
 
 /* ==========================================================================
    Numbered list

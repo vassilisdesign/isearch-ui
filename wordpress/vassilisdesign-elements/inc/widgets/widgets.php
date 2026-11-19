@@ -514,11 +514,66 @@ class VDE_Widget_Logo_Wall extends VDE_Widget {
 		$this->start( __( 'Logos', 'vassilisdesign-elements' ) );
 		$this->add_control( 'logos', array( 'label' => __( 'Logos (on white, any size)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::GALLERY, 'default' => array() ) );
 		$this->end_controls_section();
-		$this->add_style_controls(
+
+		$this->start_controls_section( 'layout', array( 'label' => __( 'Layout', 'vassilisdesign-elements' ) ) );
+		$this->add_responsive_control(
+			'columns',
 			array(
-				array( 'color', 'lines', __( 'Grid lines', 'vassilisdesign-elements' ), '.vd-logos, .vd-logo-cell', 'border-color' ),
+				'label'          => __( 'Logos per row', 'vassilisdesign-elements' ),
+				'type'           => Controls_Manager::NUMBER,
+				'min'            => 1,
+				'max'            => 12,
+				'default'        => 6,
+				'tablet_default' => 4,
+				'mobile_default' => 2,
+				'selectors'      => array( '{{WRAPPER}} .vd-logos' => '--vdl-cols: {{VALUE}};' ),
 			)
 		);
+		$this->add_responsive_control(
+			'padding',
+			array(
+				'label'       => __( 'Space around each logo', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => array( '%', 'px' ),
+				'range'       => array( '%' => array( 'min' => 0, 'max' => 40 ), 'px' => array( 'min' => 0, 'max' => 120 ) ),
+				'default'     => array( 'unit' => '%', 'size' => 17 ),
+				'description' => __( 'Larger space = smaller logos.', 'vassilisdesign-elements' ),
+				'selectors'   => array( '{{WRAPPER}} .vd-logos' => '--vdl-pad: {{SIZE}}{{UNIT}};' ),
+			)
+		);
+		$this->add_responsive_control(
+			'ratio',
+			array(
+				'label'     => __( 'Cell shape', 'vassilisdesign-elements' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '3 / 2',
+				'options'   => array(
+					'1 / 1' => __( 'Square (1:1)', 'vassilisdesign-elements' ),
+					'4 / 3' => '4:3',
+					'3 / 2' => '3:2',
+					'2 / 1' => __( 'Wide (2:1)', 'vassilisdesign-elements' ),
+				),
+				'selectors' => array( '{{WRAPPER}} .vd-logos' => '--vdl-ratio: {{VALUE}};' ),
+			)
+		);
+		$this->end_controls_section();
+
+		$this->start_controls_section( 'lines_style', array( 'label' => __( 'Lines', 'vassilisdesign-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
+		$this->add_control(
+			'line_size',
+			array(
+				'label'      => __( 'Line thickness', 'vassilisdesign-elements' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array( 'px' => array( 'min' => 0, 'max' => 8 ) ),
+				'default'    => array( 'unit' => 'px', 'size' => 1 ),
+				'description' => __( '0 hides the lines.', 'vassilisdesign-elements' ),
+				'selectors'  => array( '{{WRAPPER}} .vd-logos' => '--vdl-line: {{SIZE}}{{UNIT}};' ),
+			)
+		);
+		$this->add_control( 'lines', array( 'label' => __( 'Line colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} .vd-logos' => '--vdl-color: {{VALUE}};' ) ) );
+		$this->add_control( 'top_line', array( 'label' => __( 'Top line colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} .vd-logos' => '--vdl-top: {{VALUE}};' ) ) );
+		$this->end_controls_section();
 	}
 	protected function render() {
 		$s = $this->get_settings_for_display();
