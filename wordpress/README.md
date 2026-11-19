@@ -129,6 +129,20 @@ WordPress needs a translation plugin for two languages. **Polylang** (free) is t
 4. The header shows an **EN / ΕΛ** switch automatically when Polylang is active.
 5. Texts such as "Next project" and "Scope" are translated by the plugin's and the theme's `languages/` files.
 
+## SEO (Rank Math)
+
+`dist/rank-math-settings.json` holds the recommended Rank Math (free) settings: only the needed modules, titles with "|", Works and Sectors indexed with their own sitemaps, legal-friendly defaults, Organization details, and visibility for AI assistants (an llms.txt file and a robots.txt that welcomes AI search crawlers).
+
+1. Install and activate **Rank Math SEO**. Finish its setup wizard (connect a free account or skip): Rank Math stays inactive until then.
+2. **Rank Math → Status & Tools → Import & Export → Import Settings**: choose `rank-math-settings.json` and import. This replaces Rank Math's settings (a backup is kept).
+3. **Status & Tools → Database Tools → Re-create Missing Database Tables** (needed for Redirections and the 404 Monitor).
+4. **Settings → Permalinks → Save Changes** (activates the sitemap and llms.txt addresses), then purge the cache.
+5. Edit the **Home** page → Rank Math: set the SEO title and description (the front page uses its own).
+6. Set the legal pages (Privacy, Terms, Legal Notice, Cookie Policy) to **noindex** in their Rank Math tab.
+7. Add the street address and logo in **Titles & Meta → Local SEO**, and submit `https://vassilisdesign.gr/sitemap_index.xml` in Google Search Console.
+
+Check: `/robots.txt`, `/llms.txt` and `/sitemap_index.xml` should open.
+
 ## Speed
 
 The theme removes WordPress output the site does not use: emoji scripts, oEmbed, jQuery Migrate, block styles on Elementor pages, Dashicons for visitors and front-end Heartbeat. The plugin self-hosts the font and loads the animation scripts deferred.
