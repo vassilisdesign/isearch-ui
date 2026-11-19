@@ -149,7 +149,8 @@ body {
 /* VD widgets take the full width of their container. Without a definite width, Elementor's "wrap"
    containers (the default on phones) measure widgets like the Logo wall (no text, cells sized by width)
    as almost zero height, and the next section overlaps them. A width set under Advanced still wins. */
-.e-con > .elementor-widget[class*="elementor-widget-vd-"] { width: 100%; }
+.e-con > .elementor-widget[class*="elementor-widget-vd-"],
+.e-con-inner > .elementor-widget[class*="elementor-widget-vd-"] { width: 100%; } /* boxed containers wrap widgets in .e-con-inner */
 
 /* ==========================================================================
    Hero
