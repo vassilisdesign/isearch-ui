@@ -175,11 +175,9 @@ abstract class VDE_Widget extends Widget_Base {
 	/** The image as a background layer (black and white), described for screen readers. */
 	protected function image_bg( $media, $alt = '', $preload = false ) {
 		$url = '';
-		if ( ! empty( $media['id'] ) ) {
-			$url = wp_get_attachment_image_url( (int) $media['id'], 'vd-wide' );
-			if ( ! $url ) {
-				$url = wp_get_attachment_image_url( (int) $media['id'], 'full' );
-			}
+		$id  = ! empty( $media['id'] ) ? (int) $media['id'] : 0;
+		if ( $id ) {
+			$url = vde_webp_url( $id ); // light WebP copy, made once
 		}
 		if ( ! $url && ! empty( $media['url'] ) ) {
 			$url = $media['url'];
@@ -188,7 +186,7 @@ abstract class VDE_Widget extends Widget_Base {
 			return '';
 		}
 		$out = '';
-		if ( $preload ) {
+		if ( $preload && ( ! $id || vde_page_hero_image_id() !== $id ) ) { // already preloaded from <head> when it is this page's hero
 			$out .= '<link rel="preload" as="image" href="' . esc_url( $url ) . '" fetchpriority="high">';
 		}
 		$a11y = $alt ? ' role="img" aria-label="' . esc_attr( $alt ) . '"' : ' aria-hidden="true"';

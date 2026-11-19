@@ -1,6 +1,6 @@
 /*
- * VASSILISDESIGN motion. One orchestrated intro per page (red band sweeps in, image rises,
- * wordmark sets), gentle image parallax, Work tiles that rise once, and a red wipe between pages.
+ * VASSILISDESIGN motion: gentle image parallax, Work tiles and VD Hero image that reveal once in view,
+ * and a red wipe between pages. The page intro runs in CSS (see the inline script in <head>).
  * Transform/opacity/clip-path only; skipped entirely for prefers-reduced-motion and in the Elementor editor.
  */
 (function () {
@@ -18,7 +18,6 @@
 	function clearWipeFlag() {
 		try { sessionStorage.removeItem(WIPE_KEY); } catch (e) { /* storage blocked */ }
 	}
-	function endIntro() { html.classList.remove('vd-intro'); }
 	function $$(sel) { return Array.prototype.slice.call(d.querySelectorAll(sel)); }
 
 	/* ---------- Clock ---------- */
@@ -41,39 +40,15 @@
 	initClock();
 	clearWipeFlag();
 
+	// The page intro itself runs in CSS (started by the inline script in <head>); this file adds the
+	// scroll effects, the reveals and the page wipe. Without the motion libraries, just show everything.
 	if (reduce || inEditor || !w.gsap || !w.ScrollTrigger) {
-		html.classList.remove('vd-intro', 'vd-motion', 'vd-is-wiping');
+		html.classList.remove('vd-motion');
 		return;
 	}
 
 	var gsap = w.gsap;
 	gsap.registerPlugin(w.ScrollTrigger);
-
-	/* ---------- Intros ---------- */
-	// The wordmark leads: each line rises as one piece straight away, the image and band follow, details fade in last.
-	function homeIntro() {
-		var targets = ['.vd-wordmark .vd-wm-in', '.vd-hero-band', '.vd-hero-photo', '.vd-hero-photo > *', '.vd-hero-cta', '.vd-hero-lead', '.vd-hero-meta', '.vd-hero-vertical', '.vd-hero-corner'];
-		return gsap.timeline({ onComplete: function () { endIntro(); gsap.set(targets, { clearProps: 'transform,clipPath,opacity,visibility,willChange' }); } })
-			.fromTo('.vd-wordmark .vd-wm-in', { y: 0, yPercent: 110, willChange: 'transform' }, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12 }, 0)
-			.fromTo('.vd-hero-band', { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'expo.inOut' }, 0.1)
-			.fromTo('.vd-hero-photo', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' }, 0.2)
-			.fromTo('.vd-hero-photo > *', { scale: 1.15 }, { scale: 1, duration: 1.6, ease: 'expo.out' }, 0.2)
-			.fromTo(['.vd-hero-lead', '.vd-hero-meta', '.vd-hero-vertical', '.vd-hero-corner'], { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.06 }, 0.45)
-			.fromTo('.vd-hero-cta', { scale: 0 }, { scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, 0.85);
-	}
-
-	function caseIntro() {
-		var targets = ['.vd-case-title .vd-line > span', '.vd-case-poster', '.vd-case-poster > *', '.vd-case-meta > div', '.vd-case-red'];
-		var tl = gsap.timeline({ onComplete: function () { endIntro(); gsap.set(targets, { clearProps: 'transform,clipPath,opacity,visibility' }); } })
-			.fromTo('.vd-case-title .vd-line > span', { y: 0, yPercent: 105 }, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.1 })
-			.fromTo('.vd-case-meta > div', { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06 }, 0.3);
-		if (d.querySelector('.vd-case-red')) tl.fromTo('.vd-case-red', { scaleY: 0 }, { scaleY: 1, duration: 1, ease: 'expo.inOut' }, 0.1);
-		if (d.querySelector('.vd-case-poster')) {
-			tl.fromTo('.vd-case-poster', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.25)
-				.fromTo('.vd-case-poster > *', { scale: 1.15 }, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0.25);
-		}
-		return tl;
-	}
 
 	/* ---------- Scroll ---------- */
 	function initParallax() {
@@ -159,34 +134,11 @@
 
 	/* ---------- Start ---------- */
 	function start() {
-		var tl = gsap.timeline();
-		var at = 0;
-		if (html.classList.contains('vd-is-wiping')) {
-			tl.to('.vd-wipe', {
-				scaleY: 0, transformOrigin: '50% 0%', duration: 0.7, ease: 'expo.inOut',
-				onComplete: function () { html.classList.remove('vd-is-wiping'); gsap.set('.vd-wipe', { clearProps: 'all' }); }
-			});
-			at = 0.3;
-		}
-		initHeroImages(); // sets its own starting state before the intro class is removed
-		if (d.querySelector('.vd-hero')) tl.add(homeIntro(), at);
-		else if (d.querySelector('.vd-case-head')) tl.add(caseIntro(), at);
-		else endIntro();
-
+		initHeroImages();
 		initParallax();
 		initTiles();
 		initPageTransitions();
 	}
 
-	// Start as soon as the headline's own font is ready (at most 600ms), so letters never swap mid-animation.
-	// Waiting only for that one font, not every font on the page, keeps the intro from starting late.
-	var ready = Promise.resolve();
-	var title = d.querySelector('.vd-wordmark, .vd-case-title');
-	if (title && d.fonts && d.fonts.load) {
-		var cs = getComputedStyle(title);
-		ready = d.fonts.load(cs.fontStyle + ' ' + cs.fontWeight + ' 1em ' + cs.fontFamily).catch(function () {});
-	}
-	Promise.race([ready, new Promise(function (r) { setTimeout(r, 600); })]).then(function () {
-		try { start(); } catch (err) { html.classList.remove('vd-intro', 'vd-motion', 'vd-is-wiping'); }
-	});
+	try { start(); } catch (err) { html.classList.remove('vd-motion'); }
 })();

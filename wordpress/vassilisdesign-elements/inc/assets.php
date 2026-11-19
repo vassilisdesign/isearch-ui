@@ -59,8 +59,10 @@ add_action(
 );
 
 /*
- * Runs before first paint: marks JS as available, prepares the intro (skipped for reduced motion)
- * and never leaves content hidden (4-second failsafe if the scripts do not run).
+ * Runs before first paint and owns the page intro: hides the parts that animate in (vd-intro), starts the
+ * CSS sequence as soon as the headline font is ready, at most 0.9s in (vd-play), and ends it. Nothing here
+ * waits for the deferred scripts, so a cache plugin delaying JavaScript cannot hold the intro back.
+ * Skipped for reduced motion; Work tiles are shown after 4s if the scroll scripts never run.
  */
 add_action(
 	'wp_head',
@@ -69,7 +71,7 @@ add_action(
 			return; // Never hide content inside the Elementor editor.
 		}
 		?>
-<script>(function(d,w){var h=d.documentElement;h.classList.add('vd-js');if(w.matchMedia&&w.matchMedia('(prefers-reduced-motion: reduce)').matches)return;h.classList.add('vd-intro','vd-motion');try{if(sessionStorage.getItem('vd-wipe'))h.classList.add('vd-is-wiping')}catch(e){}setTimeout(function(){if(!w.__vd)h.classList.remove('vd-intro','vd-motion','vd-is-wiping')},4000)})(document,window);</script>
+<script<?php echo vde_no_delay_attrs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>(function(d,w){var c=d.documentElement.classList;c.add('vd-js');if(w.matchMedia&&w.matchMedia('(prefers-reduced-motion: reduce)').matches)return;c.add('vd-intro','vd-motion');try{if(sessionStorage.getItem('vd-wipe'))c.add('vd-is-wiping')}catch(e){}var on=0;function play(){if(on)return;on=1;c.add('vd-play');setTimeout(function(){c.remove('vd-intro','vd-is-wiping')},2400)}setTimeout(play,900);(function find(){if(on)return;var t=d.querySelector('.vd-wordmark,.vd-case-title');if(!t){if(d.readyState==='loading')return requestAnimationFrame(find);return play()}if(!d.fonts||!d.fonts.load)return play();var s=getComputedStyle(t);d.fonts.load(s.fontStyle+' '+s.fontWeight+' 1em '+s.fontFamily).then(play,play)})();setTimeout(function(){if(!w.__vd)c.remove('vd-motion')},4000)})(document,window);</script>
 		<?php
 	},
 	2
