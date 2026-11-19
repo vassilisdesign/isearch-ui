@@ -166,6 +166,9 @@ EL = {
     'Works (in this order)': 'Έργα (με αυτή τη σειρά)',
     'Red cover with text on hover': 'Κόκκινη επικάλυψη με κείμενο στο hover',
     'Space between Works (px, empty = default)': 'Απόσταση μεταξύ έργων (px, κενό = προεπιλογή)',
+    'To link a name, add | and the address after it, e.g. Porto Carras | https://portocarras.com': 'Για σύνδεσμο σε ένα όνομα, προσθέστε | και τη διεύθυνση μετά, π.χ. Porto Carras | https://portocarras.com',
+    'Open links in a new tab': 'Άνοιγμα συνδέσμων σε νέα καρτέλα',
+    'Linked name on hover': 'Όνομα με σύνδεσμο στο hover',
 }
 # 'Work' means "Work" (menu, plural sense) on the front end and "Work" (one item) in the admin:
 # the front-end menu label wins, since visitors see it.

@@ -250,7 +250,7 @@ msgstr ""
 msgid "No Works yet. Add them under Works → Add Work."
 msgstr ""
 
-#: inc/template-functions.php:230 inc/widgets/widgets.php:428 inc/works.php:61
+#: inc/template-functions.php:230 inc/widgets/widgets.php:430 inc/works.php:61
 msgid "Works"
 msgstr ""
 
@@ -266,7 +266,7 @@ msgstr ""
 msgid "No Works yet."
 msgstr ""
 
-#: inc/template-functions.php:279 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
+#: inc/template-functions.php:279 inc/widgets/widgets.php:456 inc/widgets/widgets.php:809
 msgid "Sector"
 msgstr ""
 
@@ -434,15 +434,15 @@ msgstr ""
 msgid "Rotated corner text"
 msgstr ""
 
-#: inc/widgets/widgets.php:221 inc/widgets/widgets.php:296 inc/widgets/widgets.php:297
+#: inc/widgets/widgets.php:221 inc/widgets/widgets.php:298 inc/widgets/widgets.php:299
 msgid "Image"
 msgstr ""
 
-#: inc/widgets/widgets.php:222 inc/widgets/widgets.php:298 inc/widgets/widgets.php:750
+#: inc/widgets/widgets.php:222 inc/widgets/widgets.php:300 inc/widgets/widgets.php:752
 msgid "Image description"
 msgstr ""
 
-#: inc/widgets/widgets.php:224 inc/widgets/widgets.php:301
+#: inc/widgets/widgets.php:224 inc/widgets/widgets.php:303
 msgid "Arrow button link"
 msgstr ""
 
@@ -470,495 +470,507 @@ msgstr ""
 msgid "Vertical text line"
 msgstr ""
 
-#: inc/widgets/widgets.php:237 inc/widgets/widgets.php:347
+#: inc/widgets/widgets.php:237 inc/widgets/widgets.php:349
 msgid "Red band"
 msgstr ""
 
-#: inc/widgets/widgets.php:238 inc/widgets/widgets.php:300 inc/widgets/widgets.php:349
+#: inc/widgets/widgets.php:238 inc/widgets/widgets.php:302 inc/widgets/widgets.php:351
 msgid "Arrow button"
 msgstr ""
 
-#: inc/widgets/widgets.php:239 inc/widgets/widgets.php:351
+#: inc/widgets/widgets.php:239 inc/widgets/widgets.php:353
 msgid "Arrow"
 msgstr ""
 
-#: inc/widgets/widgets.php:290
+#: inc/widgets/widgets.php:292
 msgid "VD Hero image"
 msgstr ""
 
-#: inc/widgets/widgets.php:302
+#: inc/widgets/widgets.php:304
 msgid "Arrow button label (for screen readers)"
 msgstr ""
 
-#: inc/widgets/widgets.php:305 inc/widgets/widgets.php:487 inc/widgets/widgets.php:604
+#: inc/widgets/widgets.php:307 inc/widgets/widgets.php:489 inc/widgets/widgets.php:606
 msgid "Layout"
 msgstr ""
 
-#: inc/widgets/widgets.php:312
+#: inc/widgets/widgets.php:314
 msgid "Height"
 msgstr ""
 
-#: inc/widgets/widgets.php:337
+#: inc/widgets/widgets.php:339
 msgid "Image: space on the left"
 msgstr ""
 
-#: inc/widgets/widgets.php:338
+#: inc/widgets/widgets.php:340
 msgid "Image: space on the right"
 msgstr ""
 
-#: inc/widgets/widgets.php:339
+#: inc/widgets/widgets.php:341
 msgid "Red band: distance from top"
 msgstr ""
 
-#: inc/widgets/widgets.php:340
+#: inc/widgets/widgets.php:342
 msgid "Red band: height"
 msgstr ""
 
-#: inc/widgets/widgets.php:341
+#: inc/widgets/widgets.php:343
 msgid "Reveal animation"
 msgstr ""
 
-#: inc/widgets/widgets.php:341
+#: inc/widgets/widgets.php:343
 msgid "The red band sweeps in and the image rises when the element comes into view."
 msgstr ""
 
-#: inc/widgets/widgets.php:342
+#: inc/widgets/widgets.php:344
 msgid "Movement on scroll"
 msgstr ""
 
-#: inc/widgets/widgets.php:348 inc/widgets/widgets.php:766
+#: inc/widgets/widgets.php:350 inc/widgets/widgets.php:768
 msgid "Image background"
 msgstr ""
 
-#: inc/widgets/widgets.php:350
+#: inc/widgets/widgets.php:352
 msgid "Arrow button on hover"
 msgstr ""
 
-#: inc/widgets/widgets.php:379
+#: inc/widgets/widgets.php:381
 msgid "VD Section heading"
 msgstr ""
 
-#: inc/widgets/widgets.php:382
+#: inc/widgets/widgets.php:384
 msgid "Heading"
 msgstr ""
 
-#: inc/widgets/widgets.php:383
+#: inc/widgets/widgets.php:385
 msgid "Intro (left)"
 msgstr ""
 
-#: inc/widgets/widgets.php:384
+#: inc/widgets/widgets.php:386
 msgid "Title (right, shown lowercase with a red full stop)"
 msgstr ""
 
-#: inc/widgets/widgets.php:388
+#: inc/widgets/widgets.php:390
 msgid "Heading level"
 msgstr ""
 
-#: inc/widgets/widgets.php:397
+#: inc/widgets/widgets.php:399
 msgid "Intro text"
 msgstr ""
 
-#: inc/widgets/widgets.php:398
+#: inc/widgets/widgets.php:400
 msgid "Intro square"
 msgstr ""
 
-#: inc/widgets/widgets.php:399 inc/widgets/widgets.php:693 inc/widgets/widgets.php:744
+#: inc/widgets/widgets.php:401 inc/widgets/widgets.php:695 inc/widgets/widgets.php:746
 msgid "Title"
 msgstr ""
 
-#: inc/widgets/widgets.php:400 inc/widgets/widgets.php:757 inc/widgets/widgets.php:872
+#: inc/widgets/widgets.php:402 inc/widgets/widgets.php:759 inc/widgets/widgets.php:905
 msgid "Title full stop"
 msgstr ""
 
-#: inc/widgets/widgets.php:422
+#: inc/widgets/widgets.php:424
 msgid "VD Works grid"
 msgstr ""
 
-#: inc/widgets/widgets.php:429
+#: inc/widgets/widgets.php:431
 msgid "Number of Works"
 msgstr ""
 
-#: inc/widgets/widgets.php:429
+#: inc/widgets/widgets.php:431
 msgid "Tip: a multiple of the Works per row fills every row."
 msgstr ""
 
-#: inc/widgets/widgets.php:430
+#: inc/widgets/widgets.php:432
 msgid "All sectors"
 msgstr ""
 
-#: inc/widgets/widgets.php:440
+#: inc/widgets/widgets.php:442
 msgid "Show"
 msgstr ""
 
-#: inc/widgets/widgets.php:444
+#: inc/widgets/widgets.php:446
 msgid "All Works (by Order)"
 msgstr ""
 
-#: inc/widgets/widgets.php:445
+#: inc/widgets/widgets.php:447
 msgid "Works in one Sector"
 msgstr ""
 
-#: inc/widgets/widgets.php:446
+#: inc/widgets/widgets.php:448
 msgid "Works I choose"
 msgstr ""
 
-#: inc/widgets/widgets.php:457
+#: inc/widgets/widgets.php:459
 msgid "Choose a Sector"
 msgstr ""
 
-#: inc/widgets/widgets.php:468
+#: inc/widgets/widgets.php:470
 msgid "Works (in this order)"
 msgstr ""
 
-#: inc/widgets/widgets.php:477
+#: inc/widgets/widgets.php:479
 msgid "\"All work\" link text (empty to hide)"
 msgstr ""
 
-#: inc/widgets/widgets.php:482
+#: inc/widgets/widgets.php:484
 msgid "Order Works with the \"Order\" field on each Work (lowest first)."
 msgstr ""
 
-#: inc/widgets/widgets.php:491
+#: inc/widgets/widgets.php:493
 msgid "Works per row (desktop)"
 msgstr ""
 
-#: inc/widgets/widgets.php:495
+#: inc/widgets/widgets.php:497
 msgid "Tablets show 3 per row, phones 2."
 msgstr ""
 
-#: inc/widgets/widgets.php:501
+#: inc/widgets/widgets.php:503
 msgid "Full width (no side margins)"
 msgstr ""
 
-#: inc/widgets/widgets.php:507
+#: inc/widgets/widgets.php:509
 msgid "Space between Works (px, empty = default)"
 msgstr ""
 
-#: inc/widgets/widgets.php:511
+#: inc/widgets/widgets.php:513
 msgid "Red cover with text on hover"
 msgstr ""
 
-#: inc/widgets/widgets.php:515
+#: inc/widgets/widgets.php:517
 msgid "Shows the Work's Excerpt, or the start of its content."
 msgstr ""
 
-#: inc/widgets/widgets.php:521
+#: inc/widgets/widgets.php:523
 msgid "Title and details under each image"
 msgstr ""
 
-#: inc/widgets/widgets.php:530
+#: inc/widgets/widgets.php:532
 msgid "Staggered heights"
 msgstr ""
 
-#: inc/widgets/widgets.php:534
+#: inc/widgets/widgets.php:536
 msgid "On: each column has its own image height. Off: all images the same size."
 msgstr ""
 
-#: inc/widgets/widgets.php:537
+#: inc/widgets/widgets.php:539
 msgid "Phones"
 msgstr ""
 
-#: inc/widgets/widgets.php:538
+#: inc/widgets/widgets.php:540
 msgid "Works on phones (0 = all)"
 msgstr ""
 
-#: inc/widgets/widgets.php:542
+#: inc/widgets/widgets.php:544
 msgid "Works per row on phones"
 msgstr ""
 
-#: inc/widgets/widgets.php:548
+#: inc/widgets/widgets.php:550
 msgid "Equal heights on phones"
 msgstr ""
 
-#: inc/widgets/widgets.php:552 inc/widgets/widgets.php:1014
+#: inc/widgets/widgets.php:554 inc/widgets/widgets.php:1047
 msgid "Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:553
+#: inc/widgets/widgets.php:555
 msgid "Work title on hover"
 msgstr ""
 
-#: inc/widgets/widgets.php:554 inc/widgets/widgets.php:1015
+#: inc/widgets/widgets.php:556 inc/widgets/widgets.php:1048
 msgid "Details under the title"
 msgstr ""
 
-#: inc/widgets/widgets.php:555
+#: inc/widgets/widgets.php:557
 msgid "Text on hover"
 msgstr ""
 
-#: inc/widgets/widgets.php:556
+#: inc/widgets/widgets.php:558
 msgid "Red cover / red block"
 msgstr ""
 
-#: inc/widgets/widgets.php:557 inc/widgets/widgets.php:932
+#: inc/widgets/widgets.php:559 inc/widgets/widgets.php:965
 msgid "\"All work\" link"
 msgstr ""
 
-#: inc/widgets/widgets.php:558
+#: inc/widgets/widgets.php:560
 msgid "\"All work\" underline"
 msgstr ""
 
-#: inc/widgets/widgets.php:597
+#: inc/widgets/widgets.php:599
 msgid "VD Logo wall"
 msgstr ""
 
-#: inc/widgets/widgets.php:600
+#: inc/widgets/widgets.php:602
 msgid "Logos"
 msgstr ""
 
-#: inc/widgets/widgets.php:601
+#: inc/widgets/widgets.php:603
 msgid "Logos (on white, any size)"
 msgstr ""
 
-#: inc/widgets/widgets.php:608
+#: inc/widgets/widgets.php:610
 msgid "Logos per row"
 msgstr ""
 
-#: inc/widgets/widgets.php:621
+#: inc/widgets/widgets.php:623
 msgid "Space around each logo"
 msgstr ""
 
-#: inc/widgets/widgets.php:626
+#: inc/widgets/widgets.php:628
 msgid "Larger space = smaller logos."
 msgstr ""
 
-#: inc/widgets/widgets.php:633
+#: inc/widgets/widgets.php:635
 msgid "Cell shape"
 msgstr ""
 
-#: inc/widgets/widgets.php:637
+#: inc/widgets/widgets.php:639
 msgid "Square (1:1)"
 msgstr ""
 
-#: inc/widgets/widgets.php:640
+#: inc/widgets/widgets.php:642
 msgid "Wide (2:1)"
 msgstr ""
 
-#: inc/widgets/widgets.php:647 inc/widgets/widgets.php:711
+#: inc/widgets/widgets.php:649 inc/widgets/widgets.php:713
 msgid "Lines"
 msgstr ""
 
-#: inc/widgets/widgets.php:651
+#: inc/widgets/widgets.php:653
 msgid "Line thickness"
 msgstr ""
 
-#: inc/widgets/widgets.php:656
+#: inc/widgets/widgets.php:658
 msgid "0 hides the lines."
 msgstr ""
 
-#: inc/widgets/widgets.php:660
+#: inc/widgets/widgets.php:662
 msgid "Line colour"
 msgstr ""
 
-#: inc/widgets/widgets.php:661
+#: inc/widgets/widgets.php:663
 msgid "Top line colour"
 msgstr ""
 
-#: inc/widgets/widgets.php:688
+#: inc/widgets/widgets.php:690
 msgid "VD Numbered list"
 msgstr ""
 
-#: inc/widgets/widgets.php:691 inc/widgets/widgets.php:698
+#: inc/widgets/widgets.php:693 inc/widgets/widgets.php:700
 msgid "Items"
 msgstr ""
 
-#: inc/widgets/widgets.php:694 inc/widgets/widgets.php:710 inc/widgets/widgets.php:859
+#: inc/widgets/widgets.php:696 inc/widgets/widgets.php:712 inc/widgets/widgets.php:892
 msgid "Text"
 msgstr ""
 
-#: inc/widgets/widgets.php:708
+#: inc/widgets/widgets.php:710
 msgid "Numbers"
 msgstr ""
 
-#: inc/widgets/widgets.php:709
+#: inc/widgets/widgets.php:711
 msgid "Titles"
 msgstr ""
 
-#: inc/widgets/widgets.php:740
+#: inc/widgets/widgets.php:742
 msgid "VD Studio"
 msgstr ""
 
-#: inc/widgets/widgets.php:743
+#: inc/widgets/widgets.php:745
 msgid "Studio"
 msgstr ""
 
-#: inc/widgets/widgets.php:745 inc/widgets/widgets.php:759 inc/widgets/widgets.php:940
+#: inc/widgets/widgets.php:747 inc/widgets/widgets.php:761 inc/widgets/widgets.php:973
 msgid "Red box label"
 msgstr ""
 
-#: inc/widgets/widgets.php:746
+#: inc/widgets/widgets.php:748
 msgid "Red box list (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:747 inc/widgets/widgets.php:761
+#: inc/widgets/widgets.php:749 inc/widgets/widgets.php:763
 msgid "Side label"
 msgstr ""
 
-#: inc/widgets/widgets.php:748
+#: inc/widgets/widgets.php:750
 msgid "Side list (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:752
+#: inc/widgets/widgets.php:754
 msgid "Text (first paragraph is shown large)"
 msgstr ""
 
-#: inc/widgets/widgets.php:758 inc/widgets/widgets.php:939
+#: inc/widgets/widgets.php:760 inc/widgets/widgets.php:972
 msgid "Red box"
 msgstr ""
 
-#: inc/widgets/widgets.php:760 inc/widgets/widgets.php:941
+#: inc/widgets/widgets.php:762 inc/widgets/widgets.php:974
 msgid "Red box list"
 msgstr ""
 
-#: inc/widgets/widgets.php:762
+#: inc/widgets/widgets.php:764
 msgid "Side list"
 msgstr ""
 
-#: inc/widgets/widgets.php:763
+#: inc/widgets/widgets.php:765
 msgid "First paragraph"
 msgstr ""
 
-#: inc/widgets/widgets.php:764
+#: inc/widgets/widgets.php:766
 msgid "Other paragraphs"
 msgstr ""
 
-#: inc/widgets/widgets.php:765
+#: inc/widgets/widgets.php:767
 msgid "Circle"
 msgstr ""
 
-#: inc/widgets/widgets.php:802
+#: inc/widgets/widgets.php:804
 msgid "VD Client index"
 msgstr ""
 
-#: inc/widgets/widgets.php:805
+#: inc/widgets/widgets.php:807
 msgid "Clients"
 msgstr ""
 
-#: inc/widgets/widgets.php:808
+#: inc/widgets/widgets.php:813
 msgid "Clients (one per line)"
 msgstr ""
 
-#: inc/widgets/widgets.php:812
-msgid "Groups"
+#: inc/widgets/widgets.php:816
+msgid "To link a name, add | and the address after it, e.g. Porto Carras | https://portocarras.com"
 msgstr ""
 
 #: inc/widgets/widgets.php:822
+msgid "Groups"
+msgstr ""
+
+#: inc/widgets/widgets.php:832
+msgid "Open links in a new tab"
+msgstr ""
+
+#: inc/widgets/widgets.php:841
 msgid "Sector titles"
 msgstr ""
 
-#: inc/widgets/widgets.php:823
+#: inc/widgets/widgets.php:842
 msgid "Sector title line"
 msgstr ""
 
-#: inc/widgets/widgets.php:824
+#: inc/widgets/widgets.php:843
 msgid "Client names"
 msgstr ""
 
-#: inc/widgets/widgets.php:825
+#: inc/widgets/widgets.php:844
 msgid "Lines between names"
 msgstr ""
 
-#: inc/widgets/widgets.php:854
+#: inc/widgets/widgets.php:845
+msgid "Linked name on hover"
+msgstr ""
+
+#: inc/widgets/widgets.php:887
 msgid "VD Contact intro"
 msgstr ""
 
-#: inc/widgets/widgets.php:857
+#: inc/widgets/widgets.php:890
 msgid "Contact"
 msgstr ""
 
-#: inc/widgets/widgets.php:860
+#: inc/widgets/widgets.php:893
 msgid "Line above the contact details"
 msgstr ""
 
-#: inc/widgets/widgets.php:865
+#: inc/widgets/widgets.php:898
 msgid "Email and phone come from Appearance → Customize → Studio details."
 msgstr ""
 
-#: inc/widgets/widgets.php:874
+#: inc/widgets/widgets.php:907
 msgid "Line above contact details"
 msgstr ""
 
-#: inc/widgets/widgets.php:875
+#: inc/widgets/widgets.php:908
 msgid "Email and phone"
 msgstr ""
 
-#: inc/widgets/widgets.php:898 inc/works.php:62
+#: inc/widgets/widgets.php:931 inc/works.php:62
 msgid "Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:903
+#: inc/widgets/widgets.php:936
 msgid "Shows the current Work. Use inside a Theme Builder \"Single\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:928
+#: inc/widgets/widgets.php:961
 msgid "VD Work header"
 msgstr ""
 
-#: inc/widgets/widgets.php:933
+#: inc/widgets/widgets.php:966
 msgid "Detail labels"
 msgstr ""
 
-#: inc/widgets/widgets.php:934
+#: inc/widgets/widgets.php:967
 msgid "Detail values"
 msgstr ""
 
-#: inc/widgets/widgets.php:935
+#: inc/widgets/widgets.php:968
 msgid "Detail lines"
 msgstr ""
 
-#: inc/widgets/widgets.php:936
+#: inc/widgets/widgets.php:969
 msgid "Project number"
 msgstr ""
 
-#: inc/widgets/widgets.php:957
+#: inc/widgets/widgets.php:990
 msgid "VD Work cover and summary"
 msgstr ""
 
-#: inc/widgets/widgets.php:961
+#: inc/widgets/widgets.php:994
 msgid "Label"
 msgstr ""
 
-#: inc/widgets/widgets.php:962
+#: inc/widgets/widgets.php:995
 msgid "Summary"
 msgstr ""
 
-#: inc/widgets/widgets.php:963
+#: inc/widgets/widgets.php:996
 msgid "Description"
 msgstr ""
 
-#: inc/widgets/widgets.php:979
+#: inc/widgets/widgets.php:1012
 msgid "VD Work gallery"
 msgstr ""
 
-#: inc/widgets/widgets.php:994
+#: inc/widgets/widgets.php:1027
 msgid "VD Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:1000
+#: inc/widgets/widgets.php:1033
 msgid "Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:1005
+#: inc/widgets/widgets.php:1038
 msgid "Title, Sector filter and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:1013
+#: inc/widgets/widgets.php:1046
 msgid "Sector filter"
 msgstr ""
 
-#: inc/widgets/widgets.php:1029
+#: inc/widgets/widgets.php:1062
 msgid "VD Next Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:1033
+#: inc/widgets/widgets.php:1066
 msgid "\"Next project\" label"
 msgstr ""
 
-#: inc/widgets/widgets.php:1034
+#: inc/widgets/widgets.php:1067
 msgid "Next Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:1036
+#: inc/widgets/widgets.php:1069
 msgid "Top line"
 msgstr ""
 

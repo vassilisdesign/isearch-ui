@@ -251,6 +251,7 @@ class VDE_Widget_Hero extends VDE_Widget {
 		};
 		?>
 		<section class="vd-hero vd-wrap" aria-label="<?php echo esc_attr( $s['label'] ); ?>">
+			<div class="vd-hero-text">
 			<h1 class="vd-wordmark" aria-label="<?php echo esc_attr( $s['label'] ); ?>">
 				<span aria-hidden="true">
 					<span class="vd-wm-line"><?php echo $chars( $s['line1'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
@@ -258,6 +259,7 @@ class VDE_Widget_Hero extends VDE_Widget {
 				</span>
 			</h1>
 			<p class="vd-hero-lead"><?php echo vde_lines( $s['lead'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			</div>
 			<?php if ( $s['corner'] ) : ?>
 				<p class="vd-hero-corner" aria-hidden="true"><?php echo esc_html( $s['corner'] ); ?></p>
 			<?php endif; ?>
@@ -805,7 +807,15 @@ class VDE_Widget_Client_Index extends VDE_Widget {
 		$this->start( __( 'Clients', 'vassilisdesign-elements' ) );
 		$r = new Repeater();
 		$r->add_control( 'title', array( 'label' => __( 'Sector', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$r->add_control( 'names', array( 'label' => __( 'Clients (one per line)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 10 ) );
+		$r->add_control(
+			'names',
+			array(
+				'label'       => __( 'Clients (one per line)', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'rows'        => 10,
+				'description' => __( 'To link a name, add | and the address after it, e.g. Porto Carras | https://portocarras.com', 'vassilisdesign-elements' ),
+			)
+		);
 		$this->add_control(
 			'groups',
 			array(
@@ -816,6 +826,15 @@ class VDE_Widget_Client_Index extends VDE_Widget {
 				'default'     => array(),
 			)
 		);
+		$this->add_control(
+			'new_tab',
+			array(
+				'label'        => __( 'Open links in a new tab', 'vassilisdesign-elements' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			)
+		);
 		$this->end_controls_section();
 		$this->add_style_controls(
 			array(
@@ -823,6 +842,7 @@ class VDE_Widget_Client_Index extends VDE_Widget {
 				array( 'color', 'sector_line', __( 'Sector title line', 'vassilisdesign-elements' ), '.vd-client-sector', 'border-bottom-color' ),
 				array( 'text', 'names', __( 'Client names', 'vassilisdesign-elements' ), '.vd-client-list li' ),
 				array( 'color', 'name_lines', __( 'Lines between names', 'vassilisdesign-elements' ), '.vd-client-list li', 'border-bottom-color' ),
+				array( 'color', 'link_hover', __( 'Linked name on hover', 'vassilisdesign-elements' ), '.vd-client-list a:hover, .vd-client-list a:focus-visible', 'color' ),
 			)
 		);
 	}
@@ -831,12 +851,25 @@ class VDE_Widget_Client_Index extends VDE_Widget {
 		if ( empty( $s['groups'] ) ) {
 			return;
 		}
+		$target = ( isset( $s['new_tab'] ) && 'yes' === $s['new_tab'] ) ? ' target="_blank" rel="noopener"' : '';
 		echo '<div class="vd-wrap vd-client-groups">';
 		foreach ( $s['groups'] as $group ) {
 			$names = array_filter( array_map( 'trim', explode( "\n", (string) $group['names'] ) ) );
 			echo '<div class="vd-client-group"><h3 class="vd-client-sector">' . esc_html( $group['title'] ) . '</h3><ul class="vd-client-list" role="list">';
 			foreach ( $names as $name ) {
-				echo '<li>' . esc_html( $name ) . '</li>';
+				$url = '';
+				if ( false !== strpos( $name, '|' ) ) {
+					list( $name, $url ) = array_map( 'trim', explode( '|', $name, 2 ) );
+					if ( $url && ! preg_match( '#^([a-z][a-z0-9+.-]*:|/|\#)#i', $url ) ) { // add https:// to bare addresses; esc_url() drops unsafe schemes
+						$url = 'https://' . $url;
+					}
+					$url = esc_url( $url );
+				}
+				if ( $url ) {
+					echo '<li><a href="' . $url . '"' . $target . '>' . esc_html( $name ) . '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				} else {
+					echo '<li>' . esc_html( $name ) . '</li>';
+				}
 			}
 			echo '</ul></div>';
 		}

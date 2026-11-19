@@ -168,12 +168,14 @@ body {
   overflow-x: clip; /* the red band drifts right on scroll; keep it inside the page */
 }
 .vd-wordmark {
-  grid-column: 1 / -1; order: 1; font-size: clamp(3rem, 21.5vw, 10rem); font-weight: 800; line-height: 0.86; letter-spacing: -0.045em;
-  margin-left: -0.04em; white-space: nowrap;
+  font-size: clamp(3rem, 21.5vw, 10rem); font-weight: 800; line-height: 0.86; letter-spacing: -0.045em;
+  margin-left: -0.04em; white-space: nowrap; width: max-content; max-width: none; /* never clip letters when a wider font or size is chosen */
 }
 .vd-wm-line { display: block; overflow: hidden; padding-block: 0.03em 0.02em; }
 .vd-ch { display: inline-block; }
-.vd-hero-lead { grid-column: 1 / -1; order: 1; font-size: var(--vd-t-l); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; max-width: 28ch; }
+/* Wordmark and positioning text share one column so the text always sits below the wordmark, whatever font or size is chosen. */
+.vd-hero-text { grid-column: 1 / -1; order: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.vd-hero-lead { font-size: var(--vd-t-l); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; max-width: 28ch; }
 .vd-hero-meta { grid-column: span 2; order: 3; font-size: var(--vd-t-xs); line-height: 1.45; font-weight: 500; padding-top: 10px; border-top: 1.5px solid var(--vd-ink); }
 .vd-hero-meta-b { color: var(--vd-grey); }
 .vd-hero-vertical, .vd-hero-corner { display: none; }
@@ -184,8 +186,9 @@ body {
 
 @media (min-width: 900px) {
   .vd-hero { min-height: 100vh; min-height: 100svh; grid-template-rows: auto 1fr auto; row-gap: 0; }
-  .vd-wordmark { order: 0; grid-column: 1 / 6; grid-row: 2; align-self: start; font-size: clamp(3.5rem, 8.7vw, 11rem); margin-top: 5vh; }
-  .vd-hero-lead { order: 0; grid-column: 1 / 5; grid-row: 2; align-self: end; margin-bottom: 40px; font-size: var(--vd-t-m); max-width: 30ch; }
+  .vd-hero-text { order: 0; grid-column: 1 / 6; grid-row: 1 / 3; gap: clamp(24px, 3vw, 48px); }
+  .vd-wordmark { font-size: clamp(3.5rem, 8.7vw, 11rem); }
+  .vd-hero-lead { margin-top: auto; margin-bottom: 40px; font-size: var(--vd-t-m); max-width: 30ch; }
   .vd-hero-meta { order: 0; grid-row: 1; margin-bottom: 28px; }
   .vd-hero-meta-a { grid-column: 6 / 8; }
   .vd-hero-meta-b { grid-column: 8 / 10; }
@@ -393,6 +396,9 @@ body {
 .vd-client-groups { display: grid; gap: 40px var(--vd-gap); }
 .vd-client-sector { font-size: var(--vd-t-s); font-weight: 700; color: var(--vd-red); padding-bottom: 12px; border-bottom: 1.5px solid var(--vd-ink); }
 .vd-client-list li { font-size: var(--vd-t-m); font-weight: 500; padding-block: 9px; border-bottom: 1px solid var(--vd-rule); letter-spacing: -0.01em; }
+.vd-client-list a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat; transition: background-size .35s ease, color .2s ease; }
+.vd-client-list a::after { content: " \2197"; font-size: .75em; opacity: .5; }
+.vd-client-list a:hover, .vd-client-list a:focus-visible { color: var(--vd-red); background-size: 100% 1.5px; }
 @media (min-width: 720px) { .vd-client-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1100px) { .vd-client-groups { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
