@@ -56,6 +56,11 @@ add_action(
 						'logged_in'              => is_user_logged_in(),
 						'wordpress_says'         => is_wp_error( $status ) ? $status->get_error_code() : ( true === $status ? 'accepted' : 'no attempt' ),
 						'server_api'             => PHP_SAPI,
+						// The caller's own username as WordPress received it (never the password), to spot typos.
+						'username_received'      => isset( $_SERVER['PHP_AUTH_USER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_USER'] ) ) : '',
+						'username_length'        => isset( $_SERVER['PHP_AUTH_USER'] ) ? strlen( (string) $_SERVER['PHP_AUTH_USER'] ) : 0,
+						'user_exists'            => isset( $_SERVER['PHP_AUTH_USER'] ) && ( get_user_by( 'login', (string) $_SERVER['PHP_AUTH_USER'] ) || get_user_by( 'email', (string) $_SERVER['PHP_AUTH_USER'] ) ),
+						'password_length'        => isset( $_SERVER['PHP_AUTH_PW'] ) ? strlen( preg_replace( '/\s+/', '', (string) $_SERVER['PHP_AUTH_PW'] ) ) : 0,
 					);
 				},
 			)
