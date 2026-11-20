@@ -57,7 +57,7 @@ abstract class VDE_Widget extends Widget_Base {
 		return '';
 	}
 	/**
-	 * Style tab: font and colour controls for each part of the widget, scoped to this widget only.
+	 * Style tab: font and colour controls for each part of the widget, scoped to this widget only, separately per device.
 	 * Items: array( 'text', key, label, selector ) adds Typography + Color;
 	 *        array( 'color', key, label, selector, css property ) adds one colour.
 	 */
@@ -72,16 +72,31 @@ abstract class VDE_Widget extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
+		/*
+		 * Every font setting and colour can differ per device (the screen icons next to each setting).
+		 * Desktop values apply everywhere until a tablet or mobile value is set.
+		 */
+		$responsive_type = array();
+		foreach ( array( 'font_family', 'font_weight', 'text_transform', 'font_style', 'text_decoration' ) as $field ) {
+			$responsive_type[ $field ] = array( 'responsive' => true );
+		}
 		foreach ( $items as $i => $item ) {
 			$selector = implode( ', ', array_map( function ( $part ) {
 				return '{{WRAPPER}} ' . trim( $part );
 			}, explode( ',', $item[3] ) ) );
 			if ( 'text' === $item[0] ) {
 				$this->add_control( $item[1] . '_heading', array( 'label' => $item[2], 'type' => Controls_Manager::HEADING, 'separator' => $i ? 'before' : 'none' ) );
-				$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => $item[1] . '_typography', 'selector' => $selector ) );
-				$this->add_control( $item[1] . '_color', array( 'label' => __( 'Colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( $selector => 'color: {{VALUE}} !important;' ) ) );
+				$this->add_group_control(
+					Group_Control_Typography::get_type(),
+					array(
+						'name'           => $item[1] . '_typography',
+						'selector'       => $selector,
+						'fields_options' => $responsive_type,
+					)
+				);
+				$this->add_responsive_control( $item[1] . '_color', array( 'label' => __( 'Colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( $selector => 'color: {{VALUE}} !important;' ) ) );
 			} else {
-				$this->add_control( $item[1], array( 'label' => $item[2], 'type' => Controls_Manager::COLOR, 'separator' => 'before', 'selectors' => array( $selector => $item[4] . ': {{VALUE}} !important;' ) ) );
+				$this->add_responsive_control( $item[1], array( 'label' => $item[2], 'type' => Controls_Manager::COLOR, 'separator' => 'before', 'selectors' => array( $selector => $item[4] . ': {{VALUE}} !important;' ) ) );
 			}
 		}
 		$this->end_controls_section();
@@ -645,7 +660,7 @@ class VDE_Widget_Logo_Wall extends VDE_Widget {
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'lines_style', array( 'label' => __( 'Lines', 'vassilisdesign-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
-		$this->add_control(
+		$this->add_responsive_control(
 			'line_size',
 			array(
 				'label'      => __( 'Line thickness', 'vassilisdesign-elements' ),
@@ -657,8 +672,8 @@ class VDE_Widget_Logo_Wall extends VDE_Widget {
 				'selectors'  => array( '{{WRAPPER}} .vd-logos' => '--vdl-line: {{SIZE}}{{UNIT}};' ),
 			)
 		);
-		$this->add_control( 'lines', array( 'label' => __( 'Line colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} .vd-logos' => '--vdl-color: {{VALUE}};' ) ) );
-		$this->add_control( 'top_line', array( 'label' => __( 'Top line colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} .vd-logos' => '--vdl-top: {{VALUE}};' ) ) );
+		$this->add_responsive_control( 'lines', array( 'label' => __( 'Line colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} .vd-logos' => '--vdl-color: {{VALUE}};' ) ) );
+		$this->add_responsive_control( 'top_line', array( 'label' => __( 'Top line colour', 'vassilisdesign-elements' ), 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} .vd-logos' => '--vdl-top: {{VALUE}};' ) ) );
 		$this->end_controls_section();
 	}
 	protected function render() {

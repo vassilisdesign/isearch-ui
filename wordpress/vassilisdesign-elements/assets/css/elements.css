@@ -592,6 +592,10 @@ html.vd-lb-lock, html.vd-lb-lock body { overflow: hidden; }
 .vd-case-next-label { grid-column: 1 / -1; font-size: var(--vd-t-s); color: var(--vd-grey); }
 .vd-case-next-client { min-width: 0; overflow-wrap: anywhere; hyphens: auto; font-size: var(--vd-t-display); font-weight: 700; letter-spacing: -0.055em; line-height: 0.9; text-transform: lowercase; transition: transform 0.6s var(--vd-ease); }
 .vd-case-next-thumb { width: clamp(80px, 14vw, 200px); aspect-ratio: 1 / 1; }
+@media (max-width: 767px) { /* phones: title and image half and half */
+  .vd-case-next-link { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+  .vd-case-next-thumb { width: 100%; }
+}
 .vd-case-next-thumb .vd-red-block { transform: scaleY(0); transition: transform 0.6s var(--vd-ease); }
 .vd-case-next-link:hover .vd-case-next-client { transform: translateX(0.1em); }
 .vd-case-next-link:hover .vd-case-next-thumb .vd-red-block { transform: scaleY(1); }
