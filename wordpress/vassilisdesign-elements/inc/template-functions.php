@@ -109,7 +109,7 @@ function vde_work_tile( $post, $overlay = false, $captions = true, $ratio = '', 
 			</span>
 			<?php if ( $captions ) : ?>
 				<span class="vd-tile-client"><?php echo esc_html( $title ); ?></span>
-				<?php if ( $services = get_post_meta( $post->ID, 'vd_services', true ) ) : ?>
+				<?php if ( $services = vde_work_services( $post ) ) : ?>
 					<span class="vd-tile-meta"><?php echo esc_html( $services ); ?></span>
 				<?php endif; ?>
 				<?php if ( $location = get_post_meta( $post->ID, 'vd_location', true ) ) : ?>
@@ -278,7 +278,7 @@ function vde_work_header( $post = null, $show_back = true ) {
 	$website = esc_url( (string) get_post_meta( $post->ID, 'vd_website', true ), array( 'http', 'https' ) );
 	$meta    = array(
 		__( 'Sector', 'vassilisdesign-elements' )   => $sectors && ! is_wp_error( $sectors ) ? implode( ', ', wp_list_pluck( $sectors, 'name' ) ) : '',
-		__( 'Services', 'vassilisdesign-elements' ) => get_post_meta( $post->ID, 'vd_services', true ),
+		__( 'Services', 'vassilisdesign-elements' ) => vde_work_services( $post ),
 		__( 'Location', 'vassilisdesign-elements' ) => get_post_meta( $post->ID, 'vd_location', true ),
 	);
 	ob_start();
@@ -319,15 +319,19 @@ function vde_work_header( $post = null, $show_back = true ) {
 }
 
 /** Cover image, summary and long description. */
-function vde_work_intro( $post = null ) {
+function vde_work_intro( $post = null, $lightbox = true ) {
 	$post  = get_post( $post );
 	$thumb = get_post_thumbnail_id( $post );
+	$full  = $thumb && $lightbox ? wp_get_attachment_image_url( $thumb, 'full' ) : '';
 	ob_start();
 	if ( $thumb ) :
 		?>
 		<figure class="vd-case-hero vd-wrap">
 			<div class="vd-case-poster vd-photo vd-is-color<?php echo 'contain' === vde_cover_fit( $post->ID ) ? ' vd-fit-contain' : ''; ?>">
 				<?php echo vde_img( $thumb, 'vd-wide', true, get_the_title( $post ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php if ( $full ) : ?>
+					<a class="vd-zoom" href="<?php echo esc_url( $full ); ?>" data-vd-lb="cover-<?php echo (int) $post->ID; ?>" data-vd-caption="<?php echo esc_attr( get_the_title( $post ) ); ?>"><span class="screen-reader-text"><?php esc_html_e( 'View the full image', 'vassilisdesign-elements' ); ?></span></a>
+				<?php endif; ?>
 			</div>
 			<span class="vd-plus" aria-hidden="true"></span>
 			<span class="vd-dots" aria-hidden="true"></span>
@@ -390,17 +394,26 @@ function vde_work_elementor_content( $post ) {
 	return '' === $html ? '' : '<div class="vd-work-content">' . $html . '</div>';
 }
 
-/** Work gallery: images at their natural proportions, in full colour. */
-function vde_work_gallery( $post = null ) {
+/** Work gallery: three per row on large screens, in full colour; each image opens full size in the lightbox. */
+function vde_work_gallery( $post = null, $lightbox = true ) {
 	$post = get_post( $post );
-	$ids  = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post->ID, 'vd_gallery', true ) ) ) );
+	$ids  = array_values( array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post->ID, 'vd_gallery', true ) ) ) ) );
 	if ( ! $ids ) {
 		return '';
 	}
-	$out = '';
-	foreach ( $ids as $id ) {
+	$out   = '';
+	$total = count( $ids );
+	foreach ( $ids as $i => $id ) {
 		$alt  = get_post_meta( $id, '_wp_attachment_image_alt', true );
-		$out .= '<figure class="vd-gallery-item">' . vde_img( $id, 'vd-wide', false, $alt ? $alt : get_the_title( $post ) ) . '</figure>';
+		$alt  = $alt ? $alt : get_the_title( $post );
+		$img  = vde_img( $id, 'vd-wide', false, $alt );
+		$full = $lightbox ? wp_get_attachment_image_url( $id, 'full' ) : '';
+		if ( $full ) {
+			/* translators: 1: image number, 2: number of images */
+			$label = sprintf( __( 'View image %1$d of %2$d full size', 'vassilisdesign-elements' ), $i + 1, $total );
+			$img   = '<a class="vd-gallery-link" href="' . esc_url( $full ) . '" data-vd-lb="gallery-' . (int) $post->ID . '" data-vd-caption="' . esc_attr( $alt ) . '">' . $img . '<span class="screen-reader-text">' . esc_html( $label ) . '</span></a>';
+		}
+		$out .= '<figure class="vd-gallery-item">' . $img . '</figure>';
 	}
 	return '<div class="vd-gallery vd-wrap">' . $out . '</div>';
 }

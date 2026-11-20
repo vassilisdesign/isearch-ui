@@ -61,14 +61,15 @@ The setup never overwrites anything. If the site already has a page with the slu
 | --- | --- |
 | Title | Client or project name |
 | Excerpt | Short summary on the Work page (turn on "Excerpt" in the editor's panel if hidden) |
-| Cover image (featured image) | Homepage tile and the large image on the Work page |
+| Cover image (featured image) | Homepage tile and the 16:9 image on the Work page (opens full size on click) |
 | Sectors | Filters on the Works archive and the "Sector" label |
+| Services | Tick 2–4 in the Services box (managed under Works → Services) |
 | Order (Page attributes) | Display order: lowest number first |
-| Work details → Location, Services | Shown under the tile and on the Work page |
+| Work details → Location | Shown under the tile and on the Work page |
 | Work details → Scope | Short line on the studio's role, shown in the red box |
 | Work details → Live website | Optional; adds "Visit website ↗" in the red box (new tab) |
 | Work details → Cover display | "Fill" for photos and screenshots, "Fit" for packshots and logos on white |
-| Work details → Gallery | Images on the Work page, in order |
+| Work details → Gallery | Images on the Work page, in order: 3 per row, each opens full size on click |
 | Content (editor) | Optional longer description |
 
 On the homepage, the **VD Works grid** shows 5 Works per row, edge to edge, with staggered heights. On hover, a red block (multiplied over the image) covers the whole tile and the Work's Excerpt appears in white, or the start of its content if there is no Excerpt. Titles use Elementor's global **Accent** font (Site Settings → Global Fonts).
@@ -88,6 +89,10 @@ Every field says something different. Do not repeat the same words in two fields
 | Scope | The studio's role, one short line. No year, no results | Concept, design, art direction |
 | Live website | The client's live site, if there is one | https://… |
 | Excerpt | 2–3 sentences: what was made and why it matters | A new identity for Hotel Atlas … |
+
+On the Work page, Sector, Services and Location show one per line. Updating to 2.11 moves the old Services text of each Work into the Services checklist automatically (for example "websites" becomes Web Design). Check **Works → Services** afterwards and merge anything left over.
+
+In Elementor, every VD widget has **Style → Fonts and colours** for each of its texts. **VD Work gallery** also has Images per row, Space, Image shape and the full-image switch; **VD Work cover and summary** has the cover Shape and the same switch.
 
 Each Work can also be built with Elementor if you want a custom layout for a special project. Its Elementor content then appears between the gallery and "Next project".
 

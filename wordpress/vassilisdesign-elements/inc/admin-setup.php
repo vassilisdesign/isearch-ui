@@ -125,11 +125,16 @@ function vde_run_setup() {
 	}
 
 	// 2. Sectors.
-	foreach ( array( 'Wine and packaging', 'Hospitality and tourism', 'Restaurants and food', 'Corporate and professional services' ) as $name ) {
+	foreach ( array( 'Wine & Spirits', 'Hospitality', 'Food & Restaurants', 'Food Products', 'Professional Services', 'Culture & Lifestyle' ) as $name ) {
 		if ( ! term_exists( $name, 'work_sector' ) ) {
 			wp_insert_term( $name, 'work_sector' );
 			/* translators: %s: sector name */
 			$log[] = sprintf( __( 'Sector created: %s', 'vassilisdesign-elements' ), $name );
+		}
+	}
+	foreach ( vde_default_services() as $name ) {
+		if ( ! term_exists( $name, 'work_service' ) ) {
+			wp_insert_term( $name, 'work_service' );
 		}
 	}
 

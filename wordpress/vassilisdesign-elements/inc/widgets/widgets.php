@@ -935,10 +935,25 @@ abstract class VDE_Work_Widget extends VDE_Widget {
 			)
 		);
 		$this->end_controls_section();
+		$this->extra_controls();
 		$this->add_style_controls( $this->style_items() );
 	}
+	/** Widget-specific settings (layout, lightbox), added after the note. */
+	protected function extra_controls() {}
 	protected function style_items() {
 		return array();
+	}
+	/** On/off switch for opening images full size. */
+	protected function add_lightbox_control() {
+		$this->add_control(
+			'lightbox',
+			array(
+				'label'        => __( 'Open full image on click', 'vassilisdesign-elements' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+			)
+		);
 	}
 	/** The current Work, or the latest one while previewing a template in the editor. */
 	protected function work() {
@@ -963,13 +978,14 @@ class VDE_Widget_Work_Header extends VDE_Work_Widget {
 			array( 'text', 'back', __( '"All work" link', 'vassilisdesign-elements' ), '.vd-case-back' ),
 			array( 'text', 'meta_label', __( 'Detail labels', 'vassilisdesign-elements' ), '.vd-case-meta dt' ),
 			array( 'text', 'meta_value', __( 'Detail values', 'vassilisdesign-elements' ), '.vd-case-meta dd' ),
-			array( 'color', 'meta_line', __( 'Detail lines', 'vassilisdesign-elements' ), '.vd-case-meta > div', 'border-left-color' ),
+			array( 'color', 'meta_line', __( 'Detail lines', 'vassilisdesign-elements' ), '.vd-case-meta, .vd-case-meta > div', 'border-color' ),
 			array( 'text', 'index', __( 'Project number', 'vassilisdesign-elements' ), '.vd-case-index' ),
 			array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-case-title' ),
 			array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-case-title .vd-stop', 'color' ),
 			array( 'color', 'red_bg', __( 'Red box', 'vassilisdesign-elements' ), '.vd-case-red', 'background-color' ),
 			array( 'text', 'red_title', __( 'Red box label', 'vassilisdesign-elements' ), '.vd-case-red-title' ),
-			array( 'text', 'facts', __( 'Red box list', 'vassilisdesign-elements' ), '.vd-case-facts li' ),
+			array( 'text', 'facts', __( 'Scope text', 'vassilisdesign-elements' ), '.vd-case-facts li' ),
+			array( 'text', 'site', __( '"Visit website" link', 'vassilisdesign-elements' ), '.vd-case-site' ),
 		);
 	}
 	protected function render() {
@@ -992,12 +1008,34 @@ class VDE_Widget_Work_Intro extends VDE_Work_Widget {
 			array( 'text', 'label', __( 'Label', 'vassilisdesign-elements' ), '.vd-case-label' ),
 			array( 'text', 'summary', __( 'Summary', 'vassilisdesign-elements' ), '.vd-case-summary' ),
 			array( 'text', 'body', __( 'Description', 'vassilisdesign-elements' ), '.vd-case-text .vd-prose' ),
+			array( 'color', 'cover_bg', __( 'Cover background', 'vassilisdesign-elements' ), '.vd-case-poster', 'background-color' ),
 		);
+	}
+	protected function extra_controls() {
+		$this->start_controls_section( 'cover', array( 'label' => __( 'Cover image', 'vassilisdesign-elements' ) ) );
+		$this->add_responsive_control(
+			'cover_ratio',
+			array(
+				'label'     => __( 'Shape', 'vassilisdesign-elements' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '16 / 9',
+				'options'   => array(
+					'16 / 9' => '16:9',
+					'3 / 2'  => '3:2',
+					'4 / 3'  => '4:3',
+					'1 / 1'  => '1:1',
+					'21 / 9' => '21:9',
+				),
+				'selectors' => array( '{{WRAPPER}} .vd-case-poster' => 'aspect-ratio: {{VALUE}};' ),
+			)
+		);
+		$this->add_lightbox_control();
+		$this->end_controls_section();
 	}
 	protected function render() {
 		$w = $this->work();
 		if ( $w ) {
-			echo vde_work_intro( $w ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo vde_work_intro( $w, 'yes' === $this->get_settings_for_display( 'lightbox' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 }
@@ -1009,10 +1047,74 @@ class VDE_Widget_Work_Gallery extends VDE_Work_Widget {
 	public function get_title() {
 		return __( 'VD Work gallery', 'vassilisdesign-elements' );
 	}
+	protected function extra_controls() {
+		$this->start_controls_section( 'layout', array( 'label' => __( 'Layout', 'vassilisdesign-elements' ) ) );
+		$this->add_responsive_control(
+			'columns',
+			array(
+				'label'          => __( 'Images per row', 'vassilisdesign-elements' ),
+				'type'           => Controls_Manager::SELECT,
+				'default'        => '3',
+				'tablet_default' => '2',
+				'mobile_default' => '1',
+				'options'        => array( '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5' ),
+				'selectors'      => array( '{{WRAPPER}} .vd-gallery' => 'grid-template-columns: repeat({{VALUE}}, minmax(0, 1fr));' ),
+			)
+		);
+		$this->add_responsive_control(
+			'gap',
+			array(
+				'label'      => __( 'Space between images', 'vassilisdesign-elements' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'vw' ),
+				'range'      => array( 'px' => array( 'min' => 0, 'max' => 120 ), 'vw' => array( 'min' => 0, 'max' => 10, 'step' => 0.1 ) ),
+				'selectors'  => array( '{{WRAPPER}} .vd-gallery' => 'gap: {{SIZE}}{{UNIT}};' ),
+			)
+		);
+		$this->add_control(
+			'shape',
+			array(
+				'label'     => __( 'Image shape', 'vassilisdesign-elements' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'auto',
+				'options'   => array(
+					'auto'   => __( 'As uploaded', 'vassilisdesign-elements' ),
+					'1 / 1'  => '1:1',
+					'4 / 5'  => '4:5',
+					'3 / 4'  => '3:4',
+					'4 / 3'  => '4:3',
+					'3 / 2'  => '3:2',
+					'16 / 9' => '16:9',
+				),
+				'selectors' => array( '{{WRAPPER}} .vd-gallery' => '--vd-g-ar: {{VALUE}};' ),
+			)
+		);
+		$this->add_control(
+			'fit',
+			array(
+				'label'     => __( 'Fit', 'vassilisdesign-elements' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'cover',
+				'options'   => array(
+					'cover'   => __( 'Fill the shape (may crop)', 'vassilisdesign-elements' ),
+					'contain' => __( 'Show the whole image', 'vassilisdesign-elements' ),
+				),
+				'condition' => array( 'shape!' => 'auto' ),
+				'selectors' => array( '{{WRAPPER}} .vd-gallery' => '--vd-g-fit: {{VALUE}};' ),
+			)
+		);
+		$this->add_lightbox_control();
+		$this->end_controls_section();
+	}
+	protected function style_items() {
+		return array(
+			array( 'color', 'item_bg', __( 'Image background', 'vassilisdesign-elements' ), '.vd-gallery-item', 'background-color' ),
+		);
+	}
 	protected function render() {
 		$w = $this->work();
 		if ( $w ) {
-			echo vde_work_gallery( $w ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo vde_work_gallery( $w, 'yes' === $this->get_settings_for_display( 'lightbox' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 }
@@ -1042,6 +1144,7 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 				array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-display' ),
 				array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-display .vd-stop', 'color' ),
 				array( 'text', 'filter', __( 'Sector filter', 'vassilisdesign-elements' ), '.vd-filter a' ),
+				array( 'color', 'filter_active', __( 'Sector filter: current', 'vassilisdesign-elements' ), '.vd-filter a[aria-current], .vd-filter a:hover', 'color' ),
 				array( 'text', 'client', __( 'Work title', 'vassilisdesign-elements' ), '.vd-tile-client' ),
 				array( 'text', 'meta', __( 'Details under the title', 'vassilisdesign-elements' ), '.vd-tile-meta' ),
 			)

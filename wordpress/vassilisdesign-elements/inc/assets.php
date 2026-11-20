@@ -45,6 +45,18 @@ add_action(
 		wp_enqueue_script( 'vde-gsap', VDE_URI . 'assets/vendor/gsap.min.js', array(), '3.15.1', array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		wp_enqueue_script( 'vde-scrolltrigger', VDE_URI . 'assets/vendor/ScrollTrigger.min.js', array( 'vde-gsap' ), '3.15.1', array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		wp_enqueue_script( 'vde-elements', VDE_URI . 'assets/js/elements.js', array( 'vde-gsap', 'vde-scrolltrigger' ), $js_ver, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		if ( is_singular( 'works' ) ) { // the lightbox labels, in the site language
+			wp_localize_script(
+				'vde-elements',
+				'vdLightbox',
+				array(
+					'dialog' => __( 'Image viewer', 'vassilisdesign-elements' ),
+					'close'  => __( 'Close', 'vassilisdesign-elements' ),
+					'prev'   => __( 'Previous image', 'vassilisdesign-elements' ),
+					'next'   => __( 'Next image', 'vassilisdesign-elements' ),
+				)
+			);
+		}
 	},
 	15
 );

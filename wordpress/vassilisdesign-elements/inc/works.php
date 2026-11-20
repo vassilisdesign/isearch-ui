@@ -48,8 +48,123 @@ add_action(
 				),
 			)
 		);
+		// Services: a checklist like Sectors, so names are spelled the same on every Work.
+		// Not public: no thin /service/ pages for search engines; the names show on the Work page and tiles.
+		register_taxonomy(
+			'work_service',
+			'works',
+			array(
+				'labels'             => array(
+					'name'          => __( 'Services', 'vassilisdesign-elements' ),
+					'singular_name' => __( 'Service', 'vassilisdesign-elements' ),
+					'add_new_item'  => __( 'Add new Service', 'vassilisdesign-elements' ),
+					'edit_item'     => __( 'Edit Service', 'vassilisdesign-elements' ),
+					'all_items'     => __( 'All Services', 'vassilisdesign-elements' ),
+					'menu_name'     => __( 'Services', 'vassilisdesign-elements' ),
+				),
+				'hierarchical'       => true,
+				'public'             => false,
+				'publicly_queryable' => false,
+				'show_ui'            => true,
+				'show_admin_column'  => true,
+				'show_in_rest'       => true,
+				'show_in_nav_menus'  => false,
+				'show_tagcloud'      => false,
+				'rewrite'            => false,
+			)
+		);
 	},
 	9
+);
+
+/** The Work's Services as one line ("Brand Identity, Web Design"). Falls back to the old text field. */
+function vde_work_services( $post ) {
+	$post  = get_post( $post );
+	$terms = $post ? get_the_terms( $post, 'work_service' ) : false;
+	if ( $terms && ! is_wp_error( $terms ) ) {
+		return implode( ', ', wp_list_pluck( $terms, 'name' ) );
+	}
+	return $post ? (string) get_post_meta( $post->ID, 'vd_services', true ) : '';
+}
+
+/** The studio's standard services, added once. */
+function vde_default_services() {
+	return array(
+		__( 'Brand Identity', 'vassilisdesign-elements' ),
+		__( 'Logo Design', 'vassilisdesign-elements' ),
+		__( 'Packaging', 'vassilisdesign-elements' ),
+		__( 'Label Design', 'vassilisdesign-elements' ),
+		__( 'Web Design', 'vassilisdesign-elements' ),
+		__( 'Print & Editorial', 'vassilisdesign-elements' ),
+		__( 'Stationery', 'vassilisdesign-elements' ),
+		__( 'Signage & Wayfinding', 'vassilisdesign-elements' ),
+		__( 'Art Direction', 'vassilisdesign-elements' ),
+		__( 'Social Media', 'vassilisdesign-elements' ),
+	);
+}
+
+/** Old free-text service words mapped to the standard names ("websites" → Web Design). */
+function vde_service_alias( $name ) {
+	$key  = strtolower( trim( $name ) );
+	$map  = array(
+		'/^(brand(ing)?|(brand |visual )?identit(y|ies)|corporate identity)$/' => 'Brand Identity',
+		'/^logos?( design)?$/'                                                  => 'Logo Design',
+		'/^(web ?sites?|web( design)?|digital)$/'                               => 'Web Design',
+		'/^labels?( design)?$/'                                                 => 'Label Design',
+		'/^packaging( design)?$/'                                               => 'Packaging',
+		'/^(print|editorial|brochures?|catalogues?|print (and|&) editorial)$/'  => 'Print & Editorial',
+		'/^stationery$/'                                                        => 'Stationery',
+		'/^(signage|wayfinding)$/'                                              => 'Signage & Wayfinding',
+		'/^(art|creative) direction$/'                                          => 'Art Direction',
+		'/^social( media)?$/'                                                   => 'Social Media',
+	);
+	foreach ( $map as $pattern => $standard ) {
+		if ( preg_match( $pattern, $key ) ) {
+			return __( $standard, 'vassilisdesign-elements' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText -- same strings as vde_default_services().
+		}
+	}
+	return mb_convert_case( trim( $name ), MB_CASE_TITLE, 'UTF-8' );
+}
+
+// Once: add the standard Services, then move each Work's old "Services" text into the checklist.
+add_action(
+	'admin_init',
+	function () {
+		if ( get_option( 'vde_services_migrated' ) || ! current_user_can( 'manage_categories' ) || ! taxonomy_exists( 'work_service' ) ) {
+			return;
+		}
+		update_option( 'vde_services_migrated', 1, false );
+		$find = function ( $name ) {
+			foreach ( get_terms( array( 'taxonomy' => 'work_service', 'hide_empty' => false ) ) as $term ) {
+				if ( 0 === strcasecmp( html_entity_decode( $term->name ), $name ) ) {
+					return (int) $term->term_id;
+				}
+			}
+			$made = wp_insert_term( $name, 'work_service' );
+			return is_wp_error( $made ) ? 0 : (int) $made['term_id'];
+		};
+		foreach ( vde_default_services() as $name ) {
+			$find( $name );
+		}
+		$works = get_posts( array( 'post_type' => 'works', 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids' ) );
+		foreach ( $works as $id ) {
+			$old = trim( (string) get_post_meta( $id, 'vd_services', true ) );
+			if ( '' === $old || wp_get_object_terms( $id, 'work_service', array( 'fields' => 'ids' ) ) ) {
+				continue;
+			}
+			$ids = array();
+			foreach ( preg_split( '/\s*[,\/·|]\s*|\s+(?:and|&)\s+/u', $old ) as $name ) {
+				$name = trim( $name );
+				if ( '' !== $name ) {
+					$ids[] = $find( vde_service_alias( $name ) );
+				}
+			}
+			$ids = array_values( array_filter( $ids ) );
+			if ( $ids && ! is_wp_error( wp_set_object_terms( $id, $ids, 'work_service' ) ) ) {
+				delete_post_meta( $id, 'vd_services' );
+			}
+		}
+	}
 );
 
 add_action(
@@ -143,21 +258,16 @@ add_action(
 function vde_render_work_metabox( $post ) {
 	wp_nonce_field( 'vd_save_work', 'vd_work_nonce' );
 	$location = get_post_meta( $post->ID, 'vd_location', true );
-	$services = get_post_meta( $post->ID, 'vd_services', true );
 	$scope    = get_post_meta( $post->ID, 'vd_scope', true );
 	$website  = get_post_meta( $post->ID, 'vd_website', true );
 	$gallery  = get_post_meta( $post->ID, 'vd_gallery', true );
 	$fit      = get_post_meta( $post->ID, 'vd_cover_fit', true );
 	?>
-	<p class="description"><?php esc_html_e( 'Title = client or project name. Excerpt = the short summary shown on the Work page. Cover image = the tile on the homepage.', 'vassilisdesign-elements' ); ?></p>
+	<p class="description"><?php esc_html_e( 'Title = client or project name. Excerpt = the short summary shown on the Work page. Cover image = the tile on the homepage. Tick the Sector and Services in the boxes on the right.', 'vassilisdesign-elements' ); ?></p>
 	<table class="form-table" role="presentation">
 		<tr>
 			<th scope="row"><label for="vd_location"><?php esc_html_e( 'Location', 'vassilisdesign-elements' ); ?></label></th>
 			<td><input type="text" class="regular-text" id="vd_location" name="vd_location" value="<?php echo esc_attr( $location ); ?>" placeholder="<?php esc_attr_e( 'Thessaloniki, Greece', 'vassilisdesign-elements' ); ?>"></td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="vd_services"><?php esc_html_e( 'Services', 'vassilisdesign-elements' ); ?></label></th>
-			<td><input type="text" class="regular-text" id="vd_services" name="vd_services" value="<?php echo esc_attr( $services ); ?>" placeholder="<?php esc_attr_e( 'Identity, packaging, website', 'vassilisdesign-elements' ); ?>"></td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="vd_scope"><?php esc_html_e( 'Scope', 'vassilisdesign-elements' ); ?></label></th>

@@ -37,7 +37,105 @@
 		setTimeout(function () { tick(); setInterval(tick, 60000); }, (60 - new Date().getSeconds()) * 1000);
 	}
 
+	/* ---------- Lightbox: Work cover and gallery images, full size ---------- */
+	function initLightbox() {
+		var box, img, cap, count, closeBtn, items = [], index = 0, opener = null, startX = null;
+		function label(key, fallback) { return (w.vdLightbox && w.vdLightbox[key]) || fallback; }
+		function visibleButtons() {
+			return Array.prototype.filter.call(box.querySelectorAll('button'), function (b) { return getComputedStyle(b).visibility !== 'hidden'; });
+		}
+		function build() {
+			box = d.createElement('div');
+			box.className = 'vd-lb';
+			box.hidden = true;
+			box.setAttribute('role', 'dialog');
+			box.setAttribute('aria-modal', 'true');
+			box.setAttribute('aria-label', label('dialog', 'Image viewer'));
+			box.innerHTML = '<div class="vd-lb-bar"><span class="vd-lb-count" aria-live="polite"></span><button type="button" class="vd-lb-close"></button></div>' +
+				'<div class="vd-lb-stage"><button type="button" class="vd-lb-prev"></button><img class="vd-lb-img" alt=""><button type="button" class="vd-lb-next"></button></div>' +
+				'<p class="vd-lb-caption"></p>';
+			d.body.appendChild(box);
+			img = box.querySelector('.vd-lb-img');
+			cap = box.querySelector('.vd-lb-caption');
+			count = box.querySelector('.vd-lb-count');
+			closeBtn = box.querySelector('.vd-lb-close');
+			[['.vd-lb-close', '×', label('close', 'Close')], ['.vd-lb-prev', '←', label('prev', 'Previous image')], ['.vd-lb-next', '→', label('next', 'Next image')]].forEach(function (b) {
+				var el = box.querySelector(b[0]);
+				el.innerHTML = '<span aria-hidden="true">' + b[1] + '</span>';
+				el.setAttribute('aria-label', b[2]);
+			});
+			closeBtn.addEventListener('click', close);
+			box.querySelector('.vd-lb-prev').addEventListener('click', function () { show(index - 1); });
+			box.querySelector('.vd-lb-next').addEventListener('click', function () { show(index + 1); });
+			// A click on the dark area around the image closes the viewer.
+			box.addEventListener('click', function (e) { if (e.target === box || e.target.classList.contains('vd-lb-stage')) close(); });
+			img.addEventListener('load', function () { img.classList.remove('vd-lb-loading'); });
+			box.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+			box.addEventListener('touchend', function (e) {
+				if (startX === null) return;
+				var dx = e.changedTouches[0].clientX - startX;
+				startX = null;
+				if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+			});
+			d.addEventListener('keydown', function (e) {
+				if (box.hidden) return;
+				if (e.key === 'Escape') { e.preventDefault(); close(); }
+				else if (e.key === 'ArrowLeft') show(index - 1);
+				else if (e.key === 'ArrowRight') show(index + 1);
+				else if (e.key === 'Tab') { // keep focus inside the viewer
+					var f = visibleButtons();
+					if (!f.length) return;
+					var first = f[0], last = f[f.length - 1];
+					if (e.shiftKey && d.activeElement === first) { e.preventDefault(); last.focus(); }
+					else if (!e.shiftKey && d.activeElement === last) { e.preventDefault(); first.focus(); }
+				}
+			});
+		}
+		function show(i) {
+			var n = items.length;
+			index = (i + n) % n;
+			var a = items[index];
+			if (img.getAttribute('src') !== a.href) {
+				img.classList.add('vd-lb-loading');
+				img.src = a.href;
+			}
+			img.alt = a.getAttribute('data-vd-caption') || '';
+			cap.textContent = a.getAttribute('data-vd-caption') || '';
+			count.textContent = (index + 1) + ' / ' + n;
+			box.classList.toggle('vd-lb-single', n < 2);
+			if (n > 1) { // load the images either side, so arrows feel instant
+				[index - 1, index + 1].forEach(function (j) { var p = new Image(); p.src = items[(j + n) % n].href; });
+			}
+		}
+		function open(a) {
+			if (!box) build();
+			var group = a.getAttribute('data-vd-lb');
+			items = $$('a[data-vd-lb]').filter(function (x) { return x.getAttribute('data-vd-lb') === group; });
+			opener = a;
+			show(Math.max(0, items.indexOf(a)));
+			box.hidden = false;
+			html.classList.add('vd-lb-lock');
+			requestAnimationFrame(function () { box.classList.add('vd-lb-open'); });
+			closeBtn.focus();
+		}
+		function close() {
+			box.classList.remove('vd-lb-open');
+			html.classList.remove('vd-lb-lock');
+			box.hidden = true;
+			img.removeAttribute('src');
+			if (opener) opener.focus();
+		}
+		d.addEventListener('click', function (e) {
+			var a = e.target.closest ? e.target.closest('a[data-vd-lb]') : null;
+			if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+			e.preventDefault();
+			e.stopPropagation(); // opens the viewer, not a new page: no red wipe
+			open(a);
+		}, true);
+	}
+
 	initClock();
+	if (!inEditor) initLightbox();
 	clearWipeFlag();
 
 	// The page intro itself runs in CSS (started by the inline script in <head>); this file adds the
