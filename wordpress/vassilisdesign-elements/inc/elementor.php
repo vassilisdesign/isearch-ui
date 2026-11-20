@@ -24,6 +24,7 @@ add_action(
 	'elementor/widgets/register',
 	function ( $widgets_manager ) {
 		require_once VDE_DIR . 'inc/widgets/widgets.php';
+		require_once VDE_DIR . 'inc/widgets/nav-menu.php';
 		foreach ( vde_widget_classes() as $class ) {
 			$widgets_manager->register( new $class() );
 		}

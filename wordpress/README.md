@@ -147,6 +147,15 @@ WordPress needs a translation plugin for two languages. **Polylang** (free) is t
 4. The header shows an **EN / ΕΛ** switch automatically when Polylang is active.
 5. Texts such as "Next project" and "Scope" are translated by the plugin's and the theme's `languages/` files.
 
+## Navigation menu
+
+**VD Navigation menu** (Elementor widget) shows a WordPress menu (Appearance → Menus). Use it in the Theme Builder header instead of an add-on menu.
+
+- Horizontal or vertical, aligned left, centre, right or spread; submenus open on hover, keyboard focus or the small arrow.
+- **Menu button (tablet and phone):** choose when the links turn into a menu button (tablet and phone, phone only, or never), and whether it opens as a full-width panel under the header or a full-screen menu. The button shows lines, text, or both, with "Close" when open.
+- Tapping a link, pressing Esc or tapping outside closes the menu. Submenus near the right edge open towards the left.
+- Style → Fonts and colours: links, hover, current page, hover line, submenu, menu button and the open menu background, each per device.
+
 ## SEO (Rank Math)
 
 `dist/rank-math-settings.json` holds the recommended Rank Math (free) settings: only the needed modules, titles with "|", Works and Sectors indexed with their own sitemaps, legal-friendly defaults, Organization details, and visibility for AI assistants (an llms.txt file and a robots.txt that welcomes AI search crawlers).

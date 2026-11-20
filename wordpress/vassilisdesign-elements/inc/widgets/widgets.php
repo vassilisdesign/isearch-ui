@@ -30,6 +30,7 @@ function vde_widget_classes() {
 		'VDE_Widget_Work_Gallery',
 		'VDE_Widget_Next_Work',
 		'VDE_Widget_Works_Archive',
+		'VDE_Widget_Nav_Menu',
 	);
 }
 

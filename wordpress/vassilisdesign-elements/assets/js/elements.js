@@ -134,7 +134,103 @@
 		}, true);
 	}
 
+	/* ---------- VD Navigation menu: menu button and submenus (works in the editor too) ---------- */
+	function initNav() {
+		function navOf(el) { return el.closest ? el.closest('.vdn') : null; }
+		function isFullscreen(nav) { return nav.classList.contains('vdn--fullscreen'); }
+		function setText(nav, open) {
+			var t = nav.querySelector('.vdn-toggle-text');
+			if (t) t.textContent = t.getAttribute(open ? 'data-close' : 'data-open') || t.textContent;
+		}
+		function place(nav) { // the panel starts at the bottom of the header (or of the button)
+			var box = nav.closest('.elementor-location-header, header, .e-con.e-parent, .elementor-section') || nav;
+			var bottom = Math.max(0, Math.round(box.getBoundingClientRect().bottom));
+			nav.style.setProperty('--vdn-top', bottom + 'px');
+		}
+		function open(nav) {
+			var btn = nav.querySelector('.vdn-toggle');
+			nav.classList.add('is-collapsed', 'is-open');
+			place(nav);
+			if (btn) btn.setAttribute('aria-expanded', 'true');
+			setText(nav, true);
+			if (isFullscreen(nav)) html.classList.add('vdn-lock');
+		}
+		function close(nav, focusButton) {
+			var btn = nav.querySelector('.vdn-toggle');
+			nav.classList.remove('is-open');
+			if (btn) btn.setAttribute('aria-expanded', 'false');
+			setText(nav, false);
+			Array.prototype.forEach.call(nav.querySelectorAll('.vdn-has-sub.is-open'), closeSub);
+			if (!d.querySelector('.vdn--fullscreen.is-open')) html.classList.remove('vdn-lock');
+			if (focusButton && btn) btn.focus();
+		}
+		function closeSub(li) {
+			li.classList.remove('is-open');
+			var b = li.querySelector(':scope > .vdn-sub-toggle');
+			if (b) b.setAttribute('aria-expanded', 'false');
+		}
+		function buttonShown(nav) {
+			var btn = nav.querySelector('.vdn-toggle');
+			return !!btn && getComputedStyle(btn).display !== 'none';
+		}
+		d.addEventListener('click', function (e) {
+			var t = e.target;
+			var toggle = t.closest ? t.closest('.vdn-toggle') : null;
+			if (toggle) {
+				var nav = navOf(toggle);
+				if (nav.classList.contains('is-open')) close(nav); else open(nav);
+				return;
+			}
+			var sub = t.closest ? t.closest('.vdn-sub-toggle') : null;
+			if (sub) {
+				var li = sub.parentNode, wasOpen = li.classList.contains('is-open');
+				Array.prototype.forEach.call(li.parentNode.querySelectorAll(':scope > .vdn-has-sub.is-open'), closeSub); // one open at a time per level
+				if (!wasOpen) { li.classList.add('is-open'); sub.setAttribute('aria-expanded', 'true'); }
+				return;
+			}
+			// A link in the open menu (for example #contact on the same page) closes it.
+			var link = t.closest ? t.closest('.vdn.is-open .vdn-link') : null;
+			if (link) { close(navOf(link)); return; }
+			// A click outside closes open menus and submenus.
+			Array.prototype.forEach.call(d.querySelectorAll('.vdn'), function (nav) {
+				if (nav.contains(t)) return;
+				if (nav.classList.contains('is-open')) close(nav);
+				Array.prototype.forEach.call(nav.querySelectorAll('.vdn-has-sub.is-open'), closeSub);
+			});
+		});
+		d.addEventListener('keydown', function (e) {
+			if (e.key !== 'Escape') return;
+			var openSub = d.activeElement && d.activeElement.closest ? d.activeElement.closest('.vdn-has-sub.is-open') : null;
+			if (openSub) { closeSub(openSub); var b = openSub.querySelector(':scope > .vdn-sub-toggle'); if (b) b.focus(); return; }
+			Array.prototype.forEach.call(d.querySelectorAll('.vdn.is-open'), function (nav) { close(nav, true); });
+		});
+		// Submenus near the right edge of the screen open towards the left.
+		function fit(e) {
+			var li = e.target.closest ? e.target.closest('.vdn-has-sub') : null;
+			if (!li || li.closest('.vdn.is-collapsed, .vdn--vertical')) return;
+			var sub = li.querySelector(':scope > .vdn-sub');
+			if (!sub) return;
+			li.classList.remove('vdn-flip');
+			var r = li.getBoundingClientRect(), wide = sub.offsetWidth;
+			var nested = !!li.parentNode.closest('.vdn-sub');
+			if ((nested ? r.right + wide : r.left + wide) > d.documentElement.clientWidth - 8) li.classList.add('vdn-flip');
+		}
+		d.addEventListener('mouseover', fit);
+		d.addEventListener('focusin', fit);
+		var timer;
+		w.addEventListener('resize', function () { // back to the full menu when the screen gets wider
+			clearTimeout(timer);
+			timer = setTimeout(function () {
+				Array.prototype.forEach.call(d.querySelectorAll('.vdn.is-collapsed'), function (nav) {
+					if (!buttonShown(nav)) { close(nav); nav.classList.remove('is-collapsed'); }
+					else if (nav.classList.contains('is-open')) place(nav);
+				});
+			}, 120);
+		});
+	}
+
 	initClock();
+	initNav();
 	if (!inEditor) initLightbox();
 	clearWipeFlag();
 

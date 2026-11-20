@@ -627,3 +627,60 @@ html.vd-lb-lock, html.vd-lb-lock body { overflow: hidden; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
   .vd-tile-link:hover .vd-photo-img, .vd-case-next-link:hover .vd-case-next-client { transform: none; }
 }
+
+/* ==========================================================================
+   VD Navigation menu
+   ========================================================================== */
+.vdn { --vdn-gap: clamp(20px, 2.2vw, 32px); --vdn-line: currentColor; --vdn-sub-bg: var(--vd-paper); --vdn-panel-bg: var(--vd-paper); --vdn-toggle: 44px; --vdn-panel-pad: 24px 16px 40px; --vdn-align: flex-end; --vdn-panel-align: flex-start; position: relative; display: flex; justify-content: var(--vdn-align); }
+.vdn-panel { width: 100%; }
+.vdn-menu, .vdn-sub { list-style: none; margin: 0; padding: 0; }
+.vdn-menu { display: flex; flex-wrap: wrap; align-items: center; justify-content: var(--vdn-align); gap: var(--vdn-gap); }
+.vdn--vertical .vdn-menu { flex-direction: column; align-items: var(--vdn-align); }
+.vdn-item { position: relative; display: flex; align-items: center; }
+.vdn-link { position: relative; display: inline-block; padding: 4px 0; color: inherit; font-weight: 500; text-decoration: none; transition: color 0.3s ease; }
+.vdn--pointer-underline .vdn-menu > .vdn-item > .vdn-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--vdn-line); transform: scaleX(0); transform-origin: right; transition: transform 0.45s var(--vd-ease); }
+.vdn--pointer-underline .vdn-menu > .vdn-item > .vdn-link:hover::after,
+.vdn--pointer-underline .vdn-menu > .vdn-item > .vdn-link:focus-visible::after,
+.vdn--pointer-underline .vdn-menu > .vdn-current > .vdn-link::after { transform: scaleX(1); transform-origin: left; }
+.vdn--pointer-colour .vdn-link:hover, .vdn--pointer-colour .vdn-link:focus-visible, .vdn--pointer-colour .vdn-current > .vdn-link { color: var(--vd-red); }
+.vdn-link:focus-visible, .vdn-toggle:focus-visible, .vdn-sub-toggle:focus-visible { outline: 2px solid var(--vd-red); outline-offset: 3px; }
+
+/* Submenus: open on hover or keyboard focus; the small arrow button opens them on touch. */
+.vdn-sub-toggle { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-left: 2px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
+.vdn-sub-toggle > span { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.3s var(--vd-ease); }
+.vdn-has-sub.is-open > .vdn-sub-toggle > span { transform: translateY(2px) rotate(-135deg); }
+.vdn-sub { position: absolute; top: 100%; left: 0; z-index: 30; min-width: 220px; padding: 8px 0; background: var(--vdn-sub-bg); box-shadow: inset 0 0 0 1px var(--vd-ink); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity 0.25s ease, transform 0.25s var(--vd-ease), visibility 0s linear 0.25s; }
+.vdn-sub .vdn-sub { top: 0; left: 100%; }
+.vdn-flip > .vdn-sub { left: auto; right: 0; } /* near the right edge: open towards the left */
+.vdn-sub .vdn-flip > .vdn-sub { right: 100%; }
+.vdn-has-sub:hover > .vdn-sub, .vdn-has-sub:focus-within > .vdn-sub, .vdn-has-sub.is-open > .vdn-sub { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.vdn-sub .vdn-item { display: flex; }
+.vdn-sub .vdn-link { display: block; flex: 1; padding: 8px 16px; white-space: nowrap; }
+.vdn-sub .vdn-link:hover, .vdn-sub .vdn-link:focus-visible { color: var(--vd-red); }
+.vdn--vertical .vdn-item { flex-wrap: wrap; }
+.vdn--vertical .vdn-sub { position: static; display: none; width: 100%; min-width: 0; padding: 4px 0 4px 16px; background: none; box-shadow: none; opacity: 1; visibility: visible; transform: none; }
+.vdn--vertical .vdn-has-sub.is-open > .vdn-sub { display: block; }
+
+/* Menu button: hidden until the breakpoint set in the widget (a small <style> beside the menu shows it). */
+.vdn-toggle { display: none; align-items: center; justify-content: center; gap: 10px; min-width: var(--vdn-toggle); height: var(--vdn-toggle); padding: 0 4px; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; font-weight: 600; line-height: 1; cursor: pointer; position: relative; z-index: 1002; }
+.vdn-lines { position: relative; display: inline-block; width: 24px; height: 12px; }
+.vdn-lines > span { position: absolute; left: 0; right: 0; height: 2px; background: currentColor; transition: transform 0.4s var(--vd-ease), top 0.4s var(--vd-ease); }
+.vdn-lines > span:first-child { top: 0; }
+.vdn-lines > span:last-child { top: 10px; }
+.vdn.is-open .vdn-lines > span { top: 5px; }
+.vdn.is-open .vdn-lines > span:first-child { transform: rotate(45deg); }
+.vdn.is-open .vdn-lines > span:last-child { transform: rotate(-45deg); }
+
+/* Open menu (tablet / phone): a full-width panel under the header, or the whole screen. */
+.vdn.is-collapsed .vdn-panel { position: fixed; left: 0; right: 0; top: var(--vdn-top, 64px); z-index: 1001; max-height: calc(100vh - var(--vdn-top, 64px)); max-height: calc(100dvh - var(--vdn-top, 64px)); overflow-y: auto; overscroll-behavior: contain; padding: var(--vdn-panel-pad); background: var(--vdn-panel-bg); box-shadow: 0 1px 0 var(--vd-ink); animation: vdn-in 0.35s var(--vd-ease); }
+.vdn--fullscreen.is-collapsed .vdn-panel { bottom: 0; max-height: none; padding-top: clamp(32px, 8vh, 72px); box-shadow: none; } /* fills the screen under the header, so the logo stays visible */
+.vdn.is-collapsed .vdn-menu { flex-direction: column; flex-wrap: nowrap; align-items: var(--vdn-panel-align); gap: var(--vdn-gap); }
+.vdn.is-collapsed .vdn-item { flex-wrap: wrap; justify-content: var(--vdn-panel-align); }
+.vdn--fullscreen.is-collapsed .vdn-menu > .vdn-item > .vdn-link { font-size: clamp(2rem, 1.2rem + 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; }
+.vdn.is-collapsed .vdn-sub { position: static; display: none; width: 100%; min-width: 0; padding: 8px 0 0 16px; background: none; box-shadow: none; opacity: 1; visibility: visible; transform: none; }
+.vdn.is-collapsed .vdn-has-sub.is-open > .vdn-sub { display: block; }
+.vdn.is-collapsed .vdn-sub .vdn-link { padding: 6px 0; white-space: normal; }
+html.vdn-lock, html.vdn-lock body { overflow: hidden; }
+@keyframes vdn-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .vdn *, .vdn *::after { transition: none !important; animation: none !important; } }
+.vdn-empty { font-size: var(--vd-t-s); color: var(--vd-grey); }
