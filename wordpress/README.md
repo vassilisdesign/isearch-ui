@@ -86,7 +86,7 @@ Every field says something different. Do not repeat the same words in two fields
 | --- | --- | --- |
 | Sector | One per Work: Wine & Spirits, Hospitality, Food & Restaurants, Food Products, Professional Services, Culture & Lifestyle | Hospitality |
 | Services | 2–4 from: Brand Identity, Logo Design, Packaging, Label Design, Web Design, Print & Editorial, Stationery, Signage & Wayfinding, Art Direction, Social Media | Brand Identity, Web Design, Print & Editorial |
-| Scope | The thinking before the design: what we looked at and the idea it led to. 1–2 short sentences (about 25–35 words), no year, no results. The client often gives the idea | One wave, two meanings: the logo's blue sea and green leaf are the same shape, turned and recoloured. |
+| Scope | The thinking before the design: what we looked at and the idea it led to. 2–3 short sentences (about 40–50 words), no year, no results. The client often gives the idea | One wave, two meanings: the logo's blue sea and green leaf are the same shape, turned and recoloured. |
 | Live website | The client's live site, if there is one | https://… |
 | Excerpt | 2–3 sentences: what was made and why it matters | A new identity for Hotel Atlas … |
 
