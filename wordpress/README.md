@@ -66,7 +66,7 @@ The setup never overwrites anything. If the site already has a page with the slu
 | Services | Tick 2–4 in the Services box (managed under Works → Services) |
 | Order (Page attributes) | Display order: lowest number first |
 | Work details → Location | Shown under the tile and on the Work page |
-| Work details → Scope | Short line on the studio's role, shown in the red box |
+| Work details → Scope | 1–2 sentences on the research and idea behind the design, shown in the red box |
 | Work details → Live website | Optional; adds "Visit website ↗" in the red box (new tab) |
 | Work details → Cover display | "Fill" for photos and screenshots, "Fit" for packshots and logos on white |
 | Work details → Gallery | Images on the Work page, in order: 3 per row, each opens full size on click |
@@ -86,7 +86,7 @@ Every field says something different. Do not repeat the same words in two fields
 | --- | --- | --- |
 | Sector | One per Work: Wine & Spirits, Hospitality, Food & Restaurants, Food Products, Professional Services, Culture & Lifestyle | Hospitality |
 | Services | 2–4 from: Brand Identity, Logo Design, Packaging, Label Design, Web Design, Print & Editorial, Stationery, Signage & Wayfinding, Art Direction, Social Media | Brand Identity, Web Design, Print & Editorial |
-| Scope | The studio's role, one short line. No year, no results | Concept, design, art direction |
+| Scope | The thinking before the design: what we looked at and the idea it led to. 1–2 short sentences (about 25–35 words), no year, no results. The client often gives the idea | One wave, two meanings: the logo's blue sea and green leaf are the same shape, turned and recoloured. |
 | Live website | The client's live site, if there is one | https://… |
 | Excerpt | 2–3 sentences: what was made and why it matters | A new identity for Hotel Atlas … |
 

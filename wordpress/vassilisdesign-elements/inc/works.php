@@ -272,8 +272,8 @@ function vde_render_work_metabox( $post ) {
 		<tr>
 			<th scope="row"><label for="vd_scope"><?php esc_html_e( 'Scope', 'vassilisdesign-elements' ); ?></label></th>
 			<td>
-				<textarea class="large-text" rows="2" id="vd_scope" name="vd_scope" aria-describedby="vd_scope_help" placeholder="<?php esc_attr_e( 'Concept, design, art direction', 'vassilisdesign-elements' ); ?>"><?php echo esc_textarea( $scope ); ?></textarea>
-				<p class="description" id="vd_scope_help"><?php esc_html_e( 'A short line on the studio\'s role. Shown in the red box on the Work page.', 'vassilisdesign-elements' ); ?></p>
+				<textarea class="large-text" rows="3" id="vd_scope" name="vd_scope" aria-describedby="vd_scope_help" placeholder="<?php esc_attr_e( 'The research and the idea behind the design, in one or two sentences.', 'vassilisdesign-elements' ); ?>"><?php echo esc_textarea( $scope ); ?></textarea>
+				<p class="description" id="vd_scope_help"><?php esc_html_e( 'The thinking before the design: what was explored and the idea it led to. Shown in the red box on the Work page.', 'vassilisdesign-elements' ); ?></p>
 			</td>
 		</tr>
 		<tr>

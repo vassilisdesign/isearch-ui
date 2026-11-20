@@ -282,51 +282,51 @@ msgstr ""
 msgid "No Works yet."
 msgstr ""
 
-#: inc/template-functions.php:280 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
+#: inc/template-functions.php:281 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
 msgid "Sector"
 msgstr ""
 
-#: inc/template-functions.php:281 inc/works.php:18 inc/works.php:58
+#: inc/template-functions.php:282 inc/works.php:18 inc/works.php:58
 msgid "Services"
 msgstr ""
 
-#: inc/template-functions.php:282 inc/works.php:17 inc/works.php:269
+#: inc/template-functions.php:283 inc/works.php:17 inc/works.php:269
 msgid "Location"
 msgstr ""
 
-#: inc/template-functions.php:288
+#: inc/template-functions.php:289
 msgid "All work"
 msgstr ""
 
-#: inc/template-functions.php:296
+#: inc/template-functions.php:297
 msgid "Project"
 msgstr ""
 
-#: inc/template-functions.php:301 inc/works.php:19 inc/works.php:273
+#: inc/template-functions.php:302 inc/works.php:19 inc/works.php:273
 msgid "Scope"
 msgstr ""
 
-#: inc/template-functions.php:311
+#: inc/template-functions.php:312
 msgid "Visit website"
 msgstr ""
 
-#: inc/template-functions.php:311
+#: inc/template-functions.php:312
 msgid "(opens in a new tab)"
 msgstr ""
 
-#: inc/template-functions.php:333
+#: inc/template-functions.php:334
 msgid "View the full image"
 msgstr ""
 
-#: inc/template-functions.php:345
+#: inc/template-functions.php:346
 msgid "About the project"
 msgstr ""
 
-#: inc/template-functions.php:413
+#: inc/template-functions.php:414
 msgid "View image %1$d of %2$d full size"
 msgstr ""
 
-#: inc/template-functions.php:432 inc/template-functions.php:434
+#: inc/template-functions.php:433 inc/template-functions.php:435
 msgid "Next project"
 msgstr ""
 
@@ -1215,11 +1215,11 @@ msgid "Thessaloniki, Greece"
 msgstr ""
 
 #: inc/works.php:275
-msgid "Concept, design, art direction"
+msgid "The research and the idea behind the design, in one or two sentences."
 msgstr ""
 
 #: inc/works.php:276
-msgid "A short line on the studio's role. Shown in the red box on the Work page."
+msgid "The thinking before the design: what was explored and the idea it led to. Shown in the red box on the Work page."
 msgstr ""
 
 #: inc/works.php:283

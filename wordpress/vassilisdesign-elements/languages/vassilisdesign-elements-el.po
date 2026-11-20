@@ -284,51 +284,51 @@ msgstr "Όλα"
 msgid "No Works yet."
 msgstr "Δεν υπάρχουν ακόμη έργα."
 
-#: inc/template-functions.php:280 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
+#: inc/template-functions.php:281 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
 msgid "Sector"
 msgstr "Τομέας"
 
-#: inc/template-functions.php:281 inc/works.php:18 inc/works.php:58
+#: inc/template-functions.php:282 inc/works.php:18 inc/works.php:58
 msgid "Services"
 msgstr "Υπηρεσίες"
 
-#: inc/template-functions.php:282 inc/works.php:17 inc/works.php:269
+#: inc/template-functions.php:283 inc/works.php:17 inc/works.php:269
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: inc/template-functions.php:288
+#: inc/template-functions.php:289
 msgid "All work"
 msgstr "Όλα τα έργα"
 
-#: inc/template-functions.php:296
+#: inc/template-functions.php:297
 msgid "Project"
 msgstr "Έργο"
 
-#: inc/template-functions.php:301 inc/works.php:19 inc/works.php:273
+#: inc/template-functions.php:302 inc/works.php:19 inc/works.php:273
 msgid "Scope"
 msgstr "Εύρος εργασιών"
 
-#: inc/template-functions.php:311
+#: inc/template-functions.php:312
 msgid "Visit website"
 msgstr "Επισκεφθείτε τον ιστότοπο"
 
-#: inc/template-functions.php:311
+#: inc/template-functions.php:312
 msgid "(opens in a new tab)"
 msgstr "(ανοίγει σε νέα καρτέλα)"
 
-#: inc/template-functions.php:333
+#: inc/template-functions.php:334
 msgid "View the full image"
 msgstr "Προβολή ολόκληρης της εικόνας"
 
-#: inc/template-functions.php:345
+#: inc/template-functions.php:346
 msgid "About the project"
 msgstr "Για το έργο"
 
-#: inc/template-functions.php:413
+#: inc/template-functions.php:414
 msgid "View image %1$d of %2$d full size"
 msgstr "Προβολή εικόνας %1$d από %2$d σε πλήρες μέγεθος"
 
-#: inc/template-functions.php:432 inc/template-functions.php:434
+#: inc/template-functions.php:433 inc/template-functions.php:435
 msgid "Next project"
 msgstr "Επόμενο έργο"
 
@@ -1217,12 +1217,12 @@ msgid "Thessaloniki, Greece"
 msgstr ""
 
 #: inc/works.php:275
-msgid "Concept, design, art direction"
-msgstr "Ιδέα, σχεδιασμός, καλλιτεχνική διεύθυνση"
+msgid "The research and the idea behind the design, in one or two sentences."
+msgstr "Η έρευνα και η ιδέα πίσω από τον σχεδιασμό, σε μία ή δύο προτάσεις."
 
 #: inc/works.php:276
-msgid "A short line on the studio's role. Shown in the red box on the Work page."
-msgstr "Μια σύντομη γραμμή για τον ρόλο του στούντιο. Εμφανίζεται στο κόκκινο πλαίσιο της σελίδας του έργου."
+msgid "The thinking before the design: what was explored and the idea it led to. Shown in the red box on the Work page."
+msgstr "Η σκέψη πριν από τον σχεδιασμό: τι εξετάστηκε και σε ποια ιδέα οδήγησε. Εμφανίζεται στο κόκκινο πλαίσιο της σελίδας του έργου."
 
 #: inc/works.php:283
 msgid "Optional. Adds a \"Visit website\" link under the scope, opening in a new tab."
