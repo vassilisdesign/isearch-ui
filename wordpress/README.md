@@ -65,7 +65,8 @@ The setup never overwrites anything. If the site already has a page with the slu
 | Sectors | Filters on the Works archive and the "Sector" label |
 | Order (Page attributes) | Display order: lowest number first |
 | Work details → Location, Services | Shown under the tile and on the Work page |
-| Work details → Scope | One item per line, shown in the red box |
+| Work details → Scope | Short line on the studio's role, shown in the red box |
+| Work details → Live website | Optional; adds "Visit website ↗" in the red box (new tab) |
 | Work details → Cover display | "Fill" for photos and screenshots, "Fit" for packshots and logos on white |
 | Work details → Gallery | Images on the Work page, in order |
 | Content (editor) | Optional longer description |
@@ -75,6 +76,18 @@ On the homepage, the **VD Works grid** shows 5 Works per row, edge to edge, with
 Which Works appear: in the widget, **Show** → *All Works (by Order)*, *Works in one Sector*, or *Works I choose* (pick them in the order you want). Columns, full width, spacing, hover text, captions and staggered heights are in the **Layout** settings. On phones it shows 4 Works, 2 per row, with equal heights; change this under **Layout → Phones**.
 
 Images: about 1600–2000px on the long edge, JPEG quality 75–80 or WebP. On the homepage, images show in black and white with the red block on hover. On Work pages they show in full colour. Packshots on a white background blend into the page colour automatically.
+
+### Writing a Work (house style)
+
+Every field says something different. Do not repeat the same words in two fields.
+
+| Field | What goes in | Example (Hotel Atlas) |
+| --- | --- | --- |
+| Sector | One per Work: Wine & Spirits, Hospitality, Food & Restaurants, Food Products, Professional Services, Culture & Lifestyle | Hospitality |
+| Services | 2–4 from: Brand Identity, Logo Design, Packaging, Label Design, Web Design, Print & Editorial, Stationery, Signage & Wayfinding, Art Direction, Social Media | Brand Identity, Web Design, Print & Editorial |
+| Scope | The studio's role, one short line. No year, no results | Concept, design, art direction |
+| Live website | The client's live site, if there is one | https://… |
+| Excerpt | 2–3 sentences: what was made and why it matters | A new identity for Hotel Atlas … |
 
 Each Work can also be built with Elementor if you want a custom layout for a special project. Its Elementor content then appears between the gallery and "Next project".
 

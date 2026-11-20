@@ -250,11 +250,11 @@ msgstr ""
 msgid "No Works yet. Add them under Works → Add Work."
 msgstr ""
 
-#: inc/template-functions.php:230 inc/widgets/widgets.php:428 inc/works.php:61
+#: inc/template-functions.php:230 inc/widgets/widgets.php:428 inc/works.php:62
 msgid "Works"
 msgstr ""
 
-#: inc/template-functions.php:237 inc/works.php:34 inc/works.php:39
+#: inc/template-functions.php:237 inc/works.php:35 inc/works.php:40
 msgid "Sectors"
 msgstr ""
 
@@ -266,35 +266,43 @@ msgstr ""
 msgid "No Works yet."
 msgstr ""
 
-#: inc/template-functions.php:279 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
+#: inc/template-functions.php:280 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
 msgid "Sector"
 msgstr ""
 
-#: inc/template-functions.php:280 inc/works.php:18 inc/works.php:157
+#: inc/template-functions.php:281 inc/works.php:18 inc/works.php:159
 msgid "Services"
 msgstr ""
 
-#: inc/template-functions.php:281 inc/works.php:17 inc/works.php:153
+#: inc/template-functions.php:282 inc/works.php:17 inc/works.php:155
 msgid "Location"
 msgstr ""
 
-#: inc/template-functions.php:287
+#: inc/template-functions.php:288
 msgid "All work"
 msgstr ""
 
-#: inc/template-functions.php:295
+#: inc/template-functions.php:296
 msgid "Project"
 msgstr ""
 
-#: inc/template-functions.php:300 inc/works.php:161
+#: inc/template-functions.php:301 inc/works.php:19 inc/works.php:163
 msgid "Scope"
 msgstr ""
 
-#: inc/template-functions.php:333
+#: inc/template-functions.php:311
+msgid "Visit website"
+msgstr ""
+
+#: inc/template-functions.php:311
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: inc/template-functions.php:341
 msgid "About the project"
 msgstr ""
 
-#: inc/template-functions.php:411 inc/template-functions.php:413
+#: inc/template-functions.php:419 inc/template-functions.php:421
 msgid "Next project"
 msgstr ""
 
@@ -310,7 +318,7 @@ msgstr ""
 msgid "Display size"
 msgstr ""
 
-#: inc/widgets/widgets.php:102 inc/works.php:242
+#: inc/widgets/widgets.php:102 inc/works.php:258
 msgid "Cover"
 msgstr ""
 
@@ -894,7 +902,7 @@ msgstr ""
 msgid "Email and phone"
 msgstr ""
 
-#: inc/widgets/widgets.php:929 inc/works.php:62
+#: inc/widgets/widgets.php:929 inc/works.php:63
 msgid "Work"
 msgstr ""
 
@@ -974,139 +982,147 @@ msgstr ""
 msgid "Top line"
 msgstr ""
 
-#: inc/works.php:19
-msgid "Scope (one item per line)"
+#: inc/works.php:20 inc/works.php:170
+msgid "Live website"
 msgstr ""
 
-#: inc/works.php:20 inc/works.php:177
+#: inc/works.php:21 inc/works.php:186
 msgid "Gallery"
 msgstr ""
 
-#: inc/works.php:21 inc/works.php:168
+#: inc/works.php:22 inc/works.php:177
 msgid "Cover display"
 msgstr ""
 
-#: inc/works.php:36
+#: inc/works.php:37
 msgid "Add new Sector"
 msgstr ""
 
-#: inc/works.php:37
+#: inc/works.php:38
 msgid "Edit Sector"
 msgstr ""
 
-#: inc/works.php:38
+#: inc/works.php:39
 msgid "All Sectors"
 msgstr ""
 
-#: inc/works.php:64
+#: inc/works.php:65
 msgid "Add Work"
 msgstr ""
 
-#: inc/works.php:65
+#: inc/works.php:66
 msgid "Add new Work"
 msgstr ""
 
-#: inc/works.php:66
+#: inc/works.php:67
 msgid "Edit Work"
 msgstr ""
 
-#: inc/works.php:67
+#: inc/works.php:68
 msgid "New Work"
 msgstr ""
 
-#: inc/works.php:68
+#: inc/works.php:69
 msgid "View Work"
 msgstr ""
 
-#: inc/works.php:69
+#: inc/works.php:70
 msgid "View Works"
 msgstr ""
 
-#: inc/works.php:70
+#: inc/works.php:71
 msgid "Search Works"
 msgstr ""
 
-#: inc/works.php:71
+#: inc/works.php:72
 msgid "No Works found."
 msgstr ""
 
-#: inc/works.php:72
+#: inc/works.php:73
 msgid "No Works found in Trash."
 msgstr ""
 
-#: inc/works.php:73
+#: inc/works.php:74
 msgid "All Works"
 msgstr ""
 
-#: inc/works.php:74
+#: inc/works.php:75
 msgid "Cover image"
 msgstr ""
 
-#: inc/works.php:75
+#: inc/works.php:76
 msgid "Set cover image"
 msgstr ""
 
-#: inc/works.php:76
+#: inc/works.php:77
 msgid "Remove cover image"
 msgstr ""
 
-#: inc/works.php:77
+#: inc/works.php:78
 msgid "Use as cover image"
 msgstr ""
 
-#: inc/works.php:78
+#: inc/works.php:79
 msgid "Work published."
 msgstr ""
 
-#: inc/works.php:79
+#: inc/works.php:80
 msgid "Work updated."
 msgstr ""
 
-#: inc/works.php:138
+#: inc/works.php:139
 msgid "Work details"
 msgstr ""
 
-#: inc/works.php:150
+#: inc/works.php:152
 msgid "Title = client or project name. Excerpt = the short summary shown on the Work page. Cover image = the tile on the homepage."
 msgstr ""
 
-#: inc/works.php:154
+#: inc/works.php:156
 msgid "Thessaloniki, Greece"
 msgstr ""
 
-#: inc/works.php:158
+#: inc/works.php:160
 msgid "Identity, packaging, website"
 msgstr ""
 
-#: inc/works.php:164
-msgid "One item per line. Shown in the red box on the Work page."
+#: inc/works.php:165
+msgid "Concept, design, art direction"
 msgstr ""
 
-#: inc/works.php:171
+#: inc/works.php:166
+msgid "A short line on the studio's role. Shown in the red box on the Work page."
+msgstr ""
+
+#: inc/works.php:173
+msgid "Optional. Adds a \"Visit website\" link under the scope, opening in a new tab."
+msgstr ""
+
+#: inc/works.php:180
 msgid "Photo or screenshot: fill the frame"
 msgstr ""
 
-#: inc/works.php:172
+#: inc/works.php:181
 msgid "Packshot or logo on white: fit inside the frame"
 msgstr ""
 
-#: inc/works.php:188
+#: inc/works.php:197
 msgid "Choose images"
 msgstr ""
 
-#: inc/works.php:189
+#: inc/works.php:198
 msgid "Remove all"
 msgstr ""
 
-#: inc/works.php:191
+#: inc/works.php:200
 msgid "Images shown on the Work page, in this order. Drag to reorder inside the media window. Packshots on white blend into the page automatically."
 msgstr ""
 
-#: inc/works.php:230
+#: inc/works.php:246
 msgid "Work gallery"
 msgstr ""
 
-#: inc/works.php:231
+#: inc/works.php:247
 msgid "Use these images"
 msgstr ""
 

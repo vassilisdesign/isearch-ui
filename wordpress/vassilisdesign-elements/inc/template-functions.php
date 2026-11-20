@@ -275,6 +275,7 @@ function vde_work_header( $post = null, $show_back = true ) {
 	$pos     = array_search( $post->ID, $ids, true );
 	$sectors = get_the_terms( $post, 'work_sector' );
 	$scope   = vde_scope_items( $post->ID );
+	$website = esc_url( (string) get_post_meta( $post->ID, 'vd_website', true ), array( 'http', 'https' ) );
 	$meta    = array(
 		__( 'Sector', 'vassilisdesign-elements' )   => $sectors && ! is_wp_error( $sectors ) ? implode( ', ', wp_list_pluck( $sectors, 'name' ) ) : '',
 		__( 'Services', 'vassilisdesign-elements' ) => get_post_meta( $post->ID, 'vd_services', true ),
@@ -295,14 +296,21 @@ function vde_work_header( $post = null, $show_back = true ) {
 			<p class="vd-case-index"><span class="screen-reader-text"><?php esc_html_e( 'Project', 'vassilisdesign-elements' ); ?> </span><?php echo esc_html( str_pad( (string) ( $pos + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></p>
 		<?php endif; ?>
 		<h1 class="vd-case-title"><span class="vd-line"><span><?php echo esc_html( get_the_title( $post ) ); ?><span class="vd-stop" aria-hidden="true">.</span></span></span></h1>
-		<?php if ( $scope ) : ?>
+		<?php if ( $scope || $website ) : ?>
 			<div class="vd-case-red">
 				<p class="vd-case-red-title"><?php esc_html_e( 'Scope', 'vassilisdesign-elements' ); ?></p>
-				<ul class="vd-case-facts" role="list">
-					<?php foreach ( $scope as $item ) : ?>
-						<li><?php echo esc_html( $item ); ?></li>
-					<?php endforeach; ?>
-				</ul>
+				<div class="vd-case-red-body">
+					<?php if ( $scope ) : ?>
+						<ul class="vd-case-facts" role="list">
+							<?php foreach ( $scope as $item ) : ?>
+								<li><?php echo esc_html( $item ); ?></li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+					<?php if ( $website ) : ?>
+						<a class="vd-case-site" href="<?php echo esc_url( $website ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Visit website', 'vassilisdesign-elements' ); ?><span aria-hidden="true"> ↗</span><span class="screen-reader-text"> <?php esc_html_e( '(opens in a new tab)', 'vassilisdesign-elements' ); ?></span></a>
+					<?php endif; ?>
+				</div>
 			</div>
 		<?php endif; ?>
 	</header>

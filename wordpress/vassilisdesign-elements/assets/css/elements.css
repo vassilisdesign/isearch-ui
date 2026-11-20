@@ -523,6 +523,10 @@ html.vd-is-wiping { --vd-intro-at: 0.3s; } /* arriving through the red page wipe
 .vd-case-red { grid-column: 1 / -1; background: var(--vd-red); color: #fff; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; min-height: 220px; transform-origin: top; }
 .vd-case-red-title { font-size: var(--vd-t-s); font-weight: 500; }
 .vd-case-facts { display: grid; gap: 6px; font-size: var(--vd-t-m); font-weight: 600; line-height: 1.25; }
+.vd-case-red-body { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.vd-case-site { color: #fff; font-size: var(--vd-t-s); font-weight: 600; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size 0.3s ease; }
+.vd-case-site:hover, .vd-case-site:focus-visible { color: #fff; background-size: 0 1px; background-position: 100% 100%; }
+.vd-case-site:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 @media (min-width: 900px) {
   .vd-case-meta { grid-column: 3 / 10; grid-row: 1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .vd-case-index { grid-column: 10 / -1; }

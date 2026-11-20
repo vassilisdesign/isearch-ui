@@ -16,7 +16,8 @@ function vde_work_fields() {
 	return array(
 		'vd_location' => __( 'Location', 'vassilisdesign-elements' ),
 		'vd_services' => __( 'Services', 'vassilisdesign-elements' ),
-		'vd_scope'    => __( 'Scope (one item per line)', 'vassilisdesign-elements' ),
+		'vd_scope'    => __( 'Scope', 'vassilisdesign-elements' ),
+		'vd_website'  => __( 'Live website', 'vassilisdesign-elements' ),
 		'vd_gallery'  => __( 'Gallery', 'vassilisdesign-elements' ),
 		'vd_cover_fit' => __( 'Cover display', 'vassilisdesign-elements' ),
 	);
@@ -100,7 +101,7 @@ add_action(
 					'type'              => 'string',
 					'single'            => true,
 					'show_in_rest'      => true,
-					'sanitize_callback' => 'vd_gallery' === $key ? 'vde_sanitize_id_list' : 'sanitize_textarea_field',
+					'sanitize_callback' => 'vd_gallery' === $key ? 'vde_sanitize_id_list' : ( 'vd_website' === $key ? 'esc_url_raw' : 'sanitize_textarea_field' ),
 					'auth_callback'     => function () {
 						return current_user_can( 'edit_posts' );
 					},
@@ -144,6 +145,7 @@ function vde_render_work_metabox( $post ) {
 	$location = get_post_meta( $post->ID, 'vd_location', true );
 	$services = get_post_meta( $post->ID, 'vd_services', true );
 	$scope    = get_post_meta( $post->ID, 'vd_scope', true );
+	$website  = get_post_meta( $post->ID, 'vd_website', true );
 	$gallery  = get_post_meta( $post->ID, 'vd_gallery', true );
 	$fit      = get_post_meta( $post->ID, 'vd_cover_fit', true );
 	?>
@@ -160,8 +162,15 @@ function vde_render_work_metabox( $post ) {
 		<tr>
 			<th scope="row"><label for="vd_scope"><?php esc_html_e( 'Scope', 'vassilisdesign-elements' ); ?></label></th>
 			<td>
-				<textarea class="large-text" rows="4" id="vd_scope" name="vd_scope" aria-describedby="vd_scope_help"><?php echo esc_textarea( $scope ); ?></textarea>
-				<p class="description" id="vd_scope_help"><?php esc_html_e( 'One item per line. Shown in the red box on the Work page.', 'vassilisdesign-elements' ); ?></p>
+				<textarea class="large-text" rows="2" id="vd_scope" name="vd_scope" aria-describedby="vd_scope_help" placeholder="<?php esc_attr_e( 'Concept, design, art direction', 'vassilisdesign-elements' ); ?>"><?php echo esc_textarea( $scope ); ?></textarea>
+				<p class="description" id="vd_scope_help"><?php esc_html_e( 'A short line on the studio\'s role. Shown in the red box on the Work page.', 'vassilisdesign-elements' ); ?></p>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><label for="vd_website"><?php esc_html_e( 'Live website', 'vassilisdesign-elements' ); ?></label></th>
+			<td>
+				<input type="text" inputmode="url" class="regular-text" id="vd_website" name="vd_website" value="<?php echo esc_attr( $website ); ?>" placeholder="https://" aria-describedby="vd_website_help">
+				<p class="description" id="vd_website_help"><?php esc_html_e( 'Optional. Adds a "Visit website" link under the scope, opening in a new tab.', 'vassilisdesign-elements' ); ?></p>
 			</td>
 		</tr>
 		<tr>
@@ -207,7 +216,14 @@ add_action(
 		foreach ( array_keys( vde_work_fields() ) as $key ) {
 			if ( isset( $_POST[ $key ] ) ) {
 				$raw   = wp_unslash( $_POST[ $key ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized below.
-				$value = 'vd_gallery' === $key ? vde_sanitize_id_list( $raw ) : sanitize_textarea_field( $raw );
+				if ( 'vd_gallery' === $key ) {
+					$value = vde_sanitize_id_list( $raw );
+				} elseif ( 'vd_website' === $key ) {
+					$raw   = trim( $raw );
+					$value = '' === $raw ? '' : esc_url_raw( preg_match( '#^[a-z][a-z0-9+.-]*://#i', $raw ) ? $raw : 'https://' . $raw, array( 'http', 'https' ) );
+				} else {
+					$value = sanitize_textarea_field( $raw );
+				}
 				update_post_meta( $post_id, $key, $value );
 			}
 		}
