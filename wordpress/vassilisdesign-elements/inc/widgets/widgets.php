@@ -708,6 +708,16 @@ class VDE_Widget_Numbered_List extends VDE_Widget {
 		$r = new Repeater();
 		$r->add_control( 'title', array( 'label' => __( 'Title', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT ) );
 		$r->add_control( 'text', array( 'label' => __( 'Text', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXTAREA ) );
+		$r->add_control(
+			'link',
+			array(
+				'label'       => __( 'Link', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::URL,
+				'placeholder' => __( 'https://… or /page/', 'vassilisdesign-elements' ),
+				'description' => __( 'Optional. The whole row becomes clickable.', 'vassilisdesign-elements' ),
+				'dynamic'     => array( 'active' => true ),
+			)
+		);
 		$this->add_control(
 			'items',
 			array(
@@ -723,8 +733,10 @@ class VDE_Widget_Numbered_List extends VDE_Widget {
 			array(
 				array( 'text', 'number', __( 'Numbers', 'vassilisdesign-elements' ), '.vd-step-n' ),
 				array( 'text', 'title', __( 'Titles', 'vassilisdesign-elements' ), '.vd-step-title' ),
+				array( 'color', 'title_hover', __( 'Linked title on hover', 'vassilisdesign-elements' ), '.vd-step-linked:hover .vd-step-title, .vd-step-linked:focus-within .vd-step-title', 'color' ),
 				array( 'text', 'text', __( 'Text', 'vassilisdesign-elements' ), '.vd-step-text' ),
 				array( 'color', 'lines', __( 'Lines', 'vassilisdesign-elements' ), '.vd-steps, .vd-step', 'border-color' ),
+				array( 'color', 'arrow', __( 'Arrow', 'vassilisdesign-elements' ), '.vd-step-arrow', 'color' ),
 			)
 		);
 	}
@@ -735,11 +747,22 @@ class VDE_Widget_Numbered_List extends VDE_Widget {
 		}
 		echo '<div class="vd-wrap"><ol class="vd-steps" role="list">';
 		foreach ( array_values( $s['items'] ) as $i => $item ) {
+			$title = esc_html( $item['title'] );
+			$url   = ! empty( $item['link']['url'] ) ? $item['link']['url'] : '';
+			if ( $url ) {
+				// The link sits on the title; its ::after covers the whole row, so the row is one big click target.
+				$key = 'link_' . $i;
+				$this->add_link_attributes( $key, $item['link'] );
+				$this->add_render_attribute( $key, 'class', 'vd-step-link' );
+				$title = '<a ' . $this->get_render_attribute_string( $key ) . '><span class="vd-step-label">' . $title . '</span></a>';
+			}
 			printf(
-				'<li class="vd-step"><span class="vd-step-n" aria-hidden="true">%s</span><h3 class="vd-step-title">%s</h3><p class="vd-step-text">%s</p></li>',
+				'<li class="vd-step%s"><span class="vd-step-n" aria-hidden="true">%s</span><h3 class="vd-step-title">%s</h3><p class="vd-step-text">%s</p>%s</li>',
+				$url ? ' vd-step-linked' : '',
 				esc_html( str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) ),
-				esc_html( $item['title'] ),
-				esc_html( $item['text'] )
+				$title, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
+				esc_html( $item['text'] ),
+				$url ? '<span class="vd-step-arrow" aria-hidden="true">' . vde_arrow() . '</span>' : '' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			);
 		}
 		echo '</ol></div>';
