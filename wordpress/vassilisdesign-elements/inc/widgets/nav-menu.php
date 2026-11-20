@@ -55,7 +55,8 @@ class VDE_Nav_Walker extends Walker_Nav_Menu {
 		if ( $has_sub ) {
 			/* translators: %s: menu item name */
 			$label   = sprintf( __( 'Show the %s submenu', 'vassilisdesign-elements' ), wp_strip_all_tags( $title ) );
-			$output .= '<button type="button" class="vdn-sub-toggle" aria-expanded="false" aria-label="' . esc_attr( $label ) . '"><span aria-hidden="true"></span></button>';
+			$icon    = ! empty( $args->vdn_sub_icon ) ? '<span class="vdn-sub-icon" aria-hidden="true">' . $args->vdn_sub_icon . '</span>' : '<span class="vdn-chevron" aria-hidden="true"></span>';
+			$output .= '<button type="button" class="vdn-sub-toggle" aria-expanded="false" aria-label="' . esc_attr( $label ) . '">' . $icon . '</button>';
 		}
 	}
 	public function end_el( &$output, $data_object, $depth = 0, $args = null ) {
@@ -161,6 +162,16 @@ class VDE_Widget_Nav_Menu extends VDE_Widget {
 			)
 		);
 		$this->add_control(
+			'sub_icon',
+			array(
+				'label'       => __( 'Submenu arrow icon', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::ICONS,
+				'skin'        => 'inline',
+				'label_block' => false,
+				'condition'   => array( 'depth' => '0' ),
+			)
+		);
+		$this->add_control(
 			'nav_label',
 			array(
 				'label'       => __( 'Name for screen readers', 'vassilisdesign-elements' ),
@@ -228,6 +239,38 @@ class VDE_Widget_Nav_Menu extends VDE_Widget {
 				'type'      => Controls_Manager::TEXT,
 				'default'   => __( 'Close', 'vassilisdesign-elements' ),
 				'condition' => array( 'collapse!' => 'none', 'toggle_show!' => 'icon' ),
+			)
+		);
+		$this->add_control(
+			'open_icon',
+			array(
+				'label'       => __( 'Button icon', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::ICONS,
+				'skin'        => 'inline',
+				'label_block' => false,
+				'description' => __( 'Empty = two lines that turn into a cross.', 'vassilisdesign-elements' ),
+				'condition'   => array( 'collapse!' => 'none', 'toggle_show!' => 'text' ),
+			)
+		);
+		$this->add_control(
+			'close_icon',
+			array(
+				'label'       => __( 'Button icon when open', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::ICONS,
+				'skin'        => 'inline',
+				'label_block' => false,
+				'condition'   => array( 'collapse!' => 'none', 'toggle_show!' => 'text' ),
+			)
+		);
+		$this->add_responsive_control(
+			'icon_size',
+			array(
+				'label'      => __( 'Icon size', 'vassilisdesign-elements' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array( 'px' => array( 'min' => 12, 'max' => 64 ) ),
+				'selectors'  => array( '{{WRAPPER}} .vdn' => '--vdn-icon: {{SIZE}}{{UNIT}};' ),
+				'condition'  => array( 'collapse!' => 'none', 'toggle_show!' => 'text' ),
 			)
 		);
 		$this->add_responsive_control(
@@ -335,6 +378,7 @@ class VDE_Widget_Nav_Menu extends VDE_Widget {
 				'items_wrap'  => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 				'depth'       => (int) $s['depth'],
 				'walker'      => new VDE_Nav_Walker(),
+				'vdn_sub_icon' => vde_icon_html( isset( $s['sub_icon'] ) ? $s['sub_icon'] : array() ),
 				'fallback_cb' => false,
 				'echo'        => false,
 			)
@@ -369,9 +413,20 @@ class VDE_Widget_Nav_Menu extends VDE_Widget {
 					<?php if ( 'icon' !== $show ) : ?>
 						<span class="vdn-toggle-text" data-open="<?php echo esc_attr( $s['toggle_text'] ); ?>" data-close="<?php echo esc_attr( $s['close_text'] ); ?>"><?php echo esc_html( $s['toggle_text'] ); ?></span>
 					<?php endif; ?>
-					<?php if ( 'text' !== $show ) : ?>
-						<span class="vdn-lines" aria-hidden="true"><span></span><span></span></span>
-					<?php endif; ?>
+					<?php
+					if ( 'text' !== $show ) :
+						$open_icon  = vde_icon_html( isset( $s['open_icon'] ) ? $s['open_icon'] : array() );
+						$close_icon = vde_icon_html( isset( $s['close_icon'] ) ? $s['close_icon'] : array() );
+						if ( $open_icon ) :
+							?>
+							<span class="vdn-icon vdn-icon-open" aria-hidden="true"><?php echo $open_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor icon markup. ?></span>
+							<span class="vdn-icon vdn-icon-close" aria-hidden="true"><?php echo $close_icon ? $close_icon : $open_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						<?php else : ?>
+							<span class="vdn-lines" aria-hidden="true"><span></span><span></span></span>
+							<?php
+						endif;
+					endif;
+					?>
 				</button>
 			<?php endif; ?>
 			<div class="vdn-panel" id="<?php echo esc_attr( $panel_id ); ?>">

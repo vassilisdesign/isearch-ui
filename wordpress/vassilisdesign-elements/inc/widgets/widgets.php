@@ -34,6 +34,17 @@ function vde_widget_classes() {
 	);
 }
 
+/** An icon chosen in an Elementor Icons control (SVG or icon font), or the fallback markup when none is chosen. */
+function vde_icon_html( $icon, $fallback = '' ) {
+	if ( empty( $icon['value'] ) || ! class_exists( '\Elementor\Icons_Manager' ) ) {
+		return $fallback;
+	}
+	ob_start();
+	\Elementor\Icons_Manager::render_icon( $icon, array( 'aria-hidden' => 'true' ) );
+	$html = trim( (string) ob_get_clean() );
+	return '' === $html ? $fallback : $html;
+}
+
 abstract class VDE_Widget extends Widget_Base {
 	public function get_categories() {
 		return array( 'vassilisdesign-elements' );
@@ -728,6 +739,27 @@ class VDE_Widget_Numbered_List extends VDE_Widget {
 				'default'     => array(),
 			)
 		);
+		$this->add_control(
+			'arrow_icon',
+			array(
+				'label'       => __( 'Icon on linked rows', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::ICONS,
+				'skin'        => 'inline',
+				'label_block' => false,
+				'separator'   => 'before',
+				'description' => __( 'Empty = the studio arrow.', 'vassilisdesign-elements' ),
+			)
+		);
+		$this->add_responsive_control(
+			'arrow_size',
+			array(
+				'label'      => __( 'Icon size', 'vassilisdesign-elements' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array( 'px' => array( 'min' => 10, 'max' => 64 ) ),
+				'selectors'  => array( '{{WRAPPER}} .vd-step-arrow' => '--vd-icon: {{SIZE}}{{UNIT}};' ),
+			)
+		);
 		$this->end_controls_section();
 		$this->add_style_controls(
 			array(
@@ -746,6 +778,7 @@ class VDE_Widget_Numbered_List extends VDE_Widget {
 			return;
 		}
 		echo '<div class="vd-wrap"><ol class="vd-steps" role="list">';
+		$arrow = vde_icon_html( isset( $s['arrow_icon'] ) ? $s['arrow_icon'] : array(), vde_arrow() );
 		foreach ( array_values( $s['items'] ) as $i => $item ) {
 			$title = esc_html( $item['title'] );
 			$url   = ! empty( $item['link']['url'] ) ? $item['link']['url'] : '';
@@ -762,7 +795,7 @@ class VDE_Widget_Numbered_List extends VDE_Widget {
 				esc_html( str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) ),
 				$title, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
 				esc_html( $item['text'] ),
-				$url ? '<span class="vd-step-arrow" aria-hidden="true">' . vde_arrow() . '</span>' : '' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				$url ? '<span class="vd-step-arrow" aria-hidden="true">' . $arrow . '</span>' : '' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			);
 		}
 		echo '</ol></div>';

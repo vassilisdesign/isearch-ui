@@ -155,6 +155,8 @@ WordPress needs a translation plugin for two languages. **Polylang** (free) is t
 - **Menu button (tablet and phone):** choose when the links turn into a menu button (tablet and phone, phone only, or never), and whether it opens as a full-width panel under the header or a full-screen menu. The button shows lines, text, or both, with "Close" when open.
 - Tapping a link, pressing Esc or tapping outside closes the menu. Submenus near the right edge open towards the left.
 - Style → Fonts and colours: links, hover, current page, hover line, submenu, menu button and the open menu background, each per device.
+- Icons: choose your own menu-button icon (and one for the open state) and submenu arrow, or keep the built-in lines and arrow.
+- iPhone: the button reacts to the tap itself, so Safari's "hover first" behaviour cannot swallow it. LiteSpeed's UCSS is told to keep the menu's open-state styles.
 
 ## SEO (Rank Math)
 

@@ -73,6 +73,9 @@ body {
 .vd svg { display: block; }
 .vd button, .vd input, .vd select, .vd textarea { font: inherit; color: inherit; }
 ::selection { background: var(--vd-red); color: #fff; }
+/* Hello Elementor's default pink (#c36) on buttons and links becomes the studio red everywhere. */
+[type=button], [type=submit], button { border-color: var(--vd-red); color: var(--vd-red); } /* same selectors as the theme, so anything with its own style keeps it */
+[type=button]:focus, [type=button]:hover, [type=submit]:focus, [type=submit]:hover, button:focus, button:hover { background-color: var(--vd-red); color: #fff; }
 .vd :focus-visible { outline: 2px solid var(--vd-red); outline-offset: 3px; }
 .vd main:focus { outline: none; }
 
@@ -416,7 +419,8 @@ html.vd-is-wiping { --vd-intro-at: 0.3s; } /* arriving through the red page wipe
 .vd-step-linked:hover .vd-step-title, .vd-step-linked:focus-within .vd-step-title { color: var(--vd-red); }
 .vd-step-linked:hover .vd-step-label, .vd-step-linked:focus-within .vd-step-label { transform: translateX(0.15em); }
 .vd-step-arrow { position: absolute; right: 0; top: 50%; display: inline-grid; place-items: center; width: 40px; height: 40px; color: var(--vd-red); opacity: 0; transform: translate(-12px, -50%); transition: opacity 0.3s ease, transform 0.5s var(--vd-ease); pointer-events: none; }
-.vd-step-arrow svg { width: 22px; height: 22px; }
+.vd-step-arrow svg, .vd-step-arrow i { width: var(--vd-icon, 22px); height: var(--vd-icon, 22px); font-size: var(--vd-icon, 22px); fill: currentColor; }
+.vd-step-arrow svg.vd-arrow { fill: none; }
 .vd-step-linked:hover .vd-step-arrow, .vd-step-linked:focus-within .vd-step-arrow { opacity: 1; transform: translate(0, -50%); }
 @media (hover: none) { .vd-step-arrow { opacity: 1; transform: translate(0, -50%); } }
 @media (prefers-reduced-motion: reduce) { .vd-step-title, .vd-step-label, .vd-step-arrow { transition: none; } }
@@ -647,7 +651,7 @@ html.vd-lb-lock, html.vd-lb-lock body { overflow: hidden; }
 /* ==========================================================================
    VD Navigation menu
    ========================================================================== */
-.vdn { --vdn-gap: clamp(20px, 2.2vw, 32px); --vdn-line: currentColor; --vdn-sub-bg: var(--vd-paper); --vdn-panel-bg: var(--vd-paper); --vdn-toggle: 44px; --vdn-panel-pad: 24px 16px 40px; --vdn-align: flex-end; --vdn-panel-align: flex-start; position: relative; display: flex; justify-content: var(--vdn-align); }
+.vdn { --vdn-gap: clamp(20px, 2.2vw, 32px); --vdn-line: var(--vd-red); --vdn-sub-bg: var(--vd-paper); --vdn-panel-bg: var(--vd-paper); --vdn-toggle: 44px; --vdn-panel-pad: 24px 16px 40px; --vdn-align: flex-end; --vdn-panel-align: flex-start; position: relative; display: flex; justify-content: var(--vdn-align); }
 .vdn-panel { width: 100%; }
 .vdn-menu, .vdn-sub { list-style: none; margin: 0; padding: 0; }
 .vdn-menu { display: flex; flex-wrap: wrap; align-items: center; justify-content: var(--vdn-align); gap: var(--vdn-gap); }
@@ -658,13 +662,18 @@ html.vd-lb-lock, html.vd-lb-lock body { overflow: hidden; }
 .vdn--pointer-underline .vdn-menu > .vdn-item > .vdn-link:hover::after,
 .vdn--pointer-underline .vdn-menu > .vdn-item > .vdn-link:focus-visible::after,
 .vdn--pointer-underline .vdn-menu > .vdn-current > .vdn-link::after { transform: scaleX(1); transform-origin: left; }
-.vdn--pointer-colour .vdn-link:hover, .vdn--pointer-colour .vdn-link:focus-visible, .vdn--pointer-colour .vdn-current > .vdn-link { color: var(--vd-red); }
+/* Hover and current page: studio red (#D41A14); the line follows the text colour. */
+.vdn:not(.vdn--pointer-none) .vdn-link:hover, .vdn:not(.vdn--pointer-none) .vdn-link:focus-visible, .vdn:not(.vdn--pointer-none) .vdn-current > .vdn-link { color: var(--vd-red); }
 .vdn-link:focus-visible, .vdn-toggle:focus-visible, .vdn-sub-toggle:focus-visible { outline: 2px solid var(--vd-red); outline-offset: 3px; }
 
+/* The menu's own buttons: none of the theme's button styles (pink hover, border, padding, transition). */
+.vdn .vdn-toggle, .vdn .vdn-sub-toggle { -webkit-appearance: none; appearance: none; border: 0; border-radius: 0; box-shadow: none; text-decoration: none; white-space: nowrap; transition: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+.vdn .vdn-toggle:hover, .vdn .vdn-toggle:focus, .vdn .vdn-toggle:active, .vdn .vdn-sub-toggle:hover, .vdn .vdn-sub-toggle:focus, .vdn .vdn-sub-toggle:active { background-color: transparent; color: inherit; opacity: 1; }
+.vdn .vdn-toggle *, .vdn .vdn-sub-toggle * { pointer-events: none; } /* the tap always lands on the button itself */
 /* Submenus: open on hover or keyboard focus; the small arrow button opens them on touch. */
 .vdn-sub-toggle { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-left: 2px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
-.vdn-sub-toggle > span { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.3s var(--vd-ease); }
-.vdn-has-sub.is-open > .vdn-sub-toggle > span { transform: translateY(2px) rotate(-135deg); }
+.vdn-chevron { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.3s var(--vd-ease); }
+.vdn-has-sub.is-open > .vdn-sub-toggle > .vdn-chevron { transform: translateY(2px) rotate(-135deg); }
 .vdn-sub { position: absolute; top: 100%; left: 0; z-index: 30; min-width: 220px; padding: 8px 0; background: var(--vdn-sub-bg); box-shadow: inset 0 0 0 1px var(--vd-ink); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity 0.25s ease, transform 0.25s var(--vd-ease), visibility 0s linear 0.25s; }
 .vdn-sub .vdn-sub { top: 0; left: 100%; }
 .vdn-flip > .vdn-sub { left: auto; right: 0; } /* near the right edge: open towards the left */
@@ -677,13 +686,20 @@ html.vd-lb-lock, html.vd-lb-lock body { overflow: hidden; }
 .vdn--vertical .vdn-sub { position: static; display: none; width: 100%; min-width: 0; padding: 4px 0 4px 16px; background: none; box-shadow: none; opacity: 1; visibility: visible; transform: none; }
 .vdn--vertical .vdn-has-sub.is-open > .vdn-sub { display: block; }
 
+/* Chosen icons (Elementor icon library or SVG) */
+.vdn-sub-icon, .vdn-icon { display: inline-grid; place-items: center; line-height: 1; }
+.vdn-sub-icon svg, .vdn-sub-icon i { width: 0.8em; height: 0.8em; font-size: 0.8em; fill: currentColor; transition: transform 0.3s var(--vd-ease); }
+.vdn-has-sub.is-open > .vdn-sub-toggle .vdn-sub-icon svg, .vdn-has-sub.is-open > .vdn-sub-toggle .vdn-sub-icon i { transform: rotate(180deg); }
+.vdn-icon svg, .vdn-icon i { width: var(--vdn-icon, 24px); height: var(--vdn-icon, 24px); font-size: var(--vdn-icon, 24px); fill: currentColor; }
+.vdn-icon-close, .vdn.is-open .vdn-icon-open { display: none; }
+.vdn.is-open .vdn-icon-close { display: inline-grid; }
 /* Menu button: hidden until the breakpoint set in the widget (a small <style> beside the menu shows it). */
 .vdn-toggle { display: none; align-items: center; justify-content: center; gap: 10px; min-width: var(--vdn-toggle); height: var(--vdn-toggle); padding: 0 4px; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; font-weight: 600; line-height: 1; cursor: pointer; position: relative; z-index: 1002; }
-.vdn-lines { position: relative; display: inline-block; width: 24px; height: 12px; }
-.vdn-lines > span { position: absolute; left: 0; right: 0; height: 2px; background: currentColor; transition: transform 0.4s var(--vd-ease), top 0.4s var(--vd-ease); }
-.vdn-lines > span:first-child { top: 0; }
-.vdn-lines > span:last-child { top: 10px; }
-.vdn.is-open .vdn-lines > span { top: 5px; }
+.vdn-lines { position: relative; display: inline-block; width: var(--vdn-icon, 24px); height: calc(var(--vdn-icon, 24px) / 2); }
+.vdn-lines > span { position: absolute; left: 0; right: 0; height: 2px; margin-top: -1px; background: currentColor; transition: transform 0.4s var(--vd-ease), top 0.4s var(--vd-ease); }
+.vdn-lines > span:first-child { top: 1px; }
+.vdn-lines > span:last-child { top: calc(100% - 1px); }
+.vdn.is-open .vdn-lines > span { top: 50%; }
 .vdn.is-open .vdn-lines > span:first-child { transform: rotate(45deg); }
 .vdn.is-open .vdn-lines > span:last-child { transform: rotate(-45deg); }
 

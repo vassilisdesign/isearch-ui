@@ -144,7 +144,12 @@
 		}
 		function place(nav) { // the panel starts at the bottom of the header (or of the button)
 			var box = nav.closest('.elementor-location-header, header, .e-con.e-parent, .elementor-section') || nav;
-			var bottom = Math.max(0, Math.round(box.getBoundingClientRect().bottom));
+			var bottom = box.getBoundingClientRect().bottom;
+			// A large logo can spill out of the header box: start below whatever is tallest.
+			Array.prototype.forEach.call(box.querySelectorAll('.elementor-widget, .vdn-toggle'), function (el) {
+				if (!nav.contains(el) || el.classList.contains('vdn-toggle')) bottom = Math.max(bottom, el.getBoundingClientRect().bottom);
+			});
+			bottom = Math.max(0, Math.round(bottom));
 			nav.style.setProperty('--vdn-top', bottom + 'px');
 		}
 		function open(nav) {
@@ -173,31 +178,64 @@
 			var btn = nav.querySelector('.vdn-toggle');
 			return !!btn && getComputedStyle(btn).display !== 'none';
 		}
+		/*
+		 * iPhone/iPad (Safari): a tap is first treated as a hover, and when hover styles change, Safari can drop
+		 * the tap. So the menu button and submenu arrows react to the tap itself (touchend) and the click that
+		 * follows is ignored; mouse, keyboard and other browsers use the normal click.
+		 */
+		var touchStart = null, lastTouch = 0;
+		d.addEventListener('touchstart', function (e) {
+			var tch = e.touches[0];
+			touchStart = tch ? { x: tch.clientX, y: tch.clientY } : null;
+		}, { passive: true });
+		d.addEventListener('touchend', function (e) {
+			var btn = e.target.closest ? e.target.closest('.vdn-toggle, .vdn-sub-toggle') : null;
+			if (!btn) { closeOutside(e.target); return; } // Safari sends no click for taps on plain areas
+			if (!touchStart) return;
+			var tch = e.changedTouches[0];
+			if (tch && (Math.abs(tch.clientX - touchStart.x) > 10 || Math.abs(tch.clientY - touchStart.y) > 10)) return; // a scroll, not a tap
+			e.preventDefault();
+			lastTouch = Date.now();
+			activate(btn, e.target);
+		}, { passive: false });
+
 		d.addEventListener('click', function (e) {
 			var t = e.target;
-			var toggle = t.closest ? t.closest('.vdn-toggle') : null;
-			if (toggle) {
-				var nav = navOf(toggle);
-				if (nav.classList.contains('is-open')) close(nav); else open(nav);
+			var btn = t.closest ? t.closest('.vdn-toggle, .vdn-sub-toggle') : null;
+			if (btn) {
+				if (Date.now() - lastTouch < 800) { e.preventDefault(); return; } // already handled by the tap
+				activate(btn, t);
 				return;
 			}
-			var sub = t.closest ? t.closest('.vdn-sub-toggle') : null;
-			if (sub) {
-				var li = sub.parentNode, wasOpen = li.classList.contains('is-open');
-				Array.prototype.forEach.call(li.parentNode.querySelectorAll(':scope > .vdn-has-sub.is-open'), closeSub); // one open at a time per level
-				if (!wasOpen) { li.classList.add('is-open'); sub.setAttribute('aria-expanded', 'true'); }
+			onClick(e);
+		});
+
+		function activate(btn, t) {
+			if (btn.classList.contains('vdn-toggle')) {
+				var n = navOf(btn);
+				if (n.classList.contains('is-open')) close(n); else open(n);
 				return;
 			}
+			var li = btn.parentNode, wasOpen = li.classList.contains('is-open');
+			Array.prototype.forEach.call(li.parentNode.querySelectorAll(':scope > .vdn-has-sub.is-open'), closeSub); // one open at a time per level
+			if (!wasOpen) { li.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); }
+		}
+
+		function onClick(e) {
+			var t = e.target;
 			// A link in the open menu (for example #contact on the same page) closes it.
 			var link = t.closest ? t.closest('.vdn.is-open .vdn-link') : null;
 			if (link) { close(navOf(link)); return; }
-			// A click outside closes open menus and submenus.
+			closeOutside(t);
+		}
+		// A click or tap outside closes open menus and submenus.
+		function closeOutside(t) {
 			Array.prototype.forEach.call(d.querySelectorAll('.vdn'), function (nav) {
 				if (nav.contains(t)) return;
 				if (nav.classList.contains('is-open')) close(nav);
 				Array.prototype.forEach.call(nav.querySelectorAll('.vdn-has-sub.is-open'), closeSub);
 			});
-		});
+		}
 		d.addEventListener('keydown', function (e) {
 			if (e.key !== 'Escape') return;
 			var openSub = d.activeElement && d.activeElement.closest ? d.activeElement.closest('.vdn-has-sub.is-open') : null;

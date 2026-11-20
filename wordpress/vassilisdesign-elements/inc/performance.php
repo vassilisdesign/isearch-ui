@@ -207,3 +207,16 @@ add_filter(
 		return array_merge( (array) $list, array( 'vassilisdesign-elements', 'vd-intro' ) );
 	}
 );
+
+/*
+ * LiteSpeed "Generate UCSS" keeps only the CSS a page uses when it is first scanned. States added later by
+ * script (menu open, lightbox, reveals, intro) would be removed, so they are always kept.
+ */
+add_filter(
+	'litespeed_ucss_whitelist',
+	function ( $list ) {
+		$keep = array( '.vdn', '.vdn-', '.is-open', '.is-collapsed', '.vdn-flip', '.vdn-lock', '.vd-lb', '.vd-lb-', '.vd-in', '.vd-play', '.vd-intro', '.vd-motion', '.vd-is-wiping', '.vd-js', '.vd-zoom' );
+		return array_values( array_unique( array_merge( (array) $list, $keep ) ) );
+	}
+);
+
