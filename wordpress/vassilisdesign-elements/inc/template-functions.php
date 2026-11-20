@@ -365,7 +365,10 @@ function vde_work_intro( $post = null, $lightbox = true ) {
 		?>
 		<figure class="vd-case-hero vd-wrap">
 			<div class="vd-case-poster vd-photo vd-is-color<?php echo 'contain' === vde_cover_fit( $post->ID ) ? ' vd-fit-contain' : ''; ?>">
-				<?php echo vde_img( $thumb, 'vd-wide', true, get_the_title( $post ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php
+				$cover_alt = trim( (string) get_post_meta( $thumb, '_wp_attachment_image_alt', true ) ); // the alt text set in the Media Library, else the Work title
+				echo vde_img( $thumb, 'vd-wide', true, '' !== $cover_alt ? $cover_alt : get_the_title( $post ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				?>
 				<?php if ( $full ) : ?>
 					<a class="vd-zoom" href="<?php echo esc_url( $full ); ?>" data-vd-lb="cover-<?php echo (int) $post->ID; ?>" data-vd-caption="<?php echo esc_attr( get_the_title( $post ) ); ?>"><span class="screen-reader-text"><?php esc_html_e( 'View the full image', 'vassilisdesign-elements' ); ?></span></a>
 				<?php endif; ?>

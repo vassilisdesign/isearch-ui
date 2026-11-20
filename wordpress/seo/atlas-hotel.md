@@ -1,6 +1,8 @@
 # Atlas Hotel: Rank Math setup
 
-Work: https://vassilisdesign.gr/works/atlas-hotel/
+Status: applied to the live site on 20 Nov 2026 through the REST API (user Claude2): text, Excerpt, slug, Rank Math keyword/title/description and alt texts.
+
+Work: https://vassilisdesign.gr/works/atlas-hotel-branding/ (the old /works/atlas-hotel/ redirects)
 
 ## 1. Rank Math box (in the Work editor)
 

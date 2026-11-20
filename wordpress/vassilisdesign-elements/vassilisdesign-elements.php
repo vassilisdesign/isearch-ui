@@ -3,7 +3,7 @@
  * Plugin Name:       VASSILISDESIGN Elements
  * Plugin URI:        https://vassilisdesign.gr
  * Description:       Works portfolio (custom post type, Sectors, fields), the VD Elementor widgets, Works page layouts, studio and legal details, and the one-click site setup for VASSILISDESIGN.
- * Version:           2.17.3
+ * Version:           2.17.4
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            VASSILISDESIGN
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'VDE_VERSION', '2.17.3' );
+define( 'VDE_VERSION', '2.17.4' );
 define( 'VDE_FILE', __FILE__ );
 define( 'VDE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'VDE_URI', plugin_dir_url( __FILE__ ) );
