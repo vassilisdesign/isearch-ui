@@ -49,7 +49,7 @@ add_action(
 			)
 		);
 		// Services: a checklist like Sectors, so names are spelled the same on every Work.
-		// Not public: no thin /service/ pages for search engines; the names show on the Work page and tiles.
+		// Each Service has its own Works page (/works/service/web-design/), like each Sector.
 		register_taxonomy(
 			'work_service',
 			'works',
@@ -62,15 +62,14 @@ add_action(
 					'all_items'     => __( 'All Services', 'vassilisdesign-elements' ),
 					'menu_name'     => __( 'Services', 'vassilisdesign-elements' ),
 				),
-				'hierarchical'       => true,
-				'public'             => false,
-				'publicly_queryable' => false,
-				'show_ui'            => true,
-				'show_admin_column'  => true,
-				'show_in_rest'       => true,
-				'show_in_nav_menus'  => false,
-				'show_tagcloud'      => false,
-				'rewrite'            => false,
+				'hierarchical'      => true,
+				'show_admin_column' => true,
+				'show_in_rest'      => true,
+				'show_tagcloud'     => false,
+				'rewrite'           => array(
+					'slug'       => 'works/service',
+					'with_front' => false,
+				),
 			)
 		);
 	},
@@ -239,11 +238,52 @@ add_action(
 		if ( is_admin() || ! $query->is_main_query() ) {
 			return;
 		}
-		if ( $query->is_post_type_archive( 'works' ) || $query->is_tax( 'work_sector' ) ) {
+		if ( $query->is_post_type_archive( 'works' ) || $query->is_tax( array( 'work_sector', 'work_service' ) ) ) {
 			$query->set( 'orderby', array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
 			$query->set( 'posts_per_page', 24 );
 		}
 	}
+);
+
+/*
+ * After an update: refresh the site's addresses (new /works/service/ pages) and show Service pages
+ * with the same Elementor "Works archive" template as Sector pages.
+ */
+add_action(
+	'init',
+	function () {
+		if ( get_option( 'vde_routes_version' ) === VDE_VERSION ) {
+			return;
+		}
+		update_option( 'vde_routes_version', VDE_VERSION );
+		flush_rewrite_rules( false );
+		$templates = get_posts(
+			array(
+				'post_type'   => 'elementor_library',
+				'post_status' => 'any',
+				'numberposts' => -1,
+				'fields'      => 'ids',
+				'meta_key'    => '_elementor_conditions', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			)
+		);
+		$cache   = get_option( 'elementor_pro_theme_builder_conditions' );
+		$changed = false;
+		foreach ( $templates as $id ) {
+			$conditions = (array) get_post_meta( $id, '_elementor_conditions', true );
+			if ( in_array( 'include/archive/work_sector', $conditions, true ) && ! in_array( 'include/archive/work_service', $conditions, true ) ) {
+				$conditions[] = 'include/archive/work_service';
+				update_post_meta( $id, '_elementor_conditions', $conditions );
+				if ( is_array( $cache ) && isset( $cache['archive'][ $id ] ) ) {
+					$cache['archive'][ $id ] = $conditions;
+					$changed                 = true;
+				}
+			}
+		}
+		if ( $changed ) {
+			update_option( 'elementor_pro_theme_builder_conditions', $cache );
+		}
+	},
+	99
 );
 
 /* ---------- Edit screen ---------- */

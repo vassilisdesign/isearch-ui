@@ -63,7 +63,7 @@ The setup never overwrites anything. If the site already has a page with the slu
 | Excerpt | Short summary on the Work page (turn on "Excerpt" in the editor's panel if hidden) |
 | Cover image (featured image) | Homepage tile and the 16:9 image on the Work page (opens full size on click) |
 | Sectors | Filters on the Works archive and the "Sector" label |
-| Services | Tick 2–4 in the Services box (managed under Works → Services) |
+| Services | Tick 2–4 in the Services box (managed under Works → Services). Each Service has its own page, like Sectors |
 | Order (Page attributes) | Display order: lowest number first |
 | Work details → Location | Shown under the tile and on the Work page |
 | Work details → Scope | 1–2 sentences on the research and idea behind the design, shown in the red box |
@@ -90,7 +90,7 @@ Every field says something different. Do not repeat the same words in two fields
 | Live website | The client's live site, if there is one | https://… |
 | Excerpt | 2–3 sentences: what was made and why it matters | A new identity for Hotel Atlas … |
 
-On the Work page, Sector, Services and Location sit in 3 columns; each Sector and Service is on its own line. Updating to 2.11 moves the old Services text of each Work into the Services checklist automatically (for example "websites" becomes Web Design). Check **Works → Services** afterwards and merge anything left over.
+On the Work page, Sector, Services and Location sit in 3 columns; each Sector and Service is on its own line and links to its Works page. The Works archive has two rows of filter buttons: Sectors and Services. Updating to 2.11 moves the old Services text of each Work into the Services checklist automatically (for example "websites" becomes Web Design). Check **Works → Services** afterwards and merge anything left over.
 
 In Elementor, every VD widget has **Style → Fonts and colours** for each of its texts. **VD Work gallery** also has Images per row, Space, Image shape and the full-image switch; **VD Work cover and summary** has the cover Shape and the same switch.
 

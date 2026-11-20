@@ -517,6 +517,8 @@ html.vd-is-wiping { --vd-intro-at: 0.3s; } /* arriving through the red page wipe
 .vd-case-meta > div { padding-left: 12px; border-left: 1px solid var(--vd-ink); }
 .vd-case-meta dt { color: var(--vd-grey); font-size: var(--vd-t-xs); margin-bottom: 2px; }
 .vd-case-meta dd { font-weight: 500; } /* one Sector / Service per line */
+.vd-case-meta dd a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.3s ease, color 0.3s ease; }
+.vd-case-meta dd a:hover, .vd-case-meta dd a:focus-visible { color: var(--vd-red); background-size: 100% 1px; }
 .vd-case-title { grid-column: 1 / -1; font-size: clamp(2.6rem, 1.2rem + 5.6vw, 8.5rem); font-weight: 700; line-height: 0.95; letter-spacing: -0.05em; text-transform: lowercase; text-wrap: balance; margin-top: clamp(16px, 4vw, 64px) !important; }
 .vd-line { display: block; overflow: hidden; padding-bottom: 0.08em; }
 .vd-line > span { display: block; }
@@ -591,6 +593,10 @@ html.vd-lb-lock, html.vd-lb-lock body { overflow: hidden; }
    Works archive
    ========================================================================== */
 .vd-archive-head { display: grid; gap: 24px; margin-bottom: clamp(40px, 6vw, 96px); }
+.vd-filters { display: grid; gap: 16px; }
+.vd-filter-row { display: grid; gap: 8px; }
+.vd-filter-label { font-size: var(--vd-t-xs); color: var(--vd-grey); }
+@media (min-width: 900px) { .vd-filter-row { grid-template-columns: 7rem minmax(0, 1fr); align-items: center; gap: 16px; } }
 .vd-filter { display: flex; flex-wrap: wrap; gap: 8px; }
 .vd-filter a { padding: 8px 14px; box-shadow: inset 0 0 0 1.5px var(--vd-ink); font-size: var(--vd-t-s); font-weight: 600; transition: background-color 0.3s, color 0.3s; }
 .vd-filter a:hover, .vd-filter a[aria-current="page"] { background: var(--vd-ink); color: var(--vd-paper); }

@@ -14,7 +14,7 @@ add_filter(
 	function ( $template ) {
 		if ( is_singular( 'works' ) ) {
 			$file = 'single-works.php';
-		} elseif ( is_post_type_archive( 'works' ) || is_tax( 'work_sector' ) ) {
+		} elseif ( is_post_type_archive( 'works' ) || is_tax( array( 'work_sector', 'work_service' ) ) ) {
 			$file = 'archive-works.php';
 		} else {
 			return $template;

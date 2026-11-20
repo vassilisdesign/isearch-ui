@@ -304,7 +304,7 @@ function vde_create_theme_builder_templates() {
 			'title'      => 'Works archive',
 			'location'   => 'archive',
 			'widgets'    => array( 'vd-works-archive' ),
-			'conditions' => array( 'include/archive/works_archive', 'include/archive/work_sector' ),
+			'conditions' => array( 'include/archive/works_archive', 'include/archive/work_sector', 'include/archive/work_service' ),
 		),
 	);
 	$cache = (array) get_option( 'elementor_pro_theme_builder_conditions', array() );

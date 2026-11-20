@@ -218,7 +218,8 @@ function vde_works_grid( $args = array() ) {
  */
 function vde_works_archive() {
 	global $wp_query;
-	$is_archive = is_post_type_archive( 'works' ) || is_tax( 'work_sector' );
+	$taxes      = array( 'work_sector', 'work_service' );
+	$is_archive = is_post_type_archive( 'works' ) || is_tax( $taxes );
 	$query      = $is_archive ? $wp_query : new WP_Query(
 		array(
 			'post_type'      => 'works',
@@ -227,20 +228,34 @@ function vde_works_archive() {
 			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
 		)
 	);
-	$title      = is_tax( 'work_sector' ) ? single_term_title( '', false ) : __( 'Works', 'vassilisdesign-elements' );
-	$terms      = get_terms( array( 'taxonomy' => 'work_sector', 'hide_empty' => true ) );
+	$title = is_tax( $taxes ) ? single_term_title( '', false ) : __( 'Works', 'vassilisdesign-elements' );
+	$rows  = array(
+		'work_sector'  => __( 'Sectors', 'vassilisdesign-elements' ),
+		'work_service' => __( 'Services', 'vassilisdesign-elements' ),
+	);
 	ob_start();
 	?>
 	<div class="vd-wrap vd-archive-head">
 		<?php echo vde_display_title( $title, 'h1' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<?php if ( $terms && ! is_wp_error( $terms ) ) : ?>
-			<nav class="vd-filter" aria-label="<?php esc_attr_e( 'Sectors', 'vassilisdesign-elements' ); ?>">
-				<a href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>"<?php echo is_post_type_archive( 'works' ) ? ' aria-current="page"' : ''; ?>><?php esc_html_e( 'All', 'vassilisdesign-elements' ); ?></a>
-				<?php foreach ( $terms as $term ) : ?>
-					<a href="<?php echo esc_url( get_term_link( $term ) ); ?>"<?php echo is_tax( 'work_sector', $term->term_id ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $term->name ); ?></a>
-				<?php endforeach; ?>
-			</nav>
-		<?php endif; ?>
+		<div class="vd-filters">
+			<?php
+			foreach ( $rows as $tax => $label ) :
+				$terms = get_terms( array( 'taxonomy' => $tax, 'hide_empty' => true ) );
+				if ( ! $terms || is_wp_error( $terms ) ) {
+					continue;
+				}
+				?>
+				<nav class="vd-filter-row" aria-label="<?php echo esc_attr( $label ); ?>">
+					<p class="vd-filter-label"><?php echo esc_html( $label ); ?></p>
+					<div class="vd-filter">
+						<a href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>"<?php echo is_post_type_archive( 'works' ) ? ' aria-current="page"' : ''; ?>><?php esc_html_e( 'All', 'vassilisdesign-elements' ); ?></a>
+						<?php foreach ( $terms as $term ) : ?>
+							<a href="<?php echo esc_url( get_term_link( $term ) ); ?>"<?php echo is_tax( $tax, $term->term_id ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $term->name ); ?></a>
+						<?php endforeach; ?>
+					</div>
+				</nav>
+			<?php endforeach; ?>
+		</div>
 	</div>
 	<div class="vd-wrap vd-archive-body">
 		<?php if ( $query->have_posts() ) : ?>
@@ -268,6 +283,27 @@ function vde_scope_items( $post_id ) {
 	return array_filter( array_map( 'trim', explode( "\n", (string) get_post_meta( $post_id, 'vd_scope', true ) ) ) );
 }
 
+/** The Work's Services as terms (linked), or the old text split into names. */
+function vde_work_service_items( $post ) {
+	$terms = get_the_terms( $post, 'work_service' );
+	if ( $terms && ! is_wp_error( $terms ) ) {
+		return $terms;
+	}
+	return array_filter( array_map( 'trim', explode( ',', (string) get_post_meta( $post->ID, 'vd_services', true ) ) ) );
+}
+
+/** One detail value: a term becomes a link to its Works page, text stays text. */
+function vde_meta_item( $item ) {
+	if ( $item instanceof WP_Term ) {
+		$link = get_term_link( $item );
+		if ( ! is_wp_error( $link ) ) {
+			return '<a href="' . esc_url( $link ) . '">' . esc_html( $item->name ) . '</a>';
+		}
+		return esc_html( $item->name );
+	}
+	return esc_html( html_entity_decode( (string) $item, ENT_QUOTES, 'UTF-8' ) );
+}
+
 /** Work page header: meta columns, index number, title and red scope box. */
 function vde_work_header( $post = null, $show_back = true ) {
 	$post    = get_post( $post );
@@ -277,9 +313,9 @@ function vde_work_header( $post = null, $show_back = true ) {
 	$scope   = vde_scope_items( $post->ID );
 	$website = esc_url( (string) get_post_meta( $post->ID, 'vd_website', true ), array( 'http', 'https' ) );
 	$meta    = array(
-		// Sectors and Services: one per line. Location: as written.
-		__( 'Sector', 'vassilisdesign-elements' )   => $sectors && ! is_wp_error( $sectors ) ? wp_list_pluck( $sectors, 'name' ) : array(),
-		__( 'Services', 'vassilisdesign-elements' ) => array_filter( array_map( 'trim', explode( ',', vde_work_services( $post ) ) ) ),
+		// Sectors and Services: one per line, each linking to its Works page. Location: as written.
+		__( 'Sector', 'vassilisdesign-elements' )   => $sectors && ! is_wp_error( $sectors ) ? $sectors : array(),
+		__( 'Services', 'vassilisdesign-elements' ) => vde_work_service_items( $post ),
 		__( 'Location', 'vassilisdesign-elements' ) => array_filter( array( trim( (string) get_post_meta( $post->ID, 'vd_location', true ) ) ) ),
 	);
 	ob_start();
@@ -290,7 +326,7 @@ function vde_work_header( $post = null, $show_back = true ) {
 		<?php endif; ?>
 		<dl class="vd-case-meta">
 			<?php foreach ( array_filter( $meta ) as $label => $value ) : ?>
-				<div><dt><?php echo esc_html( $label ); ?></dt><?php foreach ( $value as $item ) : ?><dd><?php echo esc_html( html_entity_decode( $item, ENT_QUOTES, 'UTF-8' ) ); ?></dd><?php endforeach; ?></div>
+				<div><dt><?php echo esc_html( $label ); ?></dt><?php foreach ( $value as $item ) : ?><dd><?php echo vde_meta_item( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></dd><?php endforeach; ?></div>
 			<?php endforeach; ?>
 		</dl>
 		<?php if ( false !== $pos ) : ?>

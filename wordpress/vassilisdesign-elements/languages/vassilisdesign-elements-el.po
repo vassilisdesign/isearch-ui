@@ -268,67 +268,67 @@ msgstr "Κείμενο υποσέλιδου"
 msgid "No Works yet. Add them under Works → Add Work."
 msgstr "Δεν υπάρχουν ακόμη έργα. Προσθέστε τα από Έργα → Προσθήκη έργου."
 
-#: inc/template-functions.php:230 inc/widgets/widgets.php:428 inc/works.php:177
+#: inc/template-functions.php:231 inc/widgets/widgets.php:428 inc/works.php:176
 msgid "Works"
 msgstr "Έργα"
 
-#: inc/template-functions.php:237 inc/works.php:35 inc/works.php:40
+#: inc/template-functions.php:233 inc/works.php:35 inc/works.php:40
 msgid "Sectors"
 msgstr "Τομείς"
 
-#: inc/template-functions.php:238
-msgid "All"
-msgstr "Όλα"
-
-#: inc/template-functions.php:260
-msgid "No Works yet."
-msgstr "Δεν υπάρχουν ακόμη έργα."
-
-#: inc/template-functions.php:281 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
-msgid "Sector"
-msgstr "Τομέας"
-
-#: inc/template-functions.php:282 inc/works.php:18 inc/works.php:58
+#: inc/template-functions.php:234 inc/template-functions.php:318 inc/works.php:18
 msgid "Services"
 msgstr "Υπηρεσίες"
 
-#: inc/template-functions.php:283 inc/works.php:17 inc/works.php:269
+#: inc/template-functions.php:251
+msgid "All"
+msgstr "Όλα"
+
+#: inc/template-functions.php:275
+msgid "No Works yet."
+msgstr "Δεν υπάρχουν ακόμη έργα."
+
+#: inc/template-functions.php:317 inc/widgets/widgets.php:454 inc/widgets/widgets.php:807
+msgid "Sector"
+msgstr "Τομέας"
+
+#: inc/template-functions.php:319 inc/works.php:17 inc/works.php:309
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: inc/template-functions.php:289
+#: inc/template-functions.php:325
 msgid "All work"
 msgstr "Όλα τα έργα"
 
-#: inc/template-functions.php:297
+#: inc/template-functions.php:333
 msgid "Project"
 msgstr "Έργο"
 
-#: inc/template-functions.php:302 inc/works.php:19 inc/works.php:273
+#: inc/template-functions.php:338 inc/works.php:19 inc/works.php:313
 msgid "Scope"
 msgstr "Εύρος εργασιών"
 
-#: inc/template-functions.php:312
+#: inc/template-functions.php:348
 msgid "Visit website"
 msgstr "Επισκεφθείτε τον ιστότοπο"
 
-#: inc/template-functions.php:312
+#: inc/template-functions.php:348
 msgid "(opens in a new tab)"
 msgstr "(ανοίγει σε νέα καρτέλα)"
 
-#: inc/template-functions.php:334
+#: inc/template-functions.php:370
 msgid "View the full image"
 msgstr "Προβολή ολόκληρης της εικόνας"
 
-#: inc/template-functions.php:346
+#: inc/template-functions.php:382
 msgid "About the project"
 msgstr "Για το έργο"
 
-#: inc/template-functions.php:414
+#: inc/template-functions.php:450
 msgid "View image %1$d of %2$d full size"
 msgstr "Προβολή εικόνας %1$d από %2$d σε πλήρες μέγεθος"
 
-#: inc/template-functions.php:433 inc/template-functions.php:435
+#: inc/template-functions.php:469 inc/template-functions.php:471
 msgid "Next project"
 msgstr "Επόμενο έργο"
 
@@ -344,7 +344,7 @@ msgstr "Χρώμα"
 msgid "Display size"
 msgstr "Μέγεθος προβολής"
 
-#: inc/widgets/widgets.php:102 inc/works.php:368
+#: inc/widgets/widgets.php:102 inc/works.php:408
 msgid "Cover"
 msgstr "Κάλυψη"
 
@@ -560,7 +560,7 @@ msgstr ""
 msgid "Movement on scroll"
 msgstr "Κίνηση στο scroll"
 
-#: inc/widgets/widgets.php:348 inc/widgets/widgets.php:766 inc/widgets/widgets.php:1111
+#: inc/widgets/widgets.php:348 inc/widgets/widgets.php:766 inc/widgets/widgets.php:1112
 msgid "Image background"
 msgstr "Φόντο εικόνας"
 
@@ -704,7 +704,7 @@ msgstr "Έργα ανά σειρά στα κινητά"
 msgid "Equal heights on phones"
 msgstr "Ίδιο ύψος στα κινητά"
 
-#: inc/widgets/widgets.php:552 inc/widgets/widgets.php:1148
+#: inc/widgets/widgets.php:552 inc/widgets/widgets.php:1150
 msgid "Work title"
 msgstr "Τίτλος έργου"
 
@@ -712,7 +712,7 @@ msgstr "Τίτλος έργου"
 msgid "Work title on hover"
 msgstr "Τίτλος έργου στο hover"
 
-#: inc/widgets/widgets.php:554 inc/widgets/widgets.php:1149
+#: inc/widgets/widgets.php:554 inc/widgets/widgets.php:1151
 msgid "Details under the title"
 msgstr "Στοιχεία κάτω από τον τίτλο"
 
@@ -816,7 +816,7 @@ msgstr ""
 msgid "Studio"
 msgstr "Στούντιο"
 
-#: inc/widgets/widgets.php:745 inc/widgets/widgets.php:759 inc/widgets/widgets.php:986
+#: inc/widgets/widgets.php:745 inc/widgets/widgets.php:759 inc/widgets/widgets.php:987
 msgid "Red box label"
 msgstr ""
 
@@ -836,7 +836,7 @@ msgstr ""
 msgid "Text (first paragraph is shown large)"
 msgstr ""
 
-#: inc/widgets/widgets.php:758 inc/widgets/widgets.php:985
+#: inc/widgets/widgets.php:758 inc/widgets/widgets.php:986
 msgid "Red box"
 msgstr "Κόκκινο πλαίσιο"
 
@@ -928,7 +928,7 @@ msgstr ""
 msgid "Email and phone"
 msgstr ""
 
-#: inc/widgets/widgets.php:929 inc/works.php:178
+#: inc/widgets/widgets.php:929 inc/works.php:177
 msgid "Work"
 msgstr "Έργα"
 
@@ -953,126 +953,134 @@ msgid "Detail values"
 msgstr ""
 
 #: inc/widgets/widgets.php:981
+msgid "Sector / Service on hover"
+msgstr "Τομέας / Υπηρεσία στο πέρασμα"
+
+#: inc/widgets/widgets.php:982
 msgid "Detail lines"
 msgstr ""
 
-#: inc/widgets/widgets.php:982
+#: inc/widgets/widgets.php:983
 msgid "Project number"
 msgstr ""
 
-#: inc/widgets/widgets.php:987
+#: inc/widgets/widgets.php:988
 msgid "Scope text"
 msgstr "Κείμενο εύρους εργασιών"
 
-#: inc/widgets/widgets.php:988
+#: inc/widgets/widgets.php:989
 msgid "\"Visit website\" link"
 msgstr "Σύνδεσμος «Επισκεφθείτε τον ιστότοπο»"
 
-#: inc/widgets/widgets.php:1004
+#: inc/widgets/widgets.php:1005
 msgid "VD Work cover and summary"
 msgstr ""
 
-#: inc/widgets/widgets.php:1008
+#: inc/widgets/widgets.php:1009
 msgid "Label"
 msgstr ""
 
-#: inc/widgets/widgets.php:1009
+#: inc/widgets/widgets.php:1010
 msgid "Summary"
 msgstr ""
 
-#: inc/widgets/widgets.php:1010
+#: inc/widgets/widgets.php:1011
 msgid "Description"
 msgstr ""
 
-#: inc/widgets/widgets.php:1011
+#: inc/widgets/widgets.php:1012
 msgid "Cover background"
 msgstr "Φόντο εξωφύλλου"
 
-#: inc/widgets/widgets.php:1015 inc/works.php:190
+#: inc/widgets/widgets.php:1016 inc/works.php:189
 msgid "Cover image"
 msgstr "Εικόνα εξωφύλλου"
 
-#: inc/widgets/widgets.php:1019
+#: inc/widgets/widgets.php:1020
 msgid "Shape"
 msgstr "Σχήμα"
 
-#: inc/widgets/widgets.php:1048
+#: inc/widgets/widgets.php:1049
 msgid "VD Work gallery"
 msgstr ""
 
-#: inc/widgets/widgets.php:1055
+#: inc/widgets/widgets.php:1056
 msgid "Images per row"
 msgstr "Εικόνες ανά σειρά"
 
-#: inc/widgets/widgets.php:1067
+#: inc/widgets/widgets.php:1068
 msgid "Space between images"
 msgstr "Απόσταση μεταξύ εικόνων"
 
-#: inc/widgets/widgets.php:1077
+#: inc/widgets/widgets.php:1078
 msgid "Image shape"
 msgstr "Σχήμα εικόνας"
 
-#: inc/widgets/widgets.php:1081
+#: inc/widgets/widgets.php:1082
 msgid "As uploaded"
 msgstr "Όπως ανέβηκε"
 
-#: inc/widgets/widgets.php:1095
+#: inc/widgets/widgets.php:1096
 msgid "Fit"
 msgstr "Προσαρμογή"
 
-#: inc/widgets/widgets.php:1099
+#: inc/widgets/widgets.php:1100
 msgid "Fill the shape (may crop)"
 msgstr "Γέμισμα σχήματος (μπορεί να κόψει)"
 
-#: inc/widgets/widgets.php:1100
+#: inc/widgets/widgets.php:1101
 msgid "Show the whole image"
 msgstr "Ολόκληρη η εικόνα"
 
-#: inc/widgets/widgets.php:1127
+#: inc/widgets/widgets.php:1128
 msgid "VD Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:1133
+#: inc/widgets/widgets.php:1134
 msgid "Works archive"
 msgstr "Αρχείο έργων"
 
-#: inc/widgets/widgets.php:1138
-msgid "Title, Sector filter and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
-msgstr ""
-
-#: inc/widgets/widgets.php:1146
-msgid "Sector filter"
-msgstr ""
+#: inc/widgets/widgets.php:1139
+msgid "Title, Sector and Service filters and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
+msgstr "Τίτλος, φίλτρα Τομέων και Υπηρεσιών και όλα τα έργα του τρέχοντος αρχείου. Χρησιμοποιήστε το σε πρότυπο «Αρχείο» του Theme Builder για τα έργα."
 
 #: inc/widgets/widgets.php:1147
-msgid "Sector filter: current"
-msgstr "Φίλτρο τομέα: επιλεγμένο"
+msgid "Filter labels (Sectors, Services)"
+msgstr "Ετικέτες φίλτρων (Τομείς, Υπηρεσίες)"
 
-#: inc/widgets/widgets.php:1163
+#: inc/widgets/widgets.php:1148
+msgid "Filter buttons"
+msgstr "Κουμπιά φίλτρων"
+
+#: inc/widgets/widgets.php:1149
+msgid "Filter button: current"
+msgstr "Κουμπί φίλτρου: επιλεγμένο"
+
+#: inc/widgets/widgets.php:1165
 msgid "VD Next Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:1167
+#: inc/widgets/widgets.php:1169
 msgid "\"Next project\" label"
 msgstr ""
 
-#: inc/widgets/widgets.php:1168
+#: inc/widgets/widgets.php:1170
 msgid "Next Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:1170
+#: inc/widgets/widgets.php:1172
 msgid "Top line"
 msgstr ""
 
-#: inc/works.php:20 inc/works.php:280
+#: inc/works.php:20 inc/works.php:320
 msgid "Live website"
 msgstr "Ιστότοπος"
 
-#: inc/works.php:21 inc/works.php:296
+#: inc/works.php:21 inc/works.php:336
 msgid "Gallery"
 msgstr "Γκαλερί"
 
-#: inc/works.php:22 inc/works.php:287
+#: inc/works.php:22 inc/works.php:327
 msgid "Cover display"
 msgstr "Εμφάνιση εξωφύλλου"
 
@@ -1104,155 +1112,155 @@ msgstr "Επεξεργασία υπηρεσίας"
 msgid "All Services"
 msgstr "Όλες οι υπηρεσίες"
 
-#: inc/works.php:93
+#: inc/works.php:92
 msgid "Brand Identity"
 msgstr "Εταιρική ταυτότητα"
 
-#: inc/works.php:94
+#: inc/works.php:93
 msgid "Logo Design"
 msgstr "Σχεδιασμός λογοτύπου"
 
-#: inc/works.php:95
+#: inc/works.php:94
 msgid "Packaging"
 msgstr "Συσκευασία"
 
-#: inc/works.php:96
+#: inc/works.php:95
 msgid "Label Design"
 msgstr "Σχεδιασμός ετικέτας"
 
-#: inc/works.php:97
+#: inc/works.php:96
 msgid "Web Design"
 msgstr "Σχεδιασμός ιστοσελίδων"
 
-#: inc/works.php:98
+#: inc/works.php:97
 msgid "Print & Editorial"
 msgstr "Έντυπα και εκδόσεις"
 
-#: inc/works.php:99
+#: inc/works.php:98
 msgid "Stationery"
 msgstr "Εταιρικά έντυπα"
 
-#: inc/works.php:100
+#: inc/works.php:99
 msgid "Signage & Wayfinding"
 msgstr "Σήμανση"
 
-#: inc/works.php:101
+#: inc/works.php:100
 msgid "Art Direction"
 msgstr "Καλλιτεχνική διεύθυνση"
 
-#: inc/works.php:102
+#: inc/works.php:101
 msgid "Social Media"
 msgstr "Μέσα κοινωνικής δικτύωσης"
 
-#: inc/works.php:180
+#: inc/works.php:179
 msgid "Add Work"
 msgstr "Προσθήκη έργου"
 
-#: inc/works.php:181
+#: inc/works.php:180
 msgid "Add new Work"
 msgstr "Προσθήκη νέου έργου"
 
-#: inc/works.php:182
+#: inc/works.php:181
 msgid "Edit Work"
 msgstr "Επεξεργασία έργου"
 
-#: inc/works.php:183
+#: inc/works.php:182
 msgid "New Work"
 msgstr "Νέο έργο"
 
-#: inc/works.php:184
+#: inc/works.php:183
 msgid "View Work"
 msgstr "Προβολή έργου"
 
-#: inc/works.php:185
+#: inc/works.php:184
 msgid "View Works"
 msgstr "Προβολή έργων"
 
-#: inc/works.php:186
+#: inc/works.php:185
 msgid "Search Works"
 msgstr "Αναζήτηση έργων"
 
-#: inc/works.php:187
+#: inc/works.php:186
 msgid "No Works found."
 msgstr "Δεν βρέθηκαν έργα."
 
-#: inc/works.php:188
+#: inc/works.php:187
 msgid "No Works found in Trash."
 msgstr "Δεν βρέθηκαν έργα στα διαγραμμένα."
 
-#: inc/works.php:189
+#: inc/works.php:188
 msgid "All Works"
 msgstr "Όλα τα έργα"
 
-#: inc/works.php:191
+#: inc/works.php:190
 msgid "Set cover image"
 msgstr "Ορισμός εικόνας εξωφύλλου"
 
-#: inc/works.php:192
+#: inc/works.php:191
 msgid "Remove cover image"
 msgstr "Αφαίρεση εικόνας εξωφύλλου"
 
-#: inc/works.php:193
+#: inc/works.php:192
 msgid "Use as cover image"
 msgstr "Χρήση ως εικόνα εξωφύλλου"
 
-#: inc/works.php:194
+#: inc/works.php:193
 msgid "Work published."
 msgstr "Το έργο δημοσιεύτηκε."
 
-#: inc/works.php:195
+#: inc/works.php:194
 msgid "Work updated."
 msgstr "Το έργο ενημερώθηκε."
 
-#: inc/works.php:254
+#: inc/works.php:294
 msgid "Work details"
 msgstr "Στοιχεία έργου"
 
-#: inc/works.php:266
+#: inc/works.php:306
 msgid "Title = client or project name. Excerpt = the short summary shown on the Work page. Cover image = the tile on the homepage. Tick the Sector and Services in the boxes on the right."
 msgstr "Τίτλος = όνομα πελάτη ή έργου. Απόσπασμα = η σύντομη περίληψη στη σελίδα του έργου. Εικόνα εξωφύλλου = το πλακίδιο στην αρχική σελίδα. Επιλέξτε Τομέα και Υπηρεσίες στα πλαίσια δεξιά."
 
-#: inc/works.php:270
+#: inc/works.php:310
 msgid "Thessaloniki, Greece"
 msgstr ""
 
-#: inc/works.php:275
+#: inc/works.php:315
 msgid "The research and the idea behind the design, in one or two sentences."
 msgstr "Η έρευνα και η ιδέα πίσω από τον σχεδιασμό, σε μία ή δύο προτάσεις."
 
-#: inc/works.php:276
+#: inc/works.php:316
 msgid "The thinking before the design: what was explored and the idea it led to. Shown in the red box on the Work page."
 msgstr "Η σκέψη πριν από τον σχεδιασμό: τι εξετάστηκε και σε ποια ιδέα οδήγησε. Εμφανίζεται στο κόκκινο πλαίσιο της σελίδας του έργου."
 
-#: inc/works.php:283
+#: inc/works.php:323
 msgid "Optional. Adds a \"Visit website\" link under the scope, opening in a new tab."
 msgstr "Προαιρετικό. Προσθέτει σύνδεσμο «Επισκεφθείτε τον ιστότοπο» κάτω από το εύρος εργασιών, σε νέα καρτέλα."
 
-#: inc/works.php:290
+#: inc/works.php:330
 msgid "Photo or screenshot: fill the frame"
 msgstr "Φωτογραφία ή στιγμιότυπο: γέμισμα πλαισίου"
 
-#: inc/works.php:291
+#: inc/works.php:331
 msgid "Packshot or logo on white: fit inside the frame"
 msgstr "Προϊόν ή λογότυπο σε λευκό: προσαρμογή στο πλαίσιο"
 
-#: inc/works.php:307
+#: inc/works.php:347
 msgid "Choose images"
 msgstr "Επιλογή εικόνων"
 
-#: inc/works.php:308
+#: inc/works.php:348
 msgid "Remove all"
 msgstr "Αφαίρεση όλων"
 
-#: inc/works.php:310
+#: inc/works.php:350
 msgid "Images shown on the Work page, in this order. Drag to reorder inside the media window. Packshots on white blend into the page automatically."
 msgstr ""
 
-#: inc/works.php:356
+#: inc/works.php:396
 msgid "Work gallery"
 msgstr "Γκαλερί έργου"
 
-#: inc/works.php:357
+#: inc/works.php:397
 msgid "Use these images"
 msgstr "Χρήση αυτών των εικόνων"
 

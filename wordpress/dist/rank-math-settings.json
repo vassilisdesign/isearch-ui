@@ -53,7 +53,8 @@
             "works"
         ],
         "llms_taxonomies": [
-            "work_sector"
+            "work_sector",
+            "work_service"
         ],
         "llms_limit": 100,
         "llms_summary": "VASSILISDESIGN is an independent design studio in Greece creating brand identities, packaging and labels, editorial and print design, websites and digital communication. Clients in Greece, the United States and the United Kingdom include wineries, hotels, restaurants and professional firms.",
@@ -256,7 +257,16 @@
                 "type": "customer support",
                 "number": "+30 694 769 0620"
             }
-        ]
+        ],
+        "tax_work_service_title": "%term% %sep% Work by %sitename%",
+        "tax_work_service_robots": [
+            "index"
+        ],
+        "tax_work_service_add_meta_box": "on",
+        "tax_work_service_custom_robots": "off",
+        "tax_work_service_description": "%term_description%",
+        "tax_work_service_slack_enhanced_sharing": "on",
+        "tax_work_service_bulk_editing": 0
     },
     "sitemap": {
         "items_per_page": 200,
@@ -280,7 +290,8 @@
         "pt_web-story_sitemap": "off",
         "tax_category_sitemap": "off",
         "tax_post_tag_sitemap": "off",
-        "tax_work_sector_sitemap": "on"
+        "tax_work_sector_sitemap": "on",
+        "tax_work_service_sitemap": "on"
     },
     "modules": [
         "seo-analysis",

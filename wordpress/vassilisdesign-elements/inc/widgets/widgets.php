@@ -978,6 +978,7 @@ class VDE_Widget_Work_Header extends VDE_Work_Widget {
 			array( 'text', 'back', __( '"All work" link', 'vassilisdesign-elements' ), '.vd-case-back' ),
 			array( 'text', 'meta_label', __( 'Detail labels', 'vassilisdesign-elements' ), '.vd-case-meta dt' ),
 			array( 'text', 'meta_value', __( 'Detail values', 'vassilisdesign-elements' ), '.vd-case-meta dd' ),
+			array( 'color', 'meta_hover', __( 'Sector / Service on hover', 'vassilisdesign-elements' ), '.vd-case-meta dd a:hover, .vd-case-meta dd a:focus-visible', 'color' ),
 			array( 'color', 'meta_line', __( 'Detail lines', 'vassilisdesign-elements' ), '.vd-case-meta > div', 'border-left-color' ),
 			array( 'text', 'index', __( 'Project number', 'vassilisdesign-elements' ), '.vd-case-index' ),
 			array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-case-title' ),
@@ -1135,7 +1136,7 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 			'note',
 			array(
 				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => esc_html__( 'Title, Sector filter and all Works of the current archive. Use inside a Theme Builder "Archive" template for Works.', 'vassilisdesign-elements' ),
+				'raw'  => esc_html__( 'Title, Sector and Service filters and all Works of the current archive. Use inside a Theme Builder "Archive" template for Works.', 'vassilisdesign-elements' ),
 			)
 		);
 		$this->end_controls_section();
@@ -1143,8 +1144,9 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 			array(
 				array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-display' ),
 				array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-display .vd-stop', 'color' ),
-				array( 'text', 'filter', __( 'Sector filter', 'vassilisdesign-elements' ), '.vd-filter a' ),
-				array( 'color', 'filter_active', __( 'Sector filter: current', 'vassilisdesign-elements' ), '.vd-filter a[aria-current], .vd-filter a:hover', 'color' ),
+				array( 'text', 'filter_label', __( 'Filter labels (Sectors, Services)', 'vassilisdesign-elements' ), '.vd-filter-label' ),
+				array( 'text', 'filter', __( 'Filter buttons', 'vassilisdesign-elements' ), '.vd-filter a' ),
+				array( 'color', 'filter_active', __( 'Filter button: current', 'vassilisdesign-elements' ), '.vd-filter a[aria-current], .vd-filter a:hover', 'color' ),
 				array( 'text', 'client', __( 'Work title', 'vassilisdesign-elements' ), '.vd-tile-client' ),
 				array( 'text', 'meta', __( 'Details under the title', 'vassilisdesign-elements' ), '.vd-tile-meta' ),
 			)
