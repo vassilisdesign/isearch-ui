@@ -978,7 +978,7 @@ class VDE_Widget_Work_Header extends VDE_Work_Widget {
 			array( 'text', 'back', __( '"All work" link', 'vassilisdesign-elements' ), '.vd-case-back' ),
 			array( 'text', 'meta_label', __( 'Detail labels', 'vassilisdesign-elements' ), '.vd-case-meta dt' ),
 			array( 'text', 'meta_value', __( 'Detail values', 'vassilisdesign-elements' ), '.vd-case-meta dd' ),
-			array( 'color', 'meta_line', __( 'Detail lines', 'vassilisdesign-elements' ), '.vd-case-meta, .vd-case-meta > div', 'border-color' ),
+			array( 'color', 'meta_line', __( 'Detail lines', 'vassilisdesign-elements' ), '.vd-case-meta > div', 'border-left-color' ),
 			array( 'text', 'index', __( 'Project number', 'vassilisdesign-elements' ), '.vd-case-index' ),
 			array( 'text', 'title', __( 'Title', 'vassilisdesign-elements' ), '.vd-case-title' ),
 			array( 'color', 'stop', __( 'Title full stop', 'vassilisdesign-elements' ), '.vd-case-title .vd-stop', 'color' ),

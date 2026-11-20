@@ -277,9 +277,10 @@ function vde_work_header( $post = null, $show_back = true ) {
 	$scope   = vde_scope_items( $post->ID );
 	$website = esc_url( (string) get_post_meta( $post->ID, 'vd_website', true ), array( 'http', 'https' ) );
 	$meta    = array(
-		__( 'Sector', 'vassilisdesign-elements' )   => $sectors && ! is_wp_error( $sectors ) ? implode( ', ', wp_list_pluck( $sectors, 'name' ) ) : '',
-		__( 'Services', 'vassilisdesign-elements' ) => vde_work_services( $post ),
-		__( 'Location', 'vassilisdesign-elements' ) => get_post_meta( $post->ID, 'vd_location', true ),
+		// Sectors and Services: one per line. Location: as written.
+		__( 'Sector', 'vassilisdesign-elements' )   => $sectors && ! is_wp_error( $sectors ) ? wp_list_pluck( $sectors, 'name' ) : array(),
+		__( 'Services', 'vassilisdesign-elements' ) => array_filter( array_map( 'trim', explode( ',', vde_work_services( $post ) ) ) ),
+		__( 'Location', 'vassilisdesign-elements' ) => array_filter( array( trim( (string) get_post_meta( $post->ID, 'vd_location', true ) ) ) ),
 	);
 	ob_start();
 	?>
@@ -289,7 +290,7 @@ function vde_work_header( $post = null, $show_back = true ) {
 		<?php endif; ?>
 		<dl class="vd-case-meta">
 			<?php foreach ( array_filter( $meta ) as $label => $value ) : ?>
-				<div><dt><?php echo esc_html( $label ); ?></dt><dd><?php echo esc_html( $value ); ?></dd></div>
+				<div><dt><?php echo esc_html( $label ); ?></dt><?php foreach ( $value as $item ) : ?><dd><?php echo esc_html( html_entity_decode( $item, ENT_QUOTES, 'UTF-8' ) ); ?></dd><?php endforeach; ?></div>
 			<?php endforeach; ?>
 		</dl>
 		<?php if ( false !== $pos ) : ?>
