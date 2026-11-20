@@ -450,7 +450,11 @@ function vde_work_gallery( $post = null, $lightbox = true ) {
 			$label = sprintf( __( 'View image %1$d of %2$d full size', 'vassilisdesign-elements' ), $i + 1, $total );
 			$img   = '<a class="vd-gallery-link" href="' . esc_url( $full ) . '" data-vd-lb="gallery-' . (int) $post->ID . '" data-vd-caption="' . esc_attr( $alt ) . '">' . $img . '<span class="screen-reader-text">' . esc_html( $label ) . '</span></a>';
 		}
-		$out .= '<figure class="vd-gallery-item">' . $img . '</figure>';
+		// The image's own proportions, so "As uploaded" never depends on the browser (Chrome sizes lazy images
+		// with sizes="auto" from CSS alone and would otherwise draw them 1500px tall).
+		$dims  = wp_get_attachment_image_src( $id, 'vd-wide' );
+		$ratio = ( $dims && $dims[1] && $dims[2] ) ? ' style="--vd-ar:' . (int) $dims[1] . ' / ' . (int) $dims[2] . '"' : '';
+		$out  .= '<figure class="vd-gallery-item"' . $ratio . '>' . $img . '</figure>';
 	}
 	return '<div class="vd-gallery vd-wrap">' . $out . '</div>';
 }

@@ -1161,7 +1161,8 @@ class VDE_Widget_Work_Gallery extends VDE_Work_Widget {
 					'3 / 2'  => '3:2',
 					'16 / 9' => '16:9',
 				),
-				'selectors' => array( '{{WRAPPER}} .vd-gallery' => '--vd-g-ar: {{VALUE}};' ),
+				'selectors_dictionary' => array( 'auto' => 'var(--vd-ar, auto)' ),
+				'selectors' => array( '{{WRAPPER}} .vd-gallery-item' => '--vd-gshape: {{VALUE}};' ),
 			)
 		);
 		$this->add_control(
