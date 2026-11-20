@@ -161,6 +161,27 @@ add_action(
 	1
 );
 
+/* ---------- Adobe Fonts: open the connections early ---------- */
+
+/*
+ * With an Adobe Fonts kit (Elementor Pro → Settings → Integrations), the page needs two Adobe servers before
+ * the wordmark can show: p.typekit.net (the kit's @import) and use.typekit.net (the font files). Connecting
+ * to both at the top of <head>, in parallel with everything else, saves one or two round trips on phones.
+ * Nothing about the fonts, intro or design changes.
+ */
+add_action(
+	'wp_head',
+	function () {
+		$kit = (string) get_option( 'elementor_typekit-kit-id', '' );
+		if ( '' === trim( $kit ) || ! apply_filters( 'vde_preconnect_adobe_fonts', true ) ) {
+			return;
+		}
+		echo '<link rel="preconnect" href="https://use.typekit.net" crossorigin>' . "\n";
+		echo '<link rel="preconnect" href="https://p.typekit.net">' . "\n";
+	},
+	0
+);
+
 /* ---------- No duplicate Commissioner from Elementor (the plugin already serves it) ---------- */
 
 add_filter(
