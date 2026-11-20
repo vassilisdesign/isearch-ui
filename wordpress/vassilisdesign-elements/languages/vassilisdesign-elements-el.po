@@ -560,7 +560,7 @@ msgstr ""
 msgid "Movement on scroll"
 msgstr "Κίνηση στο scroll"
 
-#: inc/widgets/widgets.php:348 inc/widgets/widgets.php:766 inc/widgets/widgets.php:1112
+#: inc/widgets/widgets.php:348 inc/widgets/widgets.php:766 inc/widgets/widgets.php:1114
 msgid "Image background"
 msgstr "Φόντο εικόνας"
 
@@ -704,7 +704,7 @@ msgstr "Έργα ανά σειρά στα κινητά"
 msgid "Equal heights on phones"
 msgstr "Ίδιο ύψος στα κινητά"
 
-#: inc/widgets/widgets.php:552 inc/widgets/widgets.php:1150
+#: inc/widgets/widgets.php:552 inc/widgets/widgets.php:1152
 msgid "Work title"
 msgstr "Τίτλος έργου"
 
@@ -712,7 +712,7 @@ msgstr "Τίτλος έργου"
 msgid "Work title on hover"
 msgstr "Τίτλος έργου στο hover"
 
-#: inc/widgets/widgets.php:554 inc/widgets/widgets.php:1151
+#: inc/widgets/widgets.php:554 inc/widgets/widgets.php:1153
 msgid "Details under the title"
 msgstr "Στοιχεία κάτω από τον τίτλο"
 
@@ -1000,75 +1000,83 @@ msgstr "Εικόνα εξωφύλλου"
 msgid "Shape"
 msgstr "Σχήμα"
 
-#: inc/widgets/widgets.php:1049
+#: inc/widgets/widgets.php:1021
+msgid "On phones the whole image is shown."
+msgstr "Στα κινητά εμφανίζεται ολόκληρη η εικόνα."
+
+#: inc/widgets/widgets.php:1050
 msgid "VD Work gallery"
 msgstr ""
 
-#: inc/widgets/widgets.php:1056
+#: inc/widgets/widgets.php:1057
 msgid "Images per row"
 msgstr "Εικόνες ανά σειρά"
 
-#: inc/widgets/widgets.php:1068
+#: inc/widgets/widgets.php:1069
 msgid "Space between images"
 msgstr "Απόσταση μεταξύ εικόνων"
 
-#: inc/widgets/widgets.php:1078
+#: inc/widgets/widgets.php:1079
 msgid "Image shape"
 msgstr "Σχήμα εικόνας"
 
-#: inc/widgets/widgets.php:1082
+#: inc/widgets/widgets.php:1080
+msgid "On phones each image is shown whole."
+msgstr "Στα κινητά κάθε εικόνα εμφανίζεται ολόκληρη."
+
+#: inc/widgets/widgets.php:1084
 msgid "As uploaded"
 msgstr "Όπως ανέβηκε"
 
-#: inc/widgets/widgets.php:1096
+#: inc/widgets/widgets.php:1098
 msgid "Fit"
 msgstr "Προσαρμογή"
 
-#: inc/widgets/widgets.php:1100
+#: inc/widgets/widgets.php:1102
 msgid "Fill the shape (may crop)"
 msgstr "Γέμισμα σχήματος (μπορεί να κόψει)"
 
-#: inc/widgets/widgets.php:1101
+#: inc/widgets/widgets.php:1103
 msgid "Show the whole image"
 msgstr "Ολόκληρη η εικόνα"
 
-#: inc/widgets/widgets.php:1128
+#: inc/widgets/widgets.php:1130
 msgid "VD Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:1134
+#: inc/widgets/widgets.php:1136
 msgid "Works archive"
 msgstr "Αρχείο έργων"
 
-#: inc/widgets/widgets.php:1139
+#: inc/widgets/widgets.php:1141
 msgid "Title, Sector and Service filters and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
 msgstr "Τίτλος, φίλτρα Τομέων και Υπηρεσιών και όλα τα έργα του τρέχοντος αρχείου. Χρησιμοποιήστε το σε πρότυπο «Αρχείο» του Theme Builder για τα έργα."
 
-#: inc/widgets/widgets.php:1147
+#: inc/widgets/widgets.php:1149
 msgid "Filter labels (Sectors, Services)"
 msgstr "Ετικέτες φίλτρων (Τομείς, Υπηρεσίες)"
 
-#: inc/widgets/widgets.php:1148
+#: inc/widgets/widgets.php:1150
 msgid "Filter buttons"
 msgstr "Κουμπιά φίλτρων"
 
-#: inc/widgets/widgets.php:1149
+#: inc/widgets/widgets.php:1151
 msgid "Filter button: current"
 msgstr "Κουμπί φίλτρου: επιλεγμένο"
 
-#: inc/widgets/widgets.php:1165
+#: inc/widgets/widgets.php:1167
 msgid "VD Next Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:1169
+#: inc/widgets/widgets.php:1171
 msgid "\"Next project\" label"
 msgstr ""
 
-#: inc/widgets/widgets.php:1170
+#: inc/widgets/widgets.php:1172
 msgid "Next Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:1172
+#: inc/widgets/widgets.php:1174
 msgid "Top line"
 msgstr ""
 

@@ -559,6 +559,13 @@ html.vd-is-wiping { --vd-intro-at: 0.3s; } /* arriving through the red page wipe
 .vd-gallery-link:hover img { transform: scale(1.03); }
 .vd-gallery-link:focus-visible { outline: 2px solid var(--vd-red); outline-offset: 2px; }
 @media (min-width: 600px) { .vd-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Phones: the cover and the gallery show each image whole, at its own proportions. */
+@media (max-width: 767px) {
+  .vd-case-poster { aspect-ratio: auto !important; }
+  .vd-case-poster > .vd-photo-img { position: static; display: block; width: 100%; height: auto; }
+  .vd-case-poster.vd-fit-contain > .vd-photo-img { width: 86%; margin: 7%; }
+  .vd-gallery-item img { aspect-ratio: auto !important; object-fit: contain; }
+}
 @media (min-width: 1024px) { .vd-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* Lightbox */
@@ -584,7 +591,7 @@ html.vd-lb-lock, html.vd-lb-lock body { overflow: hidden; }
 .vd-case-next-link { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 12px 24px; border-top: 1.5px solid var(--vd-ink); padding-top: 16px; }
 .vd-case-next-label { grid-column: 1 / -1; font-size: var(--vd-t-s); color: var(--vd-grey); }
 .vd-case-next-client { min-width: 0; overflow-wrap: anywhere; hyphens: auto; font-size: var(--vd-t-display); font-weight: 700; letter-spacing: -0.055em; line-height: 0.9; text-transform: lowercase; transition: transform 0.6s var(--vd-ease); }
-.vd-case-next-thumb { width: clamp(80px, 14vw, 200px); aspect-ratio: 4 / 5; }
+.vd-case-next-thumb { width: clamp(80px, 14vw, 200px); aspect-ratio: 1 / 1; }
 .vd-case-next-thumb .vd-red-block { transform: scaleY(0); transition: transform 0.6s var(--vd-ease); }
 .vd-case-next-link:hover .vd-case-next-client { transform: translateX(0.1em); }
 .vd-case-next-link:hover .vd-case-next-thumb .vd-red-block { transform: scaleY(1); }

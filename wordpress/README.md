@@ -61,7 +61,7 @@ The setup never overwrites anything. If the site already has a page with the slu
 | --- | --- |
 | Title | Client or project name |
 | Excerpt | Short summary on the Work page (turn on "Excerpt" in the editor's panel if hidden) |
-| Cover image (featured image) | Homepage tile and the 16:9 image on the Work page (opens full size on click) |
+| Cover image (featured image) | Homepage tile and the 16:9 image on the Work page (whole image on phones; opens full size on click) |
 | Sectors | Filters on the Works archive and the "Sector" label |
 | Services | Tick 2–4 in the Services box (managed under Works → Services). Each Service has its own page, like Sectors |
 | Order (Page attributes) | Display order: lowest number first |

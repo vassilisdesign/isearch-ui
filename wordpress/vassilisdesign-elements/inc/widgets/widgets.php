@@ -1014,10 +1014,11 @@ class VDE_Widget_Work_Intro extends VDE_Work_Widget {
 	}
 	protected function extra_controls() {
 		$this->start_controls_section( 'cover', array( 'label' => __( 'Cover image', 'vassilisdesign-elements' ) ) );
-		$this->add_responsive_control(
+		$this->add_control(
 			'cover_ratio',
 			array(
-				'label'     => __( 'Shape', 'vassilisdesign-elements' ),
+				'label'       => __( 'Shape', 'vassilisdesign-elements' ),
+				'description' => __( 'On phones the whole image is shown.', 'vassilisdesign-elements' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => '16 / 9',
 				'options'   => array(
@@ -1075,7 +1076,8 @@ class VDE_Widget_Work_Gallery extends VDE_Work_Widget {
 		$this->add_control(
 			'shape',
 			array(
-				'label'     => __( 'Image shape', 'vassilisdesign-elements' ),
+				'label'       => __( 'Image shape', 'vassilisdesign-elements' ),
+				'description' => __( 'On phones each image is shown whole.', 'vassilisdesign-elements' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'auto',
 				'options'   => array(

@@ -80,6 +80,8 @@ EL = {
     'Live website': 'Ιστότοπος',
     'Optional. Adds a "Visit website" link under the scope, opening in a new tab.': 'Προαιρετικό. Προσθέτει σύνδεσμο «Επισκεφθείτε τον ιστότοπο» κάτω από το εύρος εργασιών, σε νέα καρτέλα.',
     'Visit website': 'Επισκεφθείτε τον ιστότοπο',
+    'On phones the whole image is shown.': 'Στα κινητά εμφανίζεται ολόκληρη η εικόνα.',
+    'On phones each image is shown whole.': 'Στα κινητά κάθε εικόνα εμφανίζεται ολόκληρη.',
     'Sector / Service on hover': 'Τομέας / Υπηρεσία στο πέρασμα',
     'Filter labels (Sectors, Services)': 'Ετικέτες φίλτρων (Τομείς, Υπηρεσίες)',
     'Filter buttons': 'Κουμπιά φίλτρων',

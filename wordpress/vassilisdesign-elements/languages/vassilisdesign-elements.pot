@@ -558,7 +558,7 @@ msgstr ""
 msgid "Movement on scroll"
 msgstr ""
 
-#: inc/widgets/widgets.php:348 inc/widgets/widgets.php:766 inc/widgets/widgets.php:1112
+#: inc/widgets/widgets.php:348 inc/widgets/widgets.php:766 inc/widgets/widgets.php:1114
 msgid "Image background"
 msgstr ""
 
@@ -702,7 +702,7 @@ msgstr ""
 msgid "Equal heights on phones"
 msgstr ""
 
-#: inc/widgets/widgets.php:552 inc/widgets/widgets.php:1150
+#: inc/widgets/widgets.php:552 inc/widgets/widgets.php:1152
 msgid "Work title"
 msgstr ""
 
@@ -710,7 +710,7 @@ msgstr ""
 msgid "Work title on hover"
 msgstr ""
 
-#: inc/widgets/widgets.php:554 inc/widgets/widgets.php:1151
+#: inc/widgets/widgets.php:554 inc/widgets/widgets.php:1153
 msgid "Details under the title"
 msgstr ""
 
@@ -998,75 +998,83 @@ msgstr ""
 msgid "Shape"
 msgstr ""
 
-#: inc/widgets/widgets.php:1049
+#: inc/widgets/widgets.php:1021
+msgid "On phones the whole image is shown."
+msgstr ""
+
+#: inc/widgets/widgets.php:1050
 msgid "VD Work gallery"
 msgstr ""
 
-#: inc/widgets/widgets.php:1056
+#: inc/widgets/widgets.php:1057
 msgid "Images per row"
 msgstr ""
 
-#: inc/widgets/widgets.php:1068
+#: inc/widgets/widgets.php:1069
 msgid "Space between images"
 msgstr ""
 
-#: inc/widgets/widgets.php:1078
+#: inc/widgets/widgets.php:1079
 msgid "Image shape"
 msgstr ""
 
-#: inc/widgets/widgets.php:1082
+#: inc/widgets/widgets.php:1080
+msgid "On phones each image is shown whole."
+msgstr ""
+
+#: inc/widgets/widgets.php:1084
 msgid "As uploaded"
 msgstr ""
 
-#: inc/widgets/widgets.php:1096
+#: inc/widgets/widgets.php:1098
 msgid "Fit"
 msgstr ""
 
-#: inc/widgets/widgets.php:1100
+#: inc/widgets/widgets.php:1102
 msgid "Fill the shape (may crop)"
 msgstr ""
 
-#: inc/widgets/widgets.php:1101
+#: inc/widgets/widgets.php:1103
 msgid "Show the whole image"
 msgstr ""
 
-#: inc/widgets/widgets.php:1128
+#: inc/widgets/widgets.php:1130
 msgid "VD Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:1134
+#: inc/widgets/widgets.php:1136
 msgid "Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:1139
+#: inc/widgets/widgets.php:1141
 msgid "Title, Sector and Service filters and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:1147
+#: inc/widgets/widgets.php:1149
 msgid "Filter labels (Sectors, Services)"
 msgstr ""
 
-#: inc/widgets/widgets.php:1148
+#: inc/widgets/widgets.php:1150
 msgid "Filter buttons"
 msgstr ""
 
-#: inc/widgets/widgets.php:1149
+#: inc/widgets/widgets.php:1151
 msgid "Filter button: current"
 msgstr ""
 
-#: inc/widgets/widgets.php:1165
+#: inc/widgets/widgets.php:1167
 msgid "VD Next Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:1169
+#: inc/widgets/widgets.php:1171
 msgid "\"Next project\" label"
 msgstr ""
 
-#: inc/widgets/widgets.php:1170
+#: inc/widgets/widgets.php:1172
 msgid "Next Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:1172
+#: inc/widgets/widgets.php:1174
 msgid "Top line"
 msgstr ""
 
