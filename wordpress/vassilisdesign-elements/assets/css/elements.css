@@ -189,6 +189,9 @@ body {
 .vd-hero-media { grid-column: 1 / -1; order: 2; position: relative; margin-inline: calc(-1 * var(--vd-gutter)); height: min(118vw, 640px); margin-top: 8px; }
 .vd-hero-photo { position: absolute; top: 0; bottom: 0; left: 22%; right: 0; }
 .vd-hero-band { position: absolute; left: 0; right: 0; top: 40%; height: 40%; background: var(--vd-red); mix-blend-mode: multiply; z-index: 3; transform-origin: left; }
+/* Scroll movement (set by the script) on `translate`, kept apart from the intro's `transform`. */
+.vd-hero-band, .vd-hi-band { translate: var(--vd-px, 0%) 0; }
+.vd-hero-photo, .vd-hi-photo { translate: 0 var(--vd-py, 0%); }
 .vd-hero-cta { position: absolute; z-index: 4; left: var(--vd-gutter); top: calc(80% - var(--vd-square)); }
 
 @media (min-width: 900px) {

@@ -286,8 +286,10 @@
 	function initParallax() {
 		if (d.querySelector('.vd-hero')) {
 			var st = { trigger: '.vd-hero', start: 'top top', end: 'bottom top', scrub: true };
-			gsap.to('.vd-hero-photo', { yPercent: 12, ease: 'none', scrollTrigger: st });
-			gsap.to('.vd-hero-band', { xPercent: 6, ease: 'none', scrollTrigger: { trigger: '.vd-hero', start: 'top top', end: 'bottom top', scrub: true } });
+			// Scroll movement uses CSS variables read by the separate `translate` property, never `transform`:
+			// the CSS intro animates `transform` (the band sweeping in), and the two must not overwrite each other.
+			gsap.fromTo('.vd-hero-photo', { '--vd-py': '0%' }, { '--vd-py': '12%', ease: 'none', scrollTrigger: st });
+			gsap.fromTo('.vd-hero-band', { '--vd-px': '0%' }, { '--vd-px': '6%', ease: 'none', scrollTrigger: { trigger: '.vd-hero', start: 'top top', end: 'bottom top', scrub: true } });
 		}
 		$$('.vd-studio-photo > .vd-photo-img, .vd-studio-photo > .vd-photo-bg').forEach(function (el) {
 			gsap.fromTo(el, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
@@ -317,7 +319,7 @@
 			// The starting state comes from CSS (html.vd-motion), so the reveal never flashes.
 			if (el.getAttribute('data-vd-motion') === 'yes') {
 				var play = function () {
-					var tl = gsap.timeline({ onComplete: function () { el.classList.add('vd-in'); gsap.set([band, photo, img, cta].filter(Boolean), { clearProps: 'transform,clipPath' }); } })
+					var tl = gsap.timeline({ onComplete: function () { el.classList.add('vd-in'); gsap.set([band, photo, img, cta].filter(Boolean), { clearProps: 'transform,translate,scale,rotate,clipPath' }); } })
 						.fromTo(band, { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'expo.inOut' });
 					if (photo) tl.fromTo(photo, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' }, 0.12);
 					if (img) tl.fromTo(img, { scale: 1.15 }, { scale: 1, duration: 1.6, ease: 'expo.out' }, 0.12);
@@ -329,8 +331,8 @@
 			}
 			if (el.getAttribute('data-vd-parallax') === 'yes' && photo) {
 				var st = { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true };
-				gsap.fromTo(photo, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: st });
-				gsap.fromTo(band, { xPercent: -3 }, { xPercent: 3, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
+				gsap.fromTo(photo, { '--vd-py': '-6%' }, { '--vd-py': '6%', ease: 'none', scrollTrigger: st });
+				gsap.fromTo(band, { '--vd-px': '-3%' }, { '--vd-px': '3%', ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
 			}
 		});
 	}
