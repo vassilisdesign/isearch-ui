@@ -389,6 +389,10 @@ add_action(
 		}
 		wp_enqueue_media();
 		wp_enqueue_script( 'vd-admin-works', VDE_URI . 'assets/js/admin-works.js', array( 'jquery' ), VDE_VERSION, true );
+		// Rank Math: include the Excerpt, Scope and gallery in its content analysis (what the Work page shows).
+		if ( defined( 'RANK_MATH_VERSION' ) ) {
+			wp_enqueue_script( 'vd-admin-rankmath', VDE_URI . 'assets/js/admin-rankmath.js', array( 'wp-hooks' ), VDE_VERSION, true );
+		}
 		wp_localize_script(
 			'vd-admin-works',
 			'vdWorks',
