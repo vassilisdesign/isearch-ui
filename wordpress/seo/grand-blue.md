@@ -1,5 +1,7 @@
 # Grand Blue: texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/grand-blue-hotel-logo-design/
+
 Work ID 2358. Scope of the job: logo, stationery and a brochure (the hotel's website is not ours: no mention, no link).
 
 ## Work details
