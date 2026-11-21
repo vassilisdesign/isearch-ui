@@ -1,5 +1,7 @@
 # Mediterranean Hotels: texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/mediterranean-hotels-hotel-group-branding/
+
 Work ID 2347. One of the studio's biggest clients; continuous work since 1997: group identity (M monogram), logos, stationery, print and editorial, web design and art direction. No website link set.
 
 Group facts (press, Nov 2026): hotels in Pieria, three in Paralia Katerinis and one in Litochoro, described as four 4- and 5-star hotels, including Mediterranean Village Hotel & Spa (5-star), Mediterranean Princess (adults-only) and Mediterranean Resort; investments in Mykonos. Sources: [Powergame](https://www.powergame.gr/akinita/789826/mediterranean-hotels-ependyseis-40-ekat-se-mykono-pieria-kai-symfonia-me-ti-hilton/), [Parianos Typos](https://parianostypos.gr/ellada/ellada-koinonia/item/91714-mediterranean-hotels-ependyseis-40-ekat-se-mykono-pieria-kai-symfonia-me-ti-hilton), [Jet2holidays](https://www.jet2holidays.com/greece/olympus-riviera/katerini-paralia/mediterranean-village-hotel-and-spa). The page names only these hotels and gives no room counts.
