@@ -1,5 +1,7 @@
 # Open Ways: texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/open-ways-travel-brand-identity/
+
 Work ID 2091. Open Ways Events & Travel, Thessaloniki: logo, brand identity, stationery, print, website (openways.gr, "Powered by vassilisdesign") and art direction.
 
 Facts from openways.gr (read 21 Nov 2026): organises events, training seminars and travel experiences for organisations, institutions, groups, associations, businesses, public and private sector and individuals; culture at the heart of its work (education, training, communication, entertainment); values: quality, diversity, innovation, respect for the original, trust and friendship, environmental and collective conscience; services: Events, Travel (packages and custom programmes for groups, clubs, schools, corporate, families, individuals, youth), Slow Tourism; "MYthic paTHS" slow tourism proposal for Mount Olympus approved for funding under the Medpearls project (ENI CBC Med Programme), implemented in Greece by the Municipality of Thessaloniki / Department of Tourism; tours incl. Olympus Mythic Paths and In the footsteps of the Apostle Paul; Folkway Network / FolkWay Festival; site in English and Greek, events calendar, hotel booking request, newsletter. Pages: [Home](https://openways.gr/), [Our Company](https://openways.gr/our-company/), [Slow Tourism](https://openways.gr/services/slow-tourism/).

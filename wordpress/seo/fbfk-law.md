@@ -1,5 +1,7 @@
 # FBFK Law: texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/fbfk-law-firm-website-design/
+
 Work ID 2029. A major US client. Website (fbfk.law) plus print, stationery and art direction. No logo work.
 
 Facts from fbfk.law (read 21 Nov 2026): tagline "Designed for business. Centered on people."; "A people-first, entrepreneurial law firm"; "a team of builders, creators, and collaborators"; more than 20 years partnering with business owners and executives; seven offices: Dallas (Plano), Austin, Houston, Fort Worth in Texas; Orange County (Irvine), Century City (Los Angeles), San Diego (Del Mar) in California; ten practice areas (Corporate, Securities & M&A; Litigation & Trial; IP & Technology; Bankruptcy & Restructuring; Tax; Real Estate & Land Use; Labor & Employment; Estate Planning; International Transactions & Dispute Resolution; Healthcare); The FBFK Way (values) and FBFK Vision 2.0; careers incl. Summer Associate Program; blogs, press coverage, in the media, success stories. Pages: [Home](https://www.fbfk.law/), [About](https://www.fbfk.law/our-firm/), [The FBFK Way](https://www.fbfk.law/the-fbfk-way/), [Vision 2.0](https://www.fbfk.law/fbfk-vision-2-0/).
