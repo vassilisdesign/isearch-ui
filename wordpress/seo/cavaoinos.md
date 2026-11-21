@@ -1,5 +1,7 @@
 # CavaOinos: texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/cava-oinos-wine-importer-branding/
+
 Work ID 2589. Cava Oinos, Greek wine importer in New York; client since 2015. Identity, website (cavaoinos.com, "Powered by vassilisdesign"), brochures, flyers, promotional material, invitations and more, including work with its wineries for the US market.
 
 Facts from cavaoinos.com (read 21 Nov 2026): premium Greek wine importer in New York for retailers and restaurants; portfolio placed in many of New York City's most prestigious establishments and growing across the US, especially Florida; rare vintages incl. Château Porto Carras 1990 and Porfyrogenitos 1993 by Émile Peynaud; site sections: Our Vision, The Regions, The Wineries, Wines by type, The Varieties, Cava Oinos Moments (hosted tastings, Wine Paths in Greece); motto quote: "Where there is no wine there is no love" (Euripides). Wineries: Dougos (Rapsani, Mt Olympus), OENO Π, Wine Art Estate (Mikrochori, Mt Pangaion), Domaine Porto Carras (largest organic vineyard in Greece, 500 ha), Santorini Kalliston (PDO wines), Lantides Winery (family business, est. 1993), Monsieur Nicolas, Pieria Eratini Estate, Moschopolis Winery, Samartzis Estate. Pages: [Home](https://cavaoinos.com/), [Our Vision](https://cavaoinos.com/our-vision/), [The Wineries](https://cavaoinos.com/the-wineries/), [The Regions](https://cavaoinos.com/the-regions/).
