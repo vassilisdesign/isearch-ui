@@ -90,6 +90,8 @@ Every field says something different. Do not repeat the same words in two fields
 | Live website | The client's live site, if there is one | https://… |
 | Excerpt | 2–3 sentences: what was made and why it matters | A new identity for Hotel Atlas … |
 
+The **VD Works archive** widget can sort Works by custom order (each Work's Order field), newest or oldest first, title A–Z or Z–A, recently updated or random, show both, one or no filter rows, and hide the title.
+
 On the Work page, Sector, Services and Location sit in 3 columns; each Sector and Service is on its own line and links to its Works page. The Works archive has two rows of filter buttons: Sectors and Services. Updating to 2.11 moves the old Services text of each Work into the Services checklist automatically (for example "websites" becomes Web Design). Check **Works → Services** afterwards and merge anything left over.
 
 In Elementor, every VD widget has **Style → Fonts and colours** for each of its texts. Each font setting and colour can be set per device with the screen icon next to it: the desktop value applies everywhere until you set a different tablet or mobile value. **VD Work gallery** also has Images per row, Space, Image shape and the full-image switch; **VD Work cover and summary** has the cover Shape and the same switch.

@@ -1214,6 +1214,48 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 				'raw'  => esc_html__( 'Title, Sector and Service filters and all Works of the current archive. Use inside a Theme Builder "Archive" template for Works.', 'vassilisdesign-elements' ),
 			)
 		);
+		$this->add_control(
+			'sort',
+			array(
+				'label'       => __( 'Sort Works by', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'menu',
+				'separator'   => 'before',
+				'options'     => array(
+					'menu'          => __( 'Custom order (the Order field in each Work)', 'vassilisdesign-elements' ),
+					'date_desc'     => __( 'Newest first', 'vassilisdesign-elements' ),
+					'date_asc'      => __( 'Oldest first', 'vassilisdesign-elements' ),
+					'title_asc'     => __( 'Title A to Z', 'vassilisdesign-elements' ),
+					'title_desc'    => __( 'Title Z to A', 'vassilisdesign-elements' ),
+					'modified_desc' => __( 'Recently updated first', 'vassilisdesign-elements' ),
+					'rand'          => __( 'Random', 'vassilisdesign-elements' ),
+				),
+				'description' => __( 'Custom order: set "Order" in each Work (Page attributes); lower numbers come first. Random changes when the page cache is refreshed.', 'vassilisdesign-elements' ),
+			)
+		);
+		$this->add_control(
+			'filters',
+			array(
+				'label'   => __( 'Filter buttons', 'vassilisdesign-elements' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'both',
+				'options' => array(
+					'both'     => __( 'Sectors and Services', 'vassilisdesign-elements' ),
+					'sectors'  => __( 'Sectors only', 'vassilisdesign-elements' ),
+					'services' => __( 'Services only', 'vassilisdesign-elements' ),
+					'none'     => __( 'None', 'vassilisdesign-elements' ),
+				),
+			)
+		);
+		$this->add_control(
+			'show_title',
+			array(
+				'label'        => __( 'Show the title', 'vassilisdesign-elements' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+			)
+		);
 		$this->end_controls_section();
 		$this->add_style_controls(
 			array(
@@ -1228,7 +1270,14 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 		);
 	}
 	protected function render() {
-		echo vde_works_archive(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$s = $this->get_settings_for_display();
+		echo vde_works_archive( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			array(
+				'sort'       => isset( $s['sort'] ) ? $s['sort'] : 'menu',
+				'filters'    => isset( $s['filters'] ) ? $s['filters'] : 'both',
+				'show_title' => ! isset( $s['show_title'] ) || 'yes' === $s['show_title'],
+			)
+		);
 	}
 }
 

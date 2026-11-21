@@ -212,31 +212,87 @@ function vde_works_grid( $args = array() ) {
 	);
 }
 
+/** Sort options for Works lists: key => WP_Query orderby/order. */
+function vde_works_sort_args( $sort ) {
+	switch ( $sort ) {
+		case 'date_desc':
+			return array( 'orderby' => 'date', 'order' => 'DESC' );
+		case 'date_asc':
+			return array( 'orderby' => 'date', 'order' => 'ASC' );
+		case 'title_asc':
+			return array( 'orderby' => 'title', 'order' => 'ASC' );
+		case 'title_desc':
+			return array( 'orderby' => 'title', 'order' => 'DESC' );
+		case 'modified_desc':
+			return array( 'orderby' => 'modified', 'order' => 'DESC' );
+		case 'rand':
+			return array( 'orderby' => 'rand', 'order' => 'ASC' );
+		default: // 'menu': the Order field in Works (lowest first), then newest
+			return array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC' ), 'order' => 'ASC' );
+	}
+}
+
 /**
- * Works archive: title, Sector filter and tiles from the current archive query.
+ * Works archive: title, Sector and Service filters and tiles from the current archive.
  * Outside a Works archive (for example in the Elementor editor) it shows the latest Works.
+ *
+ * Args: sort (see vde_works_sort_args), filters (both | sectors | services | none), show_title (bool).
  */
-function vde_works_archive() {
+function vde_works_archive( $args = array() ) {
 	global $wp_query;
+	$args       = wp_parse_args( $args, array( 'sort' => 'menu', 'filters' => 'both', 'show_title' => true ) );
 	$taxes      = array( 'work_sector', 'work_service' );
 	$is_archive = is_post_type_archive( 'works' ) || is_tax( $taxes );
-	$query      = $is_archive ? $wp_query : new WP_Query(
-		array(
-			'post_type'      => 'works',
-			'post_status'    => 'publish',
-			'posts_per_page' => 24,
-			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
-		)
-	);
+	$sort       = vde_works_sort_args( $args['sort'] );
+	if ( $is_archive && 'menu' === $args['sort'] ) {
+		$query = $wp_query; // the default order is already the main query's
+	} elseif ( $is_archive ) {
+		// Same Works, same page size and page, only in the chosen order, so page links keep working.
+		$query = new WP_Query(
+			array_merge(
+				$wp_query->query_vars,
+				$sort,
+				array(
+					'paged'         => max( 1, (int) get_query_var( 'paged' ) ),
+					'no_found_rows' => false,
+				)
+			)
+		);
+	} else {
+		$query = new WP_Query(
+			array_merge(
+				array(
+					'post_type'      => 'works',
+					'post_status'    => 'publish',
+					'posts_per_page' => 24,
+				),
+				$sort
+			)
+		);
+	}
 	$title = is_tax( $taxes ) ? single_term_title( '', false ) : __( 'Works', 'vassilisdesign-elements' );
 	$rows  = array(
 		'work_sector'  => __( 'Sectors', 'vassilisdesign-elements' ),
 		'work_service' => __( 'Services', 'vassilisdesign-elements' ),
 	);
+	if ( 'sectors' === $args['filters'] ) {
+		unset( $rows['work_service'] );
+	} elseif ( 'services' === $args['filters'] ) {
+		unset( $rows['work_sector'] );
+	} elseif ( 'none' === $args['filters'] ) {
+		$rows = array();
+	}
 	ob_start();
 	?>
 	<div class="vd-wrap vd-archive-head">
-		<?php echo vde_display_title( $title, 'h1' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php
+		if ( $args['show_title'] ) {
+			echo vde_display_title( $title, 'h1' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		} else {
+			echo '<h1 class="screen-reader-text">' . esc_html( $title ) . '</h1>'; // keep one heading for screen readers and search engines
+		}
+		?>
+		<?php if ( $rows ) : ?>
 		<div class="vd-filters">
 			<?php
 			foreach ( $rows as $tax => $label ) :
@@ -256,6 +312,7 @@ function vde_works_archive() {
 				</nav>
 			<?php endforeach; ?>
 		</div>
+		<?php endif; ?>
 	</div>
 	<div class="vd-wrap vd-archive-body">
 		<?php if ( $query->have_posts() ) : ?>
@@ -267,8 +324,19 @@ function vde_works_archive() {
 				?>
 			</ul>
 			<?php
-			if ( $is_archive ) {
-				the_posts_pagination( array( 'mid_size' => 1 ) );
+			if ( $is_archive && $query->max_num_pages > 1 ) {
+				$links = paginate_links(
+					array(
+						'total'     => (int) $query->max_num_pages,
+						'current'   => max( 1, (int) get_query_var( 'paged' ) ),
+						'mid_size'  => 1,
+						'prev_text' => __( 'Previous', 'vassilisdesign-elements' ),
+						'next_text' => __( 'Next', 'vassilisdesign-elements' ),
+					)
+				);
+				if ( $links ) {
+					echo '<nav class="navigation pagination" aria-label="' . esc_attr__( 'Works pages', 'vassilisdesign-elements' ) . '"><div class="nav-links">' . $links . '</div></nav>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				}
 			}
 			?>
 		<?php else : ?>

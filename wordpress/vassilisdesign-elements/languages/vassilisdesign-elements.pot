@@ -266,67 +266,79 @@ msgstr ""
 msgid "No Works yet. Add them under Works → Add Work."
 msgstr ""
 
-#: inc/template-functions.php:231 inc/widgets/widgets.php:455 inc/works.php:176
+#: inc/template-functions.php:273 inc/widgets/widgets.php:455 inc/works.php:176
 msgid "Works"
 msgstr ""
 
-#: inc/template-functions.php:233 inc/works.php:35 inc/works.php:40
+#: inc/template-functions.php:275 inc/works.php:35 inc/works.php:40
 msgid "Sectors"
 msgstr ""
 
-#: inc/template-functions.php:234 inc/template-functions.php:318 inc/works.php:18
+#: inc/template-functions.php:276 inc/template-functions.php:386 inc/works.php:18
 msgid "Services"
 msgstr ""
 
-#: inc/template-functions.php:251
+#: inc/template-functions.php:307
 msgid "All"
 msgstr ""
 
-#: inc/template-functions.php:275
+#: inc/template-functions.php:333
+msgid "Previous"
+msgstr ""
+
+#: inc/template-functions.php:334
+msgid "Next"
+msgstr ""
+
+#: inc/template-functions.php:338
+msgid "Works pages"
+msgstr ""
+
+#: inc/template-functions.php:343
 msgid "No Works yet."
 msgstr ""
 
-#: inc/template-functions.php:317 inc/widgets/widgets.php:481 inc/widgets/widgets.php:879
+#: inc/template-functions.php:385 inc/widgets/widgets.php:481 inc/widgets/widgets.php:879
 msgid "Sector"
 msgstr ""
 
-#: inc/template-functions.php:319 inc/works.php:17 inc/works.php:309
+#: inc/template-functions.php:387 inc/works.php:17 inc/works.php:310
 msgid "Location"
 msgstr ""
 
-#: inc/template-functions.php:325
+#: inc/template-functions.php:393
 msgid "All work"
 msgstr ""
 
-#: inc/template-functions.php:333
+#: inc/template-functions.php:401
 msgid "Project"
 msgstr ""
 
-#: inc/template-functions.php:338 inc/works.php:19 inc/works.php:313
+#: inc/template-functions.php:406 inc/works.php:19 inc/works.php:314
 msgid "Scope"
 msgstr ""
 
-#: inc/template-functions.php:348
+#: inc/template-functions.php:416
 msgid "Visit website"
 msgstr ""
 
-#: inc/template-functions.php:348
+#: inc/template-functions.php:416
 msgid "(opens in a new tab)"
 msgstr ""
 
-#: inc/template-functions.php:370
+#: inc/template-functions.php:441
 msgid "View the full image"
 msgstr ""
 
-#: inc/template-functions.php:382
+#: inc/template-functions.php:453
 msgid "About the project"
 msgstr ""
 
-#: inc/template-functions.php:450
+#: inc/template-functions.php:521
 msgid "View image %1$d of %2$d full size"
 msgstr ""
 
-#: inc/template-functions.php:469 inc/template-functions.php:471
+#: inc/template-functions.php:544 inc/template-functions.php:546
 msgid "Next project"
 msgstr ""
 
@@ -394,7 +406,7 @@ msgstr ""
 msgid "Colour only"
 msgstr ""
 
-#: inc/widgets/nav-menu.php:148
+#: inc/widgets/nav-menu.php:148 inc/widgets/widgets.php:1246
 msgid "None"
 msgstr ""
 
@@ -578,7 +590,7 @@ msgstr ""
 msgid "Display size"
 msgstr ""
 
-#: inc/widgets/widgets.php:129 inc/works.php:408
+#: inc/widgets/widgets.php:129 inc/works.php:413
 msgid "Cover"
 msgstr ""
 
@@ -790,7 +802,7 @@ msgstr ""
 msgid "Movement on scroll"
 msgstr ""
 
-#: inc/widgets/widgets.php:375 inc/widgets/widgets.php:838 inc/widgets/widgets.php:1186
+#: inc/widgets/widgets.php:375 inc/widgets/widgets.php:838 inc/widgets/widgets.php:1187
 msgid "Image background"
 msgstr ""
 
@@ -930,7 +942,7 @@ msgstr ""
 msgid "Equal heights on phones"
 msgstr ""
 
-#: inc/widgets/widgets.php:579 inc/widgets/widgets.php:1224
+#: inc/widgets/widgets.php:579 inc/widgets/widgets.php:1267
 msgid "Work title"
 msgstr ""
 
@@ -938,7 +950,7 @@ msgstr ""
 msgid "Work title on hover"
 msgstr ""
 
-#: inc/widgets/widgets.php:581 inc/widgets/widgets.php:1225
+#: inc/widgets/widgets.php:581 inc/widgets/widgets.php:1268
 msgid "Details under the title"
 msgstr ""
 
@@ -1274,67 +1286,119 @@ msgstr ""
 msgid "As uploaded"
 msgstr ""
 
-#: inc/widgets/widgets.php:1170
+#: inc/widgets/widgets.php:1171
 msgid "Fit"
 msgstr ""
 
-#: inc/widgets/widgets.php:1174
+#: inc/widgets/widgets.php:1175
 msgid "Fill the shape (may crop)"
 msgstr ""
 
-#: inc/widgets/widgets.php:1175
+#: inc/widgets/widgets.php:1176
 msgid "Show the whole image"
 msgstr ""
 
-#: inc/widgets/widgets.php:1202
+#: inc/widgets/widgets.php:1203
 msgid "VD Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:1208
+#: inc/widgets/widgets.php:1209
 msgid "Works archive"
 msgstr ""
 
-#: inc/widgets/widgets.php:1213
+#: inc/widgets/widgets.php:1214
 msgid "Title, Sector and Service filters and all Works of the current archive. Use inside a Theme Builder \"Archive\" template for Works."
 msgstr ""
 
-#: inc/widgets/widgets.php:1221
-msgid "Filter labels (Sectors, Services)"
+#: inc/widgets/widgets.php:1220
+msgid "Sort Works by"
 msgstr ""
 
-#: inc/widgets/widgets.php:1222
+#: inc/widgets/widgets.php:1225
+msgid "Custom order (the Order field in each Work)"
+msgstr ""
+
+#: inc/widgets/widgets.php:1226
+msgid "Newest first"
+msgstr ""
+
+#: inc/widgets/widgets.php:1227
+msgid "Oldest first"
+msgstr ""
+
+#: inc/widgets/widgets.php:1228
+msgid "Title A to Z"
+msgstr ""
+
+#: inc/widgets/widgets.php:1229
+msgid "Title Z to A"
+msgstr ""
+
+#: inc/widgets/widgets.php:1230
+msgid "Recently updated first"
+msgstr ""
+
+#: inc/widgets/widgets.php:1231
+msgid "Random"
+msgstr ""
+
+#: inc/widgets/widgets.php:1233
+msgid "Custom order: set \"Order\" in each Work (Page attributes); lower numbers come first. Random changes when the page cache is refreshed."
+msgstr ""
+
+#: inc/widgets/widgets.php:1239 inc/widgets/widgets.php:1265
 msgid "Filter buttons"
 msgstr ""
 
-#: inc/widgets/widgets.php:1223
-msgid "Filter button: current"
-msgstr ""
-
-#: inc/widgets/widgets.php:1239
-msgid "VD Next Work"
-msgstr ""
-
 #: inc/widgets/widgets.php:1243
-msgid "\"Next project\" label"
+msgid "Sectors and Services"
 msgstr ""
 
 #: inc/widgets/widgets.php:1244
+msgid "Sectors only"
+msgstr ""
+
+#: inc/widgets/widgets.php:1245
+msgid "Services only"
+msgstr ""
+
+#: inc/widgets/widgets.php:1253
+msgid "Show the title"
+msgstr ""
+
+#: inc/widgets/widgets.php:1264
+msgid "Filter labels (Sectors, Services)"
+msgstr ""
+
+#: inc/widgets/widgets.php:1266
+msgid "Filter button: current"
+msgstr ""
+
+#: inc/widgets/widgets.php:1289
+msgid "VD Next Work"
+msgstr ""
+
+#: inc/widgets/widgets.php:1293
+msgid "\"Next project\" label"
+msgstr ""
+
+#: inc/widgets/widgets.php:1294
 msgid "Next Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:1246
+#: inc/widgets/widgets.php:1296
 msgid "Top line"
 msgstr ""
 
-#: inc/works.php:20 inc/works.php:320
+#: inc/works.php:20 inc/works.php:321
 msgid "Live website"
 msgstr ""
 
-#: inc/works.php:21 inc/works.php:336
+#: inc/works.php:21 inc/works.php:337
 msgid "Gallery"
 msgstr ""
 
-#: inc/works.php:22 inc/works.php:327
+#: inc/works.php:22 inc/works.php:328
 msgid "Cover display"
 msgstr ""
 
@@ -1470,51 +1534,51 @@ msgstr ""
 msgid "Work details"
 msgstr ""
 
-#: inc/works.php:306
+#: inc/works.php:307
 msgid "Title = client or project name. Excerpt = the short summary shown on the Work page. Cover image = the tile on the homepage. Tick the Sector and Services in the boxes on the right."
 msgstr ""
 
-#: inc/works.php:310
+#: inc/works.php:311
 msgid "Thessaloniki, Greece"
 msgstr ""
 
-#: inc/works.php:315
+#: inc/works.php:316
 msgid "The research and the idea behind the design, in one or two sentences."
 msgstr ""
 
-#: inc/works.php:316
+#: inc/works.php:317
 msgid "The thinking before the design: what was explored and the idea it led to. Shown in the red box on the Work page."
 msgstr ""
 
-#: inc/works.php:323
+#: inc/works.php:324
 msgid "Optional. Adds a \"Visit website\" link under the scope, opening in a new tab."
 msgstr ""
 
-#: inc/works.php:330
+#: inc/works.php:331
 msgid "Photo or screenshot: fill the frame"
 msgstr ""
 
-#: inc/works.php:331
+#: inc/works.php:332
 msgid "Packshot or logo on white: fit inside the frame"
 msgstr ""
 
-#: inc/works.php:347
+#: inc/works.php:348
 msgid "Choose images"
 msgstr ""
 
-#: inc/works.php:348
+#: inc/works.php:349
 msgid "Remove all"
 msgstr ""
 
-#: inc/works.php:350
+#: inc/works.php:351
 msgid "Images shown on the Work page, in this order. Drag to reorder inside the media window. Packshots on white blend into the page automatically."
 msgstr ""
 
-#: inc/works.php:396
+#: inc/works.php:401
 msgid "Work gallery"
 msgstr ""
 
-#: inc/works.php:397
+#: inc/works.php:402
 msgid "Use these images"
 msgstr ""
 
