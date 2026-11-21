@@ -1248,6 +1248,16 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 			)
 		);
 		$this->add_control(
+			'overlay',
+			array(
+				'label'        => __( 'Text on hover', 'vassilisdesign-elements' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+				'description'  => __( 'A red cover with the Work\'s Excerpt appears over the image, as in the homepage grid.', 'vassilisdesign-elements' ),
+			)
+		);
+		$this->add_control(
 			'show_title',
 			array(
 				'label'        => __( 'Show the title', 'vassilisdesign-elements' ),
@@ -1265,7 +1275,10 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 				array( 'text', 'filter', __( 'Filter buttons', 'vassilisdesign-elements' ), '.vd-filter a' ),
 				array( 'color', 'filter_active', __( 'Filter button: current', 'vassilisdesign-elements' ), '.vd-filter a[aria-current], .vd-filter a:hover', 'color' ),
 				array( 'text', 'client', __( 'Work title', 'vassilisdesign-elements' ), '.vd-tile-client' ),
+				array( 'color', 'client_hover', __( 'Work title on hover', 'vassilisdesign-elements' ), '.vd-tile-link:hover .vd-tile-client', 'color' ),
 				array( 'text', 'meta', __( 'Details under the title', 'vassilisdesign-elements' ), '.vd-tile-meta' ),
+				array( 'text', 'hover', __( 'Text on hover', 'vassilisdesign-elements' ), '.vd-tile-hover-text > span' ),
+				array( 'color', 'cover', __( 'Red cover / red block', 'vassilisdesign-elements' ), '.vd-red-block', 'background-color' ),
 			)
 		);
 	}
@@ -1276,6 +1289,7 @@ class VDE_Widget_Works_Archive extends VDE_Widget {
 				'sort'       => isset( $s['sort'] ) ? $s['sort'] : 'menu',
 				'filters'    => isset( $s['filters'] ) ? $s['filters'] : 'both',
 				'show_title' => ! isset( $s['show_title'] ) || 'yes' === $s['show_title'],
+				'overlay'    => ! isset( $s['overlay'] ) || 'yes' === $s['overlay'],
 			)
 		);
 	}

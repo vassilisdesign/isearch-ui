@@ -236,11 +236,12 @@ function vde_works_sort_args( $sort ) {
  * Works archive: title, Sector and Service filters and tiles from the current archive.
  * Outside a Works archive (for example in the Elementor editor) it shows the latest Works.
  *
- * Args: sort (see vde_works_sort_args), filters (both | sectors | services | none), show_title (bool).
+ * Args: sort (see vde_works_sort_args), filters (both | sectors | services | none), show_title (bool),
+ * overlay (red cover with the Work's text on hover, as in the homepage grid).
  */
 function vde_works_archive( $args = array() ) {
 	global $wp_query;
-	$args       = wp_parse_args( $args, array( 'sort' => 'menu', 'filters' => 'both', 'show_title' => true ) );
+	$args       = wp_parse_args( $args, array( 'sort' => 'menu', 'filters' => 'both', 'show_title' => true, 'overlay' => true ) );
 	$taxes      = array( 'work_sector', 'work_service' );
 	$is_archive = is_post_type_archive( 'works' ) || is_tax( $taxes );
 	$sort       = vde_works_sort_args( $args['sort'] );
@@ -316,10 +317,10 @@ function vde_works_archive( $args = array() ) {
 	</div>
 	<div class="vd-wrap vd-archive-body">
 		<?php if ( $query->have_posts() ) : ?>
-			<ul class="vd-tiles" role="list">
+			<ul class="vd-tiles<?php echo $args['overlay'] ? ' vd-tiles-overlay' : ''; ?>" role="list">
 				<?php
 				foreach ( $query->posts as $work ) {
-					echo vde_work_tile( $work ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo vde_work_tile( $work, (bool) $args['overlay'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 				?>
 			</ul>

@@ -266,79 +266,79 @@ msgstr ""
 msgid "No Works yet. Add them under Works → Add Work."
 msgstr ""
 
-#: inc/template-functions.php:273 inc/widgets/widgets.php:455 inc/works.php:176
+#: inc/template-functions.php:274 inc/widgets/widgets.php:455 inc/works.php:176
 msgid "Works"
 msgstr ""
 
-#: inc/template-functions.php:275 inc/works.php:35 inc/works.php:40
+#: inc/template-functions.php:276 inc/works.php:35 inc/works.php:40
 msgid "Sectors"
 msgstr ""
 
-#: inc/template-functions.php:276 inc/template-functions.php:386 inc/works.php:18
+#: inc/template-functions.php:277 inc/template-functions.php:387 inc/works.php:18
 msgid "Services"
 msgstr ""
 
-#: inc/template-functions.php:307
+#: inc/template-functions.php:308
 msgid "All"
 msgstr ""
 
-#: inc/template-functions.php:333
+#: inc/template-functions.php:334
 msgid "Previous"
 msgstr ""
 
-#: inc/template-functions.php:334
+#: inc/template-functions.php:335
 msgid "Next"
 msgstr ""
 
-#: inc/template-functions.php:338
+#: inc/template-functions.php:339
 msgid "Works pages"
 msgstr ""
 
-#: inc/template-functions.php:343
+#: inc/template-functions.php:344
 msgid "No Works yet."
 msgstr ""
 
-#: inc/template-functions.php:385 inc/widgets/widgets.php:481 inc/widgets/widgets.php:879
+#: inc/template-functions.php:386 inc/widgets/widgets.php:481 inc/widgets/widgets.php:879
 msgid "Sector"
 msgstr ""
 
-#: inc/template-functions.php:387 inc/works.php:17 inc/works.php:310
+#: inc/template-functions.php:388 inc/works.php:17 inc/works.php:310
 msgid "Location"
 msgstr ""
 
-#: inc/template-functions.php:393
+#: inc/template-functions.php:394
 msgid "All work"
 msgstr ""
 
-#: inc/template-functions.php:401
+#: inc/template-functions.php:402
 msgid "Project"
 msgstr ""
 
-#: inc/template-functions.php:406 inc/works.php:19 inc/works.php:314
+#: inc/template-functions.php:407 inc/works.php:19 inc/works.php:314
 msgid "Scope"
 msgstr ""
 
-#: inc/template-functions.php:416
+#: inc/template-functions.php:417
 msgid "Visit website"
 msgstr ""
 
-#: inc/template-functions.php:416
+#: inc/template-functions.php:417
 msgid "(opens in a new tab)"
 msgstr ""
 
-#: inc/template-functions.php:441
+#: inc/template-functions.php:442
 msgid "View the full image"
 msgstr ""
 
-#: inc/template-functions.php:453
+#: inc/template-functions.php:454
 msgid "About the project"
 msgstr ""
 
-#: inc/template-functions.php:521
+#: inc/template-functions.php:522
 msgid "View image %1$d of %2$d full size"
 msgstr ""
 
-#: inc/template-functions.php:544 inc/template-functions.php:546
+#: inc/template-functions.php:545 inc/template-functions.php:547
 msgid "Next project"
 msgstr ""
 
@@ -942,23 +942,23 @@ msgstr ""
 msgid "Equal heights on phones"
 msgstr ""
 
-#: inc/widgets/widgets.php:579 inc/widgets/widgets.php:1267
+#: inc/widgets/widgets.php:579 inc/widgets/widgets.php:1277
 msgid "Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:580
+#: inc/widgets/widgets.php:580 inc/widgets/widgets.php:1278
 msgid "Work title on hover"
 msgstr ""
 
-#: inc/widgets/widgets.php:581 inc/widgets/widgets.php:1268
+#: inc/widgets/widgets.php:581 inc/widgets/widgets.php:1279
 msgid "Details under the title"
 msgstr ""
 
-#: inc/widgets/widgets.php:582
+#: inc/widgets/widgets.php:582 inc/widgets/widgets.php:1253 inc/widgets/widgets.php:1280
 msgid "Text on hover"
 msgstr ""
 
-#: inc/widgets/widgets.php:583
+#: inc/widgets/widgets.php:583 inc/widgets/widgets.php:1281
 msgid "Red cover / red block"
 msgstr ""
 
@@ -1346,7 +1346,7 @@ msgstr ""
 msgid "Custom order: set \"Order\" in each Work (Page attributes); lower numbers come first. Random changes when the page cache is refreshed."
 msgstr ""
 
-#: inc/widgets/widgets.php:1239 inc/widgets/widgets.php:1265
+#: inc/widgets/widgets.php:1239 inc/widgets/widgets.php:1275
 msgid "Filter buttons"
 msgstr ""
 
@@ -1362,31 +1362,35 @@ msgstr ""
 msgid "Services only"
 msgstr ""
 
-#: inc/widgets/widgets.php:1253
+#: inc/widgets/widgets.php:1257
+msgid "A red cover with the Work's Excerpt appears over the image, as in the homepage grid."
+msgstr ""
+
+#: inc/widgets/widgets.php:1263
 msgid "Show the title"
 msgstr ""
 
-#: inc/widgets/widgets.php:1264
+#: inc/widgets/widgets.php:1274
 msgid "Filter labels (Sectors, Services)"
 msgstr ""
 
-#: inc/widgets/widgets.php:1266
+#: inc/widgets/widgets.php:1276
 msgid "Filter button: current"
 msgstr ""
 
-#: inc/widgets/widgets.php:1289
+#: inc/widgets/widgets.php:1303
 msgid "VD Next Work"
 msgstr ""
 
-#: inc/widgets/widgets.php:1293
+#: inc/widgets/widgets.php:1307
 msgid "\"Next project\" label"
 msgstr ""
 
-#: inc/widgets/widgets.php:1294
+#: inc/widgets/widgets.php:1308
 msgid "Next Work title"
 msgstr ""
 
-#: inc/widgets/widgets.php:1296
+#: inc/widgets/widgets.php:1310
 msgid "Top line"
 msgstr ""
 

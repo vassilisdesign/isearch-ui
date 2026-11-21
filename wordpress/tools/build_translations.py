@@ -80,6 +80,7 @@ EL = {
     'Live website': 'Ιστότοπος',
     'Optional. Adds a "Visit website" link under the scope, opening in a new tab.': 'Προαιρετικό. Προσθέτει σύνδεσμο «Επισκεφθείτε τον ιστότοπο» κάτω από το εύρος εργασιών, σε νέα καρτέλα.',
     'Visit website': 'Επισκεφθείτε τον ιστότοπο',
+    "A red cover with the Work's Excerpt appears over the image, as in the homepage grid.": 'Ένα κόκκινο κάλυμμα με το απόσπασμα του έργου εμφανίζεται πάνω στην εικόνα, όπως στο πλέγμα της αρχικής σελίδας.',
     'Sort Works by': 'Ταξινόμηση έργων κατά',
     'Custom order (the Order field in each Work)': 'Προσαρμοσμένη σειρά (πεδίο «Σειρά» κάθε έργου)',
     'Newest first': 'Νεότερα πρώτα',
