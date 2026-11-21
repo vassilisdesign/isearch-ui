@@ -1,5 +1,7 @@
 # Queens PMU: texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/queens-pmu-beauty-e-shop-design/
+
 Work ID 2354. Logo design and the e-shop (web design) for Queens PMU Supplies, an online shop for professional permanent makeup (PMU) products. Website: https://queenspmu.com (ours: mention and link).
 
 ## Work details
