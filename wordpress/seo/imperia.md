@@ -1,5 +1,7 @@
 # Imperia Furs & Leather: texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2), sector moved to Culture & Lifestyle. Live at https://vassilisdesign.gr/works/imperia-fur-brand-identity/
+
 Work ID 2350. Logo, brand identity, label design, print and art direction for Imperia Furs & Leather, Pieria, Greece. Client since 2005. No website.
 
 ## Work details
