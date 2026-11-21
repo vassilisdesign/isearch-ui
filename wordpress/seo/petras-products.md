@@ -1,5 +1,7 @@
 # Προϊόντα Πέτρας (Petras cheeses): texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/petras-cheese-label-design/
+
 Work ID 2088. Label design, packaging, logo, brand identity, print and art direction for the Petras cheese range by Family Food: Graviera with bukovo, smoked Graviera, Graviera with 4 peppers, Kefalotyri Kritis, Talagani. No website.
 
 Talagani sources: [Athens Voice](https://www.athensvoice.gr/life/geusi/themata/404833/talagani-tyri-poy-pire-onoma-toy-apo-tin-kapa-toy-tsopani/amp/), [Greek Gastronomy Guide](https://www.greekgastronomyguide.gr/en/ti-xeroume-gia-talagani/), [Greek Reporter](https://greekreporter.com/?p=39838), [Culinary Flavors](https://www.culinaryflavors.gr/?p=5286). Agreed: Messinia, name from the shepherd's cloak, grills without melting, hint of mint. Not agreed: exact milk and who first made it, so the text avoids both.
@@ -76,7 +78,7 @@ Cheese label design for whole wheels has practical demands. The round labels fit
 
 ## Art direction for the product photography
 
-We art-directed the photography to match the labels: rough stone and old wood, olive branches, cherry tomatoes, thyme and a linen cloth in soft afternoon light. The whole range was shot together, so the cheese label design and the photography tell one story and the brand looks the same in a catalogue, on a website or on a supermarket leaflet.
+We art-directed the photography to match the labels: rough stone and old wood, olive branches, cherry tomatoes, thyme and a linen cloth in soft afternoon light. The whole range was shot together, so the cheese label design and the photography tell one story and the brand looks the same in a catalogue, on social media or on a supermarket leaflet.
 
 ## Why this cheese label design works
 
