@@ -1,5 +1,7 @@
 # Happy Family: texts and Rank Math setup
 
+Status: applied to the live site on 21 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/happy-family-food-label-design/
+
 Work ID 2360. Logo, brand identity, label design and art direction (food photography direction) for the Happy Family range by Family Food, Thessaloniki.
 
 Note: the Pizza labels read "ΕΙΔΟΣ ΔΙΑΤΡΟΦΗΣ ΜΕ ΦΥΤΙΚΑ ΛΙΠΑΡΑ – ΜΗ ΓΑΛΑΚΤΟΚΟΜΙΚΟ ΠΡΟΪΟΝ" (food with vegetable fats, not a dairy product). "Cheese" is a protected name for dairy products in the EU, so the texts describe the range by its uses, never as cheese.
