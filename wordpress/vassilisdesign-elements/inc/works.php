@@ -201,7 +201,7 @@ add_action(
 				),
 				'menu_icon'       => 'dashicons-portfolio',
 				'menu_position'   => 5,
-				'supports'        => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions', 'elementor' ),
+				'supports'        => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions', 'elementor', 'custom-fields' ), // custom-fields: Work details (Scope, Location, Gallery...) readable and editable through the REST API
 				'show_in_rest'    => true,
 				'capability_type' => 'post',
 			)
@@ -292,6 +292,7 @@ add_action(
 	'add_meta_boxes_works',
 	function () {
 		add_meta_box( 'vd-work-details', __( 'Work details', 'vassilisdesign-elements' ), 'vde_render_work_metabox', 'works', 'normal', 'high' );
+		remove_meta_box( 'postcustom', 'works', 'normal' ); // the raw "Custom Fields" box would duplicate Work details
 	}
 );
 
