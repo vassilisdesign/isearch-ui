@@ -1,6 +1,6 @@
 # Dougos Winery: texts and Rank Math setup
 
-Status: draft, awaiting approval.
+Status: applied to the live site on 23 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/dougos-winery-wine-label-design/
 
 Work ID 2614. Dougos Winery, family winery in the Tempi Valley (Itea, Larissa) with organic vineyards on the north-east slopes of Mount Olympus, Rapsani PDO. Work: the label for Mavrotragano, and the rebranding of the Rapsani series labels (Rapsani PDO, Rapsani PDO Old Vines, Single Vineyard Tourtoura). Website (dougos.gr) is not our work: no link.
 
