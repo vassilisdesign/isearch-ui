@@ -1,5 +1,7 @@
 # LEInternational: texts and Rank Math setup
 
+Status: applied to the live site on 23 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/leinternational-legal-network-website/
+
 Work ID 2602. LEInternational (LEI), a network of independent law firms. Website only (lei-network.com). Main purpose of the site: attract quality law firms around the world to join and connect.
 
 Facts from lei-network.com (read 23 Nov 2026): "A network of law firms"; "Local expertise, global network"; multinational network of independent law firms working with individuals and businesses around the world; founded 1991; 800 lawyers, 31 countries, 54 law offices; "now expanding and actively seeking dynamic, quality-driven firms to join"; CEO Pablo Bonfill: "LEI is more than a network of law firms, it's a community built on trust"; Join Us benefits: cross-border referrals (40+ jurisdictions), knowledge sharing in specialist teams, global credibility, client trust, access to annual and regional meetings, webinars and workshops; members sought: mid-sized firms with strong domestic practices and international capabilities, responsiveness, integrity, collaboration, partner-level involvement; Annual Conference 2026 Shanghai and 2027 Portugal; online annual meeting; specialist group meetings; webinars and news; International Firm Network, Specialist Teams, Board; sponsors incl. FBFK Law (Platinum); member testimonials; Members Area and payments. Pages: [Home](https://lei-network.com/), [Join Us](https://lei-network.com/join-us/).
