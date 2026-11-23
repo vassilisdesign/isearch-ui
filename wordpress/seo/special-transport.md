@@ -1,6 +1,6 @@
 # Special Transport: texts and Rank Math setup
 
-Status: draft, awaiting approval.
+Status: applied to the live site on 23 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/special-transport-company-website-design/
 
 Work ID 2610. ST Special Transport P.C. (Stefanidis), Thessaloniki. Website only (specialtransport.gr), in English and Greek.
 
