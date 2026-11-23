@@ -4,7 +4,7 @@ Status: applied to the live site on 23 Nov 2026 through the REST API (user Claud
 
 Work ID 2614. Dougos Winery, family winery in the Tempi Valley (Itea, Larissa) with organic vineyards on the north-east slopes of Mount Olympus, Rapsani PDO. Work: the label for Mavrotragano, and the rebranding of the Rapsani series labels (Rapsani PDO, Rapsani PDO Old Vines, Single Vineyard Tourtoura). Website (dougos.gr) is not our work: no link.
 
-Label idea from the client brief: the Mavrotragano label's die-cut edge traces the slope of Mount Olympus, with the black bottle showing through as the mountain.
+Label idea from the client brief: where the white paper of the Mavrotragano label ends, the black glass forms the silhouette of a winemaker in a hat, head slightly bowed: tired from the day's work, but not so much that he cannot proudly look at what he has made. The day's labour is rewarded.
 
 Facts from dougos.gr (read 23 Nov 2026): the Dougos family started in wine in 1991; organic vineyards, respect for the environment and the consumer's health; second generation Thanos Dougos (agriculturist) and Louiza Dougou (chemist and oenologist); vineyards at 550-700 m on the north-east Olympus slopes, in Prosilia and Tourtoura; iron-rich schist soil, dry organic farming, 5-8 tonnes per hectare; 9 hectares, 12 Greek and international varieties, 9 labels, exports to 12 countries; winery at the foot of Olympus in the Tempi Valley, with views of Olympus, Kissavos and the Pinios river, 250 m² underground cellar with French and American oak; Rapsani PDO: Xinomavro, Krasato, Stavroto, 12 months in oak, cedar, smoke and red fruit; Rapsani PDO Old Vines: low yields, 18 months in 300 L French oak, herbs, incense, red fruit, Decanter Expert's Choice (2017 vintage among 18 top Greek Xinomavro wines), many 17+ Jancis Robinson scores; Tourtoura Old Vines 2019 Rapsani, 17.5+; Mavrotragano: 20-day extraction, 18 months in 50% new French and American oak, roses and spice, 2012 rated 92+ by Yiannis Karakasis MW, 2011 rated 91 by Robert Parker. Cover image: Mavrotragano 2015, white label with fine hand-drawn lines, die-cut right edge, Dougos signature with a small purple flower.
 
@@ -19,7 +19,7 @@ Facts from dougos.gr (read 23 Nov 2026): the Dougos family started in wine in 19
 
 **Scope**
 
-A mountain on the bottle. The Mavrotragano label is cut along the slope of Mount Olympus, where the Dougos vines grow, and the black glass becomes the mountain itself. Fine hand-drawn lines on white paper add texture and calm, so a rare grape gets a label as distinctive as its taste.
+The winemaker at dusk. Where the white paper ends, the black glass becomes the profile of a winemaker in a hat, head slightly bowed after a long day in the vineyard: tired, yet still proud, watching the fruit of his work. Every bottle of Mavrotragano is that reward.
 
 **Excerpt**
 
@@ -33,7 +33,7 @@ Wine label design for Dougos Winery, the family estate on the slopes of Mount Ol
 | Secondary keywords | Dougos winery, Mavrotragano label, Rapsani wine label, Greek wine packaging |
 | SEO title | Wine Label Design: Dougos Mavrotragano and Rapsani Series |
 | Slug | `dougos-winery-wine-label-design` (the old /works/dougos-winery/ redirects) |
-| Meta description | Wine label design for Dougos Winery on Mount Olympus: a Mavrotragano label cut along the mountain's slope and a rebrand of the Rapsani wine series. |
+| Meta description | Wine label design for Dougos Winery, Mount Olympus: a Mavrotragano label whose edge forms a proud winemaker in a hat, and a Rapsani series rebrand. |
 
 ## Image alt text
 
@@ -51,13 +51,13 @@ The Dougos family began its journey in Greek wine in 1991. Today the second gene
 
 That story, a mountain, a family and a strict respect for nature, is the starting point of every wine label design we create for Dougos.
 
-## Mavrotragano: a mountain on the bottle
+## Mavrotragano: the winemaker's reward
 
 Mavrotragano is a rare red grape, and Dougos makes a powerful, elegant wine from it: roses and spice, full body, 18 months in oak and a long life ahead. Critics agree, with 92+ points from Yiannis Karakasis MW for the 2012 vintage and 91 from Robert Parker for the 2011.
 
-For this label we let the mountain speak. The white label is cut along the slope of Mount Olympus, where the Dougos vines grow. Where the paper ends, the black glass of the bottle takes over and becomes the mountain itself. The edge is irregular and natural, like a ridge seen against the sky, so no two glances at the bottle feel quite the same.
+For this label we wanted to honour the people behind the wine. Where the white paper ends, the black glass of the bottle takes over and forms a silhouette: a winemaker in a hat, his head slightly bowed. He is tired after a long day in the vineyard, but not so tired that he cannot lift his eyes and proudly look at what he has made. It is the quiet moment when the day's labour is rewarded, and every bottle of Mavrotragano carries it.
 
-The white paper carries fine hand-drawn lines that give it texture and movement, like wind over the slopes. The name, Mavrotragano, and the vintage are set in a refined, classic serif; the Dougos signature with its small purple flower closes the label. The result is a wine label design that is quiet and confident, made for a wine that rewards patience.
+The white paper carries fine hand-drawn lines that give it texture and movement, like rows in a vineyard worked by hand. The name, Mavrotragano, and the vintage are set in a refined, classic serif; the Dougos signature with its small purple flower closes the label. The result is a wine label design that is quiet and confident, and tells its story only to those who look a second time.
 
 ## The Rapsani series, rebranded
 
@@ -71,11 +71,11 @@ A good wine label design works in many places at once. It must stand out on a sh
 
 ## Why this wine label design works
 
-- **It tells the place.** The Mavrotragano label carries the slope of Olympus, where the vines grow.
+- **It tells a human story.** The winemaker's silhouette honours the work behind every bottle.
 - **It respects the wine.** Calm, refined design suits wines made for time and patience.
 - **It organises the range.** The Rapsani series reads as one family with three clear levels.
 
-For a winery that lets its mountain shape every wine, we designed labels that let the mountain shape the bottle too.
+For a family that has worked its vineyards on Olympus since 1991, we designed labels that show the pride of that work on every bottle.
 
 ## Services in this project
 
