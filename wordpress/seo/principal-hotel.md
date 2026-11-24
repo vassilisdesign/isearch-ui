@@ -1,6 +1,6 @@
 # Principal Hotel: texts and Rank Math setup
 
-Status: draft, awaiting approval.
+Status: applied to the live site on 24 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/principal-hotel-website-design/
 
 Work ID 2624. Hotel Principal *** ("new leisure hotel"), Paralia Katerini, Pieria (Olympus Riviera). Work: logo and identity, website (principal-paralia.gr, "Powered by vassilisdesign"), brochures and flyers, including a food menu.
 
