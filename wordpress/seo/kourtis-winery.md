@@ -1,6 +1,6 @@
 # Kourtis Winery: texts and Rank Math setup
 
-Status: draft, awaiting approval.
+Status: applied to the live site on 24 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/kourtis-winery-branding/
 
 Work ID 2632. Kourtis Winery (Κτήμα Κούρτη), Rachi, Pieria. Friend since 1992, working together since 2000. Work: identity, website (kourtiswinery.com, "Powered by vassilisdesign"), label design and label advice, posters, brochures, flyers and more.
 
