@@ -238,20 +238,43 @@ class VDE_Widget_Hero extends VDE_Widget {
 		$this->add_control( 'line1', array( 'label' => __( 'Wordmark line 1', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'VASSILIS' ) );
 		$this->add_control( 'line2', array( 'label' => __( 'Wordmark line 2', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'DESIGN' ) );
 		$this->add_control( 'label', array( 'label' => __( 'Accessible name', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'VASSILISDESIGN, independent design studio' ) );
-		if ( function_exists( 'vde_wordmark_svg_ready' ) && vde_wordmark_svg_ready() ) {
-			$this->add_control( 'wordmark_svg', array( 'label' => __( 'SVG wordmark (no font download)', 'vassilisdesign-elements' ), 'type' => Controls_Manager::SWITCHER, 'default' => 'yes' ) );
-			$this->add_responsive_control(
-				'wordmark_svg_h',
-				array(
-					'label'      => __( 'SVG wordmark letter height', 'vassilisdesign-elements' ),
-					'type'       => Controls_Manager::SLIDER,
-					'size_units' => array( 'em' ),
-					'range'      => array( 'em' => array( 'min' => 0.4, 'max' => 1.2, 'step' => 0.01 ) ),
-					'selectors'  => array( '{{WRAPPER}} .vd-wordmark' => '--vd-wm-h: {{SIZE}}em;' ),
-					'condition'  => array( 'wordmark_svg' => 'yes' ),
-				)
-			);
-		}
+		$this->add_control(
+			'wordmark_mode',
+			array(
+				'label'   => __( 'Wordmark', 'vassilisdesign-elements' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'text',
+				'options' => array(
+					'text' => __( 'Text (lines above)', 'vassilisdesign-elements' ),
+					'svg'  => __( 'SVG logo', 'vassilisdesign-elements' ),
+				),
+			)
+		);
+		$this->add_control(
+			'wordmark_image',
+			array(
+				'label'       => __( 'SVG logo', 'vassilisdesign-elements' ),
+				'type'        => Controls_Manager::MEDIA,
+				'media_types' => array( 'svg' ),
+				'description' => __( 'Shown inline, so it appears with the page. The accessible name above is what screen readers and search engines read.', 'vassilisdesign-elements' ),
+				'condition'   => array( 'wordmark_mode' => 'svg' ),
+			)
+		);
+		$this->add_responsive_control(
+			'wordmark_svg_h',
+			array(
+				'label'      => __( 'SVG logo height', 'vassilisdesign-elements' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'em', 'px', 'vw' ),
+				'range'      => array(
+					'em' => array( 'min' => 0.5, 'max' => 3, 'step' => 0.01 ),
+					'px' => array( 'min' => 40, 'max' => 600 ),
+					'vw' => array( 'min' => 5, 'max' => 60, 'step' => 0.5 ),
+				),
+				'selectors'  => array( '{{WRAPPER}} .vd-wordmark' => '--vd-wm-h: {{SIZE}}{{UNIT}};' ),
+				'condition'  => array( 'wordmark_mode' => 'svg' ),
+			)
+		);
 		$this->add_control( 'lead', array( 'label' => __( 'Positioning', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXTAREA, 'default' => "Independent design studio.\nDistinctive identities.\nMeaningful design." ) );
 		$this->add_control( 'meta_a', array( 'label' => __( 'Column 1', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXTAREA, 'default' => "Brand identity\nPackaging and labels\nEditorial and print\nWeb design\nDigital communication" ) );
 		$this->add_control( 'meta_b', array( 'label' => __( 'Column 2', 'vassilisdesign-elements' ), 'type' => Controls_Manager::TEXTAREA, 'default' => "Based in Greece\nClients in Greece, the US and the UK" ) );
@@ -293,9 +316,11 @@ class VDE_Widget_Hero extends VDE_Widget {
 			<div class="vd-hero-text">
 			<h1 class="vd-wordmark" aria-label="<?php echo esc_attr( $s['label'] ); ?>">
 				<span aria-hidden="true">
-					<?php if ( function_exists( 'vde_wordmark_svg_ready' ) && vde_wordmark_svg_ready() && 'no' !== ( $s['wordmark_svg'] ?? 'yes' ) ) : ?>
-					<span class="vd-wm-line"><span class="vd-wm-in vd-wm-img"><?php echo vde_wordmark_svg( 'wordmark-line1' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- plugin file ?></span></span>
-					<span class="vd-wm-line"><span class="vd-wm-in vd-wm-img"><?php echo vde_wordmark_svg( 'wordmark-line2' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- plugin file ?></span></span>
+					<?php
+					$wm_svg = ( 'svg' === ( $s['wordmark_mode'] ?? 'text' ) && ! empty( $s['wordmark_image']['id'] ) ) ? vde_inline_svg_attachment( $s['wordmark_image']['id'] ) : '';
+					if ( $wm_svg ) :
+						?>
+					<span class="vd-wm-line"><span class="vd-wm-in vd-wm-img"><?php echo $wm_svg; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- cleaned in vde_inline_svg_attachment() ?></span></span>
 					<?php else : ?>
 					<span class="vd-wm-line"><span class="vd-wm-in"><?php echo $chars( $s['line1'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></span>
 					<span class="vd-wm-line"><span class="vd-wm-in"><?php echo $chars( $s['line2'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span class="vd-ch vd-stop">.</span></span></span>

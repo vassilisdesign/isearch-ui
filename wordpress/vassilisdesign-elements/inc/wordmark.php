@@ -1,72 +1,55 @@
 <?php
 /**
- * SVG wordmark: the "VASSILIS DESIGN." lines drawn from outlined SVGs (exported from Illustrator in
- * Zuume Black) instead of the Adobe Fonts kit. Same look, no font download, nothing render-blocking.
- *
- * Files in assets/wordmark/: wordmark-line1.svg, wordmark-line2.svg (with the full stop as a
- * class="vd-stop" shape) and wordmark-footer.svg. While all hero files are present the VD Hero uses
- * them (switch "SVG wordmark" off to go back to text), the footer heading "VASSILISDESIGN." is drawn
- * the same way, and the Adobe Fonts kit is no longer loaded.
+ * SVG wordmark from the Media Library: the VD Hero can show an uploaded SVG logo instead of the
+ * typed wordmark. The SVG is printed inline (no extra request, so it appears with the page), cleaned of
+ * anything that could run code, and its CSS class names are made unique so two logos never clash.
  *
  * @package vassilisdesign-elements
  */
 
 defined( 'ABSPATH' ) || exit;
 
-/** Inline SVG for a wordmark file, or '' when the file is missing. */
-function vde_wordmark_svg( $slug ) {
-	static $cache = array();
-	if ( isset( $cache[ $slug ] ) ) {
-		return $cache[ $slug ];
+/** Inline markup for an SVG attachment, or '' when it is not a readable SVG. */
+function vde_inline_svg_attachment( $attachment_id, $class = '' ) {
+	$attachment_id = (int) $attachment_id;
+	if ( ! $attachment_id || 'image/svg+xml' !== get_post_mime_type( $attachment_id ) ) {
+		return '';
 	}
-	$file = VDE_DIR . 'assets/wordmark/' . sanitize_file_name( $slug ) . '.svg';
-	$svg  = is_readable( $file ) ? (string) file_get_contents( $file ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-	if ( $svg ) {
-		$svg = preg_replace( '/^.*?(<svg\b)/s', '$1', $svg ); // drop the XML prolog and comments
-		$svg = preg_replace( '/<svg\b/', '<svg class="vd-wm-svg" aria-hidden="true" focusable="false"', $svg, 1 );
+	$file = get_attached_file( $attachment_id );
+	if ( ! $file || ! is_readable( $file ) || filesize( $file ) > 300 * KB_IN_BYTES ) {
+		return '';
 	}
-	$cache[ $slug ] = $svg;
+	$svg = (string) file_get_contents( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	if ( ! preg_match( '/<svg\b.*<\/svg>/is', $svg, $m ) ) {
+		return '';
+	}
+	$svg = $m[0];
+
+	// Nothing that can run code or load other files.
+	$svg = preg_replace( '#<(script|foreignObject|iframe|object|embed|image|use)\b.*?(</\1>|/>)#is', '', $svg );
+	$svg = preg_replace( '/\son[a-z]+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $svg );
+	$svg = preg_replace( '/(href|xlink:href)\s*=\s*("|\')\s*(javascript|data):[^"\']*\2/i', '', $svg );
+	$svg = preg_replace( '/<!--.*?-->/s', '', $svg );
+
+	// Unique class names and ids (Illustrator uses .st0, .st1 ... in every file).
+	$prefix = 'vdsvg' . $attachment_id . '-';
+	$svg    = preg_replace_callback(
+		'/<style\b[^>]*>(.*?)<\/style>/is',
+		function ( $s ) use ( $prefix ) {
+			return str_replace( $s[1], preg_replace( '/\.(-?[_a-zA-Z][\w-]*)/', '.' . $prefix . '$1', $s[1] ), $s[0] );
+		},
+		$svg
+	);
+	$svg = preg_replace_callback(
+		'/\sclass="([^"]*)"/',
+		function ( $c ) use ( $prefix ) {
+			return ' class="' . trim( preg_replace( '/(\S+)/', $prefix . '$1', $c[1] ) ) . '"';
+		},
+		$svg
+	);
+	$svg = preg_replace( '/\sid="([^"]*)"/', ' id="' . $prefix . '$1"', $svg );
+
+	// Our attributes on the root element: decorative (the heading carries the name), never focusable.
+	$svg = preg_replace( '/<svg\b/', '<svg class="vd-wm-svg ' . esc_attr( $class ) . '" aria-hidden="true" focusable="false" role="presentation"', $svg, 1 );
 	return $svg;
 }
-
-/** True when the hero wordmark can be drawn from SVG. */
-function vde_wordmark_svg_ready() {
-	return apply_filters( 'vde_svg_wordmark', '' !== vde_wordmark_svg( 'wordmark-line1' ) && '' !== vde_wordmark_svg( 'wordmark-line2' ) );
-}
-
-/* Footer heading "VASSILISDESIGN." drawn from the footer SVG; the text stays for screen readers and search. */
-add_filter(
-	'elementor/widget/render_content',
-	function ( $content, $widget ) {
-		if ( 'heading' !== $widget->get_name() || ! vde_wordmark_svg_ready() ) {
-			return $content;
-		}
-		$svg = vde_wordmark_svg( 'wordmark-footer' );
-		if ( '' === $svg || ! preg_match( '/>\s*VASSILISDESIGN\s*<span[^>]*>\.<\/span>\s*</i', $content ) ) {
-			return $content;
-		}
-		return preg_replace(
-			'/>\s*VASSILISDESIGN\s*<span[^>]*>\.<\/span>\s*</i',
-			'><span class="vd-wm-footer">' . $svg . '<span class="screen-reader-text">VASSILISDESIGN.</span></span><',
-			$content,
-			1
-		);
-	},
-	10,
-	2
-);
-
-/* No Adobe Fonts kit once the wordmark is SVG (Zuume is used only there). */
-add_filter(
-	'style_loader_src',
-	function ( $src ) {
-		return ( is_string( $src ) && false !== strpos( $src, 'use.typekit.net' ) && ! is_admin() && vde_wordmark_svg_ready() ) ? false : $src;
-	},
-	99
-);
-add_filter(
-	'vde_preconnect_adobe_fonts',
-	function ( $on ) {
-		return vde_wordmark_svg_ready() ? false : $on;
-	}
-);
