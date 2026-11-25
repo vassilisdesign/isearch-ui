@@ -9,6 +9,44 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/* ---------- New uploads: sizes made as WebP ---------- */
+
+/**
+ * When a JPEG or PNG is uploaded, WordPress makes the thumbnails, tiles and wide sizes as WebP
+ * instead (a 768px photo tile drops from about 1MB as PNG to under 100KB). The uploaded original is
+ * kept as it is, so nothing is lost. Skipped when the server cannot write WebP.
+ */
+add_filter(
+	'image_editor_output_format',
+	function ( $formats ) {
+		static $webp = null, $checking = false;
+		if ( $checking ) { // wp_image_editor_supports() runs this filter again: answer without WebP while asking
+			return $formats;
+		}
+		if ( null === $webp ) {
+			$checking = true;
+			$webp     = wp_image_editor_supports( array( 'mime_type' => 'image/webp' ) );
+			$checking = false;
+		}
+		if ( ! $webp ) {
+			return $formats;
+		}
+		$formats['image/jpeg'] = 'image/webp';
+		$formats['image/png']  = 'image/webp';
+		return $formats;
+	}
+);
+
+// WebP at quality 88 (WordPress uses 82): no visible loss, even full screen in the lightbox.
+add_filter(
+	'wp_editor_set_quality',
+	function ( $quality, $mime_type = '' ) {
+		return 'image/webp' === $mime_type ? max( (int) $quality, 88 ) : $quality;
+	},
+	10,
+	2
+);
+
 /* ---------- WebP background images ---------- */
 
 /**
