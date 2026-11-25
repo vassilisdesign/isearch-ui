@@ -3,7 +3,7 @@
  * Plugin Name:       VASSILISDESIGN Elements
  * Plugin URI:        https://vassilisdesign.gr
  * Description:       Works portfolio (custom post type, Sectors, fields), the VD Elementor widgets, Works page layouts, studio and legal details, and the one-click site setup for VASSILISDESIGN.
- * Version:           2.20.0
+ * Version:           2.21.0
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            VASSILISDESIGN
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'VDE_VERSION', '2.20.0' );
+define( 'VDE_VERSION', '2.21.0' );
 define( 'VDE_FILE', __FILE__ );
 define( 'VDE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'VDE_URI', plugin_dir_url( __FILE__ ) );
@@ -71,6 +71,16 @@ register_activation_hook(
 		update_option( 'vde_flush_rewrites', 1 );
 	}
 );
+// The cache warmer's scheduled runs stop with the plugin.
+register_deactivation_hook(
+	__FILE__,
+	function () {
+		wp_clear_scheduled_hook( 'vde_warm_cache' );
+		wp_clear_scheduled_hook( 'vde_warm_cache_daily' );
+		delete_option( 'vde_warm_queue' );
+	}
+);
+
 add_action(
 	'init',
 	function () {

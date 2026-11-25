@@ -279,3 +279,125 @@ add_filter(
 	}
 );
 
+
+/* ---------- No jQuery Migrate on the public site ---------- */
+
+/*
+ * jQuery Migrate only helps very old plugins that still use removed jQuery functions; Elementor, Complianz
+ * and this plugin do not. Kept in wp-admin. To bring it back: add_filter( 'vde_jquery_migrate', '__return_true' ).
+ */
+add_action(
+	'wp_default_scripts',
+	function ( $scripts ) {
+		if ( is_admin() || ! isset( $scripts->registered['jquery'] ) || apply_filters( 'vde_jquery_migrate', false ) ) {
+			return;
+		}
+		$scripts->registered['jquery']->deps = array_values( array_diff( $scripts->registered['jquery']->deps, array( 'jquery-migrate' ) ) );
+	}
+);
+
+/* ---------- Cache warmer: pages cached before the first visitor ---------- */
+
+/*
+ * A page that is not in the LiteSpeed cache takes 1-1.7s to start; from the cache about 0.2s. The cache is
+ * emptied when content changes, so the next visitor pays the wait. After a Work or page is saved (and once a
+ * day) this opens the main pages itself, a few at a time in the background, so they are cached again.
+ * Off with: add_filter( 'vde_cache_warmer', '__return_false' ).
+ */
+function vde_warm_urls() {
+	$urls = array( home_url( '/' ) );
+	$arch = get_post_type_archive_link( 'works' );
+	if ( $arch ) {
+		$urls[] = $arch;
+	}
+	foreach ( array( 'works', 'page' ) as $type ) {
+		$ids = get_posts(
+			array(
+				'post_type'      => $type,
+				'post_status'    => 'publish',
+				'posts_per_page' => 100,
+				'fields'         => 'ids',
+				'orderby'        => 'menu_order date',
+				'no_found_rows'  => true,
+			)
+		);
+		foreach ( $ids as $id ) {
+			$urls[] = get_permalink( $id );
+		}
+	}
+	foreach ( array( 'work_sector', 'work_service' ) as $tax ) {
+		$terms = get_terms(
+			array(
+				'taxonomy'   => $tax,
+				'hide_empty' => true,
+			)
+		);
+		if ( ! is_wp_error( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$link = get_term_link( $term );
+				if ( ! is_wp_error( $link ) ) {
+					$urls[] = $link;
+				}
+			}
+		}
+	}
+	return array_values( array_unique( array_filter( $urls ) ) );
+}
+
+function vde_schedule_warm( $delay = 90 ) {
+	if ( ! apply_filters( 'vde_cache_warmer', true ) || wp_next_scheduled( 'vde_warm_cache' ) ) {
+		return;
+	}
+	delete_option( 'vde_warm_queue' ); // start again from the top with a fresh list
+	wp_schedule_single_event( time() + $delay, 'vde_warm_cache' );
+}
+
+add_action(
+	'vde_warm_cache',
+	function () {
+		$queue = get_option( 'vde_warm_queue' );
+		if ( ! is_array( $queue ) ) {
+			$queue = vde_warm_urls();
+		}
+		$batch = array_splice( $queue, 0, 6 ); // a few per run, so a run never hits the PHP time limit
+		foreach ( $batch as $url ) {
+			wp_remote_get(
+				$url,
+				array(
+					'timeout'     => 20,
+					'redirection' => 0,
+					'user-agent'  => 'Mozilla/5.0 (compatible; VDE-cache-warmer; +' . home_url( '/' ) . ')',
+					'headers'     => array( 'Accept' => 'text/html' ),
+					'cookies'     => array(), // as a first-time visitor, the version the cache keeps
+				)
+			);
+		}
+		if ( $queue ) {
+			update_option( 'vde_warm_queue', $queue, false );
+			wp_schedule_single_event( time() + 30, 'vde_warm_cache' );
+		} else {
+			delete_option( 'vde_warm_queue' );
+		}
+	}
+);
+
+add_action(
+	'transition_post_status',
+	function ( $new_status, $old_status, $post ) {
+		if ( ( 'publish' === $new_status || 'publish' === $old_status ) && in_array( $post->post_type, array( 'works', 'page' ), true ) && ! wp_is_post_revision( $post ) ) {
+			vde_schedule_warm();
+		}
+	},
+	10,
+	3
+);
+
+add_action(
+	'init',
+	function () {
+		if ( apply_filters( 'vde_cache_warmer', true ) && ! wp_next_scheduled( 'vde_warm_cache_daily' ) ) {
+			wp_schedule_event( time() + HOUR_IN_SECONDS, 'daily', 'vde_warm_cache_daily' );
+		}
+	}
+);
+add_action( 'vde_warm_cache_daily', 'vde_schedule_warm' );
