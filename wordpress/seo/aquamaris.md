@@ -1,6 +1,6 @@
 # Aquamaris: texts and Rank Math setup
 
-Status: draft, awaiting approval.
+Status: applied to the live site on 25 Nov 2026 through the REST API (user Claude2). Live at https://vassilisdesign.gr/works/aquamaris-tour-operator-branding/
 
 Work ID 2094. Aquamaris, a Polish tour operator selling holidays in Greece and Bulgaria. Work (from the client brief): logo and brand identity, yearly holiday catalogues over several seasons, photography direction, ads and other print. No website to link.
 
