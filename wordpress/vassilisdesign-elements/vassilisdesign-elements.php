@@ -58,6 +58,7 @@ require VDE_DIR . 'inc/template-functions.php';
 require VDE_DIR . 'inc/assets.php';
 require VDE_DIR . 'inc/performance.php';
 require VDE_DIR . 'inc/agents.php';
+require VDE_DIR . 'inc/wordmark.php';
 require VDE_DIR . 'inc/templates.php';
 require VDE_DIR . 'inc/elementor.php';
 

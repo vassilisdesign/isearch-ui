@@ -180,6 +180,13 @@ body {
 .vd-wm-in { display: inline-block; }
 .vd-intro .vd-wm-line { overflow: hidden; }
 .vd-ch { display: inline-block; }
+/* SVG wordmark (outlined letters instead of a web font): sized from the font size, coloured like the text. */
+.vd-wm-img { line-height: 0; }
+.vd-wm-img .vd-wm-svg { display: block; height: var(--vd-wm-h, 0.72em); width: auto; fill: currentColor; }
+.vd-wm-line + .vd-wm-line .vd-wm-img { margin-top: var(--vd-wm-gap, 0.14em); }
+.vd-wm-svg .vd-stop { color: #D41A14; fill: currentColor; } /* the "Wordmark full stop" colour control overrides this */
+.vd-wm-footer { display: inline-block; line-height: 0; }
+.vd-wm-footer .vd-wm-svg { display: block; height: var(--vd-wmf-h, 0.72em); width: auto; fill: currentColor; }
 /* Wordmark and positioning text share one column so the text always sits below the wordmark, whatever font or size is chosen. */
 .vd-hero-text { grid-column: 1 / -1; order: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
 .vd-hero-lead { font-size: var(--vd-t-l); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; max-width: 28ch; }
