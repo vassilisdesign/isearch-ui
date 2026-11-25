@@ -63,7 +63,9 @@ The white paper carries fine hand-drawn lines that give it texture and movement,
 
 Rapsani is one of the most respected red wine appellations in Greece, and its vineyards are home ground for Dougos. The winery makes three Rapsani wines from the traditional blend of Xinomavro, Krasato and Stavroto: Rapsani PDO, savoury and elegant, with cedar, smoke and red fruit; Rapsani PDO Old Vines, from low-yielding old vines, with herbs, incense and bright red fruit, a Decanter Expert's Choice; and the Single Vineyard Tourtoura, from one of the estate's own high vineyards.
 
-Our task was a complete wine label design refresh for the whole series. The new wine label design brings the three wines together as one family, so the Dougos Rapsani is recognisable at a glance, while each level has its own clear place: the classic Rapsani, the deeper Old Vines and the single vineyard expression of Tourtoura. A customer, a sommelier or an importer can read the range immediately, from the first bottle to the top of the series.
+Our task was a complete wine label design refresh for the whole series. All three labels now share one shape: a classic cartouche with softly cut corners, the name Rapsani written in a flowing hand script, and the Dougos signature below. What changes is the colour, and it tells the level at a glance. The classic Rapsani PDO wears a clean white label with the name in red. Rapsani Old Vines steps up to a bold red label around a white panel. The Single Vineyard Tourtoura Old Vines, the top of the range, is dressed in black with a gold panel and gold lettering.
+
+White, red, black and gold: with this wine label design, a customer, a sommelier or an importer can read the range immediately, from the first bottle to the single vineyard, while the shared shape and script keep the Dougos Rapsani recognisable on any shelf or wine list.
 
 ## Wine label design for shelves and wine lists
 
