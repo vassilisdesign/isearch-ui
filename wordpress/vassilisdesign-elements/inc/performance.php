@@ -401,3 +401,54 @@ add_action(
 	}
 );
 add_action( 'vde_warm_cache_daily', 'vde_schedule_warm' );
+
+/* ---------- jQuery at the end of the page, not in <head> ---------- */
+
+/*
+ * Nothing in <head> uses jQuery, yet WordPress prints it there, where it holds back the first paint
+ * (PageSpeed "render-blocking requests"). In the footer it still loads before every script that needs it.
+ * Not in wp-admin or the Elementor editor. To keep it in <head>: add_filter( 'vde_jquery_in_footer', '__return_false' ).
+ */
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		if ( is_admin() || ( function_exists( 'vde_is_elementor_preview' ) && vde_is_elementor_preview() ) || ! apply_filters( 'vde_jquery_in_footer', true ) ) {
+			return;
+		}
+		$scripts = wp_scripts();
+		foreach ( array( 'jquery', 'jquery-core' ) as $handle ) {
+			if ( isset( $scripts->registered[ $handle ] ) ) {
+				$scripts->add_data( $handle, 'group', 1 );
+			}
+		}
+	},
+	1
+);
+
+/* ---------- Accessibility: one "main" landmark per page ---------- */
+
+/*
+ * Pages built with Elementor have no <main>, so screen readers and AI agents cannot jump to the content
+ * (Lighthouse "Document does not have a main landmark"). The page's own content (not the header or
+ * footer template) gets role="main", once per page.
+ */
+add_filter(
+	'elementor/document/wrapper_attributes',
+	function ( $attributes, $document ) {
+		static $done = false;
+		if ( $done || is_admin() || ! is_object( $document ) || ! method_exists( $document, 'get_name' ) ) {
+			return $attributes;
+		}
+		$main_types = array( 'wp-page', 'wp-post', 'single', 'single-post', 'single-page', 'archive', 'search-results', 'error-404' );
+		if ( in_array( $document->get_name(), $main_types, true ) && ! isset( $attributes['role'] ) ) {
+			$attributes['role'] = 'main';
+			if ( ! isset( $attributes['id'] ) ) {
+				$attributes['id'] = 'content';
+			}
+			$done = true;
+		}
+		return $attributes;
+	},
+	10,
+	2
+);
